@@ -13,6 +13,7 @@ import { RestaurantAsianComponent } from './restaurants-homepage/restaurant-asia
 import { RestaurantsMexicanComponent } from './restaurants-homepage/restaurants-mexican/restaurants-mexican.component';
 import { RestaurantsItalianComponent } from './restaurants-homepage/restaurants-italian/restaurants-italian.component';
 import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pizza/restaurants-pizza.component';
+import { ReviewsAmericanComponent } from './restaurants-homepage/restaurant-american/reviews-american/reviews-american.component';
 
 
 
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path: 'restaurants/asian' , component: RestaurantAsianComponent},
   {path: 'restaurants/mexican' , component: RestaurantsMexicanComponent},
   {path: 'restaurants/italian' , component: RestaurantsItalianComponent},
-  {path: 'restaurants/pizza' , component: RestaurantsPizzaComponent}
+  {path: 'restaurants/pizza' , component: RestaurantsPizzaComponent},
+  {path: 'restaurants/reviews/american' , component: ReviewsAmericanComponent}
 
 ];
 

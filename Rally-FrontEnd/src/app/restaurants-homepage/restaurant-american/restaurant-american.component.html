@@ -1,19 +1,26 @@
 
-<table style width=100% *ngFor="let component of americanRestaurant">
-    <td>
-        <div>{{component.restauntName}}</div>
-        <div>{{component.address}}</div>
-        <div>{{component.conactInfo}}</div>
+        <table style width=100% *ngFor="let component of americanRestaurant">
+            <!-- <div img src = "https://en.casacol.co/wp-content/uploads/sites/3/2022/06/The-Best-American-Food-in-Medellin-2048x1365.jpg"> -->
+            
+                <div>{{component.restauntName}}</div>
+                    <div>{{component.address}}</div>
+                        <div>{{component.conactInfo}}</div>
+                            <a class="review-link" routerLink="/restaurants/reviews/american" routerLinkActive="active">reviews</a>
+                        <br>
+                    <br>
+            
         
-    </td>
-</table>
+
+
+        </table>
 
 
 
-<form action=; method="post">
+
+<!-- <form action=; method="post">
     <label>Write your review here:<br/>
        <textarea name="description" rows="1" cols="50"></textarea>
     </label>
     
     <button>Upload Review</button>
- </form>
+ </form> -->

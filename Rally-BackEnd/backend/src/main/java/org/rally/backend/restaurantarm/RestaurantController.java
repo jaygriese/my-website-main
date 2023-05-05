@@ -25,8 +25,7 @@ public class RestaurantController {
   }
 
   public void createRestaurantObjects() {
-    Restaurant restaurant1 = new Restaurant("Hi-Point Drive-In", "1033 McCausland Ave, St. Louis, MO 63117",
-        "https://hipointedrivein.com/", "Clayton", "American");
+    Restaurant restaurant1 = new Restaurant("Hi-Point Drive-In", "1033 McCausland Ave, St. Louis, MO 63117", "https://hipointedrivein.com/", "Clayton", "American");
     restaurantRepository.save(restaurant1);
 
     Restaurant restaurant2 = new Restaurant("Mai Lee", "8396 Musick Memorial Dr, Brentwood, MO 63144", "www.maileestl.com/", "Clayton", "Asian");

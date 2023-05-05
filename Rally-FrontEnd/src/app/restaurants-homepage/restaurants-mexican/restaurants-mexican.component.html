@@ -1,1 +1,19 @@
-<p>restaurants-mexican works!</p>
+<table style width=100% *ngFor="let component of mexicanRestaurant">
+    <td>
+        <div>{{component.restauntName}}</div>
+        <div>{{component.address}}</div>
+        <div>{{component.conactInfo}}</div>
+        <br>
+
+    </td>
+</table>
+
+
+
+<form action=; method="post">
+    <label>Write your review here:<br/>
+       <textarea name="description" rows="1" cols="50"></textarea>
+    </label>
+    
+    <button>Upload Review</button>
+ </form>

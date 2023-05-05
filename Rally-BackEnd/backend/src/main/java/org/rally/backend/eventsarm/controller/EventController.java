@@ -31,7 +31,7 @@ public class EventController {
     }
 
 
-    @GetMapping("/event/{id}/")
+    @GetMapping("/event/{id}")
     public ResponseEntity<?>displayEventPage(@PathVariable int id) {
         return new ResponseEntity<>(eventRepository.findById(id), HttpStatus.OK);
     }

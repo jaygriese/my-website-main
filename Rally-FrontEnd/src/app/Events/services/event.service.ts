@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
 })
 export class EventService {
 
-  private getEventByIdUrl = 'http://localhost:8080/event';
+  private getEventByIdUrl = 'http://localhost:8080/event/{id}/';
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getEventById(id: number) {
+  getEvent(id: number) {
     return this.http.get(`${this.getEventByIdUrl}` + id);
   }
 

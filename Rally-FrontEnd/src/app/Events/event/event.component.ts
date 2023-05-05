@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Event } from '../models/event';
-import { EventViewComponent } from '../event-view/event-view.component';
+import { EventService } from '../services/event.service';
 
 @Component({
   selector: 'app-event',
@@ -15,13 +16,15 @@ export class EventComponent implements OnInit {
   // logInStatus: Boolean;
 
 
-  private eventUrl: string;
+  // private eventUrl: string;
+  id: number;
   eventDetails: Event;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private eventService: EventService) {
     // this.logInStatus = false;
-    this.eventUrl = 'http://localhost:8080/events/event/{id}/'
+    // this.eventUrl = 'http://localhost:8080/events/event/{id}/'
     this.eventDetails;
+    this.id;
 
     
    }
@@ -29,12 +32,21 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
     // this.verifyLoggedIn();
 
+    // this.eventDetails = new Event();
 
-    this.http.get(this.eventUrl).subscribe((response: Event) => {
-     
+    this.id = this.route.snapshot.params['id'];
+
+    this.eventService.getEvent(this.id).subscribe((response: Event) => {
       this.eventDetails = response;
       console.log(response);
     })
+
+
+    // this.http.get(this.eventUrl).subscribe((response: Event) => {
+     
+    //   this.eventDetails = response;
+    //   console.log(response);
+    // })
 
 
 

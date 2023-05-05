@@ -11,12 +11,12 @@ import { ResourceDTO } from '../model/Resource';
 })
 export class ResourcesAddComponent implements OnInit {
   private userUrl: string;
-  currentUser: string;
+  currentUser;
   logInStatus: Boolean;
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
-    this.userUrl = 'http://locahost:8080/resources/add';
+    this.userUrl = 'http://localhost:8080/resources/add';
    }
 
   ngOnInit(): void {

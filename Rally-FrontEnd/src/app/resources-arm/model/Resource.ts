@@ -1,4 +1,3 @@
-import { UserEntity } from "src/app/user-profile-arm/models/UserEntity";
 export class ResourceDTO {
     resourceName: string;
     category: string;

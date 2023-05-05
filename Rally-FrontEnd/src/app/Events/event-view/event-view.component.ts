@@ -51,10 +51,12 @@ export class EventViewComponent implements OnInit {
 
 }
 
-// filterByConnect() {
-// this.filtered = this.eventList.filter((obj) => {
-//   return obj.eventCategory === 'connect';
-// });
+filterByConnect() {
+this.filtered = this.eventList.filter((obj) => {
+  return obj.eventCategory === 'connect';
+});
+
+}
 
 }
  

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from '../models/event';
+import { EventViewComponent } from '../event-view/event-view.component';
 
 @Component({
   selector: 'app-event',

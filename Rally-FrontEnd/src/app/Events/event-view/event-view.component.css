@@ -39,7 +39,8 @@
     height: 300px;
     width: auto;
     box-sizing: border-box;
-    border: 1px solid #f4d668;
+    border: 1px solid black;
+    /* border: 1px solid #f4d668; */
 }
 
 .button2 {

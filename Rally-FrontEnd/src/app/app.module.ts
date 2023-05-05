@@ -15,7 +15,6 @@ import { EventCreateComponent } from './Events/event-create/event-create.compone
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
 import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
 import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
-
 import { ServicesHomeComponent } from './services-arm/services-home/services-home.component';
 import { OfferComponent } from './services-arm/offer/offer.component';
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';

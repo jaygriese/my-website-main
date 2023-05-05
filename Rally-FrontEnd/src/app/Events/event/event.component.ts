@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from '../models/event';
 import { EventService } from '../services/event.service';
+import { EventViewComponent } from '../event-view/event-view.component';
 
 @Component({
   selector: 'app-event',
@@ -17,7 +18,7 @@ export class EventComponent implements OnInit {
 
 
   // private eventUrl: string;
-  id: number;
+  id: string;
   eventDetails: Event;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private eventService: EventService) {

@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { EventDTO } from '../models/DTO/EventDTO';
 import { Event } from '../models/event';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { EventComponent } from '../event/event.component';
+import { EventService } from '../services/event.service';
 
 @Component({
   selector: 'app-event-view',
@@ -12,6 +14,14 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./event-view.component.css']
 })
 export class EventViewComponent implements OnInit {
+  // @HostListener('click', ['filterByConnect'])
+  // onClick
+  // filterByConnect() {
+  //   this.filtered = this.eventList.filter((obj) => {
+  //     return obj.eventCategory === 'connect';
+  //   });
+    
+  //   }
 
   isLoading: boolean = true;
 
@@ -20,12 +30,12 @@ export class EventViewComponent implements OnInit {
 
   private eventsUrl: string;
 
-  eventList: Event[] = [];
-  filtered: Event[] = [];
+  public eventList: Event[] = [];
+  public filtered: Event[] = [];
 
 
 
-  constructor(private http: HttpClient, private router: Router, private sanitizer: DomSanitizer) {
+  constructor(private http: HttpClient, private router: Router, private eventService: EventService) {
     this.logInStatus = false;
     this.eventsUrl = 'http://localhost:8080/events/events/'
     this.eventList;
@@ -51,12 +61,22 @@ export class EventViewComponent implements OnInit {
 
 }
 
+// onClick() {
+//   this.router.navigate(["'http://localhost:4200/event/?id=' + event.id"]);
+// }
+
+// onClick() {
+//   this.router.navigateByUrl("'/event/?id=' + event.id");
+// }
+
 filterByConnect() {
 this.filtered = this.eventList.filter((obj) => {
   return obj.eventCategory === 'connect';
 });
 
 }
+
+
 
 }
  

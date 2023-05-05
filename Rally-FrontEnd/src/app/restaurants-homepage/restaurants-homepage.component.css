@@ -1,0 +1,83 @@
+.orange {
+    background-color: orange;
+}
+
+/* .button { margin-right: 20px; } */
+
+/* .pizza button {
+    size-adjust: 16px;
+}
+
+.pizza button {
+    position: relative;
+    width: 25%;
+    max-width: 50px;
+  }
+  
+  .pizza button img {
+    width: 25%;
+    height: 25px;
+  }
+  
+  .pizza button .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+    color: black;
+    font-size: 16px;
+    padding: 16px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .pizza button .btn:hover {
+    background-color: black;
+    color: white;
+  } */
+
+.button {
+    margin-right: 20px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px;
+    cursor: pointer;
+
+  }
+
+  .nav-link {
+    margin-right: 20px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px;
+    cursor: pointer;
+  }
+
+.button1:hover { 
+    margin-right: 20px; 
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+body {
+    color: white;
+    background-color: #333;
+    font-size: 150%;
+    font-family: 'Satisfy';
+    /* margin: 5em 25%; */
+ }

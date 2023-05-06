@@ -91,41 +91,47 @@
 <div class="row">
     <div class="col" class="col-sm-3 p-1 boarder">
         <div class="card">
-            <h2>UserDetails</h2>
-            <div *ngIf="changeInfo; else changeForm">
-                <button (click)="editProfileDetails()">Edit Profile Details</button>
+            <h4>{{ userEntity?.userName }}'s<br>Information</h4>
+            <div *ngIf="changeInfo; else changeForm"> 
             <div class="card">
                 <br> 
-                <label>First Name: {{ userInformation?.firstName }}</label>
+                <label>First Name:<br>{{ userInformation?.firstName }}</label>
                 <br>
-                <label>Last Name: {{ userInformation?.lastName}}</label>
+                <label>Last Name:<br>{{ userInformation?.lastName}}</label>
                 <br>
-                <label>Neigborhood: {{ userInformation?.neigborhood}}</label>
+                <label>Neigborhood:<br>{{ userInformation?.neigborhood}}</label>
                 <br>
-                <label>City: {{ userInformation?.city}}</label>
+                <label>City:<br>{{ userInformation?.city}}</label>
                 <br>       
-                <label>State: {{ userInformation?.state}}</label>                     
+                <label>State:<br>{{ userInformation?.state}}</label>  
+                <br>
+                <button (click)="editProfileDetails()">Edit Profile Details</button>                   
             </div>
             </div>
             <ng-template #changeForm>
-            <div class="form-group"> 
+            <div class="form-group: card"> 
               <form #userDetails="ngForm" (ngSubmit)="updateUserInfo(userDetails)">
                 <br><br>
-                <label>First Name: <input type="text" name="firstName" ngModel></label>
+                <label for="firstName">First Name:<br>
+                <input type="text" id="firstName" name="firstName" placeholder={{userInformation?.firstName}} [(ngModel)]="model.firstName" #firstName="ngModel"></label>
                 <br><br>
-                <label>Last Name: <input type="text" name="lastName" ngModel></label>                
+                <label for="lastName">Last Name:<br>
+                <input type="text" name="lastName" id="lastName" placeholder={{userInformation?.lastName}} [(ngModel)]="model.lastName" #lastName="ngModel"></label>                
                 <br><br>
-                <label>Neigborhood: <input type="text" name="neigborhood" ngModel></label>
+                <label for="neigborhood">Neigborhood:<br>
+                <input type="text" name="neigborhood" id="neigborhood" placeholder={{userInformation?.neigborhood}} [(ngModel)]="model.neigborhood" #neigborhood="ngModel"></label>
                 <br><br>
-                <label>City: <input type="text" name="city" ngModel></label>                
+                <label for="city">City:<br>
+                <input type="text" name="city" id="city" placeholder={{userInformation?.city}} [(ngModel)]="model.city" #city="ngModel"></label>                
                 <br><br>
-                <label>State: <input type="text" name="state" ngModel></label>                
+                <label for="state">State:<br>
+                <input type="text" name="state" id="state" placeholder={{userInformation?.state}} [(ngModel)]="model.state" #state="ngModel"></label>                
                 <br><br>
                 <input type="submit" value="Submit">
               </form>
+              <input (click)="changeInfo=true" type="button" value="Back">
               </div>
             </ng-template>
-            
         </div>
     </div>
     <div class="col-sm-6">

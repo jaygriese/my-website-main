@@ -10,6 +10,9 @@ import { UserEntity } from '../../models/UserEntity';
 import { MainUserBundle } from '../../models/MainUserBundle';
 import { DirectMessage } from '../../models/Directmessage';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
+import { UserInformationService } from '../services/user-information.service';
+import { NgUserInformation } from '../../models/ng-model/UserInformation';
+import { NgUserInformationCity } from '../../models/ng-model/UserInformation';
 
 @Component({
   selector: 'app-user-profile',
@@ -26,6 +29,7 @@ export class UserProfileComponent implements OnInit {
   userEntityDmList: UserEntity[];
   allDmHistory: DirectMessage[];
   conversation: DirectMessage[] = [];
+  model: NgUserInformation;
 
   noError: boolean = true;
   logInStatus = false;
@@ -41,7 +45,7 @@ export class UserProfileComponent implements OnInit {
               private viewUser: ViewUserService,
               private verifyService: VerifyLogoutService, 
               private activeUserService: ViewUserService) {
-   }
+  }
 
   ngOnInit(): void {
     this.logInStatus = this.verifyService.verifyLoggedIn();
@@ -50,15 +54,19 @@ export class UserProfileComponent implements OnInit {
 
       /* Get user information and user entity data */
       this.activeUserService.getMainUserBundleByUserName(localStorage.getItem('userName')).subscribe((data: MainUserBundle) => {
-        this.mainUserBundle = data;
-        this.userInformation = this.mainUserBundle.viewUserInformation;
+        this.userEntity = data.mainUser;
+        this.userInformation = data.viewUserInformation;
+        this.model = new NgUserInformation(this.userInformation.firstName,
+                                           this.userInformation.lastName,
+                                           this.userInformation.neigborhood,
+                                           this.userInformation.city,
+                                           this.userInformation.state);
       })
 
       /* Get user entities that have dm history with active user */
       this.activeUserService.getDmHistoryUsers(localStorage.getItem('id')).subscribe((response: UserEntity[]) => {
         this.userEntityDmList = response;
         let remove: UserEntity;
-
         for (let i = 0; i < this.userEntityDmList.length; i++) {
           if (localStorage.getItem('userName') === this.userEntityDmList[i].userName) {
             remove = this.userEntityDmList[i];
@@ -120,25 +128,21 @@ export class UserProfileComponent implements OnInit {
     
   } 
 
-
-
-
   updateUserInfo( userDetails: NgForm ) {
-
     let userInfo: UserInfoDTO = {
-      userId: Number(this.mainUserBundle.mainUser.id),
+      userId: Number(this.userEntity.id),
       firstName: userDetails.value.firstName,
       lastName: userDetails.value.lastName, 
       neigborhood: userDetails.value.neigborhood,
       city: userDetails.value.city,
       state: userDetails.value.state
     }
-
+    console.log(userInfo)
     this.http.post(this.userUrl, userInfo).subscribe((response: UserInformation) => {
         this.userInformation = response
         this.changeInfo=true;
+        return;
     });
-
   }
 
   editProfileDetails() {

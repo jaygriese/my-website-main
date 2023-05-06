@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { EventComponent } from '../event/event.component';
 import { EventService } from '../services/event.service';
+import { EventFilterService } from '../services/event-filter.service';
 
 @Component({
   selector: 'app-event-view',
@@ -35,7 +36,7 @@ export class EventViewComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient, private router: Router, private eventService: EventService) {
+  constructor(private http: HttpClient, private router: Router, private eventService: EventService, private eventFilterService: EventFilterService) {
     this.logInStatus = false;
     this.eventsUrl = 'http://localhost:8080/events/events/'
     this.eventList;
@@ -57,6 +58,12 @@ export class EventViewComponent implements OnInit {
     this.eventList = response;
   })
 
+  // if (connect()) {
+
+  }
+
+  
+
   
 
 }
@@ -69,16 +76,23 @@ export class EventViewComponent implements OnInit {
 //   this.router.navigateByUrl("'/event/?id=' + event.id");
 // }
 
-filterByConnect() {
-this.filtered = this.eventList.filter((obj) => {
-  return obj.eventCategory === 'connect';
-});
+// filterByConnect() {
+// this.filtered = this.eventList.filter((obj) => {
+//   return obj.eventCategory === 'connect';
+// });
 
-}
+// }
+
+
+// filterByConnect() {
+//   return this.eventFilterService.getEventByConnect();
+// }
 
 
 
-}
+
+
+// }
  
 
 // }

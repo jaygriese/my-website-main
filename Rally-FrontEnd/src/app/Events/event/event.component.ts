@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Event } from '../models/event';
 import { EventService } from '../services/event.service';
 import { EventViewComponent } from '../event-view/event-view.component';
+// import { Component, Input} from '@angular/core'
 
 @Component({
   selector: 'app-event',

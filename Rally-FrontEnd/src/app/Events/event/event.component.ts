@@ -26,7 +26,7 @@ export class EventComponent implements OnInit {
     // this.logInStatus = false;
     // this.eventUrl = 'http://localhost:8080/events/event/{id}/'
     this.eventDetails;
-    this.id;
+    this.id = this.route.snapshot.params['id'];
 
     
    }
@@ -36,11 +36,14 @@ export class EventComponent implements OnInit {
 
     // this.eventDetails = new Event();
 
-    this.id = this.route.snapshot.params['id'];
+    // this.id = this.route.snapshot.params['id'];
+
+    console.log(this.id);
 
     this.eventService.getEvent(this.id).subscribe((response: Event) => {
       this.eventDetails = response;
       console.log(response);
+    
     })
 
 

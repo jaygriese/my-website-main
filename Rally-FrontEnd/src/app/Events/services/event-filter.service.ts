@@ -22,29 +22,29 @@ export class EventFilterService {
   });
  }
 
- getEventByLearn() {
-  return this.eventDetails.filter((event) => {
-    return event.eventCategory === 'learn';
-  });
- }
+//  getEventByLearn() {
+//   return this.eventDetails.filter((event) => {
+//     return event.eventCategory === 'learn';
+//   });
+//  }
 
- getEventByVolunteer() {
-  return this.eventDetails.filter((event) => {
-    return event.eventCategory === 'volunteer';
-  });
- }
+//  getEventByVolunteer() {
+//   return this.eventDetails.filter((event) => {
+//     return event.eventCategory === 'volunteer';
+//   });
+//  }
 
- getEventByDonate() {
-  return this.eventDetails.filter((event) => {
-    return event.eventCategory === 'donate';
-  });
- }
+//  getEventByDonate() {
+//   return this.eventDetails.filter((event) => {
+//     return event.eventCategory === 'donate';
+//   });
+//  }
 
- getEventByCelebrate() {
-  return this.eventDetails.filter((event) => {
-    return event.eventCategory === 'celebrate';
-  });
- }
+//  getEventByCelebrate() {
+//   return this.eventDetails.filter((event) => {
+//     return event.eventCategory === 'celebrate';
+//   });
+//  }
 
 
 }

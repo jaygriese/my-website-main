@@ -30,7 +30,7 @@ const routes: Routes = [
   {path: 'communityHomeForum', component: CommunityHomeComponent},
   {path: 'resources', component: ResourcesHomeComponent},
   {path: 'resourcesAdd', component: ResourcesAddComponent},
-  {path: 'event', component: EventComponent },
+  {path: 'event/:id', component: EventComponent },
   {path: 'create', component: EventCreateComponent},
   {path: 'services', component: ServicesHomeComponent},
   {path: 'offer', component: OfferComponent},

@@ -72,7 +72,8 @@
             </div>
         </div>
         <br>
-       
+
+        
         <div class="row">
             <div class="col-3">
                 <p id="event_display1">event calendar</p>
@@ -82,21 +83,24 @@
             <br>
             <br>
             <br>
-        
+            
             <span>
                 <p id="event_display2">search by category</p>
-                <!-- <button class="button2" (click)="connect()">connect</button> -->
-                <button class="button2" >connect</button>
-                <!-- <button class="button2" (click)="learn()">learn</button> -->
-                <button class="button2" >learn</button>
-                <!-- <button class="button2" (click)="filterByVolunteer">volunteer</button> -->
-                <button class="button2" >volunteer</button>
-                <!-- <button class="button2" (click)="filterByDonate">donate</button> -->
-                <button class="button2" >donate</button>
-                <!-- <button class="button2" (click)="filterByCelebrate">celebrate</button> -->
-                <button class="button2">celebrate</button>
-                <!-- <button class="button2"(click)="filterByAll">view all</button> -->
-                <button class="button2">view all</button>
+                    <button class="button2" (click)="connect('connect')">connect</button>
+                    <!-- <button class="button2" (click)="learn()">learn</button> -->
+                    <button class="button2" >learn</button>
+                    <!-- <button class="button2" (click)="filterByVolunteer">volunteer</button> -->
+                    <button class="button2" >volunteer</button>
+                    <!-- <button class="button2" (click)="filterByDonate">donate</button> -->
+                    <button class="button2" >donate</button>
+                    <!-- <button class="button2" (click)="filterByCelebrate">celebrate</button> -->
+                    <button class="button2">celebrate</button>
+                    <!-- <button class="button2"(click)="filterByAll">view all</button> -->
+                    <button class="button2">view all</button>
+
+
+
+                
             </span>
             </div>
 
@@ -119,9 +123,10 @@
                                 <p style="font-size: 15px; font-style: italic; margin-top: 75px;">hosted by {{event.eventHost}}</p>
                                 <!-- <button type="button" class="btn btn-outline-info btn-xm" (click)="onClick()">learn more</button> -->
                                 <a [href]="'http://localhost:4200/event/?id=' + event.id" class="btn btn-outline-info btn-xm">learn more</a>
+                                <a routerLink="/event/{{event.id}}" routerLinkActive="active">{{event.eventTitle}}</a>
                                 <!-- <button class="btn btn-outline-info btn-xs" type="button"><a class="nav-link" routerLink="'http://localhost:4200/event/?id=' + event.id" routerLinkActive="active">learn more</a></button> -->
                                 <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" style="font-size: 15px;">learn more</a> -->
-                            </div>
+                             </div>
                         </div>
                     </div>
 

@@ -6,8 +6,9 @@ import { Event } from '../models/event';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { EventComponent } from '../event/event.component';
-import { EventService } from '../services/event.service';
+// import { EventService } from '../services/event.service';
 import { EventFilterService } from '../services/event-filter.service';
+// import { FunctionCall } from '@angular/compiler';
 
 @Component({
   selector: 'app-event-view',
@@ -31,16 +32,18 @@ export class EventViewComponent implements OnInit {
 
   private eventsUrl: string;
 
-  public eventList: Event[] = [];
-  public filtered: Event[] = [];
+  eventList: Event[] = [];
+  filteredEvents: Event[] = [];
+  // connect: Function;
 
 
 
-  constructor(private http: HttpClient, private router: Router, private eventService: EventService, private eventFilterService: EventFilterService) {
+  constructor(private http: HttpClient, private router: Router, private eventFilterService: EventFilterService) {
     this.logInStatus = false;
     this.eventsUrl = 'http://localhost:8080/events/events/'
     this.eventList;
-    this.filtered;
+    this.filteredEvents;
+    // this.connect = this.eventFilterService.getEventByConnect();
    }
 
   ngOnInit(): void {
@@ -53,16 +56,34 @@ export class EventViewComponent implements OnInit {
     //   });
       
 
-  this.http.get(this.eventsUrl).subscribe((response: Event[]) => {
-    console.log(response);
-    this.eventList = response;
-  })
+  // this.http.get(this.eventsUrl).subscribe((response: Event[]) => {
+  //   console.log(response);
+  //   this.eventList = response;
+  // })
 
-  // if (connect()) {
+    this.http.get(this.eventsUrl).subscribe((response: Event[]) => {
+      console.log(response);
+      this.eventList = response;
+    })
+
+  
 
   }
 
-  
+  connect(string: string) {
+    for(let i = 0; i < this.eventList.length; i++) {
+      if ( this.eventList[i].eventCategory === string) {
+        this.filteredEvents.push(this.eventList[i])
+      }
+      
+    }
+
+    console.log(this.filteredEvents)
+
+  //   return this.eventList.filter((obj) => {
+  //       return obj.eventCategory === 'connect';
+  //     });
+  };
 
   
 
@@ -84,9 +105,7 @@ export class EventViewComponent implements OnInit {
 // }
 
 
-// filterByConnect() {
-//   return this.eventFilterService.getEventByConnect();
-// }
+
 
 
 

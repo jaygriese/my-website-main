@@ -5,6 +5,8 @@ import { ThemeserviceService } from '../../../services/themeservice.service';
 import { NgForm } from '@angular/forms';
 import { ForumPostDTO } from '../../models/ForumPostDTO';
 import { UserEntity } from 'src/app/user-profile-arm/models/UserEntity';
+import { ForumPost } from '../../models/ForumPost';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forum-topic3',
@@ -16,16 +18,16 @@ export class ForumTopic3Component implements OnInit {
   currentUser: String;
   logInStatus: Boolean;
   darktheme: Boolean;
-  testArray;
+  testArray: ForumPost[];
   newArray;
+  testArray1;
   createPostBoolean: boolean;
   constructor(private http: HttpClient, private router: Router, private themeservice: ThemeserviceService) {
     this.logInStatus = false;
     this.createPostBoolean = false;
     this.darktheme = false;
     this.testArray;
-    this.newArray = [];
-    this.forumTopic = "ForumTopic3"
+    this.forumTopic = "topic3"
    }
   
   ngOnInit(): void {
@@ -54,7 +56,8 @@ export class ForumTopic3Component implements OnInit {
       this.themeservice.createAPost(postInformation, this.forumTopic);
   }
   getPosts(){
-    this.newArray = this.themeservice.getForumTopicPosts(this.forumTopic);
+    this.themeservice.getForumTopicPosts(this.forumTopic).subscribe((posts) =>{
+      this.newArray = this.themeservice.sortPosts(posts)})
   }
   Light(){
       this.themeservice.switchToLightTheme();

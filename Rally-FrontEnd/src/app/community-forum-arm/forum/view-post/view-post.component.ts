@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReplyDTO } from '../../models/ReplyDTO';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
 
@@ -17,11 +17,20 @@ export class ViewPostComponent implements OnInit {
   postReplyBoolean: boolean;
   logInStatus: Boolean;
   replies;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private themeservice: ThemeserviceService) { 
+  updateDescription: boolean;
+  editReplyDescription1;
+  editAndDeleteButtons: boolean;
+  postEditAndDeleteButtons: boolean;
+  updatePostDescription: boolean;
+  constructor(private route: ActivatedRoute, private http: HttpClient, private themeservice: ThemeserviceService, private router: Router) { 
     this.postId = +this.route.snapshot.paramMap.get('id');
     this.postReplyBoolean = false;
     this.logInStatus = false;
     this.replies = [];
+    this.updateDescription = false;
+    this.editAndDeleteButtons = true;
+    this.postEditAndDeleteButtons = true;
+    this.updatePostDescription = false;
   }
   
   ngOnInit(): void {
@@ -71,10 +80,13 @@ export class ViewPostComponent implements OnInit {
     this.postReplyBoolean = true;
   }
   editDescription(idString){
-    
+    this.editAndDeleteButtons = false;
+    this.updateDescription = true;
+    this.editReplyDescription1 = idString;
   }
   logOut() {
     localStorage.removeItem('userName');
+    this.currentUser = null;
     console.log(localStorage.getItem('userName'));
     this.logInStatus = false;
   }
@@ -83,5 +95,41 @@ export class ViewPostComponent implements OnInit {
       this.currentUser = localStorage.getItem('userName');
       this.logInStatus = true;
     }
+  }
+  updateDescription1(updateInformation: NgForm){
+    let newReplyDescription: ReplyDTO = {
+        description: updateInformation.value.newDescription,
+        username: updateInformation.value.username,
+        id: this.editReplyDescription1
+    }
+    console.log(newReplyDescription.description)
+    this.http.post(`http://localhost:8080/UpdateReply`, newReplyDescription).subscribe((res) => {
+    console.log(res)
+    this.editAndDeleteButtons = true;
+    this.updateDescription = false;
+});
+  }
+  editPost(){
+    this.postEditAndDeleteButtons = false;
+    this.updatePostDescription = true;
+  }
+  editPostWithNewDescription(updateDescription: NgForm){
+      let newPostDescription: ReplyDTO = {
+        description: updateDescription.value.newDescription,
+        username: this.postObject.userEntity.userName,
+        id: this.postObject.id
+      }
+      console.log(newPostDescription)
+      this.http.post(`http://localhost:8080/UpdatePost`, newPostDescription).subscribe((res) => {
+        console.log(res)
+        this.postEditAndDeleteButtons = true;
+        this.updatePostDescription = false;
+      })
+  }
+  deletePost(idString){
+    this.http.post('http://localhost:8080/DeletePost', +idString).subscribe((res) => {
+      console.log(res);
+      this.router.navigate(["/forum/" + this.postObject.category.toLowerCase()]);
+    })
   }
 }

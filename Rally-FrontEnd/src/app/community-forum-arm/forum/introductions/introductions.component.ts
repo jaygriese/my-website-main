@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
-
+import { map } from 'rxjs/operators';
+import { ForumPost } from '../../models/ForumPost';
 @Component({
   selector: 'app-introductions',
   templateUrl: './introductions.component.html',
@@ -54,7 +55,8 @@ export class IntroductionsComponent implements OnInit {
       this.themeservice.createAPost(postInformation, this.forumTopic);
   }
   getPosts(){
-    this.newArray = this.themeservice.getForumTopicPosts(this.forumTopic);
+    this.themeservice.getForumTopicPosts(this.forumTopic).subscribe((posts) =>{
+      this.newArray = this.themeservice.sortPosts(posts)})
   }
   Light(){
       this.themeservice.switchToLightTheme();

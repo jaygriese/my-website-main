@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -67,6 +68,28 @@ public class ForumController {
         Optional <Replies> result = repliesRepository.findById(replyDTO.getId());
         Replies reply = result.get();
         reply.setDescription(replyDTO.getDescription());
+        repliesRepository.save(reply);
+        AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
+        return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
+    }
+    @PostMapping("/UpdatePost")
+    public ResponseEntity<?> updatePost(@RequestBody ReplyDTO replyDTO){
+        Optional <ForumPosts> result = forumPostRepository.findById(replyDTO.getId());
+        ForumPosts post = result.get();
+        post.setDescription(replyDTO.getDescription());
+        forumPostRepository.save(post);
+        AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
+        return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
+    }
+    @PostMapping("/DeletePost")
+    public ResponseEntity<?> deletePost(@RequestBody int id) {
+        List<Replies> findAll = (List<Replies>) repliesRepository.findAll();
+        for (Replies reply: findAll){
+            if( reply.getForumPosts().getId() == id){
+                repliesRepository.delete(reply);
+            }
+        }
+        forumPostRepository.deleteById(id);
         AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
         return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
     }

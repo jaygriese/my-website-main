@@ -8,9 +8,32 @@
     <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
 </ng-template>
 <div id="theme" class="white">
+    
         <body class="white-theme">
             <h1>{{postObject.title}}</h1>
         </body>
+<br><br>
+<div *ngIf="!updatePostDescription; else editPostDescription">
+<div *ngIf="postObject.userEntity.userName == currentUser">
+    <div *ngIf="postEditAndDeleteButtons">
+        <button (click)="editPost()">Edit Post Description</button>
+        <button (click)="deletePost(postObject.id)">Delete Post</button>
+    </div>
+</div>
+<section>
+    <article>
+            <span> <div class="thought">{{postObject.description}}</div></span>
+            <br>
+            <span style="padding-top: 5px;">{{postObject.userEntity.userName}} says</span>
+    </article>
+</section>
+</div>
+<ng-template #editPostDescription>
+    <form #editPostAttempt="ngForm" (ngSubmit)="editPostWithNewDescription(editPostAttempt)">
+    <input type="text" name="newDescription" [(ngModel)]="postObject.description" required ngModel>
+        <input type="submit" value="Submit">
+    </form>
+</ng-template>
 <br><br>
 <div *ngIf="!postReplyBoolean; else createReplyForm">   
     <div *ngIf="logInStatus">
@@ -18,32 +41,35 @@
     </div>
 </div>
 <ng-template #createReplyForm>
-<div *ngIf="logInStatus">
-    <form #createdReplyAttempt="ngForm" (ngSubmit)="createReply(createdReplyAttempt)">
-
-        <label>Reply: <input type="text" name="description" required ngModel></label>     
-                            <br><br>
-        <input type="submit" value="Submit">
-    </form>
-</div>
-</ng-template>
-<section>
-    <article>
-            <span> <div class="thought">{{postObject.description}}</div></span>
-            <br><br>
-            <span style="padding-top: 5px;">{{postObject.userEntity.userName}} says</span>
-
-    </article>
-</section>
+    <div *ngIf="logInStatus">
+        <form #createdReplyAttempt="ngForm" (ngSubmit)="createReply(createdReplyAttempt)">
+    
+            <label>Reply: <input type="text" name="description" required ngModel></label>     
+                                <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    </ng-template>
 <br><br>
 <h4>Replies</h4>
 <div id="parent{{reply.id}}" *ngFor="let reply of replies">
 <div id="{{reply.id}}">
-<span><div class="thought">{{reply.description}}</div></span>
+<div *ngIf="updateDescription && editReplyDescription1 == reply.id; else editReplyDescription">
+    <form #editReplyAttempt="ngForm" (ngSubmit)="updateDescription1(editReplyAttempt)">
+    <input type="text" name="newDescription" [(ngModel)]="reply.description" required ngModel>
+    <input type="hidden" name="username" [(ngModel)]="reply.userEntity.userName" required ngModel>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<ng-template #editReplyDescription>
+    <span><div class="thought">{{reply.description}}</div></span>
+</ng-template>
 <span style="padding-top: 5px;">{{reply.userEntity.userName}} says</span>
-<div *ngIf="reply.userEntity.userName.toLowerCase() == currentUser.toLowerCase()">
-    <button (click)="editDescription(reply.id)">Update reply</button>
-    <button (click)="deleteReply(reply.id)">Delete</button>
+<div *ngIf="reply.userEntity.userName == currentUser">
+    <div *ngIf="editAndDeleteButtons">
+        <button (click)="editDescription(reply.id)">Update reply</button>
+        <button (click)="deleteReply(reply.id)">Delete</button>
+    </div>
 </div>
 <br><br>
 </div>

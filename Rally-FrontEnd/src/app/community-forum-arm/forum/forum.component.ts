@@ -9,9 +9,10 @@ import { ThemeserviceService } from 'src/app/services/themeservice.service';
   styleUrls: ['./forum.component.css']
 })
 export class ForumComponent implements OnInit {
-currentUser: String;
-logInStatus: Boolean;
-darktheme: Boolean;
+currentUser: string;
+logInStatus: boolean;
+darktheme: boolean;
+
 constructor(private http: HttpClient, private router: Router, private themeservice: ThemeserviceService) {
   this.logInStatus = false;
   this.darktheme = false;

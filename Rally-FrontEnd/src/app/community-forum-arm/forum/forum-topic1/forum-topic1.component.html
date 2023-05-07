@@ -1,4 +1,4 @@
-<div class="big">
+
     <div *ngIf="logInStatus; else notLoggedIn">
         <div style="text-align: right;">
             <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
@@ -55,7 +55,7 @@
     </ng-template>
     <!-- light theme posts -->
 </div>
-</div>
+
 <ng-template #createPostForm>
     <div *ngIf="logInStatus">
         <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">

@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
-
+import { map } from 'rxjs/operators';
+import { ForumPost } from '../../models/ForumPost';
 @Component({
   selector: 'app-forum-topic1',
   templateUrl: './forum-topic1.component.html',
@@ -22,7 +23,7 @@ export class ForumTopic1Component implements OnInit {
     this.createPostBoolean = false;
     this.darktheme = false;
     this.testArray;
-    this.forumTopic = "ForumTopic1";
+    this.forumTopic = "topic1";
     this.newArray = [];
    }
   
@@ -52,7 +53,8 @@ export class ForumTopic1Component implements OnInit {
       this.themeservice.createAPost(postInformation, this.forumTopic);
   }
   getPosts(){
-    this.newArray = this.themeservice.getForumTopicPosts(this.forumTopic);
+    this.themeservice.getForumTopicPosts(this.forumTopic).subscribe((posts) =>{
+      this.newArray = this.themeservice.sortPosts(posts)})
   }
   Light(){
       this.themeservice.switchToLightTheme();

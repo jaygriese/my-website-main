@@ -9,7 +9,7 @@
 }
 .white {
     background-image: repeating-linear-gradient(white, rgb(148, 252, 252));
-    position: fixed; 
+    position: absolute; 
     top: 1; 
     left: 0; 
     min-width: 100%;

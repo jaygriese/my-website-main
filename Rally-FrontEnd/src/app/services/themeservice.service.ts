@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ForumPostDTO } from '../community-forum-arm/models/ForumPostDTO';
 import { HttpClient } from '@angular/common/http';
-
+import { ForumPost } from '../community-forum-arm/models/ForumPost';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeserviceService {
+  testArray1: ForumPost[];
   constructor(private http: HttpClient) { 
   }
 
@@ -37,20 +39,19 @@ createAPost(postInfo: NgForm, forumTopic: string){
 window.location.reload();
 }
 getForumTopicPosts(forumTopic: string){
-  let testArray1 = [];
-  let newArray = [];
-  this.http.get(`http://localhost:8080/Posts`).subscribe((res)=>{
-    for(const k in res){
-        if(res[k].title != null){
-          testArray1.push(res[k])
-        }
-    }
-    for(let i = 0; i < testArray1.length; i++){
-      if (testArray1[i].category == forumTopic){
-        newArray.push(testArray1[i]);
+  return this.http.get<{[key: string]: ForumPost}>(`http://localhost:8080/Posts`).pipe(map((res) => {
+    const posts = [];
+    for(const key in res){
+      if (res[key].category == forumTopic){
+          posts.push({...res[key]})
       }
     }
-  });
-  return newArray;
+    return posts;
+  }))
+}
+sortPosts(posts: ForumPost[]){
+  return posts.sort(function(b, a) {
+    return a.id - b.id
+  })
 }
 }

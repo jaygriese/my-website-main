@@ -2,9 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from '../models/event';
-import { Observable } from 'rxjs';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { EventComponent } from '../event/event.component';
 
 @Component({
   selector: 'app-event-view',
@@ -12,14 +9,6 @@ import { EventComponent } from '../event/event.component';
   styleUrls: ['./event-view.component.css']
 })
 export class EventViewComponent implements OnInit {
-  // @HostListener('click', ['filterByConnect'])
-  // onClick
-  // filterByConnect() {
-  //   this.filtered = this.eventList.filter((obj) => {
-  //     return obj.eventCategory === 'connect';
-  //   });
-    
-  //   }
 
   isLoading: boolean = true;
 
@@ -54,17 +43,84 @@ export class EventViewComponent implements OnInit {
   
   }
 
-
   connect(string: string) {
     for(let i = 0; i < this.eventList.length; i++) {
       if ( this.eventList[i].eventCategory === string) {
         this.filteredEvents.push(this.eventList[i])
       }
-      
     }
-    // return this.filteredEvents;
-    console.log(this.filteredEvents)
 
+    this.eventList = this.filteredEvents;
+    console.log(this.filteredEvents)
+    return this.filteredEvents;
+ 
+  };
+
+
+  learn(string: string) {
+    for(let i = 0; i < this.eventList.length; i++) {
+      if ( this.eventList[i].eventCategory === string) {
+        this.filteredEvents.push(this.eventList[i])
+      }
+    }
+
+    this.eventList = this.filteredEvents;
+    console.log(this.filteredEvents)
+    return this.filteredEvents;
+ 
+  };
+
+
+  volunteer(string: string) {
+    for(let i = 0; i < this.eventList.length; i++) {
+      if ( this.eventList[i].eventCategory === string) {
+        this.filteredEvents.push(this.eventList[i])
+      }
+    }
+
+    this.eventList = this.filteredEvents;
+    console.log(this.filteredEvents)
+    return this.filteredEvents;
+ 
+  };
+
+  donate(string: string) {
+    for(let i = 0; i < this.eventList.length; i++) {
+      if ( this.eventList[i].eventCategory === string) {
+        this.filteredEvents.push(this.eventList[i])
+      }
+    }
+
+    this.eventList = this.filteredEvents;
+    console.log(this.filteredEvents)
+    return this.filteredEvents;
+ 
+  };
+
+  celebrate(string: string) {
+    for(let i = 0; i < this.eventList.length; i++) {
+      if ( this.eventList[i].eventCategory === string) {
+        this.filteredEvents.push(this.eventList[i])
+      }
+    }
+
+    this.eventList = this.filteredEvents;
+    console.log(this.filteredEvents)
+    return this.filteredEvents;
+ 
+  };
+
+
+  viewAll(string: string) {
+    for(let i = 0; i < this.eventList.length; i++) {
+      if ( this.eventList[i].eventCategory === string) {
+        this.filteredEvents.push(this.eventList[i])
+      }
+    }
+
+    this.eventList = this.filteredEvents;
+    console.log(this.filteredEvents)
+    return this.filteredEvents;
  
   };
   
@@ -79,28 +135,7 @@ export class EventViewComponent implements OnInit {
 //   this.router.navigateByUrl("'/event/?id=' + event.id");
 // }
 
-// filterByConnect() {
-// this.filtered = this.eventList.filter((obj) => {
-//   return obj.eventCategory === 'connect';
-// });
 
-// }
-
-
-
-
-
-
-
-
-// }
- 
-
-// }
-
-
-
-  // }
 
   // verifyLoggedIn() {
 

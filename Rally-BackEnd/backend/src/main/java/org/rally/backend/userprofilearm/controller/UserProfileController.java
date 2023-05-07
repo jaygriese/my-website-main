@@ -4,16 +4,19 @@ import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.*;
 import org.rally.backend.userprofilearm.model.dto.DirectMessageDTO;
 import org.rally.backend.userprofilearm.model.dto.UserInfoDTO;
-import org.rally.backend.userprofilearm.repository.DirectMessageRepository;
-import org.rally.backend.userprofilearm.repository.RoleRepository;
-import org.rally.backend.userprofilearm.repository.UserInformationRepository;
-import org.rally.backend.userprofilearm.repository.UserRepository;
+import org.rally.backend.userprofilearm.model.response.ImageUploadResponse;
+import org.rally.backend.userprofilearm.repository.*;
+import org.rally.backend.userprofilearm.utility.ImageUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -24,18 +27,61 @@ public class UserProfileController {
     UserInformationRepository userInformationRepository;
     RoleRepository roleRepository;
     DirectMessageRepository directMessageRepository;
+    ProfilePictureRepository profilePictureRepository;
 
 
     @Autowired
     public UserProfileController(UserRepository userRepository,
                                  RoleRepository roleRepository,
                                  UserInformationRepository userInformationRepository,
-                                 DirectMessageRepository directMessageRepository) {
+                                 DirectMessageRepository directMessageRepository,
+                                 ProfilePictureRepository profilePictureRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
         this.directMessageRepository = directMessageRepository;
+        this.profilePictureRepository = profilePictureRepository;
     }
+
+    /** Upload Image testing **/
+    /** Upload Image testing **/
+    /** Upload Image testing **/
+
+    @PostMapping("/upload/image")
+    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file)
+            throws IOException {
+
+        profilePictureRepository.save(ProfilePicture.builder()
+                .name(file.getOriginalFilename())
+                .type(file.getContentType())
+                .image(ImageUtility.compressImage(file.getBytes())).build());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ImageUploadResponse("Image uploaded successfully: " + file.getOriginalFilename()));
+    }
+
+    @GetMapping(path = {"/userProfileImage/{name}"})
+    public ProfilePicture getImageDetails(@PathVariable("name") String name) throws IOException {
+
+        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByName(name);
+
+        return ProfilePicture.builder()
+                .name(dbImage.get().getName())
+                .type(dbImage.get().getType())
+                .image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
+    }
+
+    @GetMapping(path = {"/get/image/{name}"})
+    public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) throws IOException {
+        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByName(name);
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.valueOf(dbImage.get().getType()))
+                .body(ImageUtility.decompressImage(dbImage.get().getImage()));
+    }
+
+
+
 
     /** GET REQUEST **/
     /** GET REQUEST **/

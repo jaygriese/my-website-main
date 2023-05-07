@@ -7,9 +7,3 @@ export class NgUserInformation {
         public state: string
     ) {}
 }
-
-export class NgUserInformationCity {
-    constructor (
-        public city: string
-    ) {}
-}

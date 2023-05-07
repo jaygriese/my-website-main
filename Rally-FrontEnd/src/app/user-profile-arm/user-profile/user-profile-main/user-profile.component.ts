@@ -10,9 +10,7 @@ import { UserEntity } from '../../models/UserEntity';
 import { MainUserBundle } from '../../models/MainUserBundle';
 import { DirectMessage } from '../../models/Directmessage';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
-import { UserInformationService } from '../services/user-information.service';
 import { NgUserInformation } from '../../models/ng-model/UserInformation';
-import { NgUserInformationCity } from '../../models/ng-model/UserInformation';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,25 +18,34 @@ import { NgUserInformationCity } from '../../models/ng-model/UserInformation';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-
+  
+  /* logged in user information */
   currentUser = localStorage.getItem('userName');
+  logInStatus: boolean = false;
   userEntity: UserEntity;
-  respondToDm: UserEntity;
   userInformation: UserInformation;
-  mainUserBundle: MainUserBundle;
+  model: NgUserInformation;
+  
+  /* Direct Message variables */
+  respondToDm: UserEntity;
   userEntityDmList: UserEntity[];
   allDmHistory: DirectMessage[];
   conversation: DirectMessage[] = [];
-  model: NgUserInformation;
-
+  
+  /* HTML booleans */
   noError: boolean = true;
-  logInStatus = false;
-  changeInfo = true;
-  userDms = true;
-
+  changeInfo: boolean = true;
+  userDms: boolean = true;
+ 
+  /* URL routes */
   private userUrl: string = 'http://localhost:8080/user/update-user-information';
 
-  
+  /* Image uploading */
+  uploadedImage: File;
+  dbImage: any;
+  postResponse: any;
+  successResponse: string;
+  image: any;
 
   constructor(private http: HttpClient, 
               private router: Router, 
@@ -51,7 +58,6 @@ export class UserProfileComponent implements OnInit {
     this.logInStatus = this.verifyService.verifyLoggedIn();
     
     if (localStorage.getItem('id') !== null) {
-
       /* Get user information and user entity data */
       this.activeUserService.getMainUserBundleByUserName(localStorage.getItem('userName')).subscribe((data: MainUserBundle) => {
         this.userEntity = data.mainUser;
@@ -62,10 +68,10 @@ export class UserProfileComponent implements OnInit {
                                            this.userInformation.city,
                                            this.userInformation.state);
       })
-
       /* Get user entities that have dm history with active user */
       this.activeUserService.getDmHistoryUsers(localStorage.getItem('id')).subscribe((response: UserEntity[]) => {
         this.userEntityDmList = response;
+        /* Remove active user from list */
         let remove: UserEntity;
         for (let i = 0; i < this.userEntityDmList.length; i++) {
           if (localStorage.getItem('userName') === this.userEntityDmList[i].userName) {
@@ -74,13 +80,44 @@ export class UserProfileComponent implements OnInit {
         }
         this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user !== remove);
       })
-
       /* Get all user message dm history */
       this.activeUserService.getDmHistoryDirectMessages(localStorage.getItem('id')).subscribe((response: DirectMessage[]) => {
         this.allDmHistory = response;
       })
     }
   }
+
+  /* Image upload testing */
+  /* Image upload testing */
+  public onImageUpload(event) {
+    this.uploadedImage = event.target.files[0];
+  }
+
+  imageUploadAction() {
+    const imageFormData = new FormData();
+    imageFormData.append('image', this.uploadedImage, this.uploadedImage.name);
+
+    this.http.post('http://localhost:8080/user/upload/image', imageFormData, {observe: 'response'}).subscribe((response) => {
+      console.log(response);
+      if (response.status === 200) {
+        this.postResponse = response;
+        this.successResponse = this.postResponse.body.messge;
+      } else { 
+        this.successResponse = 'Image not uploaded due to an error!';
+      }
+    })
+  }
+
+  viewImage() {
+    this.http.get('http://localhost:8080/user/userProfileImage/' + this.image).subscribe((response) => {
+      this.postResponse = response;
+      this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
+    })
+  }
+
+
+
+  
 
   displayConversation( userDms: UserEntity) {
     this.respondToDm = null;
@@ -121,7 +158,9 @@ export class UserProfileComponent implements OnInit {
       this.noError = false;
       return
     }
-    this.viewUser.postDirectMessage(sendDirectMessage).subscribe();
+    this.viewUser.postDirectMessage(sendDirectMessage).subscribe(
+      // push new post into the DM list maybe?
+    );
 
     /* Temp solution, need to figure out how to refresh just this part of the page while staying in user conversation. */
     location.reload();

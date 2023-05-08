@@ -20,7 +20,7 @@ export class EventViewComponent implements OnInit {
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
 
-  isValue: number = 0;
+  // isValue: number = 0;
 
 
   constructor(private http: HttpClient, private router: Router) {
@@ -28,7 +28,7 @@ export class EventViewComponent implements OnInit {
     this.eventsUrl = 'http://localhost:8080/events/events/'
     this.eventList;
     this.filteredEvents;
-    this.isValue;
+    // this.isValue;
 
    }
 
@@ -114,6 +114,8 @@ export class EventViewComponent implements OnInit {
   };
 
 
+
+
   viewAll(string: string) {
     for(let i = 0; i < this.eventList.length; i++) {
       if ( this.eventList[i].eventCategory === string) {
@@ -127,8 +129,8 @@ export class EventViewComponent implements OnInit {
  
   };
 
-  toggle1() {this.isValue = 1;}
-  toggle2() {this.isValue = 2;}
+  // toggle1() {this.isValue = 1;}
+  // toggle2() {this.isValue = 2;}
 
 
   

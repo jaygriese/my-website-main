@@ -54,4 +54,23 @@ sortPosts(posts: ForumPost[]){
     return a.id - b.id
   })
 }
+getAllForumPosts(){
+  return this.http.get<{[key: string]: ForumPost}>('http://localhost:8080/Posts').pipe(map((res) => {
+    const posts = [];
+    for(const key in res){
+          posts.push({...res[key]})
+
+    }
+    return posts;
+  }))
+}
+searchPosts(posts: ForumPost[]){
+    const sortedPosts = [];
+    for(const key in posts){
+      if (posts[key].title.toLowerCase().includes(localStorage.getItem('searchTerm').toLowerCase()) || posts[key].description.toLowerCase().includes(localStorage.getItem('searchTerm').toLowerCase()) || posts[key].userEntity.userName.toLowerCase().includes(localStorage.getItem('searchTerm').toLowerCase())){
+          sortedPosts.push(posts[key]);
+      }
+    }
+    return sortedPosts;
+}
 }

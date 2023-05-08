@@ -19,7 +19,14 @@
     </div>
     <ng-template #lightTheme>
         <div style="text-align: right;"><button (click)="Dark()">Turn off the lights</button></div>
-    </ng-template>   
+    </ng-template>
+    <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
+        <div style="text-align: right;">
+            <input type="text" name="description" required ngModel>
+            <input type="submit" value="Search Posts">
+        </div>
+    </form>
+        <!-- search button -->   
 <div id="theme" class="white">
 <body class="white-theme"><div class="container-fluid"><h1>Community Forum</h1></div></body>
 <br>

@@ -9,7 +9,7 @@
 }
 .white {
     background-image: repeating-linear-gradient(white, rgb(148, 252, 252));
-    position: absolute; 
+    position: fixed; 
     top: 1; 
     left: 0; 
     min-width: 100%;
@@ -17,16 +17,15 @@
 }
 .white-theme {
     color:black;
-    background-image: linear-gradient( white, azure);
-    border: 1px solid black;
+    background: transparent;
 }
 .black-background {
     color:beige;
-    background-color: black;
+    background: transparent;
 }
 .black-theme {
     color:black;
-    background-image: linear-gradient( white, azure);
+    background: transparent;
     border: 1px solid black;
 }
 .div {

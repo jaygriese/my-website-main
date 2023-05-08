@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
 
@@ -47,5 +48,8 @@ logOut() {
   console.log(localStorage.getItem('userName'))
   this.logInStatus = false;
 }
-
+Search(searchInformation: NgForm){
+  localStorage.setItem('searchTerm', searchInformation.value.description)
+  this.router.navigate(["/forum/search"]);
+}
 }

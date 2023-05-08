@@ -3,15 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
-import { map } from 'rxjs/operators';
-import { ForumPost } from '../../models/ForumPost';
+
 @Component({
-  selector: 'app-forum-topic1',
-  templateUrl: './forum-topic1.component.html',
-  styleUrls: ['./forum-topic1.component.css']
+  selector: 'app-forum-search-results',
+  templateUrl: './forum-search-results.component.html',
+  styleUrls: ['./forum-search-results.component.css']
 })
-export class ForumTopic1Component implements OnInit {
-  forumTopic: string;
+export class ForumSearchResultsComponent implements OnInit {
+
   currentUser: String;
   logInStatus: Boolean;
   darktheme: Boolean;
@@ -23,7 +22,6 @@ export class ForumTopic1Component implements OnInit {
     this.createPostBoolean = false;
     this.darktheme = false;
     this.testArray;
-    this.forumTopic = "topic1";
     this.newArray = [];
    }
   
@@ -37,24 +35,25 @@ export class ForumTopic1Component implements OnInit {
           this.Dark();
       }
   }
-  createPostButton(){
-      this.createPostBoolean = true;
+
+  getPosts(){
+    if (localStorage.getItem('searchTerm') != null){
+    this.themeservice.getAllForumPosts().subscribe((posts) =>{
+      this.newArray = this.themeservice.searchPosts(posts)
+      if(this.newArray.length == 0){
+        document.getElementById("title").innerHTML = "No Results"
+      }}) 
+    }
+    else {
+      document.getElementById("title").innerHTML = "No Results"
+    }
   }
   verifyLoggedIn() {
-  
     if (localStorage.getItem('userName') != null) {
       this.currentUser = localStorage.getItem('userName');
       this.logInStatus = true;
     }
   
-  }
-  createPost(postInformation: NgForm){
-      this.createPostBoolean = false;
-      this.themeservice.createAPost(postInformation, this.forumTopic);
-  }
-  getPosts(){
-    this.themeservice.getForumTopicPosts(this.forumTopic).subscribe((posts) =>{
-      this.newArray = this.themeservice.sortPosts(posts)})
   }
   Light(){
       this.themeservice.switchToLightTheme();
@@ -68,9 +67,5 @@ export class ForumTopic1Component implements OnInit {
     localStorage.removeItem('userName');
     console.log(localStorage.getItem('userName'));
     this.logInStatus = false;
-  }
-  Search(searchInformation: NgForm){
-    localStorage.setItem('searchTerm', searchInformation.value.description)
-    this.router.navigate(["/forum/search"]);
   }
 }

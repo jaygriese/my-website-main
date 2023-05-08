@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReplyDTO } from '../../models/ReplyDTO';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
+import { map } from 'rxjs/operators';
+import { ForumPost } from '../../models/ForumPost';
 
 @Component({
   selector: 'app-view-post',
@@ -12,7 +14,7 @@ import { ThemeserviceService } from 'src/app/services/themeservice.service';
 })
 export class ViewPostComponent implements OnInit {
   postId: number;
-  postObject;
+  postObject: ForumPost;
   currentUser: string;
   postReplyBoolean: boolean;
   logInStatus: Boolean;
@@ -22,6 +24,7 @@ export class ViewPostComponent implements OnInit {
   editAndDeleteButtons: boolean;
   postEditAndDeleteButtons: boolean;
   updatePostDescription: boolean;
+  darktheme: Boolean;
   constructor(private route: ActivatedRoute, private http: HttpClient, private themeservice: ThemeserviceService, private router: Router) { 
     this.postId = +this.route.snapshot.paramMap.get('id');
     this.postReplyBoolean = false;
@@ -31,30 +34,36 @@ export class ViewPostComponent implements OnInit {
     this.editAndDeleteButtons = true;
     this.postEditAndDeleteButtons = true;
     this.updatePostDescription = false;
+    this.darktheme = false;
   }
-  
   ngOnInit(): void {
-    this.getPost();
     this.verifyLoggedIn();
+    this.checkTheme();
+    this.getPost();
     this.getReplies();
   }
-  
-  getPost(){    
-      this.http.post('http://localhost:8080/viewPost', this.postId).subscribe((res)=> {
+  checkTheme(){
+    if (localStorage.getItem('theme') == 'dark'){
+        this.Dark();
+    }
+    else{
+      this.Light();
+    }
+  }
+  async getPost(){    
+    const response =  await this.http.post('http://localhost:8080/viewPost', this.postId).subscribe((res: ForumPost)=> {
         this.postObject = res;
       })
   }
   getReplies(){
-      this.http.get('http://localhost:8080/Replies').subscribe((res)=> {
-        console.log(res)
+    this.http.get('http://localhost:8080/Replies').subscribe((res)=> {
+      console.log(res)
         for(const k in res){
           if(res[k].forumPosts.id == this.postId){
-              this.replies.push(res[k])
-          }
+            this.replies.push(res[k])
         }
-      })
-
-    console.log(this.replies)
+      }
+    })
   }
   deleteReply(idString){
     let parent = document.getElementById("parent" + idString);
@@ -73,7 +82,7 @@ export class ViewPostComponent implements OnInit {
       }
       this.http.post(`http://localhost:8080/Replies`, replyDetails).subscribe((res) => {
     console.log(res)
-});
+    });
     window.location.reload();
   }
   populateForm(){
@@ -107,7 +116,7 @@ export class ViewPostComponent implements OnInit {
     console.log(res)
     this.editAndDeleteButtons = true;
     this.updateDescription = false;
-});
+    });
   }
   editPost(){
     this.postEditAndDeleteButtons = false;
@@ -132,4 +141,12 @@ export class ViewPostComponent implements OnInit {
       this.router.navigate(["/forum/" + this.postObject.category.toLowerCase()]);
     })
   }
+  Light(){
+    this.themeservice.switchToLightTheme();
+    this.darktheme = false;
+}
+  Dark(){
+    this.themeservice.switchToDarkTheme();
+    this.darktheme = true;
+}
 }

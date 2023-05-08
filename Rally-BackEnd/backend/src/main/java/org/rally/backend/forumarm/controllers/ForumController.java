@@ -93,5 +93,4 @@ public class ForumController {
         AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
         return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
     }
-
 }

@@ -22,15 +22,6 @@ export class EventViewComponent implements OnInit {
 
   isValue: number = 0;
 
-// filterButtons = [
-//   {text: 'connect', isClicked: false},
-//   {text: 'learn', isClicked: false},
-//   {text: 'volunteer', isClicked: false},
-//   {text: 'donate', isClicked: false},
-//   {text: 'celebrate', isClicked: false},
-// ]
-
-
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
@@ -139,27 +130,10 @@ export class EventViewComponent implements OnInit {
   toggle1() {this.isValue = 1;}
   toggle2() {this.isValue = 2;}
 
-  // setActive(button: any): void {
-  //   for(let but of this.filterButtons) {
-  //     but.isClicked = false;
-  //   }
-  //   button.isClicked = true;
-  // }
 
-  // btnFilter() {
-  //   this.btnActive = true;
-  // }
   
 
 }
-
-// onClick() {
-//   this.router.navigate(["'http://localhost:4200/event/?id=' + event.id"]);
-// }
-
-// onClick() {
-//   this.router.navigateByUrl("'/event/?id=' + event.id");
-// }
 
 
 

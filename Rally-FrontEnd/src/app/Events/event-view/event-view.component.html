@@ -108,12 +108,24 @@
                 </div> -->
 
 
-                    <button class="button2" (click)="connect('connect')" >connect</button>
-                    <button class="button2" (click)="learn('learn')" >learn</button>
+                <div>
+                    <button class="button2" [ngClass]="{ 'active' : isValue == 1 }" (click)="toggle1(); connect('connect')" >connect</button>
+                    <button class="button2" [ngClass]="{ 'active' : isValue == 2 }" (click)="toggle2(); learn('learn')" >learn</button>
                     <button class="button2" (click)="volunteer('volunteer')">volunteer</button>
                     <button class="button2" (click)="donate('donate')">donate</button>
                     <button class="button2" (click)="celebrate('celebrate')">celebrate</button>
                     <button class="button2" (click)="viewAll('viewAll')">view all</button>
+                </div>
+
+                    <!-- <div>
+                        <button class="button2" (click)="connect('connect')" >connect</button>
+                        <button class="button2" (click)="learn('learn')" >learn</button>
+                        <button class="button2" (click)="volunteer('volunteer')">volunteer</button>
+                        <button class="button2" (click)="donate('donate')">donate</button>
+                        <button class="button2" (click)="celebrate('celebrate')">celebrate</button>
+                        <button class="button2" (click)="viewAll('viewAll')">view all</button>
+                    </div> -->
+                   
 
                 
             </span>

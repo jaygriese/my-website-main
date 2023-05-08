@@ -11,9 +11,12 @@
 <div class="col-sm-3 p-1 boarder">
     <div class="card">
         <h4>Viewing {{ this?.viewUserName }}'s Profile</h4>
-            <div style="align-content: center;">
-            <img src="/assets/user-profile-assets/big-duck.jpg" width="170" height="170">
-            </div>
+        <div style="align-content: center;" *ngIf="dbImage; else default">               
+            <img [src]="dbImage" width="200" height="200">
+        </div>
+        <ng-template #default>
+            <img src="/assets/user-profile-assets/profile-pic.gif" width="200" height="200">
+        </ng-template>
         </div> 
     </div>
     <div class="col-sm-8 offset-md-1">
@@ -71,7 +74,7 @@
                 <br>
                 <label>Last Name: {{ userEntityInformation?.viewUserInformation?.lastName }}</label>
                 <br>
-                <label>Neigborhood: {{ userEntityInformation?.viewUserInformation?.neigborhood }}</label>
+                <label>Neighborhood: {{ userEntityInformation?.viewUserInformation?.neighborhood }}</label>
                 <br>
                 <label>City: {{ userEntityInformation?.viewUserInformation?.city }}</label>
                 <br>       

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { VerifyLogoutService } from 'src/app/user-profile-arm/security/verify-logout.service';
 import { UserInfoDTO } from '../../models/dto/UserInfoDTO';
@@ -11,6 +11,7 @@ import { MainUserBundle } from '../../models/MainUserBundle';
 import { DirectMessage } from '../../models/Directmessage';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { NgUserInformation } from '../../models/ng-model/UserInformation';
+import { ProfilePicture } from '../../models/ProfilePicture';
 
 @Component({
   selector: 'app-user-profile',
@@ -31,14 +32,16 @@ export class UserProfileComponent implements OnInit {
   userEntityDmList: UserEntity[];
   allDmHistory: DirectMessage[];
   conversation: DirectMessage[] = [];
+
+  /* Post History */
+  forumPost: any = [];
   
   /* HTML booleans */
   noError: boolean = true;
   changeInfo: boolean = true;
   userDms: boolean = true;
- 
-  /* URL routes */
-  private userUrl: string = 'http://localhost:8080/user/update-user-information';
+  changeProfilePic: boolean = true;
+  uploadErrorMsg: string[];
 
   /* Image uploading */
   uploadedImage: File;
@@ -55,8 +58,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    /* Make sure the user is logged in */
     this.logInStatus = this.verifyService.verifyLoggedIn();
-    
+    /* If they are logged in */
     if (localStorage.getItem('id') !== null) {
       /* Get user information and user entity data */
       this.activeUserService.getMainUserBundleByUserName(localStorage.getItem('userName')).subscribe((data: MainUserBundle) => {
@@ -64,60 +68,81 @@ export class UserProfileComponent implements OnInit {
         this.userInformation = data.viewUserInformation;
         this.model = new NgUserInformation(this.userInformation.firstName,
                                            this.userInformation.lastName,
-                                           this.userInformation.neigborhood,
+                                           this.userInformation.neighborhood,
                                            this.userInformation.city,
                                            this.userInformation.state);
       })
       /* Get user entities that have dm history with active user */
       this.activeUserService.getDmHistoryUsers(localStorage.getItem('id')).subscribe((response: UserEntity[]) => {
         this.userEntityDmList = response;
-        /* Remove active user from list */
+        /* Remove logged in user from list */
         let remove: UserEntity;
         for (let i = 0; i < this.userEntityDmList.length; i++) {
           if (localStorage.getItem('userName') === this.userEntityDmList[i].userName) {
+
             remove = this.userEntityDmList[i];
           }
         }
         this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user !== remove);
       })
-      /* Get all user message dm history */
+      /* Get all user dm history */
       this.activeUserService.getDmHistoryDirectMessages(localStorage.getItem('id')).subscribe((response: DirectMessage[]) => {
         this.allDmHistory = response;
+      })
+      /* Get user Profile Picture */
+      this.http.get('http://localhost:8080/user/userProfileImage/' + localStorage.getItem('id')).subscribe((response: ProfilePicture) => {
+        this.postResponse = response;
+        this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
+      })
+      /* Get user Forum Post history */
+      this.http.get('http://localhost:8080/Posts').subscribe((response) => {
+        this.forumPost = response;
+        console.log(response)
       })
     }
   }
 
-  /* Image upload testing */
-  /* Image upload testing */
-  public onImageUpload(event) {
-    this.uploadedImage = event.target.files[0];
+  /* Hide requested post from profile */
+  hidePost(postId: string) {
+    this.http.post('http://localhost:8080/user/hidePostList', postId).subscribe((response) => {
+      console.log(response);
+    })
   }
 
+  /* Select file to be uploaded */
+  public onImageUpload(event) {
+    console.log(event)
+    if (event.target.files[0].size > 1024000) {
+      
+      this.uploadErrorMsg = ["File is too large, please select a smaller image", "true"];
+      this.uploadedImage = null;
+      return;
+    } else {
+      this.uploadedImage = event.target.files[0];
+    }
+  }
+
+  /* Upload the image to the database */
   imageUploadAction() {
+    if (this.uploadedImage === null) {
+      console.log("Nope");
+      return;
+    }
+
     const imageFormData = new FormData();
-    imageFormData.append('image', this.uploadedImage, this.uploadedImage.name);
+    imageFormData.append('image', this.uploadedImage, this.userEntity.id);
 
     this.http.post('http://localhost:8080/user/upload/image', imageFormData, {observe: 'response'}).subscribe((response) => {
       console.log(response);
       if (response.status === 200) {
         this.postResponse = response;
-        this.successResponse = this.postResponse.body.messge;
+        console.log(this.postResponse)
       } else { 
         this.successResponse = 'Image not uploaded due to an error!';
       }
+      location.reload();
     })
-  }
-
-  viewImage() {
-    this.http.get('http://localhost:8080/user/userProfileImage/' + this.image).subscribe((response) => {
-      this.postResponse = response;
-      this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
-    })
-  }
-
-
-
-  
+  }  
 
   displayConversation( userDms: UserEntity) {
     this.respondToDm = null;
@@ -172,12 +197,12 @@ export class UserProfileComponent implements OnInit {
       userId: Number(this.userEntity.id),
       firstName: userDetails.value.firstName,
       lastName: userDetails.value.lastName, 
-      neigborhood: userDetails.value.neigborhood,
+      neighborhood: userDetails.value.neighborhood,
       city: userDetails.value.city,
       state: userDetails.value.state
     }
     console.log(userInfo)
-    this.http.post(this.userUrl, userInfo).subscribe((response: UserInformation) => {
+    this.http.post('http://localhost:8080/user/update-user-information', userInfo).subscribe((response: UserInformation) => {
         this.userInformation = response
         this.changeInfo=true;
         return;
@@ -195,5 +220,4 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(["/login"])
     return;
   }
-
 }

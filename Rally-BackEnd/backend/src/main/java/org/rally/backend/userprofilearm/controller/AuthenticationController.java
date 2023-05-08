@@ -64,7 +64,7 @@ public class AuthenticationController {
         int userId = userBundleDTO.getUserInfoDTO().getUserId();
         String firstName = userBundleDTO.getUserInfoDTO().getFirstName();
         String lastName = userBundleDTO.getUserInfoDTO().getLastName();
-        String neighborhood = userBundleDTO.getUserInfoDTO().getNeigborhood();
+        String neighborhood = userBundleDTO.getUserInfoDTO().getNeighborhood();
         String city = userBundleDTO.getUserInfoDTO().getCity();
         String state = userBundleDTO.getUserInfoDTO().getState();
 

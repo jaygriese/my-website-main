@@ -8,37 +8,38 @@
 <br>
 
 <div class="row">
-
-
 <div class="col-sm-3 p-1 boarder">
     <div class="card">
         <div class="profilepic">
         <h4>Hello<br>{{currentUser}}</h4>
         <div class="card">
-            <div style="align-content: center;">
-            <img src="/assets/user-profile-assets/profile-pic.gif" width="200" height="200">
+            <div style="align-content: center;" *ngIf="dbImage; else default">               
+                <img [src]="dbImage" width="200" height="200">
             </div>
-
-            <!-- Image testing -->
-            <!-- Image testing -->
-            <!-- Image testing -->
+            <ng-template #default>
+                <img src="/assets/user-profile-assets/profile-pic.gif" width="200" height="200">
+            </ng-template>
+            <div *ngIf="changeProfilePic; else changePic">
+                <button (click)="changeProfilePic=false">Update Profile Picture</button>
+            </div>
+            <ng-template #changePic>
+                <button (click)="changeProfilePic=true">Cancel</button>
             <form>
                 <div class="form-group">
                     <input type="file" (change)="onImageUpload($event)">
+
+                    <div *ngIf="uploadErrorMsg">
+                        <p style="color: crimson;">{{ uploadErrorMsg[0] }}</p>
+                    </div>
+
                     <input type="button" value="upload" (click)="imageUploadAction()">
                 </div>
-
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <input type="text" id="image" placeholder="Search Image" [(ngModel)]="image" name="image" />
                     <input type="button" (click)="viewImage()" value="View Image" class="btn1">
-                </div>
-
-                <div *ngIf=dbImage>
-                    <img [src]="dbImage" width="200px" height="200px">
-                </div>
+                </div> -->
             </form>
-
-
+            </ng-template>
         </div>
         </div> 
     </div>
@@ -120,7 +121,7 @@
                 <br>
                 <label>Last Name:<br>{{ userInformation?.lastName}}</label>
                 <br>
-                <label>Neigborhood:<br>{{ userInformation?.neigborhood}}</label>
+                <label>Neigborhood:<br>{{ userInformation?.neighborhood}}</label>
                 <br>
                 <label>City:<br>{{ userInformation?.city}}</label>
                 <br>       
@@ -139,8 +140,8 @@
                 <label for="lastName">Last Name:<br>
                 <input type="text" name="lastName" id="lastName" placeholder={{userInformation?.lastName}} [(ngModel)]="model.lastName" #lastName="ngModel"></label>                
                 <br><br>
-                <label for="neigborhood">Neigborhood:<br>
-                <input type="text" name="neigborhood" id="neigborhood" placeholder={{userInformation?.neigborhood}} [(ngModel)]="model.neigborhood" #neigborhood="ngModel"></label>
+                <label for="neighborhood">Neighborhood:<br>
+                <input type="text" name="neighborhood" id="neighborhood" placeholder={{userInformation?.neighborhood}} [(ngModel)]="model.neigborhood" #neigborhood="ngModel"></label>
                 <br><br>
                 <label for="city">City:<br>
                 <input type="text" name="city" id="city" placeholder={{userInformation?.city}} [(ngModel)]="model.city" #city="ngModel"></label>                
@@ -158,6 +159,14 @@
     <div class="col-sm-6">
         <div class="card">
             <h2>Post History</h2>
+            <div class="scroll">
+                <ul *ngFor="let post of forumPost">
+                    <div class="card">
+                        <h2><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h2>
+                        <p><button type="button" (click)="hidePost(post.id)">Hide this Post?</button></p>
+                    </div>
+                </ul>
+                </div>
         </div>
     </div>
     <div class="col">

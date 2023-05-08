@@ -57,7 +57,7 @@ export class RegisterUserComponent implements OnInit {
       userId: this.nextUserId + 1,
       firstName: userDetails.value.firstName,
       lastName: userDetails.value.lastName, 
-      neigborhood: userDetails.value.neigborhood,
+      neighborhood: userDetails.value.neighborhood,
       city: userDetails.value.city,
       state: userDetails.value.state
     }

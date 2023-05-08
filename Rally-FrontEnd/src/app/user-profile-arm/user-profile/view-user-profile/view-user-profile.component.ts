@@ -7,6 +7,8 @@ import { ViewUserBundle } from '../../models/ViewUserBundle';
 import { NgForm } from '@angular/forms';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { DirectMessage } from '../../models/Directmessage';
+import { HttpClient } from '@angular/common/http';
+import { ProfilePicture } from '../../models/ProfilePicture';
 @Component({
   selector: 'app-view-user-profile',
   templateUrl: './view-user-profile.component.html',
@@ -21,6 +23,7 @@ export class ViewUserProfileComponent implements OnInit {
   viewUserName: string;
   viewUserId: string;
   userEntityInformation: ViewUserBundle;
+  dbImage: any;
 
   noError: boolean = true;
   showDmHistory = true;
@@ -28,7 +31,8 @@ export class ViewUserProfileComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router, 
               private viewUser: ViewUserService,
-              private verifyService: VerifyLogoutService) {
+              private verifyService: VerifyLogoutService,
+              private http: HttpClient) {
       this.logInStatus = false;
    }
 
@@ -52,6 +56,10 @@ export class ViewUserProfileComponent implements OnInit {
         this.dmList =response
         // console.log(this.dmList)
     })
+
+      this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserId).subscribe((response: ProfilePicture) => {
+        this.dbImage = 'data:image/jpeg;base64,' + response.image;
+      })
 
   }
 

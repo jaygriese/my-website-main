@@ -1,15 +1,16 @@
 package org.rally.backend.userprofilearm.controller;
 
+import org.rally.backend.forumarm.models.ForumPosts;
+import org.rally.backend.forumarm.repository.ForumPostRepository;
+import org.rally.backend.forumarm.repository.RepliesRepository;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.*;
 import org.rally.backend.userprofilearm.model.dto.DirectMessageDTO;
 import org.rally.backend.userprofilearm.model.dto.UserInfoDTO;
-import org.rally.backend.userprofilearm.model.response.ImageUploadResponse;
 import org.rally.backend.userprofilearm.repository.*;
 import org.rally.backend.userprofilearm.utility.ImageUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +29,9 @@ public class UserProfileController {
     RoleRepository roleRepository;
     DirectMessageRepository directMessageRepository;
     ProfilePictureRepository profilePictureRepository;
+    ForumPostRepository forumPostRepository;
+    RepliesRepository repliesRepository;
+    HiddenPostRepository hiddenPostRepository;
 
 
     @Autowired
@@ -35,12 +39,18 @@ public class UserProfileController {
                                  RoleRepository roleRepository,
                                  UserInformationRepository userInformationRepository,
                                  DirectMessageRepository directMessageRepository,
-                                 ProfilePictureRepository profilePictureRepository) {
+                                 ProfilePictureRepository profilePictureRepository,
+                                 ForumPostRepository forumPostRepository,
+                                 RepliesRepository repliesRepository,
+                                 HiddenPostRepository hiddenPostRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
         this.directMessageRepository = directMessageRepository;
         this.profilePictureRepository = profilePictureRepository;
+        this.forumPostRepository = forumPostRepository;
+        this.repliesRepository = repliesRepository;
+        this.hiddenPostRepository = hiddenPostRepository;
     }
 
     /** Upload Image testing **/
@@ -51,34 +61,46 @@ public class UserProfileController {
     public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file)
             throws IOException {
 
+        if (profilePictureRepository.findByUserId(file.getOriginalFilename()).isPresent()) {
+            Optional<ProfilePicture> remove = profilePictureRepository.findByUserId(file.getOriginalFilename());
+            profilePictureRepository.deleteById(remove.get().getId());
+        }
+
+        ProfilePicture profilePicture = ProfilePicture.builder()
+                .userId(file.getOriginalFilename())
+                .type(file.getContentType())
+                .image(ImageUtility.compressImage(file.getBytes())).build();
+
         profilePictureRepository.save(ProfilePicture.builder()
-                .name(file.getOriginalFilename())
+                .userId(file.getOriginalFilename())
                 .type(file.getContentType())
                 .image(ImageUtility.compressImage(file.getBytes())).build());
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(new ImageUploadResponse("Image uploaded successfully: " + file.getOriginalFilename()));
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(new ImageUploadResponse("Image uploaded successfully: " + file.getOriginalFilename()));
+        return new ResponseEntity<>(profilePicture, HttpStatus.OK);
     }
 
-    @GetMapping(path = {"/userProfileImage/{name}"})
-    public ProfilePicture getImageDetails(@PathVariable("name") String name) throws IOException {
+    @GetMapping(path = {"/userProfileImage/{userId}"})
+    public ProfilePicture getImageDetails(@PathVariable("userId") String userId) throws IOException {
 
-        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByName(name);
+        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByUserId(userId);
 
         return ProfilePicture.builder()
-                .name(dbImage.get().getName())
+                .id(dbImage.get().getId())
+                .userId(dbImage.get().getUserId())
                 .type(dbImage.get().getType())
                 .image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
     }
 
-    @GetMapping(path = {"/get/image/{name}"})
-    public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) throws IOException {
-        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByName(name);
-
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.valueOf(dbImage.get().getType()))
-                .body(ImageUtility.decompressImage(dbImage.get().getImage()));
-    }
+//    @GetMapping(path = {"/get/image/{name}"})
+//    public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) throws IOException {
+//        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByUserId(name);
+//
+//        return ResponseEntity
+//                .ok()
+//                .contentType(MediaType.valueOf(dbImage.get().getType()))
+//                .body(ImageUtility.decompressImage(dbImage.get().getImage()));
+//    }
 
 
 
@@ -166,6 +188,17 @@ public class UserProfileController {
     /** POST REQUEST **/
     /** POST REQUEST **/
 
+    @PostMapping("/hidePostList")
+    public List<HiddenPost> hiddenPosts(@RequestBody int post) {
+        Optional<ForumPosts> forumPosts = forumPostRepository.findById(post);
+
+        // if hidePostId is the same, don't save this new post.
+
+        HiddenPost hiddenPost = new HiddenPost(forumPosts.get().getId(), forumPosts.get().getUserEntity().getId());
+        hiddenPostRepository.save(hiddenPost);
+        return hiddenPostRepository.findAll();
+    }
+
     @PostMapping("/update-user-information")
     public ResponseEntity<?> updateUserInformation(@RequestBody UserInfoDTO userInfoDTO) {
 
@@ -174,7 +207,7 @@ public class UserProfileController {
         UserInformation userInformation = new UserInformation(userInfoDTO.getUserId(),
                                                               userInfoDTO.getFirstName(),
                                                               userInfoDTO.getLastName(),
-                                                              userInfoDTO.getNeigborhood(),
+                                                              userInfoDTO.getNeighborhood(),
                                                               userInfoDTO.getCity(),
                                                               userInfoDTO.getState());
 

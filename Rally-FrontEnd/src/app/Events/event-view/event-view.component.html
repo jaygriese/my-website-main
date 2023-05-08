@@ -86,14 +86,34 @@
             
             <span>
                 <p id="event_display2">search by category</p>
+                <!-- <div class="btn-group">
+                    <input type="radio" class="btn-check" name="options" id="radio1" (click)="connect('connect')">
+                    <label class="btn btn-outline-primary" for="radio1">connect</label>
+                    
+                    <input type="radio" class="btn-check" name="options" id="radio2" (click)="learn('learn')" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="radio2">learn</label>
+                    
+                    <input type="radio" class="btn-check" name="options" id="radio3" (click)="volunteer('volunteer')" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="radio3">volunteer</label>
+                    <br>
+
+                    <input type="radio" class="btn-check" name="options" id="radio4" (click)="donate('donate')" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="radio4">donate</label>
+                    
+                    <input type="radio" class="btn-check" name="options" id="radio5" (click)="celebrate('celebrate')" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="radio5">celebrate</label>
+                    
+                    <input type="radio" class="btn-check" name="options" id="radio6" (click)="viewAll('viewAll')" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="radio6">view all</label>
+                </div> -->
+
+
                     <button class="button2" (click)="connect('connect')" >connect</button>
                     <button class="button2" (click)="learn('learn')" >learn</button>
                     <button class="button2" (click)="volunteer('volunteer')">volunteer</button>
                     <button class="button2" (click)="donate('donate')">donate</button>
                     <button class="button2" (click)="celebrate('celebrate')">celebrate</button>
                     <button class="button2" (click)="viewAll('viewAll')">view all</button>
-
-
 
                 
             </span>
@@ -103,6 +123,7 @@
 
             </div>
 
+
             <div class="col-7">
                 <div class="card mb-3" style="max-width: 900px;" *ngFor="let event of eventList">
                     <div class="row no-gutters">
@@ -111,16 +132,18 @@
                         </div>
                         <div class="col-md-10">
                             <div class="card-body">
-                                <p style="font-family:Impact; margin-bottom: -10px;">{{event.datetime}}</p>
-                                <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" style="font-weight: bold;">{{event.eventTitle}}</a> -->
+                                <p style="font-family:Impact;  font-size: 15;">{{event.datetime}}</p>
                                 <p style="font-weight: bold; margin-top: -20px;">{{event.eventTitle}}</p>
-                                <p style="font-size: 25px; margin-top: -10px;">{{event.eventCategory}}</p>
-                                <p style="font-size: 15px; font-style: italic; margin-top: 75px;">hosted by {{event.eventHost}}</p>
-                                <!-- <button type="button" class="btn btn-outline-info btn-xm" (click)="onClick()">learn more</button> -->
-                                <a [href]="'http://localhost:4200/event/?id=' + event.id" class="btn btn-outline-info btn-xm">learn more</a>
-                                <a routerLink="/event/{{event.id}}" routerLinkActive="active">{{event.eventTitle}}</a>
+                                <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory}}</p>
+                                <p style="font-size: 15px; font-style: italic; margin-top: 90px;">hosted by {{event.eventHost}}</p>
+
+                                <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" class="btn btn-outline-info btn-xm">learn more</a> -->
+
+                                <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
+
                                 <!-- <button class="btn btn-outline-info btn-xs" type="button"><a class="nav-link" routerLink="'http://localhost:4200/event/?id=' + event.id" routerLinkActive="active">learn more</a></button> -->
                                 <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" style="font-size: 15px;">learn more</a> -->
+
                              </div>
                         </div>
                     </div>

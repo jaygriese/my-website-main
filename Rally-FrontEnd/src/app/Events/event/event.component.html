@@ -86,7 +86,7 @@
 
             <div class="col-7">
                 <div id="details">
-                    <p style="font-size: 15px; margin-top: -12px; margin-bottom: -8px;">CATEGORY: {{eventDetails.eventCategory}}</p>
+                    <p style="font-size: 15px; margin-top: -12px; margin-bottom: -8px;"><span style="font-weight: bolder;">CATEGORY: </span> {{eventDetails.eventCategory}}</p>
                     <p>photo goes here</p>
                     <img src="{{eventDetails.imageId}}" />
                     <br>
@@ -94,13 +94,14 @@
                     <br>
                     <br>
                     <br>  
-                    <p style="font-size: 15px; font-style: italic;">hosted by: {{eventDetails.eventHost}}</p>  
+                    <p style="font-size: 15px; font-style: italic; font-weight: bolder;">hosted by: {{eventDetails.eventHost}}</p>  
                     <br>
-                    <p style="font-size: 25px;">address:</p><br>
-                    <p>{{eventDetails.eventAddress}}</p>
+                    <p style="font-size: 20px; font-weight: bolder;">address:</p>
+                    <p style="margin-top: -15px;">{{eventDetails.eventAddress}}</p>
                     <br>
-                    <p style="font-size: 25px;">description:</p><br>
-                    <p>{{eventDetails.description}}</p>  
+                    <br>
+                    <p style="font-size: 20px; font-weight: bolder;">description:</p>
+                    <p style="margin-top: -15px;">{{eventDetails.description}}</p>  
                 </div>
             </div>
         </div>

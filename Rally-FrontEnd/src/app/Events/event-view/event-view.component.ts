@@ -16,7 +16,7 @@ export class EventViewComponent implements OnInit {
   logInStatus: Boolean;
 
   private eventsUrl: string;
-  private filterEventsUrl: string;
+  // private filterEventsUrl: string;
 
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
@@ -29,7 +29,7 @@ export class EventViewComponent implements OnInit {
     this.eventsUrl = 'http://localhost:8080/events/events/'
     this.eventList;
     this.filteredEvents;
-    this.filterEventsUrl = 'http://localhost:4200/events'
+    // this.filterEventsUrl = 'http://localhost:4200/events'
 
     // this.isValue;
 
@@ -131,6 +131,7 @@ export class EventViewComponent implements OnInit {
     return this.filteredEvents;
  
   };
+
 
   // reload() {
   //   this.router.navigateByUrl(this.eventsUrl);

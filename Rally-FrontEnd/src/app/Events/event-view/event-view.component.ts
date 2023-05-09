@@ -16,12 +16,9 @@ export class EventViewComponent implements OnInit {
   logInStatus: Boolean;
 
   private eventsUrl: string;
-  // private filterEventsUrl: string;
 
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
-  
-  // isValue: number = 0;
 
 
   constructor(private http: HttpClient, private router: Router) {
@@ -29,9 +26,6 @@ export class EventViewComponent implements OnInit {
     this.eventsUrl = 'http://localhost:8080/events/events/'
     this.eventList;
     this.filteredEvents;
-    // this.filterEventsUrl = 'http://localhost:4200/events'
-
-    // this.isValue;
 
    }
 
@@ -116,38 +110,23 @@ export class EventViewComponent implements OnInit {
  
   };
 
+  reset() {
+    window.location.reload();
+  }
 
 
+  // viewAll(string: string) {
+  //   for(let i = 0; i < this.eventList.length; i++) {
+  //     if ( this.eventList[i].eventCategory === string) {
+  //       this.filteredEvents.push(this.eventList[i])
+  //     }
+  //   }
 
-  viewAll(string: string) {
-    for(let i = 0; i < this.eventList.length; i++) {
-      if ( this.eventList[i].eventCategory === string) {
-        this.filteredEvents.push(this.eventList[i])
-      }
-    }
-
-    this.eventList = this.filteredEvents;
-    console.log(this.filteredEvents)
-    return this.filteredEvents;
+  //   this.eventList = this.filteredEvents;
+  //   console.log(this.filteredEvents)
+  //   return this.filteredEvents;
  
-  };
-
-
-  // reload() {
-  //   this.router.navigateByUrl(this.eventsUrl);
-  // }
-
-
-// updateLearn() {
-//   this.router.navigate([this.filterEventsUrl]);
-//   this.learn('learn');
-
-// }
-
-
-
-  // toggle1() {this.isValue = 1;}
-  // toggle2() {this.isValue = 2;}
+  // };
 
 
   

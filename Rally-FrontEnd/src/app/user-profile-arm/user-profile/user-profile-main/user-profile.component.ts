@@ -35,13 +35,14 @@ export class UserProfileComponent implements OnInit {
 
   /* Post History */
   forumPost: any = [];
+  hiddenPost: any;
   
   /* HTML booleans */
   noError: boolean = true;
   changeInfo: boolean = true;
   userDms: boolean = true;
   changeProfilePic: boolean = true;
-  uploadErrorMsg: string[];
+  uploadErrorMsg: any[];
 
   /* Image uploading */
   uploadedImage: File;
@@ -79,7 +80,6 @@ export class UserProfileComponent implements OnInit {
         let remove: UserEntity;
         for (let i = 0; i < this.userEntityDmList.length; i++) {
           if (localStorage.getItem('userName') === this.userEntityDmList[i].userName) {
-
             remove = this.userEntityDmList[i];
           }
         }
@@ -96,8 +96,17 @@ export class UserProfileComponent implements OnInit {
       })
       /* Get user Forum Post history */
       this.http.get('http://localhost:8080/Posts').subscribe((response) => {
-        this.forumPost = response;
-        console.log(response)
+        let filterPost: any = response;
+        for (let i = 0; i < filterPost.length; i++) {
+          if(filterPost[i].userEntity.id === Number(localStorage.getItem('id'))) {
+            this.forumPost.push(filterPost[i]);
+          }
+        }
+      })
+      /* Get hidden post list */
+      this.http.get('http://localhost:8080/user/getHiddenPostList/' + localStorage.getItem('id')).subscribe((response) => {
+        this.hiddenPost = response;
+        console.log(this.hiddenPost)
       })
     }
   }
@@ -109,13 +118,18 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  unhidePost(postId: string) {
+    this.http.post('http://localhost:8080/user/unhidePost', postId).subscribe((response) => {
+      console.log(response);
+    })
+  }
+
   /* Select file to be uploaded */
   public onImageUpload(event) {
-    console.log(event)
-    if (event.target.files[0].size > 1024000) {
-      
-      this.uploadErrorMsg = ["File is too large, please select a smaller image", "true"];
+    if (event.target.files[0].size > 1024000) {   
+      this.uploadErrorMsg = ["File is too large, please select a smaller image", true];
       this.uploadedImage = null;
+      console.log(this.uploadedImage)
       return;
     } else {
       this.uploadedImage = event.target.files[0];

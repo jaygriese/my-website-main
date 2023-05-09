@@ -1,9 +1,9 @@
 package org.rally.backend.userprofilearm.model.response;
 
-public class ImageUploadResponse {
+public class ResponseMessage {
     private String message;
 
-    public ImageUploadResponse(String message) {
+    public ResponseMessage(String message) {
         this.message = message;
     }
 

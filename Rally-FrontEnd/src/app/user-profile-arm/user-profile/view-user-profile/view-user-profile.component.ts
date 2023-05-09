@@ -9,6 +9,8 @@ import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { DirectMessage } from '../../models/Directmessage';
 import { HttpClient } from '@angular/common/http';
 import { ProfilePicture } from '../../models/ProfilePicture';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-view-user-profile',
   templateUrl: './view-user-profile.component.html',
@@ -24,6 +26,9 @@ export class ViewUserProfileComponent implements OnInit {
   viewUserId: string;
   userEntityInformation: ViewUserBundle;
   dbImage: any;
+  /* Post History */
+  forumPost: any = [];
+  hiddenPost: any =[];
 
   noError: boolean = true;
   showDmHistory = true;
@@ -51,15 +56,56 @@ export class ViewUserProfileComponent implements OnInit {
       this.userEntityInformation = data;
       this.viewUserEntity = this.userEntityInformation.viewUser;
     })
-
+    /* Get Direct Message history with active user */
     this.viewUser.getDmHistoryDirectMessages(this.viewUserId).subscribe((response: DirectMessage[]) => {
         this.dmList =response
-        // console.log(this.dmList)
+    })
+    /* Get other users profile picture */
+    this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserId).subscribe((response: ProfilePicture) => {
+      this.dbImage = 'data:image/jpeg;base64,' + response.image;
     })
 
-      this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserId).subscribe((response: ProfilePicture) => {
-        this.dbImage = 'data:image/jpeg;base64,' + response.image;
-      })
+    // let hiddenGetPost: any = this.http.get('http://localhost:8080/user/getHiddenPostList/' + this.viewUserId);
+    // let forumPostAll: any = this.http.get('http://localhost:8080/Posts');
+
+    // forkJoin([hiddenGetPost, forumPostAll]).subscribe( result => {
+    //   this.hiddenPost = result[0];
+    //   this.forumPost = result[1];
+    // });
+
+    
+    /* Currently not working right, async issues need to be addressed */
+    /* Get hidden post list */
+    this.http.get('http://localhost:8080/user/getHiddenPostList/' + this.viewUserId).subscribe((response) => {
+      this.hiddenPost = response;      
+    })
+    /* Get user Forum Post history */
+    this.http.get('http://localhost:8080/Posts').subscribe((response) => {
+      let filterPost: any = response;
+      for (let i = 0; i < filterPost.length; i++) {
+        if(filterPost[i].userEntity.id === Number(this.viewUserId)) {
+          this.forumPost.push(filterPost[i]);
+          
+        }
+      }
+
+      let remove: any;
+        for (let i = 0; i < this.forumPost.length; i++) {
+          console.log("Loop 1")
+          for (let j = 0; i< this.hiddenPost.length; i++) {
+            console.log("Loop 2")
+            if (this.forumPost[i].id === this.hiddenPost[j].hidePostId) {
+              remove = this.forumPost[i];
+              console.log(`This is forum post #${this.forumPost[i].id} and this is post #${this.hiddenPost[j].hidePostId}, the post I want to hide. Do they match?`)
+              this.forumPost = this.forumPost.filter((post: any) => post !== remove);
+            }
+          }
+        }
+        console.log("Forum Post post remove")
+        console.log(this.forumPost)
+    })
+  
+        
 
   }
 

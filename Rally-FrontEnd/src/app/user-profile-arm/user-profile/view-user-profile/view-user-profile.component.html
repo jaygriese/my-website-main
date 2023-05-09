@@ -85,6 +85,13 @@
     <div class="col">
         <div class="card">
             <h2>Post History</h2>
+            <div class="scroll">
+            <ul *ngFor="let post of forumPost">
+                <div class="card">                        
+                    <h2><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h2>
+                </div>
+            </ul>
+        </div>
         </div>
     </div>
     <div class="col">

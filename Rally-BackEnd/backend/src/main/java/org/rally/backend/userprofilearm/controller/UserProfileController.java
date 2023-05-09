@@ -7,6 +7,7 @@ import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.*;
 import org.rally.backend.userprofilearm.model.dto.DirectMessageDTO;
 import org.rally.backend.userprofilearm.model.dto.UserInfoDTO;
+import org.rally.backend.userprofilearm.model.response.ResponseMessage;
 import org.rally.backend.userprofilearm.repository.*;
 import org.rally.backend.userprofilearm.utility.ImageUtility;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -183,20 +184,50 @@ public class UserProfileController {
         return allDirectMessageHistory;
     }
 
+    @GetMapping("/getHiddenPostList/{userId}")
+    public List<HiddenPost> getHiddenPostListByUserId(@PathVariable int userId) {
+        List<HiddenPost> hiddenPostList = new ArrayList<>();
+        for (HiddenPost post : hiddenPostRepository.findAll()) {
+            if (post.getUserId() == userId) {
+                hiddenPostList.add(post);
+            }
+        }
+        return hiddenPostList;
+    }
+
 
     /** POST REQUEST **/
     /** POST REQUEST **/
     /** POST REQUEST **/
 
     @PostMapping("/hidePostList")
-    public List<HiddenPost> hiddenPosts(@RequestBody int post) {
-        Optional<ForumPosts> forumPosts = forumPostRepository.findById(post);
+    public ResponseEntity<?> hiddenPosts(@RequestBody int postId) {
+        Optional<ForumPosts> forumPosts = forumPostRepository.findById(postId);
 
-        // if hidePostId is the same, don't save this new post.
+        for (HiddenPost post : hiddenPostRepository.findAll()) {
+            if (post.getHidePostId() == forumPosts.get().getId()) {
+                ResponseMessage responseMessage = new ResponseMessage("Post Already Hidden");
+                return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+            }
+        }
 
         HiddenPost hiddenPost = new HiddenPost(forumPosts.get().getId(), forumPosts.get().getUserEntity().getId());
         hiddenPostRepository.save(hiddenPost);
-        return hiddenPostRepository.findAll();
+        return new ResponseEntity<>(hiddenPostRepository.findAll(), HttpStatus.OK);
+    }
+
+    @PostMapping("/unhidePost")
+    public ResponseEntity<?> unhidePostFromProfile(@RequestBody int postId) {
+        Optional<ForumPosts> forumPosts = forumPostRepository.findById(postId);
+        if (forumPosts.isPresent()) {
+            HiddenPost hiddenPost = hiddenPostRepository.findByHidePostId(forumPosts.get().getId());
+            hiddenPostRepository.delete(hiddenPost);
+            ResponseMessage responseMessage = new ResponseMessage("Post is no longer hidden.");
+            return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+        } else {
+            ResponseMessage responseMessage = new ResponseMessage("No Post with that ID found.");
+            return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+        }
     }
 
     @PostMapping("/update-user-information")

@@ -16,6 +16,7 @@ export class EventViewComponent implements OnInit {
   logInStatus: Boolean;
 
   private eventsUrl: string;
+  private filterEventsUrl: string;
 
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
@@ -28,6 +29,7 @@ export class EventViewComponent implements OnInit {
     this.eventsUrl = 'http://localhost:8080/events/events/'
     this.eventList;
     this.filteredEvents;
+    this.filterEventsUrl = 'http://localhost:4200/events'
 
     // this.isValue;
 
@@ -62,7 +64,6 @@ export class EventViewComponent implements OnInit {
 
 
   learn(string: string) {
-    this.filteredEvents = this.eventList;
     for(let i = 0; i < this.eventList.length; i++) {
       if ( this.eventList[i].eventCategory === string) {
         this.filteredEvents.push(this.eventList[i])
@@ -136,17 +137,12 @@ export class EventViewComponent implements OnInit {
   // }
 
 
-updateLearn() {
-  this.router.navigate([this.eventsUrl]);
-  this.learn('learn');
+// updateLearn() {
+//   this.router.navigate([this.filterEventsUrl]);
+//   this.learn('learn');
 
-}
+// }
 
-updateVolunteer() {
-  this.router.navigate([this.eventsUrl]);
-  this.volunteer('volunteer');
-
-}
 
 
   // toggle1() {this.isValue = 1;}

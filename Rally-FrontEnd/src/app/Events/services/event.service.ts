@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class EventService {
 
   private getEventByIdUrl = 'http://localhost:8080/events/event/';
+  
 
   constructor(private http: HttpClient, private router: Router) { }
 

@@ -195,6 +195,30 @@ public class UserProfileController {
         return hiddenPostList;
     }
 
+    @GetMapping("/getUpdatedPostHistoryViewUser/{userId}")
+    public List<ForumPosts> getUpdatedPostHistoryViewUser(@PathVariable int userId) {
+
+        List<ForumPosts> currentPostSettings = new ArrayList<>();
+        List<HiddenPost> hiddenPostList = new ArrayList<>();
+        for (HiddenPost post : hiddenPostRepository.findAll()) {
+            if (post.getUserId() == userId) {
+                hiddenPostList.add(post);
+            }
+        }
+
+        for (ForumPosts post : forumPostRepository.findAll()) {
+            if (post.getUserEntity().getId() == userId) {
+                for (HiddenPost remove : hiddenPostList) {
+                    if (post.getId() != remove.getHidePostId()) {
+                        currentPostSettings.add(post);
+                    }
+                }
+            }
+        }
+
+        return currentPostSettings;
+    }
+
 
     /** POST REQUEST **/
     /** POST REQUEST **/

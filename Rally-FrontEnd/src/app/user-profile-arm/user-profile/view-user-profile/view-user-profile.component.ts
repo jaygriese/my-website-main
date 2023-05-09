@@ -65,6 +65,10 @@ export class ViewUserProfileComponent implements OnInit {
       this.dbImage = 'data:image/jpeg;base64,' + response.image;
     })
 
+    this.http.get('http://localhost:8080/user/getUpdatedPostHistoryViewUser/' + this.viewUserId).subscribe((response) => {
+      this.forumPost = response;
+    })
+    
     // let hiddenGetPost: any = this.http.get('http://localhost:8080/user/getHiddenPostList/' + this.viewUserId);
     // let forumPostAll: any = this.http.get('http://localhost:8080/Posts');
 
@@ -72,41 +76,6 @@ export class ViewUserProfileComponent implements OnInit {
     //   this.hiddenPost = result[0];
     //   this.forumPost = result[1];
     // });
-
-    
-    /* Currently not working right, async issues need to be addressed */
-    /* Get hidden post list */
-    this.http.get('http://localhost:8080/user/getHiddenPostList/' + this.viewUserId).subscribe((response) => {
-      this.hiddenPost = response;      
-    })
-    /* Get user Forum Post history */
-    this.http.get('http://localhost:8080/Posts').subscribe((response) => {
-      let filterPost: any = response;
-      for (let i = 0; i < filterPost.length; i++) {
-        if(filterPost[i].userEntity.id === Number(this.viewUserId)) {
-          this.forumPost.push(filterPost[i]);
-          
-        }
-      }
-
-      let remove: any;
-        for (let i = 0; i < this.forumPost.length; i++) {
-          console.log("Loop 1")
-          for (let j = 0; i< this.hiddenPost.length; i++) {
-            console.log("Loop 2")
-            if (this.forumPost[i].id === this.hiddenPost[j].hidePostId) {
-              remove = this.forumPost[i];
-              console.log(`This is forum post #${this.forumPost[i].id} and this is post #${this.hiddenPost[j].hidePostId}, the post I want to hide. Do they match?`)
-              this.forumPost = this.forumPost.filter((post: any) => post !== remove);
-            }
-          }
-        }
-        console.log("Forum Post post remove")
-        console.log(this.forumPost)
-    })
-  
-        
-
   }
 
   viewingUserSendDM(dmMessageDetails: NgForm) {

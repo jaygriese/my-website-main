@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class EventService {
 
   private getEventByIdUrl = 'http://localhost:8080/events/event/';
+  private updateEventUrl = 'http://localhost:8080/events/edit/event/';
   
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -19,14 +20,21 @@ export class EventService {
   }
 
   updateEvent(id: string, value: any) {
-    return this.http.put(`${this.getEventByIdUrl}` + id, value);
+    return this.http.put(`${this.updateEventUrl}` + id, value);
     //is this right?
   }
 
-  deleteEvent(id: string) {
-    return this.http.delete(`${this.getEventByIdUrl}` + id, { responseType: 'text'});
-    //is this right?
-  }
+  // updateEvent(id: string, value: any) {
+  //   return this.http.post(`${this.updateEventUrl}` + id, value);
+  //   //is this right?
+  // }
+
+ 
+
+  // deleteEvent(id: string) {
+  //   return this.http.delete(`${this.getEventByIdUrl}` + id, { responseType: 'text'});
+  //   //is this right?
+  // }
 
 
 }

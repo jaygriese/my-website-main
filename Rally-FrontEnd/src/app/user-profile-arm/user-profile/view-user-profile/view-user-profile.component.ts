@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserEntity } from '../../models/UserEntity';
 import { ViewUserService } from '../services/view-user.service';
@@ -8,9 +8,6 @@ import { NgForm } from '@angular/forms';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { DirectMessage } from '../../models/Directmessage';
 import { HttpClient } from '@angular/common/http';
-import { ProfilePicture } from '../../models/ProfilePicture';
-import { map, mergeMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-view-user-profile',
   templateUrl: './view-user-profile.component.html',
@@ -18,18 +15,19 @@ import { forkJoin } from 'rxjs';
 })
 export class ViewUserProfileComponent implements OnInit {
 
-  dmList: DirectMessage[];
-  conversation: DirectMessage[];
-  logInStatus: Boolean;
-  viewUserEntity: UserEntity;
+  /* Viewing Users information */
+  logInStatus: Boolean = false;
   viewUserName: string;
   viewUserId: string;
   userEntityInformation: ViewUserBundle;
+  /* Direct Message with active user */
+  dmList: DirectMessage[];
+  conversation: DirectMessage[];
+  /* User Profile Pic */
   dbImage: any;
   /* Post History */
   forumPost: any = [];
-  hiddenPost: any =[];
-
+  /* HTML booleans */
   noError: boolean = true;
   showDmHistory = true;
 
@@ -38,12 +36,11 @@ export class ViewUserProfileComponent implements OnInit {
               private viewUser: ViewUserService,
               private verifyService: VerifyLogoutService,
               private http: HttpClient) {
-      this.logInStatus = false;
    }
 
   ngOnInit() {
     this.logInStatus = this.verifyService.verifyLoggedIn();
-    /* This method pulls the parameters of the activated route and converts them into a usable object */
+    /* This method pulls the parameters of the activated route and converts them into a usable string */
     this.activatedRoute.paramMap.subscribe(params => {
     this.viewUserName = params.get('userName');
     this.viewUserId = params.get('id');
@@ -54,28 +51,25 @@ export class ViewUserProfileComponent implements OnInit {
     /* This method gets a bundle of information I want to display on the view user page */
     this.viewUser.getViewUserBundleByUserName(this.viewUserName).subscribe((data: ViewUserBundle) => {
       this.userEntityInformation = data;
-      this.viewUserEntity = this.userEntityInformation.viewUser;
     })
     /* Get Direct Message history with active user */
     this.viewUser.getDmHistoryDirectMessages(this.viewUserId).subscribe((response: DirectMessage[]) => {
         this.dmList =response
     })
     /* Get other users profile picture */
-    this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserId).subscribe((response: ProfilePicture) => {
-      this.dbImage = 'data:image/jpeg;base64,' + response.image;
+    this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserId).subscribe((response: any) => {
+      if (response.message) {
+        console.log(response.message);
+        return;
+      } else {
+        this.dbImage = 'data:image/jpeg;base64,' + response.image;
+      }
     })
-
+    /* Get user post history with hiddenpost removed */
     this.http.get('http://localhost:8080/user/getUpdatedPostHistoryViewUser/' + this.viewUserId).subscribe((response) => {
       this.forumPost = response;
     })
-    
-    // let hiddenGetPost: any = this.http.get('http://localhost:8080/user/getHiddenPostList/' + this.viewUserId);
-    // let forumPostAll: any = this.http.get('http://localhost:8080/Posts');
-
-    // forkJoin([hiddenGetPost, forumPostAll]).subscribe( result => {
-    //   this.hiddenPost = result[0];
-    //   this.forumPost = result[1];
-    // });
+  
   }
 
   viewingUserSendDM(dmMessageDetails: NgForm) {

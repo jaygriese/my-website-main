@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { VerifyLogoutService } from 'src/app/user-profile-arm/security/verify-logout.service';
 import { UserInfoDTO } from '../../models/dto/UserInfoDTO';
@@ -11,7 +11,6 @@ import { MainUserBundle } from '../../models/MainUserBundle';
 import { DirectMessage } from '../../models/Directmessage';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { NgUserInformation } from '../../models/ng-model/UserInformation';
-import { ProfilePicture } from '../../models/ProfilePicture';
 
 @Component({
   selector: 'app-user-profile',
@@ -65,18 +64,16 @@ export class UserProfileComponent implements OnInit {
     if (localStorage.getItem('id') !== null) {
       /* Get user information and user entity data */
       this.activeUserService.getMainUserBundleByUserName(localStorage.getItem('userName')).subscribe((data: MainUserBundle) => {
-        this.userEntity = data.mainUser;
+        this.userEntity = data.viewUser;
         this.userInformation = data.viewUserInformation;
+        this.allDmHistory = data.viewMainUserDmHistory.directMessageList;
+        this.userEntityDmList = data.viewMainUserDmHistory.userEntities;
         this.model = new NgUserInformation(this.userInformation.firstName,
                                            this.userInformation.lastName,
                                            this.userInformation.neighborhood,
                                            this.userInformation.city,
                                            this.userInformation.state);
-      })
-      /* Get user entities that have dm history with active user */
-      this.activeUserService.getDmHistoryUsers(localStorage.getItem('id')).subscribe((response: UserEntity[]) => {
-        this.userEntityDmList = response;
-        /* Remove logged in user from list */
+        /* Remove active user from dm list */
         let remove: UserEntity;
         for (let i = 0; i < this.userEntityDmList.length; i++) {
           if (localStorage.getItem('userName') === this.userEntityDmList[i].userName) {
@@ -85,14 +82,15 @@ export class UserProfileComponent implements OnInit {
         }
         this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user !== remove);
       })
-      /* Get all user dm history */
-      this.activeUserService.getDmHistoryDirectMessages(localStorage.getItem('id')).subscribe((response: DirectMessage[]) => {
-        this.allDmHistory = response;
-      })
-      /* Get user Profile Picture */
-      this.http.get('http://localhost:8080/user/userProfileImage/' + localStorage.getItem('id')).subscribe((response: ProfilePicture) => {
-        this.postResponse = response;
-        this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
+      /* Get user Profile pic */
+      this.http.get('http://localhost:8080/user/userProfileImage/' + localStorage.getItem('id')).subscribe((response: any) => {
+        if (response.message) {
+          console.log(response.message);
+          return;
+        } else {
+          this.postResponse = response;
+          this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
+        }
       })
       /* Get user Forum Post history */
       this.http.get('http://localhost:8080/Posts').subscribe((response) => {
@@ -106,7 +104,6 @@ export class UserProfileComponent implements OnInit {
       /* Get hidden post list */
       this.http.get('http://localhost:8080/user/getHiddenPostList/' + localStorage.getItem('id')).subscribe((response) => {
         this.hiddenPost = response;
-        console.log(this.hiddenPost)
       })
     }
   }
@@ -197,9 +194,9 @@ export class UserProfileComponent implements OnInit {
       this.noError = false;
       return
     }
-    this.viewUser.postDirectMessage(sendDirectMessage).subscribe(
-      // push new post into the DM list maybe?
-    );
+    this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
+      this.allDmHistory = response;
+    });
 
     /* Temp solution, need to figure out how to refresh just this part of the page while staying in user conversation. */
     location.reload();
@@ -208,7 +205,6 @@ export class UserProfileComponent implements OnInit {
 
   updateUserInfo( userDetails: NgForm ) {
     let userInfo: UserInfoDTO = {
-      userId: Number(this.userEntity.id),
       firstName: userDetails.value.firstName,
       lastName: userDetails.value.lastName, 
       neighborhood: userDetails.value.neighborhood,

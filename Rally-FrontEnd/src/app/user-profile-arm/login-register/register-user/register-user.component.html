@@ -12,12 +12,11 @@
             <br><br>
             <input type="submit" value="Submit">
             <div *ngIf="incorrectPassword">
-            <p id="IncorrectPW">Passwords don't match!</p>
+            <p style="color: crimson;">{{ this.message }}</p>
             </div>
             <div >
             </div>
-        </form>
-        
+        </form>       
     </div>
  
     <ng-template #nextForm>
@@ -36,6 +35,10 @@
             <label>State: <input type="text" name="state" ngModel></label>                
             <br><br>
             <input type="submit" value="Submit">
+            <button type="button" (click)="passwordsMatch = true">Go back</button>
+            <div *ngIf="incorrectPassword">
+            <p style="color: crimson;">{{ this.message }}</p>
+            </div>
         </form>
     </div>
     </ng-template>

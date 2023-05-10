@@ -1,13 +1,13 @@
 import { DirectMessage } from "./Directmessage";
 import { UserEntity } from "./UserEntity";
 
-export class AllHistoryDirectMessage {
+export class MainUserDmHistory {
 
-    uniqueUserConversations: UserEntity[];
+    userEntities: UserEntity[];
     directMessageList: DirectMessage[];
 
 	constructor(uniqueUserConversations: UserEntity[], directMessageList: DirectMessage[]){
-        this.uniqueUserConversations = uniqueUserConversations,
+        this.userEntities = uniqueUserConversations,
         this.directMessageList = directMessageList
 	}
 }

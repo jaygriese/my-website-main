@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserEntity } from '../../models/UserEntity';
 import { ViewUserService } from '../services/view-user.service';
 import { VerifyLogoutService } from 'src/app/user-profile-arm/security/verify-logout.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-user',
@@ -21,6 +20,13 @@ export class SearchUserComponent implements OnInit {
     this.logInStatus = this.verifyService.verifyLoggedIn();
     this.userService.getUserList().subscribe((data: UserEntity[]) => {
       this.userList = data;
+      let remove: UserEntity;
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].userName === localStorage.getItem("userName")) {
+          remove = this.userList[i];
+        }
+      }
+      this.userList = this.userList.filter((user: UserEntity) => user !== remove);
     })
   }
 }

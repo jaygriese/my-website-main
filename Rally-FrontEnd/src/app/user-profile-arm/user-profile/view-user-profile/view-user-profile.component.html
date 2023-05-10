@@ -8,14 +8,14 @@
 <br>
 
 <div class="row">
-<div class="col-sm-3 p-1 boarder">
+<div class="col-sm-3">
     <div class="card">
         <h4>Viewing {{ this?.viewUserName }}'s Profile</h4>
-        <div style="align-content: center;" *ngIf="dbImage; else default">               
-            <img [src]="dbImage" width="200" height="200">
+        <div class="card" style="align-content: center;" *ngIf="dbImage; else default">               
+            <img [src]="dbImage" width="100%" height="auto">
         </div>
         <ng-template #default>
-            <img src="/assets/user-profile-assets/profile-pic.gif" width="200" height="200">
+            <img src="/assets/user-profile-assets/profile-pic.gif" width="100%" height="auto">
         </ng-template>
         </div> 
     </div>
@@ -25,7 +25,7 @@
                    
                 <div class="scroll">
                     <form #dmMessageDetails="ngForm" (ngSubmit)="viewingUserSendDM(dmMessageDetails)">
-                        <button (click)="displayConversation(viewUserEntity)">View Message History</button>
+                        <button (click)="displayConversation(userEntityInformation.viewUser)">View Message History</button>
                         <input type="submit" value="Send Message">
                         <br>
                         <ng-template #lengthError>
@@ -70,25 +70,26 @@
 
             <div class="card">
                 <br> 
-                <label>First Name: {{ userEntityInformation?.viewUserInformation?.firstName }}</label>
+                <label>First Name: <h4>{{ userEntityInformation?.viewUserInformation?.firstName }}</h4></label>
                 <br>
-                <label>Last Name: {{ userEntityInformation?.viewUserInformation?.lastName }}</label>
+                <label>Last Name: <h4>{{ userEntityInformation?.viewUserInformation?.lastName }}</h4></label>
                 <br>
-                <label>Neighborhood: {{ userEntityInformation?.viewUserInformation?.neighborhood }}</label>
+                <label>Neighborhood: <h4>{{ userEntityInformation?.viewUserInformation?.neighborhood }}</h4></label>
                 <br>
-                <label>City: {{ userEntityInformation?.viewUserInformation?.city }}</label>
+                <label>City: <h4>{{ userEntityInformation?.viewUserInformation?.city }}</h4></label>
                 <br>       
-                <label>State: {{ userEntityInformation?.viewUserInformation?.state }}</label>                     
+                <label>State: <h4>{{ userEntityInformation?.viewUserInformation?.state }}</h4></label>                     
             </div>
         </div>
     </div>
-    <div class="col">
+    <div class="col-sm-6">
         <div class="card">
             <h2>Post History</h2>
-            <div class="scroll">
+            <div class="scroll-posthistory">
             <ul *ngFor="let post of forumPost">
                 <div class="card">                        
-                    <h2><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h2>
+                    <h3><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h3>
+                    <h6>{{ post.description }}</h6>
                 </div>
             </ul>
         </div>

@@ -14,10 +14,10 @@
         <h4>Hello<br>{{currentUser}}</h4>
         <div class="card">
             <div style="align-content: center;" *ngIf="dbImage; else default">               
-                <img [src]="dbImage" width="200" height="200">
+                <img [src]="dbImage" width="100%" height="auto">
             </div>
             <ng-template #default>
-                <img src="/assets/user-profile-assets/profile-pic.gif" width="200" height="200">
+                <img src="/assets/user-profile-assets/profile-pic.gif" width="100%" height="auto">
             </ng-template>
             <div *ngIf="changeProfilePic; else changePic">
                 <button (click)="changeProfilePic=false">Update Profile Picture</button>
@@ -57,7 +57,7 @@
                 <div class="scroll" *ngIf="userDms; else showConversations">
                 <ul *ngFor="let user of userEntityDmList">
                     <div class="card">
-                        <p (click)="displayConversation(user)">{{ user.userName }}</p>
+                        <p (click)="displayConversation(user)"><a>{{ user.userName }}</a></p>
                     </div>
                 </ul>
                 </div>
@@ -117,15 +117,15 @@
             <div *ngIf="changeInfo; else changeForm"> 
             <div class="card">
                 <br> 
-                <label>First Name:<br>{{ userInformation?.firstName }}</label>
+                <label>First Name:<br><h4>{{ userInformation?.firstName }}</h4></label>
                 <br>
-                <label>Last Name:<br>{{ userInformation?.lastName}}</label>
+                <label>Last Name:<br><h4>{{ userInformation?.lastName}}</h4></label>
                 <br>
-                <label>Neigborhood:<br>{{ userInformation?.neighborhood}}</label>
+                <label>Neigborhood:<br><h4>{{ userInformation?.neighborhood}}</h4></label>
                 <br>
-                <label>City:<br>{{ userInformation?.city}}</label>
+                <label>City:<br><h4>{{ userInformation?.city}}</h4></label>
                 <br>       
-                <label>State:<br>{{ userInformation?.state}}</label>  
+                <label>State:<br><h4>{{ userInformation?.state}}</h4></label>  
                 <br>
                 <button (click)="editProfileDetails()">Edit Profile Details</button>                   
             </div>
@@ -159,17 +159,20 @@
     <div class="col-sm-6">
         <div class="card">
             <h2>Post History</h2>
-            <div class="scroll">
+            <div class="scroll-posthistory">
                 <ul *ngFor="let post of this?.forumPost">
-                    <div class="card">                        
+                    <div class="card" >                        
                         <input type="button" (click)="hidePost(post.id)" value="Hide this Post"/>
                         <h2><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h2>
+                        <h6>{{ post.description }}</h6>
                         <div *ngFor="let hide of this?.hiddenPost">
                         <div *ngIf="hide.hidePostId !== post.id; else hiddenPost">
                         </div>
                         <ng-template #hiddenPost>
-                            <p>This post is hidden.</p>
+                            <div style="text-align: left;">
                             <button type="button" (click)="unhidePost(post.id)">Unhide Post?</button>
+                            <p>This post is hidden.</p>
+                            </div>
                         </ng-template>
                         </div>
                     </div>

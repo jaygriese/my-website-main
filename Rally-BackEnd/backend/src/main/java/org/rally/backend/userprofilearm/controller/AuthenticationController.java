@@ -16,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/api")
@@ -34,21 +32,13 @@ public class AuthenticationController {
         this.userInformationRepository = userInformationRepository;
     }
 
-    @GetMapping("/userIdCount")
-    public Integer currentUserIdCount() {
-        List<UserEntity> userList = (userRepository.findAll());
-        return userList.size();
-    }
-
-
-
     @PostMapping("/register")
     public ResponseEntity<?> processRegistrationForm(@RequestBody UserBundleDTO userBundleDTO) {
 
         UserEntity existingUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
 
         if (existingUser != null) {
-            AuthenticationFailure authenticationFailure = new AuthenticationFailure("That username is taken");
+            AuthenticationFailure authenticationFailure = new AuthenticationFailure("That username is taken, please select a different user name.");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
@@ -60,8 +50,11 @@ public class AuthenticationController {
         }
 
         UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()), userBundleDTO.getRegisterDTO().getPassword());
+        userRepository.save(registerNewUser);
 
-        int userId = userBundleDTO.getUserInfoDTO().getUserId();
+        UserEntity newestUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
+
+        int userId = newestUser.getId();
         String firstName = userBundleDTO.getUserInfoDTO().getFirstName();
         String lastName = userBundleDTO.getUserInfoDTO().getLastName();
         String neighborhood = userBundleDTO.getUserInfoDTO().getNeighborhood();
@@ -74,7 +67,7 @@ public class AuthenticationController {
 //        Role roles = roleRepository.findByName("USER").get();
 //        registerNewUser.setRoles(Collections.singletonList(roles));
 
-        userRepository.save(registerNewUser);
+
         userInformationRepository.save(newUserInformation);
 
         return new ResponseEntity<>(registerNewUser, HttpStatus.OK);

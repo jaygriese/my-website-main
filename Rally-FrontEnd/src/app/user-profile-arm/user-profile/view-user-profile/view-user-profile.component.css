@@ -1,7 +1,17 @@
 div.scroll {
     column-width: auto;
-    background-color: #b6eee9;
-    height: 210px;
+    background-color: #5e6b6b;
+    height: 260px;
+    overflow: auto;
+    resize: vertical;
+    text-align: center;
+    padding: 8px;
+  }
+
+  div.scroll-posthistory {
+    column-width: auto;
+    background-color: #5e6b6b;
+    height: auto;
     overflow: auto;
     resize: vertical;
     text-align: center;

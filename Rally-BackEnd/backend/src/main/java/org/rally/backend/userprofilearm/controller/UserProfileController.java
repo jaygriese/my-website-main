@@ -54,58 +54,6 @@ public class UserProfileController {
         this.hiddenPostRepository = hiddenPostRepository;
     }
 
-    /** Upload Image testing **/
-    /** Upload Image testing **/
-    /** Upload Image testing **/
-
-    @PostMapping("/upload/image")
-    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file)
-            throws IOException {
-
-        if (profilePictureRepository.findByUserId(file.getOriginalFilename()).isPresent()) {
-            Optional<ProfilePicture> remove = profilePictureRepository.findByUserId(file.getOriginalFilename());
-            profilePictureRepository.deleteById(remove.get().getId());
-        }
-
-        ProfilePicture profilePicture = ProfilePicture.builder()
-                .userId(file.getOriginalFilename())
-                .type(file.getContentType())
-                .image(ImageUtility.compressImage(file.getBytes())).build();
-
-        profilePictureRepository.save(ProfilePicture.builder()
-                .userId(file.getOriginalFilename())
-                .type(file.getContentType())
-                .image(ImageUtility.compressImage(file.getBytes())).build());
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body(new ImageUploadResponse("Image uploaded successfully: " + file.getOriginalFilename()));
-        return new ResponseEntity<>(profilePicture, HttpStatus.OK);
-    }
-
-    @GetMapping(path = {"/userProfileImage/{userId}"})
-    public ProfilePicture getImageDetails(@PathVariable("userId") String userId) throws IOException {
-
-        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByUserId(userId);
-
-        return ProfilePicture.builder()
-                .id(dbImage.get().getId())
-                .userId(dbImage.get().getUserId())
-                .type(dbImage.get().getType())
-                .image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
-    }
-
-//    @GetMapping(path = {"/get/image/{name}"})
-//    public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) throws IOException {
-//        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByUserId(name);
-//
-//        return ResponseEntity
-//                .ok()
-//                .contentType(MediaType.valueOf(dbImage.get().getType()))
-//                .body(ImageUtility.decompressImage(dbImage.get().getImage()));
-//    }
-
-
-
-
     /** GET REQUEST **/
     /** GET REQUEST **/
     /** GET REQUEST **/
@@ -129,18 +77,18 @@ public class UserProfileController {
     }
 
     @GetMapping("/getViewUserBundleInformation/{userName}")
-    public ViewUserBundle getViewUserInformation(@PathVariable String userName) {
+    public UserBundle getViewUserInformation(@PathVariable String userName) {
 
         /** call post history and favorites here when ready **/
         UserEntity targetUser = userRepository.findByUserName(userName);
         Optional<UserInformation> targetInformation = userInformationRepository.findByUserId(targetUser.getId());
 
-        return new ViewUserBundle(targetUser, targetInformation);
+        return new UserBundle(targetUser, targetInformation);
 
     }
 
     @GetMapping("/getMainUserBundleInformation/{userName}")
-    public MainUserBundle getMainUserBundle(@PathVariable String userName) {
+    public UserBundle getMainUserBundle(@PathVariable String userName) {
 
         UserEntity targetUser = userRepository.findByUserName(userName);
         Optional<UserInformation> targetInformation = userInformationRepository.findByUserId(targetUser.getId());
@@ -149,7 +97,7 @@ public class UserProfileController {
         List<UserEntity> usersInDm = targetDirectMessages.getUserEntities();
         List<DirectMessage> allDmHistory = targetDirectMessages.getDirectMessageList();
 
-        MainUserBundle userBundle =  new MainUserBundle(targetUser, targetInformation);
+        UserBundle userBundle =  new UserBundle(targetUser, targetInformation, targetDirectMessages);
 
         return userBundle;
     }
@@ -200,6 +148,8 @@ public class UserProfileController {
 
         List<ForumPosts> currentPostSettings = new ArrayList<>();
         List<HiddenPost> hiddenPostList = new ArrayList<>();
+        List<ForumPosts> userPost = new ArrayList<>();
+
         for (HiddenPost post : hiddenPostRepository.findAll()) {
             if (post.getUserId() == userId) {
                 hiddenPostList.add(post);
@@ -208,10 +158,15 @@ public class UserProfileController {
 
         for (ForumPosts post : forumPostRepository.findAll()) {
             if (post.getUserEntity().getId() == userId) {
-                for (HiddenPost remove : hiddenPostList) {
-                    if (post.getId() != remove.getHidePostId()) {
-                        currentPostSettings.add(post);
-                    }
+                userPost.add(post);
+                currentPostSettings.add(post);
+            }
+        }
+
+        for (ForumPosts post : userPost) {
+            for (HiddenPost hidden : hiddenPostList) {
+                if (post.getId() == hidden.getHidePostId()) {
+                    currentPostSettings.remove(post);
                 }
             }
         }
@@ -219,10 +174,43 @@ public class UserProfileController {
         return currentPostSettings;
     }
 
+    @GetMapping(path = {"/userProfileImage/{userId}"})
+    public ResponseEntity<?> getImageDetails(@PathVariable("userId") String userId) throws IOException {
+
+        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByUserId(userId);
+        if (dbImage.isEmpty()) {
+            ResponseMessage responseMessage = new ResponseMessage("User does not have a profile picture.");
+            return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(ProfilePicture.builder()
+                .id(dbImage.get().getId())
+                .userId(dbImage.get().getUserId())
+                .type(dbImage.get().getType())
+                .image(ImageUtility.decompressImage(dbImage.get().getImage())).build(), HttpStatus.OK);
+    }
+
 
     /** POST REQUEST **/
     /** POST REQUEST **/
     /** POST REQUEST **/
+
+    @PostMapping("/upload/image")
+    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file)
+            throws IOException {
+
+        if (profilePictureRepository.findByUserId(file.getOriginalFilename()).isPresent()) {
+            Optional<ProfilePicture> remove = profilePictureRepository.findByUserId(file.getOriginalFilename());
+            profilePictureRepository.deleteById(remove.get().getId());
+        }
+
+        profilePictureRepository.save(ProfilePicture.builder()
+                .userId(file.getOriginalFilename())
+                .type(file.getContentType())
+                .image(ImageUtility.compressImage(file.getBytes())).build());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseMessage("Image uploaded successfully: " + file.getOriginalFilename()));
+    }
 
     @PostMapping("/hidePostList")
     public ResponseEntity<?> hiddenPosts(@RequestBody int postId) {
@@ -293,7 +281,10 @@ public class UserProfileController {
 
         directMessageRepository.save(messageSent);
 
-        return new ResponseEntity<>(messageSent, HttpStatus.OK);
+        MainUserDmHistory targetDirectMessages = activeUserDirectMessageHistory(directMessageDTO.getSentByUserId());
+        List<DirectMessage> allDirectMessageHistory = targetDirectMessages.getDirectMessageList();
+
+        return new ResponseEntity<>(allDirectMessageHistory, HttpStatus.OK);
 
     }
 

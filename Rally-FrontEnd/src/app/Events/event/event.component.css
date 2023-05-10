@@ -51,3 +51,19 @@
     text-align: left;
     font-size: 25px;
 }
+
+.edit_btn {
+    background-color: #5AD5E7;
+	border-radius:7px;
+	display: internal;
+	color:#ffffff;
+	font-family: Arial;
+	font-size:30px;
+	font-weight:bold;
+    text-shadow: 0.5px 0.5px 0px #000;
+	padding:15px 50px;
+	text-decoration: none;
+    width: auto;
+    float: right;
+    margin-bottom: 30px;
+ }

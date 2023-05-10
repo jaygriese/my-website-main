@@ -43,7 +43,7 @@ input[type=text] {
     float:right;
  }
 
- #create_btn {
+ #edit_btn {
     background-color: #2e9abc;
 	border-radius:7px;
 	display: internal;

@@ -67,6 +67,7 @@
                 </div>
             <br>
             <br>
+            <!-- <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="edit_btn">edit event</a>  -->
             <br>
         
             <span>
@@ -99,9 +100,14 @@
                     <p style="font-size: 20px; font-weight: bolder;">address:</p>
                     <p style="margin-top: -15px;">{{eventDetails.eventAddress}}</p>
                     <br>
-                    <br>
+                    <!-- <br> -->
                     <p style="font-size: 20px; font-weight: bolder;">description:</p>
-                    <p style="margin-top: -15px;">{{eventDetails.description}}</p>  
+                    <p style="margin-top: -15px;">{{eventDetails.description}}</p> 
+                    <!-- <br> -->
+                    <br>
+                    <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="edit_btn">edit event</a> 
+                    <br>
+                    <br>
                 </div>
             </div>
         </div>

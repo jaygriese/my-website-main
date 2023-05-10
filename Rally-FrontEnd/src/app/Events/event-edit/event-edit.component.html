@@ -61,13 +61,11 @@
    
                 <label>category</label>
                 <hr style="width:550px; margin-top:0;">
-                <div required [(ngModel)]="event.eventCategory">
-                    <input type="radio" value="connect" name="eventCategory" ngModel> connect
-                    <input type="radio" value="volunteer" name="eventCategory" ngModel> volunteer
-                    <input type="radio" value="learn" name="eventCategory" ngModel> learn <br>
-                    <input type="radio" value="donate"  name="eventCategory" ngModel> donate
-                    <input type="radio" value="celebrate" name="eventCategory" ngModel> celebrate
-                </div>
+                    <input type="radio" value="connect" [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> connect
+                    <input type="radio" value="volunteer" [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> volunteer
+                    <input type="radio" value="learn" [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> learn <br>
+                    <input type="radio" value="donate"  [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> donate
+                    <input type="radio" value="celebrate"  [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> celebrate
                
 
                 <br>
@@ -99,10 +97,10 @@
                 <!-- <button type="submit" id="create_btn">SUBMIT</button> -->
                 <!-- <button (click)="list()" type="submit" id="create_btn">SUBMIT</button> -->
                 
-                <button type="submit" id="create_btn">EDIT</button>
+                <button type="submit" id="edit_btn">EDIT</button>
                 <br>
                 <br>
-                <button type="submit" id="create_btn">DELETE</button>
+                <button type="submit" id="edit_btn" style="background-color: #C03E24;">DELETE</button>
                 <br>
                 <br>
                 <br>

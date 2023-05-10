@@ -26,6 +26,7 @@ import { ThemeserviceService } from './services/themeservice.service';
 import { ForumTopic3Component } from './community-forum-arm/forum/forum-topic3/forum-topic3.component';
 import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-post.component';
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
+import { EventEditComponent } from './Events/event-edit/event-edit.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-u
     ViewPostComponent,
     ViewUserProfileComponent,
     UserProfileComponent,
+    EventEditComponent,
   ],
   imports: [
     BrowserModule,

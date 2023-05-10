@@ -43,6 +43,7 @@ export class EventViewComponent implements OnInit {
   }
   
 
+
   connect(string: string) {
     for(let i = 0; i < this.eventList.length; i++) {
       if ( this.eventList[i].eventCategory === string) {

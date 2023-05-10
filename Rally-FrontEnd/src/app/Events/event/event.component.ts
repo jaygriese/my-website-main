@@ -47,13 +47,6 @@ export class EventComponent implements OnInit {
     })
 
 
-    // this.http.get(this.eventUrl).subscribe((response: Event) => {
-     
-    //   this.eventDetails = response;
-    //   console.log(response);
-    // })
-
-
 
   }
 

@@ -18,5 +18,15 @@ export class EventService {
     return this.http.get(`${this.getEventByIdUrl}` + id);
   }
 
+  updateEvent(id: string, value: any) {
+    return this.http.put(`${this.getEventByIdUrl}` + id, value);
+    //is this right?
+  }
+
+  deleteEvent(id: string) {
+    return this.http.delete(`${this.getEventByIdUrl}` + id, { responseType: 'text'});
+    //is this right?
+  }
+
 
 }

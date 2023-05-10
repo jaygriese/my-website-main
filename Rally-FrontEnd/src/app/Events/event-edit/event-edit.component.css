@@ -1,0 +1,58 @@
+div#list_head {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    height: 75px;
+    width: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: left;
+    font-size: 45px;
+    color: black;
+    font-weight: 575;
+}
+
+div#event_details {
+    text-align: left;
+}
+
+input[type=text] {
+    width: 550px;
+    background-color: #f6f4f3;
+ }
+
+ input[type=datetime-local] {
+    width: 550px;
+    background-color: #f6f4f3;
+ }
+
+ #description {
+    background-color: #f6f4f3;
+ }
+
+ label {
+    font-family: arial;
+    font-size: x-large;
+ }
+
+ div#form_1 {
+   float:left;
+ }
+ div#form_2 {
+    float:right;
+ }
+
+ #create_btn {
+    background-color: #2e9abc;
+	border-radius:7px;
+	display: internal;
+	color:#ffffff;
+	font-family: Arial;
+	font-size:30px;
+	font-weight:bold;
+    text-shadow: 0.5px 0.5px 0px #000;
+	padding:15px 75px;
+	text-decoration: none;
+    width: 550px;
+ }

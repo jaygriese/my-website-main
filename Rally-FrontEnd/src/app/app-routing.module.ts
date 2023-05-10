@@ -43,7 +43,7 @@ const routes: Routes = [
   {path: 'forum/post/:id', component: ViewPostComponent},
   {path: 'myProfile', component: UserProfileComponent},
   {path: 'user/:userName/:id', component: ViewUserProfileComponent},
-  {path: 'edit', component: EventEditComponent},
+  {path: 'edit/:id', component: EventEditComponent},
 ];
 
 @NgModule({

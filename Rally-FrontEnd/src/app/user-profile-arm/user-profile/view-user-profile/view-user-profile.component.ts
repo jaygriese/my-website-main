@@ -87,7 +87,7 @@ export class ViewUserProfileComponent implements OnInit {
     } 
 
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe();
-    location.reload();
+    // location.reload();
   }
 
   displayConversation( userDms: UserEntity) {

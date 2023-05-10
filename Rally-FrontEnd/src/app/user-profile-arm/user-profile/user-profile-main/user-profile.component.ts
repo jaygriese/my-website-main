@@ -196,10 +196,16 @@ export class UserProfileComponent implements OnInit {
     }
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
       this.allDmHistory = response;
+      this.userDms = true;
+      // find this.respondToDm.userName and pass into this.display converstaion to refresh the text.
+      
+
+      // this.displayConversation()
     });
 
     /* Temp solution, need to figure out how to refresh just this part of the page while staying in user conversation. */
-    location.reload();
+    // location.reload();
+    
     
   } 
 

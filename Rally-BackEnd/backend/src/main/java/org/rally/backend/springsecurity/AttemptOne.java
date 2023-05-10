@@ -1,2 +1,4 @@
-package org.rally.backend.springsecurity;public class AttemptOne {
+package org.rally.backend.springsecurity;
+
+public class AttemptOne {
 }

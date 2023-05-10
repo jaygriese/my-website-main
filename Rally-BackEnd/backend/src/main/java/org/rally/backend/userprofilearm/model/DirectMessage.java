@@ -1,9 +1,7 @@
 package org.rally.backend.userprofilearm.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.springframework.javapoet.TypeName;
 
 @Entity
 public class DirectMessage {
@@ -20,6 +18,7 @@ public class DirectMessage {
 
     private String sentByUserName;
 
+    @Column(columnDefinition = "varchar(5000)")
     private String messageContent;
 
     public DirectMessage() {

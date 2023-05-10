@@ -3,7 +3,7 @@ div.scroll {
     background-color: #5e6b6b;
     height: 260px;
     overflow: auto;
-    resize: vertical;
+    resize: both;
     text-align: center;
     padding: 8px;
   }
@@ -22,7 +22,7 @@ div.scroll {
   column-width: 10%;
   display: flex;
   margin: auto;
-  background-color: rgb(253, 203, 142);
+  color: aquamarine;
 }
 
 .thought {

@@ -57,7 +57,7 @@
                 <div class="scroll" *ngIf="userDms; else showConversations">
                 <ul *ngFor="let user of userEntityDmList">
                     <div class="card">
-                        <p (click)="displayConversation(user)"><a>{{ user.userName }}</a></p>
+                        <h6 style="text-align: left;" (click)="displayConversation(user)">{{ user.userName }}</h6>
                     </div>
                 </ul>
                 </div>
@@ -66,7 +66,7 @@
                     <div class="scroll">
                         <form #respondToDm="ngForm" (ngSubmit)="respondToUserDm(respondToDm)">
 
-                            <button (click)="reload()">Return to all Messages</button>
+                            <button (click)="userDms=true">Return to all Messages</button>
                             
                             <input type="submit" value="Send Message">
                             <br>                                  

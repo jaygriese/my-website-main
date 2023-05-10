@@ -94,8 +94,8 @@ public class UserProfileController {
         Optional<UserInformation> targetInformation = userInformationRepository.findByUserId(targetUser.getId());
 
         MainUserDmHistory targetDirectMessages = activeUserDirectMessageHistory(targetUser.getId());
-        List<UserEntity> usersInDm = targetDirectMessages.getUserEntities();
-        List<DirectMessage> allDmHistory = targetDirectMessages.getDirectMessageList();
+//        List<UserEntity> usersInDm = targetDirectMessages.getUserEntities();
+//        List<DirectMessage> allDmHistory = targetDirectMessages.getDirectMessageList();
 
         UserBundle userBundle =  new UserBundle(targetUser, targetInformation, targetDirectMessages);
 

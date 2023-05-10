@@ -3,15 +3,12 @@ package org.rally.backend.eventsarm.controller;
 import org.rally.backend.eventsarm.models.DTO.EventDTO;
 import org.rally.backend.eventsarm.models.Event;
 import org.rally.backend.eventsarm.repository.EventRepository;
-import org.rally.backend.userprofilearm.model.UserEntity;
 import org.rally.backend.userprofilearm.model.response.AuthenticationSuccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,18 +34,70 @@ public class EventController {
     }
 
 
-
-
     @PostMapping("/create")
     public ResponseEntity<?> createEventForm(@RequestBody EventDTO eventDTO) {
 
-        Event createNewEvent = new Event(eventDTO.getEventHost(), eventDTO.getContactEmail(), eventDTO.getEventTitle(), eventDTO.getDatetime(), eventDTO.getEventAddress(), eventDTO.getEventCategory(), eventDTO.getDescription(), eventDTO.getImageId());
+        Event createNewEvent = new Event(eventDTO.getEventHost(),
+                eventDTO.getContactEmail(),
+                eventDTO.getEventTitle(),
+                eventDTO.getDatetime(),
+                eventDTO.getEventAddress(),
+                eventDTO.getEventCategory(),
+                eventDTO.getDescription(),
+                eventDTO.getImageId());
 
         eventRepository.save(createNewEvent);
         AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
         return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
 
     }
+
+    @PostMapping("/edit/event/{id}")
+    public ResponseEntity<?> editEventForm(@RequestBody Event event) {
+
+        List<Event> updatedEventList = (List<Event>) eventRepository.findAll();
+
+        Event updatedEvent = new Event();
+
+        for (Event update : updatedEventList) {
+            if(update.getId() == event.getId()) {
+                eventRepository.deleteById(update.getId());
+
+            }
+        }
+
+        eventRepository.save(updatedEvent);
+
+        return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
+
+    }
+
+//    @PostMapping("/edit/event/{id}")
+//    public ResponseEntity<?> editEventForm(@RequestBody EventDTO eventDTO) {
+//
+//        List<Event> updatedEventList = (List<Event>) eventRepository.findAll();
+//
+//        Event updatedEvent = new Event(eventDTO.getid(),
+//                eventDTO.getEventHost(),
+//                eventDTO.getContactEmail(),
+//                eventDTO.getEventTitle(),
+//                eventDTO.getDatetime(),
+//                eventDTO.getEventAddress(),
+//                eventDTO.getDescription(),
+//                eventDTO.getImageId(), eventDTO.getImageId());
+//
+//        for (Event update : updatedEventList) {
+//            if(update.getId() == eventDTO.getId()) {
+//                eventRepository.deleteById(update.getId());
+//
+//            }
+//        }
+//
+//        eventRepository.save(updatedEvent);
+//
+//        return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
+//
+//    }
 
     //ResponseEntity represents the whole HTTP response from front end
     //@RequestBody pulls from client side and puts data into Java object (event)

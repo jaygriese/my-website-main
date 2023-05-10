@@ -4,7 +4,6 @@ package org.rally.backend.eventsarm.models;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity
 public class Event extends AbstractEntity {

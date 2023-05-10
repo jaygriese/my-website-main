@@ -6,6 +6,10 @@ import jakarta.validation.constraints.NotBlank;
 public class EventDTO {
 
 
+//    private String eventId;
+
+//    private int id;
+
     @NotBlank(message = "Who can your community thank for hosting this event?")
     private String eventHost;
 
@@ -79,6 +83,24 @@ public class EventDTO {
 //        return eventCategory;
 //    }
 //
+
+//    public String getEventId() {
+//        return eventId;
+//    }
+//
+//    public void setEventId(String eventId) {
+//        this.eventId = eventId;
+//    }
+
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+
+
 //    public void setEventCategory(EventCategory eventCategory) {
 //        this.eventCategory = eventCategory;
 //    }

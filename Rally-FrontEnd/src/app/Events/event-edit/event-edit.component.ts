@@ -47,15 +47,15 @@ export class EventEditComponent implements OnInit {
 
   }
 
-updateEvent() {
-  this.eventService.updateEvent(this.id, this.event).subscribe((response: Event) => {
-    this.event = response;
-  })
-}  
+// updateEvent() {
+//   this.eventService.updateEvent(this.id, this.event).subscribe((response: Event) => {
+//     this.event = response;
+//   })
+// }  
 
-onSubmit() {
-  this.updateEvent;
-}
+// onSubmit() {
+//   this.updateEvent;
+// }
 
 // deleteEvent() {
 //   // this.event.eventTitle = "delete";
@@ -75,28 +75,28 @@ onSubmit() {
 
 
 
-// updateEvent(eventInformation: NgForm) {
-//   let updateEvent: EventDTO = {
-//     // id: eventInformation.value.id,
-//     eventHost: eventInformation.value.eventHost,
-//     contactEmail: eventInformation.value.contactEmail,
-//     eventTitle: eventInformation.value.eventTitle, 
-//     datetime: eventInformation.value.datetime,
-//     eventAddress: eventInformation.value.eventAddress,
-//     eventCategory: eventInformation.value.eventCategory,
-//     description: eventInformation.value.description,
-//     imageId: eventInformation.value.imageId
-//   }
+updateEvent(eventInformation: NgForm) {
+  let updateEvent: EventDTO = {
+    // id: eventInformation.value.id,
+    eventHost: eventInformation.value.eventHost,
+    contactEmail: eventInformation.value.contactEmail,
+    eventTitle: eventInformation.value.eventTitle, 
+    datetime: eventInformation.value.datetime,
+    eventAddress: eventInformation.value.eventAddress,
+    eventCategory: eventInformation.value.eventCategory,
+    description: eventInformation.value.description,
+    imageId: eventInformation.value.imageId
+  }
 
-//   console.log(updateEvent);
-//   this.http.post(this.updateEventUrl, updateEvent).subscribe((res) => {
-//     console.log(res)
-//   });
+  console.log(updateEvent);
+  this.http.post(this.updateEventUrl, updateEvent).subscribe((res) => {
+    console.log(res)
+  });
 
-//   eventInformation.reset();
+  eventInformation.reset();
  
 
-// }
+}
 
 
     // verifyLoggedIn() {

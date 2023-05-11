@@ -116,11 +116,13 @@
 
                     <div>
                         <button class="button2" (click)="connect('connect')" >connect</button>
+                        <!-- <button class="button2" (click)="connect()" >connect</button> -->
                         <button class="button2" (click)="learn('learn')" >learn</button>
                         <button class="button2" (click)="volunteer('volunteer')">volunteer</button>
                         <button class="button2" (click)="donate('donate')">donate</button>
                         <button class="button2" (click)="celebrate('celebrate')">celebrate</button>
-                        <button class="button2" (click)="reset()">reset</button>
+                        <!-- <button class="button2" (click)="reset()">reset</button> -->
+                        <button class="button2" (click)="viewAll()">view all</button>
                     </div>
                    
 
@@ -134,7 +136,8 @@
 
 
             <div class="col-7">
-                <div class="card mb-3" style="max-width: 900px;" *ngFor="let event of eventList">
+                <!-- <div class="card mb-3" style="max-width: 900px;" *ngFor="let event of eventList"> -->
+                    <div class="card mb-3" style="max-width: 900px;" *ngFor="let event of filteredEvents">
                     <div class="row no-gutters">
                         <div class="col-md-4">
                             <img src="{{event.imageId}}" class="card-img" alt="IMAGE" >

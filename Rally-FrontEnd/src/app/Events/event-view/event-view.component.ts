@@ -34,54 +34,17 @@ export class EventViewComponent implements OnInit {
    
    
 
-    // this.http.get(this.eventsUrl).subscribe((response: Event[]) => {
-    //   console.log(response);
-    //   this.eventList = response;
-    // })
-
+   
     this.http.get(this.eventsUrl).subscribe((response: Event[]) => {
       console.log(response);
       this.eventList = response;
       this.allEvents();
     })
 
-    // this.allEvents();
-
-    // this.filteredEvents = this.eventList;
-
 
   
   }
   
-
-
-  // connect(string: string) {
-  //   for(let i = 0; i < this.eventList.length; i++) {
-  //     if ( this.eventList[i].eventCategory === string) {
-  //       this.filteredEvents.push(this.eventList[i])
-  //     }
-  //   }
-
-  //   // this.eventList = this.filteredEvents;
-  //   console.log(this.filteredEvents)
-  //   return this.filteredEvents;
- 
-  // };
-
-
-  // connect(string: string) {
-  //   // this.filteredEvents.splice(0);
-  //   for(let i = 0; i < this.eventList.length; i++) {
-  //     if ( this.eventList[i].eventCategory === string) {
-  //       this.filteredEvents.push(this.eventList[i])
-  //     }
-  //   }
-
-  //   // this.eventList = this.filteredEvents;
-  //   console.log(this.filteredEvents)
-  //   return this.filteredEvents;
- 
-  // };
 
   connect(string: string) {
     this.filteredEvents.splice(0);
@@ -91,17 +54,10 @@ export class EventViewComponent implements OnInit {
       }
     }
 
-    // this.eventList = this.filteredEvents;
     console.log(this.filteredEvents)
     return this.filteredEvents;
  
   };
-
-  // connect() {
-  //   return this.filteredEvents.filter((event) => {
-  //     return event.eventCategory === 'connect';
-  //   });
-  //  }
 
 
 
@@ -113,7 +69,6 @@ export class EventViewComponent implements OnInit {
       }
     }
 
-    // this.eventList = this.filteredEvents;
     console.log(this.filteredEvents)
     return this.filteredEvents;
  
@@ -121,7 +76,6 @@ export class EventViewComponent implements OnInit {
 
 
   volunteer(string: string) {
-    // this.filteredEvents = this.eventList;
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
       if ( this.eventList[i].eventCategory === string) {
@@ -129,7 +83,6 @@ export class EventViewComponent implements OnInit {
       }
     }
 
-    // this.eventList = this.filteredEvents;
     console.log(this.filteredEvents)
     return this.filteredEvents;
  
@@ -143,7 +96,6 @@ export class EventViewComponent implements OnInit {
       }
     }
 
-    // this.eventList = this.filteredEvents;
     console.log(this.filteredEvents)
     return this.filteredEvents;
  
@@ -157,17 +109,12 @@ export class EventViewComponent implements OnInit {
       }
     }
 
-    // this.eventList = this.filteredEvents;
     console.log(this.filteredEvents)
     return this.filteredEvents;
  
   };
 
   viewAll() {
-    // this.filteredEvents.splice(0);
-    // return this.filteredEvents = this.eventList;
-  
-
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
       this.filteredEvents.push(this.eventList[i]);
@@ -183,22 +130,6 @@ export class EventViewComponent implements OnInit {
   //   window.location.reload();
   // }
 
-
-  // viewAll(string: string) {
-  //   for(let i = 0; i < this.eventList.length; i++) {
-  //     if ( this.eventList[i].eventCategory === string) {
-  //       this.filteredEvents.push(this.eventList[i])
-  //     }
-  //   }
-
-  //   this.eventList = this.filteredEvents;
-  //   console.log(this.filteredEvents)
-  //   return this.filteredEvents;
- 
-  // };
-
-
-  
 
 }
 

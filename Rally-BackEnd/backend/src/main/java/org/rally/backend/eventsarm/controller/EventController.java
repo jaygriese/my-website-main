@@ -33,6 +33,11 @@ public class EventController {
         return new ResponseEntity<>(eventRepository.findById(id), HttpStatus.OK);
     }
 
+    @PostMapping("/event/{id}")
+    public ResponseEntity<?>deleteEvent(@PathVariable int id) {
+        return new ResponseEntity<>(deleteEvent(id), HttpStatus.OK);
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<?> createEventForm(@RequestBody EventDTO eventDTO) {

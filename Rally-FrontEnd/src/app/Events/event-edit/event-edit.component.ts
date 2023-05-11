@@ -57,6 +57,12 @@ onSubmit() {
 }
 
 
+
+deleteEvent() {
+
+}
+
+
 // updateEvent(eventInformation: NgForm) {
 //   let updateEvent: EventDTO = {
 //     // id: eventInformation.value.id,

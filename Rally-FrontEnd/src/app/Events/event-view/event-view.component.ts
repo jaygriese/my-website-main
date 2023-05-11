@@ -33,8 +33,6 @@ export class EventViewComponent implements OnInit {
     // this.verifyLoggedIn();
    
    
-
-   
     this.http.get(this.eventsUrl).subscribe((response: Event[]) => {
       console.log(response);
       this.eventList = response;
@@ -44,9 +42,11 @@ export class EventViewComponent implements OnInit {
 
   
   }
+
+
+
   
-
-  connect(string: string) {
+filter(string: string) {
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
       if ( this.eventList[i].eventCategory === string) {
@@ -59,60 +59,6 @@ export class EventViewComponent implements OnInit {
  
   };
 
-
-
-  learn(string: string) {
-    this.filteredEvents.splice(0);
-    for(let i = 0; i < this.eventList.length; i++) {
-      if ( this.eventList[i].eventCategory === string) {
-        this.filteredEvents.push(this.eventList[i])
-      }
-    }
-
-    console.log(this.filteredEvents)
-    return this.filteredEvents;
- 
-  };
-
-
-  volunteer(string: string) {
-    this.filteredEvents.splice(0);
-    for(let i = 0; i < this.eventList.length; i++) {
-      if ( this.eventList[i].eventCategory === string) {
-        this.filteredEvents.push(this.eventList[i])
-      }
-    }
-
-    console.log(this.filteredEvents)
-    return this.filteredEvents;
- 
-  };
-
-  donate(string: string) {
-    this.filteredEvents.splice(0);
-    for(let i = 0; i < this.eventList.length; i++) {
-      if ( this.eventList[i].eventCategory === string) {
-        this.filteredEvents.push(this.eventList[i])
-      }
-    }
-
-    console.log(this.filteredEvents)
-    return this.filteredEvents;
- 
-  };
-
-  celebrate(string: string) {
-    this.filteredEvents.splice(0);
-    for(let i = 0; i < this.eventList.length; i++) {
-      if ( this.eventList[i].eventCategory === string) {
-        this.filteredEvents.push(this.eventList[i])
-      }
-    }
-
-    console.log(this.filteredEvents)
-    return this.filteredEvents;
- 
-  };
 
   viewAll() {
     this.filteredEvents.splice(0);

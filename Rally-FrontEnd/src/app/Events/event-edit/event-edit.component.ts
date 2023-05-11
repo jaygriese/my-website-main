@@ -22,6 +22,7 @@ export class EventEditComponent implements OnInit {
   private getEventUrl: string;
   id: string;
   event: Event;
+  // buttonType: string;
 
 
 
@@ -53,14 +54,25 @@ updateEvent() {
 }  
 
 onSubmit() {
-  this.updateEvent();
+  this.updateEvent;
 }
 
+// deleteEvent() {
+//   // this.event.eventTitle = "delete";
+
+// }
+
+// onSubmit(buttonType: string): void {
+//   if(buttonType==="update") {
+//     this.updateEvent();
+//   } else if(buttonType==="delete") {
+//     this.deleteEvent();
+//   }
+// }
 
 
-deleteEvent() {
 
-}
+
 
 
 // updateEvent(eventInformation: NgForm) {

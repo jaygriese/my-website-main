@@ -11,6 +11,7 @@ export class EventService {
 
   private getEventByIdUrl = 'http://localhost:8080/events/event/';
   private updateEventUrl = 'http://localhost:8080/events/edit/event/';
+  // private deleteEventByIdUrl = 'http://localhost:8080/events/event/';
   
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -24,17 +25,10 @@ export class EventService {
     //is this right?
   }
 
-  // updateEvent(id: string, value: any) {
-  //   return this.http.post(`${this.updateEventUrl}` + id, value);
-  //   //is this right?
-  // }
-
- 
-
-  // deleteEvent(id: string) {
-  //   return this.http.delete(`${this.getEventByIdUrl}` + id, { responseType: 'text'});
-  //   //is this right?
-  // }
+  deleteEvent(id: string) {
+    return this.http.delete(`${this.getEventByIdUrl}` + id, { responseType: 'text'});
+    //is this right?
+  }
 
 
 }

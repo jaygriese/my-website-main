@@ -50,6 +50,13 @@ export class EventComponent implements OnInit {
 
   }
 
+
+deleteEvent() {
+  this.eventService.deleteEvent(this.id).subscribe(data => {
+    console.log(data);
+  })
+}
+
   // verifyLoggedIn() {
 
   //   if (localStorage.getItem('userName') != null) {

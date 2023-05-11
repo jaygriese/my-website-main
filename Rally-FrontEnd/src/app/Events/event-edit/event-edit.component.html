@@ -37,7 +37,8 @@
 
     <div id="event_details">
         <!-- <form #eventInformation="ngForm" (ngSubmit)="updateEvent(eventInformation)"> -->
-            <form #eventInformation="ngForm" (ngSubmit)="onSubmit()">
+            <!-- <form #eventInformation="ngForm" (ngSubmit)="onSubmit(buttonType)"> -->
+                <form #eventInformation="ngForm" (ngSubmit)="onSubmit()">
             <div style=float:left; id="form_1">
                 <label>host</label><br>
                 <input type="text" id="host" required [(ngModel)]="event.eventHost" name="eventHost" ngModel>
@@ -98,15 +99,20 @@
                 <!-- <button type="submit" id="create_btn">SUBMIT</button> -->
                 <!-- <button (click)="list()" type="submit" id="create_btn">SUBMIT</button> -->
                 
-                <button type="submit" id="edit_btn">EDIT</button>
+                <!-- <button type="submit" id="edit_btn" (click)="onSubmit('update')">UPDATE</button> -->
+                <button type="submit" id="edit_btn" >EDIT</button>
                 <br>
                 <br>
-                <button id="edit_btn" style="background-color: #C03E24;" (click)="deleteEvent()">DELETE</button>
+                <!-- <button type="submit" id="edit_btn" style="background-color: #C03E24;" (click)="onSubmit('delete')">DELETE</button>
                 <br>
                 <br>
-                <br>
+                <br> -->
             </div>
         </form>
+        <!-- <button id="edit_btn" style="background-color: #C03E24; float: right;" (click)="deleteEvent()">DELETE</button>
+        <br>
+        <br>
+        <br> -->
        
     </div>
 </div>

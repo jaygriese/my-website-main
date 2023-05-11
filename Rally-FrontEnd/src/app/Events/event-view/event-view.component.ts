@@ -19,7 +19,7 @@ export class EventViewComponent implements OnInit {
 
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
-
+  
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
@@ -42,8 +42,10 @@ export class EventViewComponent implements OnInit {
     this.http.get(this.eventsUrl).subscribe((response: Event[]) => {
       console.log(response);
       this.eventList = response;
-      // this.filteredEvents = this.eventList;
+      this.allEvents();
     })
+
+    // this.allEvents();
 
     // this.filteredEvents = this.eventList;
 
@@ -163,7 +165,18 @@ export class EventViewComponent implements OnInit {
 
   viewAll() {
     // this.filteredEvents.splice(0);
-    return this.filteredEvents = this.eventList;
+    // return this.filteredEvents = this.eventList;
+  
+
+    this.filteredEvents.splice(0);
+    for(let i = 0; i < this.eventList.length; i++) {
+      this.filteredEvents.push(this.eventList[i]);
+    }
+    return this.filteredEvents;
+  }
+
+  allEvents() {
+    return this.viewAll();
   }
 
   // reset() {

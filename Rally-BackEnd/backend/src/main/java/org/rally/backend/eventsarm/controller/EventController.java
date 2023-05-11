@@ -33,10 +33,10 @@ public class EventController {
         return new ResponseEntity<>(eventRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/event/{id}")
-    public ResponseEntity<?>deleteEvent(@PathVariable int id) {
-        return new ResponseEntity<>(deleteEvent(id), HttpStatus.OK);
-    }
+//    @PostMapping("/event/{id}")
+//    public ResponseEntity<?>deleteEvent(@PathVariable int id) {
+//        return new ResponseEntity<>(eventRepository.deleteById(id), HttpStatus.OK);
+//    }
 
 
     @PostMapping("/create")
@@ -57,42 +57,15 @@ public class EventController {
 
     }
 
-    @PostMapping("/edit/event/{id}")
-    public ResponseEntity<?> editEventForm(@RequestBody Event event) {
-
-        List<Event> updatedEventList = (List<Event>) eventRepository.findAll();
-
-        Event updatedEvent = new Event();
-
-        for (Event update : updatedEventList) {
-            if(update.getId() == event.getId()) {
-                eventRepository.deleteById(update.getId());
-
-            }
-        }
-
-        eventRepository.save(updatedEvent);
-
-        return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
-
-    }
-
 //    @PostMapping("/edit/event/{id}")
-//    public ResponseEntity<?> editEventForm(@RequestBody EventDTO eventDTO) {
+//    public ResponseEntity<?> editEventForm(@RequestBody Event event) {
 //
 //        List<Event> updatedEventList = (List<Event>) eventRepository.findAll();
 //
-//        Event updatedEvent = new Event(eventDTO.getid(),
-//                eventDTO.getEventHost(),
-//                eventDTO.getContactEmail(),
-//                eventDTO.getEventTitle(),
-//                eventDTO.getDatetime(),
-//                eventDTO.getEventAddress(),
-//                eventDTO.getDescription(),
-//                eventDTO.getImageId(), eventDTO.getImageId());
+//        Event updatedEvent = new Event();
 //
 //        for (Event update : updatedEventList) {
-//            if(update.getId() == eventDTO.getId()) {
+//            if(update.getId() == event.getId()) {
 //                eventRepository.deleteById(update.getId());
 //
 //            }
@@ -103,6 +76,33 @@ public class EventController {
 //        return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
 //
 //    }
+
+    @PostMapping("/edit/event/{id}")
+    public ResponseEntity<?> editEventForm(@RequestBody EventDTO eventDTO) {
+
+        List<Event> updatedEventList = (List<Event>) eventRepository.findAll();
+
+        Event updatedEvent = new Event(eventDTO.getEventHost(),
+                eventDTO.getContactEmail(),
+                eventDTO.getEventTitle(),
+                eventDTO.getDatetime(),
+                eventDTO.getEventAddress(),
+                eventDTO.getEventCategory(),
+                eventDTO.getDescription(),
+                eventDTO.getImageId());
+
+        for (Event event : updatedEventList) {
+            if(event.getId() == eventDTO.getId()) {
+                eventRepository.deleteById(event.getId());
+
+            }
+        }
+
+        eventRepository.save(updatedEvent);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
 
     //ResponseEntity represents the whole HTTP response from front end
     //@RequestBody pulls from client side and puts data into Java object (event)

@@ -8,13 +8,13 @@ public class EventDTO {
 
 //    private String eventId;
 
-//    private int id;
+    private int id;
 
-    @NotBlank(message = "Who can your community thank for hosting this event?")
+//    @NotBlank(message = "Who can your community thank for hosting this event?")
     private String eventHost;
 
-    @NotBlank(message = "But how will your community know who to contact?")
-    @Email(message = "Whoops! Try entering your email again.")
+//    @NotBlank(message = "But how will your community know who to contact?")
+//    @Email(message = "Whoops! Try entering your email again.")
     private String contactEmail;
 
     private String eventTitle;
@@ -25,14 +25,14 @@ public class EventDTO {
 //@Basic
 //private java.time.LocalDateTime localDateTime;
 
-    @NotBlank(message = "But how will your community know where to go?")
+//    @NotBlank(message = "But how will your community know where to go?")
     private String eventAddress;
 
 //    private EventCategory eventCategory;
 
     private String eventCategory;
 
-    @NotBlank(message = "Tell your community what this event is all about!")
+//    @NotBlank(message = "Tell your community what this event is all about!")
     private String description;
 
     private String imageId;
@@ -92,13 +92,13 @@ public class EventDTO {
 //        this.eventId = eventId;
 //    }
 
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 
 //    public void setEventCategory(EventCategory eventCategory) {

@@ -18,7 +18,7 @@ public class DirectMessage {
 
     private String sentByUserName;
 
-    @Column(columnDefinition = "varchar(5000)")
+    @Column(columnDefinition = "VARCHAR(5000) NOT NULL")
     private String messageContent;
 
     public DirectMessage() {

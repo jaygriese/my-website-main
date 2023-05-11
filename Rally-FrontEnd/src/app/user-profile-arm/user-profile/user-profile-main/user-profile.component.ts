@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterContentChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { VerifyLogoutService } from 'src/app/user-profile-arm/security/verify-logout.service';
@@ -31,6 +32,7 @@ export class UserProfileComponent implements OnInit {
   userEntityDmList: UserEntity[];
   allDmHistory: DirectMessage[];
   conversation: DirectMessage[] = [];
+  commentBox: any;
 
   /* Post History */
   forumPost: any = [];
@@ -43,6 +45,9 @@ export class UserProfileComponent implements OnInit {
   changeProfilePic: boolean = true;
   uploadErrorMsg: any[];
 
+  /* HTML variables */
+  @ViewChild('dmBottomOfScroll') private scrollMe: ElementRef;
+
   /* Image uploading */
   uploadedImage: File;
   dbImage: any;
@@ -54,7 +59,8 @@ export class UserProfileComponent implements OnInit {
               private router: Router, 
               private viewUser: ViewUserService,
               private verifyService: VerifyLogoutService, 
-              private activeUserService: ViewUserService) {
+              private activeUserService: ViewUserService, 
+              private cdref: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -106,6 +112,12 @@ export class UserProfileComponent implements OnInit {
         this.hiddenPost = response;
       })
     }
+  }
+  
+  /* Learning about LifeCycle Hooks in Angular */
+  ngAfterContentChecked() {
+    this.scrollMe = this.scrollMe;
+    this.cdref.detectChanges();
   }
 
   /* Hide requested post from profile */
@@ -171,14 +183,19 @@ export class UserProfileComponent implements OnInit {
         this.conversation.push(this.allDmHistory[i]);
       }
     }
-    this.conversation.reverse();
     // console.log(`${localStorage.getItem('userName')} is viewing and messaging ${this.respondToDm.userName}`)
     this.userDms = false;
 
   }
 
-  reload() {
-    location.reload();
+  refreshConversation( chatWithUser: string) {
+    for (let i = 0; i < this.allDmHistory.length; i++) {
+      if (localStorage.getItem('userName') === this.allDmHistory[i].sentByUserName && chatWithUser === this.allDmHistory[i].receivedByUserName) {
+        this.conversation.push(this.allDmHistory[i]);
+      } else if (localStorage.getItem('userName') === this.allDmHistory[i].receivedByUserName && chatWithUser === this.allDmHistory[i].sentByUserName) {
+        this.conversation.push(this.allDmHistory[i]);
+      }
+    }
   }
 
   respondToUserDm( userResponse: NgForm ) {
@@ -190,23 +207,15 @@ export class UserProfileComponent implements OnInit {
       messageContent: userResponse.value.messageContent
     }
 
-    if (sendDirectMessage.messageContent.length < 3) {
+    if (sendDirectMessage.messageContent === undefined || sendDirectMessage.messageContent.length < 3) {
       this.noError = false;
       return
     }
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
       this.allDmHistory = response;
-      this.userDms = true;
-      // find this.respondToDm.userName and pass into this.display converstaion to refresh the text.
-      
-
-      // this.displayConversation()
-    });
-
-    /* Temp solution, need to figure out how to refresh just this part of the page while staying in user conversation. */
-    // location.reload();
-    
-    
+      this.commentBox = '';
+      this.refreshConversation(this.respondToDm.userName)
+    });   
   } 
 
   updateUserInfo( userDetails: NgForm ) {

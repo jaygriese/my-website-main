@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserEntity } from '../../models/UserEntity';
 import { ViewUserService } from '../services/view-user.service';
@@ -8,12 +8,13 @@ import { NgForm } from '@angular/forms';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { DirectMessage } from '../../models/Directmessage';
 import { HttpClient } from '@angular/common/http';
+import { MainUserBundle } from '../../models/MainUserBundle';
 @Component({
   selector: 'app-view-user-profile',
   templateUrl: './view-user-profile.component.html',
   styleUrls: ['./view-user-profile.component.css']
 })
-export class ViewUserProfileComponent implements OnInit {
+export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
   /* Viewing Users information */
   logInStatus: Boolean = false;
@@ -23,6 +24,7 @@ export class ViewUserProfileComponent implements OnInit {
   /* Direct Message with active user */
   dmList: DirectMessage[];
   conversation: DirectMessage[];
+  commentBox: any;
   /* User Profile Pic */
   dbImage: any;
   /* Post History */
@@ -30,6 +32,9 @@ export class ViewUserProfileComponent implements OnInit {
   /* HTML booleans */
   noError: boolean = true;
   showDmHistory = true;
+  dmCharacters = true;
+
+  @ViewChild('dmBottomOfScroll') private myScrollContainer: ElementRef;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router, 
@@ -49,14 +54,13 @@ export class ViewUserProfileComponent implements OnInit {
     this.viewUser.redirectWhenViewingSelf(this.viewUserName);
 
     /* This method gets a bundle of information I want to display on the view user page */
-    this.viewUser.getViewUserBundleByUserName(this.viewUserName).subscribe((data: ViewUserBundle) => {
+    this.viewUser.getViewUserBundleByUserName(this.viewUserName).subscribe((data: MainUserBundle) => {
       this.userEntityInformation = data;
+      this.dmList = data.viewMainUserDmHistory.directMessageList;
+      this.displayConversation(this.userEntityInformation.viewUser);
+      this.scrollToBottom;
     })
-    /* Get Direct Message history with active user */
-    this.viewUser.getDmHistoryDirectMessages(this.viewUserId).subscribe((response: DirectMessage[]) => {
-        this.dmList =response
-    })
-    /* Get other users profile picture */
+    /* Get view users profile picture */
     this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserId).subscribe((response: any) => {
       if (response.message) {
         console.log(response.message);
@@ -72,6 +76,14 @@ export class ViewUserProfileComponent implements OnInit {
   
   }
 
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+  } 
+
+  scrollToBottom() {
+    this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+  }
+
   viewingUserSendDM(dmMessageDetails: NgForm) {
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.userEntityInformation.viewUser.id,
@@ -81,28 +93,28 @@ export class ViewUserProfileComponent implements OnInit {
       messageContent: dmMessageDetails.value.messageContent
     }
 
-    if (sendDirectMessage.messageContent.length < 3) {
-      this.noError = false;
+    if (sendDirectMessage.messageContent === undefined || sendDirectMessage.messageContent.length < 3) {
+      this.dmCharacters = false;
       return;
     } 
 
-    this.viewUser.postDirectMessage(sendDirectMessage).subscribe();
-    // location.reload();
+    this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
+      this.dmList = response;
+      this.commentBox = '';
+      this.displayConversation(this.userEntityInformation.viewUser);
+    });
   }
 
   displayConversation( userDms: UserEntity) {
     this.conversation = [];
-    console.log(`${localStorage.getItem('userName')} is viewing and messaging ${userDms.userName}`)
-    
-    for (let i = 0; i < this.dmList.length; i++) {
-      if (localStorage.getItem('userName') === this.dmList[i].sentByUserName && userDms.userName === this.dmList[i].receivedByUserName) {
-        this.conversation.push(this.dmList[i]);
-      } else if (localStorage.getItem('userName') === this.dmList[i].receivedByUserName && userDms.userName === this.dmList[i].sentByUserName) {
-        this.conversation.push(this.dmList[i]);
+
+    for (let user of this.dmList) {
+      if (localStorage.getItem('userName') === user.sentByUserName && userDms.userName === user.receivedByUserName) {
+        this.conversation.push(user);
+      } else if (localStorage.getItem('userName') === user.receivedByUserName && userDms.userName === user.sentByUserName) {
+        this.conversation.push(user);
       }
     }
-    this.conversation.reverse();
-    this.showDmHistory = false;
   }
 
 

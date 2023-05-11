@@ -22,22 +22,7 @@
     <div class="col-sm-8 offset-md-1">
         <div class="card">
             <h4>Direct Messaging: <br>{{ viewUserName }}</h4>
-                   
-                <div class="scroll">
-                    <form #dmMessageDetails="ngForm" (ngSubmit)="viewingUserSendDM(dmMessageDetails)">
-                        <button (click)="displayConversation(userEntityInformation.viewUser)">View Message History</button>
-                        <input type="submit" value="Send Message">
-                        <br>
-                        <ng-template #lengthError>
-                            <h6>Minimum of 3 characters required.</h6>
-                        </ng-template>
-                        <br>
-                        <h3>Message:</h3>
-                        <textarea rows="3" cols="40" type="text" name="messageContent" ngModel></textarea>
-                        <p>View most recent message below.</p><br>
-                        <div style="text-align: right;">
-                        </div>
-                      </form>
+                <div #dmBottomOfScroll class="scroll">     
                 <table style="width: 100%;" *ngFor="let dm of conversation">
                     <br>
                     <tr>
@@ -56,6 +41,20 @@
                     </td>
                     <br><br>
                 </table>
+                <form #dmMessageDetails="ngForm" (ngSubmit)="viewingUserSendDM(dmMessageDetails)">
+                    
+                    <div class="card" style="align-items: center; background-color: rgb(153, 162, 175);">
+                    <h3>Respond: </h3>
+                    <textarea rows="3" cols="40" type="text" name="messageContent" [(ngModel)]="commentBox"></textarea> 
+                    <br>
+                    <div *ngIf="dmCharacters; else lengthError"></div>
+                    <input type="submit" value="Send Message">
+                    
+                    <ng-template #lengthError>
+                        <h6 style="color:crimson;">Minimum of 3 characters required.</h6>
+                    </ng-template>
+                </div>
+                  </form>
             </div>
             
             </div>

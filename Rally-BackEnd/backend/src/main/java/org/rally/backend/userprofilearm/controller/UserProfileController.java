@@ -82,8 +82,9 @@ public class UserProfileController {
         /** call post history and favorites here when ready **/
         UserEntity targetUser = userRepository.findByUserName(userName);
         Optional<UserInformation> targetInformation = userInformationRepository.findByUserId(targetUser.getId());
+        MainUserDmHistory targetDirectMessages = activeUserDirectMessageHistory(targetUser.getId());
 
-        return new UserBundle(targetUser, targetInformation);
+        return new UserBundle(targetUser, targetInformation, targetDirectMessages);
 
     }
 

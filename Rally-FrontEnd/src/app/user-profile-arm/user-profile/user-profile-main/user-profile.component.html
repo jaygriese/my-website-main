@@ -63,23 +63,8 @@
                 </div>
 
                 <ng-template #showConversations>
-                    <div class="scroll">
-                        <form #respondToDm="ngForm" (ngSubmit)="respondToUserDm(respondToDm)">
-
-                            <button (click)="userDms=true">Return to all Messages</button>
-                            
-                            <input type="submit" value="Send Message">
-                            <br>                                  
-                            <ng-template #lengthError>
-                                <h6>Minimum of 3 characters required.</h6>
-                            </ng-template>
-                            <br>
-                            <div *ngIf="noError; else lengthError">
-                            </div>
-                            <h3>Message:</h3>
-                            <textarea rows="3" cols="40" type="text" name="messageContent" minlength="10" ngModel></textarea>
-                            <p>View most recent message below.</p><br>                         
-                        </form>
+                    <div class="scroll" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                        
                         <table style="width: 100%;" *ngFor="let dm of conversation">
                             <br>
                             <tr>
@@ -96,15 +81,22 @@
                             <td class="cell-sent-received">
                                 <tr class="card">Recieved: <br>{{ dm.receivedByUserName}}</tr>
                             </td>
-                            <br><br>
+                            <br>
                         </table>
-                        <br><br>
-                        <h3 class="card">End of Messages</h3>
-                        <button (click)="reload()">Return to all Messages</button>
-                    </div>
-                    
-                </ng-template> 
-                
+                        <form #respondToDm="ngForm" (ngSubmit)="respondToUserDm(respondToDm)">
+                            <div class="card" style="align-items: center; background-color: rgb(153, 162, 175);">
+                            <ng-template #lengthError>
+                            <h6 style="color: rgb(165, 35, 61);">Minimum of 3 characters required.</h6>
+                            </ng-template>
+                            <h3>Respond:</h3>
+                            <textarea rows="3" cols="40" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
+                            <div *ngIf="noError; else lengthError"></div>
+                            <input type="submit" value="Send Message">    
+                            <button (click)="userDms=true">Return to all Messages</button>
+                        </div>
+                        </form>
+                    </div>   
+                </ng-template>
             </div>
         </div>
     </div>

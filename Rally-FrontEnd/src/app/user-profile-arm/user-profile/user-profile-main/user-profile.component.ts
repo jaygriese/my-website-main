@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterContentChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { MainUserBundle } from '../../models/MainUserBundle';
 import { DirectMessage } from '../../models/Directmessage';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { NgUserInformation } from '../../models/ng-model/UserInformation';
+import { HiddenPost } from '../../models/HiddenPost';
 
 @Component({
   selector: 'app-user-profile',
@@ -35,8 +36,11 @@ export class UserProfileComponent implements OnInit {
   commentBox: any;
 
   /* Post History */
-  forumPost: any = [];
-  hiddenPost: any;
+  allPost: any[] = [];
+  hiddenPost: HiddenPost[];
+  forumPost: any[];
+  forumReplies: any[];
+  eventPost: any[];
   
   /* HTML booleans */
   noError: boolean = true;
@@ -66,7 +70,8 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     /* Make sure the user is logged in */
     this.logInStatus = this.verifyService.verifyLoggedIn();
-    /* If they are logged in */
+    
+    /* If user is logged in */
     if (localStorage.getItem('id') !== null) {
       /* Get user information and user entity data */
       this.activeUserService.getMainUserBundleByUserName(localStorage.getItem('userName')).subscribe((data: MainUserBundle) => {
@@ -74,6 +79,10 @@ export class UserProfileComponent implements OnInit {
         this.userInformation = data.viewUserInformation;
         this.allDmHistory = data.viewMainUserDmHistory.directMessageList;
         this.userEntityDmList = data.viewMainUserDmHistory.userEntities;
+        this.hiddenPost = data.viewUserPostHistory.viewUserHiddenPost;
+        this.forumPost = data.viewUserPostHistory.viewUserForumPost;
+        this.forumReplies = data.viewUserPostHistory.viewUserForumReplies;
+        this.eventPost = data.viewUserPostHistory.viewUserEventPost;
         this.model = new NgUserInformation(this.userInformation.firstName,
                                            this.userInformation.lastName,
                                            this.userInformation.neighborhood,
@@ -87,7 +96,11 @@ export class UserProfileComponent implements OnInit {
           }
         }
         this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user !== remove);
+
+        this.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
+        // console.log(this.allPost)
       })
+
       /* Get user Profile pic */
       this.http.get('http://localhost:8080/user/userProfileImage/' + localStorage.getItem('id')).subscribe((response: any) => {
         if (response.message) {
@@ -98,23 +111,11 @@ export class UserProfileComponent implements OnInit {
           this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
         }
       })
-      /* Get user Forum Post history */
-      this.http.get('http://localhost:8080/Posts').subscribe((response) => {
-        let filterPost: any = response;
-        for (let i = 0; i < filterPost.length; i++) {
-          if(filterPost[i].userEntity.id === Number(localStorage.getItem('id'))) {
-            this.forumPost.push(filterPost[i]);
-          }
-        }
-      })
-      /* Get hidden post list */
-      this.http.get('http://localhost:8080/user/getHiddenPostList/' + localStorage.getItem('id')).subscribe((response) => {
-        this.hiddenPost = response;
-      })
     }
   }
   
-  /* Learning about LifeCycle Hooks in Angular */
+  /* Learning about LifeCycle Hooks in Angular / prevents error in the console when viewing 
+    direct messages while using the [scrollTop]="scrollMe.scrollHeight" */
   ngAfterContentChecked() {
     this.scrollMe = this.scrollMe;
     this.cdref.detectChanges();
@@ -127,11 +128,28 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  /* Remove post from hidden post / Make post public */
   unhidePost(postId: string) {
     this.http.post('http://localhost:8080/user/unhidePost', postId).subscribe((response) => {
       console.log(response);
     })
   }
+
+  oneBigList(forumPost, forumReplies, events) {  // , resources, restaurantReview, services
+    let bigJoin: any[] = [];
+    for (let post of forumPost) {
+      bigJoin.push(post);
+    }
+    for (let reply of forumReplies) {
+      bigJoin.push(reply);
+    }
+    for (let event of events) {
+      bigJoin.push(event);
+    }
+    this.allPost = bigJoin;
+    console.log(this.allPost);
+  }
+
 
   /* Select file to be uploaded */
   public onImageUpload(event) {
@@ -167,6 +185,7 @@ export class UserProfileComponent implements OnInit {
     })
   }  
 
+  /* Display conversation with user selected */
   displayConversation( userDms: UserEntity) {
     this.respondToDm = null;
 
@@ -188,6 +207,7 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+  /* After sending a message to a user, this refreshes the chat history */
   refreshConversation( chatWithUser: string) {
     for (let i = 0; i < this.allDmHistory.length; i++) {
       if (localStorage.getItem('userName') === this.allDmHistory[i].sentByUserName && chatWithUser === this.allDmHistory[i].receivedByUserName) {
@@ -198,6 +218,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  /* Sends respone to the database */
   respondToUserDm( userResponse: NgForm ) {
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.respondToDm.id,
@@ -218,6 +239,7 @@ export class UserProfileComponent implements OnInit {
     });   
   } 
 
+  /* Updates the users information */
   updateUserInfo( userDetails: NgForm ) {
     let userInfo: UserInfoDTO = {
       firstName: userDetails.value.firstName,

@@ -1,9 +1,9 @@
 div.scroll {
     column-width: auto;
     background-color: #5e6b6b;
-    height: 260px;
+    height: 290px;
     overflow: auto;
-    resize: both;
+    resize: vertical;
     text-align: center;
     padding: 8px;
   }
@@ -18,12 +18,12 @@ div.scroll {
     padding: 8px;
   }
 
-.cell.sent-received {
+/* .cell.sentreceived {
+  background-color: darkcyan;
   column-width: 10%;
   display: flex;
   margin: auto;
-  color: aquamarine;
-}
+} */
 
 .thought {
   display:flex;

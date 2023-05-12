@@ -2,12 +2,12 @@ package org.rally.backend.userprofilearm.model;
 
 import java.util.List;
 
-public class MainUserDmHistory {
+public class UserDmHistory {
 
     List<UserEntity> userEntities;
     List<DirectMessage> directMessageList;
 
-    public MainUserDmHistory(List<UserEntity> userEntities, List<DirectMessage> directMessageList) {
+    public UserDmHistory(List<UserEntity> userEntities, List<DirectMessage> directMessageList) {
         this.userEntities = userEntities;
         this.directMessageList = directMessageList;
     }

@@ -31,7 +31,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
   forumPost: any = [];
   /* HTML booleans */
   noError: boolean = true;
-  showDmHistory = true;
+  showDmHistory = false;
   dmCharacters = true;
 
   @ViewChild('dmBottomOfScroll') private myScrollContainer: ElementRef;
@@ -57,6 +57,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
     this.viewUser.getViewUserBundleByUserName(this.viewUserName).subscribe((data: MainUserBundle) => {
       this.userEntityInformation = data;
       this.dmList = data.viewMainUserDmHistory.directMessageList;
+      console.log(data)
       this.displayConversation(this.userEntityInformation.viewUser);
       this.scrollToBottom;
     })

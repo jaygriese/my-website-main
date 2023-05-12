@@ -8,7 +8,7 @@
 <br>
 
 <div class="row">
-<div class="col-sm-3 p-1 boarder">
+<div class="col-3 p-1 boarder">
     <div class="card">
         <div class="profilepic">
         <h4>Hello<br>{{currentUser}}</h4>
@@ -46,7 +46,7 @@
 </div>
 
 
-<div class="col-sm-8  offset-md-1">
+<div class="col-9">
         <div class="card">
             <h4 *ngIf="userDms; else differentTitle">View your messages</h4>
             <ng-template #differentTitle>
@@ -103,7 +103,7 @@
 </div>
 
 <div class="row">
-    <div class="col" class="col-sm-3 p-1 boarder">
+    <div class="col-3 p-1 boarder">
         <div class="card">
             <h4>{{ userEntity?.userName }}'s<br>Information</h4>
             <div *ngIf="changeInfo; else changeForm"> 
@@ -151,11 +151,13 @@
     <div class="col-sm-6">
         <div class="card">
             <h2>Post History</h2>
+            <!-- Some type of way to view only certain classes -->
             <div class="scroll-posthistory">
-                <ul *ngFor="let post of this?.forumPost">
+                <ul *ngFor="let post of this?.allPost">
                     <div class="card" >                        
                         <input type="button" (click)="hidePost(post.id)" value="Hide this Post"/>
                         <h2><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h2>
+                        <h2><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.eventTitle}}</a></h2>
                         <h6>{{ post.description }}</h6>
                         <div *ngFor="let hide of this?.hiddenPost">
                         <div *ngIf="hide.hidePostId !== post.id; else hiddenPost">
@@ -172,7 +174,7 @@
             </div>
         </div>
     </div>
-    <div class="col">
+    <div class="col-3">
         <div class="card">
             <h2>Favorites</h2>
         </div>

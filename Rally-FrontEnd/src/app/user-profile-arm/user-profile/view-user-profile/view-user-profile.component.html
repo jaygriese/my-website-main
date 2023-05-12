@@ -19,7 +19,7 @@
         </ng-template>
         </div> 
     </div>
-    <div class="col-sm-8 offset-md-1">
+    <div class="col-sm-9">
         <div class="card">
             <h4>Direct Messaging: <br>{{ viewUserName }}</h4>
                 <div #dmBottomOfScroll class="scroll">     
@@ -31,32 +31,29 @@
                         <th></th>
                     </tr>
                     <td class="card">
-                        <tr class="cell-sent-received">Sent: <br>{{dm.sentByUserName}}</tr> 
+                        <tr class="cell-sentreceived">Sent: <br>{{dm.sentByUserName}}</tr> 
                     </td>
                     <td>
                         <tr class="thought">Message: <br>{{ dm.messageContent }}</tr> 
                     </td>
-                    <td class="cell-sent-received">
+                    <td class="cell-sentreceived">
                         <tr class="card">Recieved: <br>{{ dm.receivedByUserName}}</tr>
                     </td>
                     <br><br>
                 </table>
                 <form #dmMessageDetails="ngForm" (ngSubmit)="viewingUserSendDM(dmMessageDetails)">
-                    
                     <div class="card" style="align-items: center; background-color: rgb(153, 162, 175);">
-                    <h3>Respond: </h3>
-                    <textarea rows="3" cols="40" type="text" name="messageContent" [(ngModel)]="commentBox"></textarea> 
+                        <h3>Respond: </h3>
+                        <textarea rows="3" cols="40" type="text" name="messageContent" [(ngModel)]="commentBox"></textarea> 
                     <br>
                     <div *ngIf="dmCharacters; else lengthError"></div>
-                    <input type="submit" value="Send Message">
-                    
+                    <input type="submit" value="Send Message">    
                     <ng-template #lengthError>
                         <h6 style="color:crimson;">Minimum of 3 characters required.</h6>
                     </ng-template>
-                </div>
-                  </form>
-            </div>
-            
+                    </div>
+                </form>
+                
             </div>
         </div>
     </div>

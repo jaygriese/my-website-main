@@ -74,16 +74,17 @@ export class EventEditComponent implements OnInit {
 
 
 
-getIdNum(str: string) {
-  let num: number = parseInt(str);
-  console.log(typeof num);
-  return num;
-}
+// getIdNum(str: string) {
+//   let num: number = parseInt(str);
+//   console.log(typeof num);
+//   return num;
+// }
 
 
 updateEvent(eventInformation: NgForm) {
   let updateEvent: EventDTO = {
-    id: this.getIdNum(localStorage.getItem('id')),
+
+    // id: this.getIdNum(localStorage.getItem('id')),
     eventHost: eventInformation.value.eventHost,
     contactEmail: eventInformation.value.contactEmail,
     eventTitle: eventInformation.value.eventTitle, 

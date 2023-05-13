@@ -59,7 +59,7 @@ export class EventCreateComponent implements OnInit {
   registerNewEvent(eventInformation: NgForm) {
     let createNewEvent: EventDTO = {
       // id: eventInformation.value.id,
-      id: this.getIdNum(localStorage.getItem('id')),
+      // id: this.getIdNum(localStorage.getItem('id')),
       eventHost: eventInformation.value.eventHost,
       contactEmail: eventInformation.value.contactEmail,
       eventTitle: eventInformation.value.eventTitle, 

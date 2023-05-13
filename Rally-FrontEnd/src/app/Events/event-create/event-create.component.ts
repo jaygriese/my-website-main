@@ -5,6 +5,7 @@ import { Event } from 'src/app/Events/models/event';
 import { EventDTO } from '../models/DTO/EventDTO';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-event-create',
   templateUrl: './event-create.component.html',
@@ -17,11 +18,14 @@ export class EventCreateComponent implements OnInit {
   logInStatus: Boolean;
   private eventUrl: string;
 
+  // userId: number = Number(localStorage.getItem('id'));
+
 
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
     this.eventUrl = 'http://localhost:8080/events/create'
+
    }
 
   ngOnInit(): void {
@@ -46,11 +50,16 @@ export class EventCreateComponent implements OnInit {
     this.logInStatus = false;
   }
 
+  getIdNum(str: string) {
+    let num: number = parseInt(str);
+    return num;
+}
 
 
   registerNewEvent(eventInformation: NgForm) {
     let createNewEvent: EventDTO = {
       // id: eventInformation.value.id,
+      id: this.getIdNum(localStorage.getItem('id')),
       eventHost: eventInformation.value.eventHost,
       contactEmail: eventInformation.value.contactEmail,
       eventTitle: eventInformation.value.eventTitle, 

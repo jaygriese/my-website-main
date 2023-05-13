@@ -34,6 +34,8 @@
     <div id="event_details">
         <form #eventInformation="ngForm" (ngSubmit)="registerNewEvent(eventInformation)">
             <div style=float:left; id="form_1">
+                
+                <input type=hidden id="id" name="id" ngModel>
                 <label>host</label><br>
                 <input type="text" id="host" name="eventHost" ngModel>
                 <br>

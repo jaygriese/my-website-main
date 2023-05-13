@@ -14,8 +14,8 @@ import { NgForm } from '@angular/forms';
 })
 export class EventEditComponent implements OnInit {
 
-  // currentUser;
-  // logInStatus: Boolean;
+  currentUser;
+  logInStatus: Boolean;
 
 
   private updateEventUrl: string;
@@ -27,7 +27,7 @@ export class EventEditComponent implements OnInit {
 
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private eventService: EventService) {
- // this.logInStatus = false;
+ this.logInStatus = false;
     this.getEventUrl = 'http://localhost:8080/events/event/{id}/'
     this.updateEventUrl = 'http://localhost:8080/events/edit/event/{id}'
     this.event;
@@ -35,6 +35,8 @@ export class EventEditComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+    this.verifyLoggedIn();
 
     console.log(this.id);
 
@@ -72,12 +74,16 @@ export class EventEditComponent implements OnInit {
 
 
 
-
+getIdNum(str: string) {
+  let num: number = parseInt(str);
+  console.log(typeof num);
+  return num;
+}
 
 
 updateEvent(eventInformation: NgForm) {
   let updateEvent: EventDTO = {
-    // id: eventInformation.value.id,
+    id: this.getIdNum(localStorage.getItem('id')),
     eventHost: eventInformation.value.eventHost,
     contactEmail: eventInformation.value.contactEmail,
     eventTitle: eventInformation.value.eventTitle, 
@@ -99,20 +105,20 @@ updateEvent(eventInformation: NgForm) {
 }
 
 
-    // verifyLoggedIn() {
+    verifyLoggedIn() {
 
-  //   if (localStorage.getItem('userName') != null) {
-  //     this.currentUser = localStorage.getItem('userName');
-  //     this.logInStatus = true;
-  //   }
+    if (localStorage.getItem('userName') != null) {
+      this.currentUser = localStorage.getItem('userName');
+      this.logInStatus = true;
+    }
 
   
-  // }
+  }
 
-  // logOut() {
-  //   localStorage.clear();
-  //   console.log(localStorage.getItem('userName'))
-  //   this.logInStatus = false;
-  // }
+  logOut() {
+    // localStorage.clear();
+    console.log(localStorage.getItem('userName'))
+    this.logInStatus = false;
+  }
 
 }

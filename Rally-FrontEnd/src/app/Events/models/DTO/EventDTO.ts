@@ -1,5 +1,6 @@
 export class EventDTO {
-    // id: number;
+    id: number;
+    // id: string;
     eventHost: string;
     contactEmail: string;
     eventTitle: string;   
@@ -9,8 +10,8 @@ export class EventDTO {
     description: string;
     imageId: string;
 
-    constructor( eventHost: string, contactEmail: string, eventTitle: string, datetime: string, eventAddress: string, eventCategory: string, description: string, imageId: string) {
-        // this.id = id;
+    constructor( id: number, eventHost: string, contactEmail: string, eventTitle: string, datetime: string, eventAddress: string, eventCategory: string, description: string, imageId: string) {
+        this.id = id;
         this.eventHost = eventHost;
         this.contactEmail = contactEmail;
         this.eventTitle = eventTitle;
@@ -20,4 +21,7 @@ export class EventDTO {
         this.description = description;
         this.imageId = imageId;
     }
+
+
+
 }

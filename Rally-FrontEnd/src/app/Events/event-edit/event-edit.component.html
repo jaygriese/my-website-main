@@ -1,4 +1,4 @@
-<!-- <div *ngIf="logInStatus; else notLoggedIn">
+<div *ngIf="logInStatus; else notLoggedIn">
     
     <div style="text-align: right;  display: flex; justify-content:space-between;">
         <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
@@ -11,7 +11,7 @@
 
 <ng-template #notLoggedIn>
     <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
-</ng-template> -->
+</ng-template>
 
 
 

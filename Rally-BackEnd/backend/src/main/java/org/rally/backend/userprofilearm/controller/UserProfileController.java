@@ -11,7 +11,7 @@ import org.rally.backend.userprofilearm.model.*;
 import org.rally.backend.userprofilearm.model.dto.DirectMessageDTO;
 import org.rally.backend.userprofilearm.model.dto.UserInfoDTO;
 import org.rally.backend.userprofilearm.model.response.ResponseMessage;
-import org.rally.backend.userprofilearm.model.response.UserPostHistory;
+import org.rally.backend.userprofilearm.model.UserPostHistory;
 import org.rally.backend.userprofilearm.repository.*;
 import org.rally.backend.userprofilearm.utility.ImageUtility;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,33 +73,30 @@ public class UserProfileController {
         return this.userRepository.findAll();
     }
 
-    @GetMapping("/searchid/{id}")
-    public Optional<UserEntity> displayUser(@PathVariable int id) { return userRepository.findById(id); }
-
-    @GetMapping("/userinfo/{id}")
-    public Optional<UserInformation> displayUserInformation(@PathVariable int id) {
-        return userInformationRepository.findById((id));
-    }
-
-    @GetMapping("/searchUserName/{userName}")
-    public  UserEntity searchByUserName(@PathVariable String userName) {
-        return userRepository.findByUserName(userName);
-    }
-
     @GetMapping("/getViewUserBundleInformation/{userName}")
-    public UserBundle getViewUserInformation(@PathVariable String userName) {
+    public ResponseEntity<?> getViewUserInformation(@PathVariable String userName) {
+
+        Optional<UserEntity> areYouThere = Optional.ofNullable(userRepository.findByUserName(userName));
+        if (areYouThere.isEmpty()) {
+            return new ResponseEntity<>(new ResponseMessage("404"), HttpStatus.OK);
+        }
 
         /** call post history and favorites here when ready **/
         UserEntity targetUser = userRepository.findByUserName(userName);
         Optional<UserInformation> targetInformation = userInformationRepository.findByUserId(targetUser.getId());
         UserDmHistory targetDirectMessages = activeUserDirectMessageHistory(targetUser.getId());
 
-        return new UserBundle(targetUser, targetInformation, targetDirectMessages);
+        return new ResponseEntity<>(new UserBundle(targetUser, targetInformation, targetDirectMessages), HttpStatus.OK);
 
     }
 
     @GetMapping("/getMainUserBundleInformation/{userName}")
-    public UserBundle getMainUserBundle(@PathVariable String userName) {
+    public ResponseEntity<?> getMainUserBundle(@PathVariable String userName) {
+
+        Optional<UserEntity> areYouThere = Optional.ofNullable(userRepository.findByUserName(userName));
+        if (areYouThere.isEmpty()) {
+            return new ResponseEntity<>(new ResponseMessage("404"), HttpStatus.OK);
+        }
 
         UserEntity targetUser = userRepository.findByUserName(userName);
         Optional<UserInformation> targetInformation = userInformationRepository.findByUserId(targetUser.getId());
@@ -118,37 +115,7 @@ public class UserProfileController {
         targetUserPostHistory.setViewUserEventPost(targetEventPost);
         /** Services, Resources, RestaurantReview need username, userid, or UserEntity inside model **/
 
-        return new UserBundle(targetUser, targetInformation, targetDirectMessages, targetUserPostHistory);
-    }
-
-    @GetMapping("/getUserInformationByUserId/{id}")
-    public Optional<UserInformation> searchUserInfoRepositoryByUserId(@PathVariable int id) {
-
-        List<UserInformation> userInformationList = userInformationRepository.findAll();
-        Optional<UserInformation> userInformation = Optional.of(new UserInformation());
-        for (UserInformation info : userInformationList) {
-            if (info.getUserId() == id) {
-                userInformation = userInformationRepository.findById(info.getId());
-            }
-        }
-
-        return userInformation;
-    }
-
-    @GetMapping("/getActiveUserDirectMessageHistory/{id}")
-    public List<UserEntity> getUserListWithDmHistory(@PathVariable int id) {
-        UserDmHistory targetDirectMessages = activeUserDirectMessageHistory(id);
-        List<UserEntity> targetUsersWithDmHistory = targetDirectMessages.getUserEntities();
-
-        return targetUsersWithDmHistory;
-    }
-
-    @GetMapping("/getActiveUserDmList/{id}")
-    public List<DirectMessage> getDirectMessagesForUser(@PathVariable int id) {
-        UserDmHistory targetDirectMessages = activeUserDirectMessageHistory(id);
-        List<DirectMessage> allDirectMessageHistory = targetDirectMessages.getDirectMessageList();
-
-        return allDirectMessageHistory;
+        return new ResponseEntity<>(new UserBundle(targetUser, targetInformation, targetDirectMessages, targetUserPostHistory), HttpStatus.OK);
     }
 
     @GetMapping("/getHiddenPostList/{userId}")
@@ -163,7 +130,11 @@ public class UserProfileController {
     }
 
     @GetMapping("/getUpdatedPostHistoryViewUser/{userId}")
-    public List<ForumPosts> getUpdatedPostHistoryViewUser(@PathVariable int userId) {
+    public ResponseEntity<?> getUpdatedPostHistoryViewUser(@PathVariable int userId) {
+
+        if (!userRepository.existsById(userId)) {
+            return new ResponseEntity<>(new ResponseMessage("404"), HttpStatus.OK);
+        }
 
         List<ForumPosts> currentPostSettings = new ArrayList<>();
         List<HiddenPost> hiddenPostList = new ArrayList<>();
@@ -190,7 +161,7 @@ public class UserProfileController {
             }
         }
 
-        return currentPostSettings;
+        return new ResponseEntity<>(currentPostSettings, HttpStatus.OK);
     }
 
     @GetMapping(path = {"/userProfileImage/{userId}"})

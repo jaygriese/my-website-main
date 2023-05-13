@@ -1,4 +1,8 @@
+<div *ngIf="userReal; else fourOFour"></div>
 
+<ng-template #fourOFour>
+<h1 style="color: crimson;">404 USER NOT FOUND</h1>
+</ng-template>
 <div *ngIf="logInStatus"> 
     <div style="text-align: right;">
         <button><a routerLink="/search" routerLinkActive="active">Search</a></button>

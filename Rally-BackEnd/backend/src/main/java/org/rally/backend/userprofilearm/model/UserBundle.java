@@ -1,8 +1,5 @@
 package org.rally.backend.userprofilearm.model;
 
-import org.rally.backend.userprofilearm.model.response.UserPostHistory;
-
-import java.util.List;
 import java.util.Optional;
 
 public class UserBundle {

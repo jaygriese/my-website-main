@@ -12,7 +12,7 @@
             <br><br>
             <input type="submit" value="Submit">
             <div *ngIf="incorrectPassword">
-            <p style="color: crimson;">{{ this.message }}</p>
+                <p style="color: crimson;">{{ this.message }}</p>
             </div>
             <div >
             </div>
@@ -23,6 +23,7 @@
     <div class="form-group"> 
         <h2>Register</h2>
         <form #userDetails="ngForm" (ngSubmit)="completeRegisteration(userDetails)">
+            <div *ngIf="errorInFormSubmit; else errors"></div>
             <br><br>
             <label>First Name: <input type="text" name="firstName" ngModel></label>
             <br><br>
@@ -32,13 +33,15 @@
             <br><br>
             <label>City: <input type="text" name="city" ngModel></label>                
             <br><br>
-            <label>State: <input type="text" name="state" ngModel></label>                
+            <label>State: <input type="text" name="state" ngModel></label>
             <br><br>
             <input type="submit" value="Submit">
-            <button type="button" (click)="passwordsMatch = true">Go back</button>
-            <div *ngIf="incorrectPassword">
-            <p style="color: crimson;">{{ this.message }}</p>
-            </div>
+            <button type="button" (click)="clearForms()">Go back</button>
+            <ng-template #errors>
+                <div *ngFor="let response of userInformationCheck">
+                    <p style="color: crimson;">{{ response }}</p>
+                </div>
+            </ng-template>
         </form>
     </div>
     </ng-template>

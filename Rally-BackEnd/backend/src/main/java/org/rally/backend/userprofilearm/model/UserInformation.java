@@ -2,6 +2,7 @@ package org.rally.backend.userprofilearm.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class UserInformation {
@@ -13,9 +14,11 @@ public class UserInformation {
     private int userId;
 
     @NotNull
+    @Size(min = 3, max = 20)
     private String firstName;
 
     @NotNull
+    @Size(min = 3, max = 20)
     private String lastName;
 
     @NotNull

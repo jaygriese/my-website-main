@@ -6,6 +6,7 @@ import org.rally.backend.userprofilearm.model.dto.UserBundleDTO;
 import org.rally.backend.userprofilearm.exception.AuthenticationFailure;
 import org.rally.backend.userprofilearm.model.UserEntity;
 import org.rally.backend.userprofilearm.model.dto.LoginDTO;
+import org.rally.backend.userprofilearm.model.response.ResponseMessage;
 import org.rally.backend.userprofilearm.repository.RoleRepository;
 import org.rally.backend.userprofilearm.repository.UserInformationRepository;
 import org.rally.backend.userprofilearm.repository.UserRepository;
@@ -38,16 +39,18 @@ public class AuthenticationController {
         UserEntity existingUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
 
         if (existingUser != null) {
-            AuthenticationFailure authenticationFailure = new AuthenticationFailure("That username is taken, please select a different user name.");
+            ResponseMessage authenticationFailure = new ResponseMessage("That username is taken, please select a different user name.");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
         String password = userBundleDTO.getRegisterDTO().getPassword();
         String verifyPassword = userBundleDTO.getRegisterDTO().getVerifyPassword();
         if (!password.equals(verifyPassword)) {
-            AuthenticationFailure authenticationFailure = new AuthenticationFailure("Passwords do not match");
+            ResponseMessage authenticationFailure = new ResponseMessage("Passwords do not match");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
+
+
 
         UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()), userBundleDTO.getRegisterDTO().getPassword());
         userRepository.save(registerNewUser);

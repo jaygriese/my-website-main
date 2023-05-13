@@ -8,7 +8,6 @@ import { NgForm } from '@angular/forms';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { DirectMessage } from '../../models/Directmessage';
 import { HttpClient } from '@angular/common/http';
-import { MainUserBundle } from '../../models/MainUserBundle';
 @Component({
   selector: 'app-view-user-profile',
   templateUrl: './view-user-profile.component.html',
@@ -29,10 +28,12 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
   dbImage: any;
   /* Post History */
   forumPost: any = [];
+  
   /* HTML booleans */
   noError: boolean = true;
   showDmHistory = false;
   dmCharacters = true;
+  userReal = true;
 
   @ViewChild('dmBottomOfScroll') private myScrollContainer: ElementRef;
 
@@ -54,10 +55,15 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
     this.viewUser.redirectWhenViewingSelf(this.viewUserName);
 
     /* This method gets a bundle of information I want to display on the view user page */
-    this.viewUser.getViewUserBundleByUserName(this.viewUserName).subscribe((data: MainUserBundle) => {
+    this.viewUser.getViewUserBundleByUserName(this.viewUserName).subscribe((data: any) => {
+      if (data.message) {
+        console.log(data);
+        this.userReal = false;
+        this.router.navigate(['/user/404']);
+        return;
+      }
       this.userEntityInformation = data;
       this.dmList = data.viewMainUserDmHistory.directMessageList;
-      console.log(data)
       this.displayConversation(this.userEntityInformation.viewUser);
       this.scrollToBottom;
     })
@@ -71,7 +77,13 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
       }
     })
     /* Get user post history with hiddenpost removed */
-    this.http.get('http://localhost:8080/user/getUpdatedPostHistoryViewUser/' + this.viewUserId).subscribe((response) => {
+    this.http.get('http://localhost:8080/user/getUpdatedPostHistoryViewUser/' + this.viewUserId).subscribe((response: any) => {
+      if (response.message) {
+        console.log(response);
+        this.userReal = false;
+        this.router.navigate(['/user/404']);
+        return
+      }
       this.forumPost = response;
     })
   

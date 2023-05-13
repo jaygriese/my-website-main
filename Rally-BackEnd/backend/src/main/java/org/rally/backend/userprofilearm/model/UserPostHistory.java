@@ -1,4 +1,4 @@
-package org.rally.backend.userprofilearm.model.response;
+package org.rally.backend.userprofilearm.model;
 
 import org.rally.backend.eventsarm.models.Event;
 import org.rally.backend.forumarm.models.ForumPosts;

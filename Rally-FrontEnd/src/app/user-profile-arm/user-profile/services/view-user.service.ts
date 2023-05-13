@@ -10,62 +10,35 @@ import { Router } from '@angular/router';
 export class ViewUserService {
 
   private getUserListUrl = 'http://localhost:8080/user/search';
-  private searchUserByIdUrl = 'http://localhost:8080/user/searchid/';
-  private searchUserByUserNameUrl = 'http://localhost:8080/user/searchUserName/';
-  private searchUserInformationByIdUrl = 'http://localhost:8080/user/userinfo/';
-  private searchUserInformationByUserIdUrl = 'http://localhost:8080/user/getUserInformationByUserId/';
   private getUserBundleByUserName = 'http://localhost:8080/user/getViewUserBundleInformation/';
-  private getUserIdCountRegister = 'http://localhost:8080/api/userIdCount';
-  private getDirectMessagesWithUserId = 'http://localhost:8080/user/getActiveUserDirectMessageHistory/';
-  private getDirectMessageHistory = 'http://localhost:8080/user/getActiveUserDmList/';
   private getMainUserBundle = 'http://localhost:8080/user/getMainUserBundleInformation/';
 
   private postDirectMessageToViewedUser = 'http://localhost:8080/user/sendDirectMessage';
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getDmHistoryDirectMessages(mainUserid: string) {
-    return this.http.get(`${this.getDirectMessageHistory}` + mainUserid)
-  }
-
-  getDmHistoryUsers(id: string) {
-    return this.http.get(`${this.getDirectMessagesWithUserId}` + id);
-  }
-
+  /* Get Request */
+  /* Get Request */
+  /* Get Request */
+  
   getUserList(): Observable<UserEntity[]>{
     return this.http.get<UserEntity[]>(`${this.getUserListUrl}`);
-  }
-
-  getUserById(id: string) {
-    return this.http.get(`${this.searchUserByIdUrl}` + id);
-  }
-
-  getUserByUserName(userName: string) {
-    return this.http.get(`${this.searchUserByUserNameUrl}` + userName);
-  }
-
-  getClassUserInformation(id: string) {
-    return this.http.get(`${this.searchUserInformationByIdUrl}` + id);
-  }
-
-  getUserInformationByUserId(id: string) {
-    return this.http.get(`${this.searchUserInformationByUserIdUrl}` + id);
   }
 
   getViewUserBundleByUserName(username: string) {
     return this.http.get(`${this.getUserBundleByUserName}` + username);
   }
 
-  getCurrentUserIdCount() {
-    return this.http.get(`${this.getUserIdCountRegister}`);
-  }
-
-  getDirectMessagesFromUserId(id: string) {
-    return this.http.get(`${this.getDirectMessagesWithUserId}` + id);
-  }
-
   getMainUserBundleByUserName(userName: string) {
     return this.http.get(`${this.getMainUserBundle}` + userName);
+  }
+
+  /* Post Methods */
+  /* Post Methods */
+  /* Post Methods */
+
+  postDirectMessage(directMessage) {
+    return this.http.post(`${this.postDirectMessageToViewedUser}`, directMessage);
   }
 
   /* Service methods */
@@ -79,12 +52,53 @@ export class ViewUserService {
     }
   }
 
-  /* Post Methods */
-  /* Post Methods */
-  /* Post Methods */
+  userInformationCheck(userDTO) {
+    let message1: object;
+    let message2: object;
+    let message3: object;
+    let message4: object;
+    let message5: object;
+    let response: any[] = [];
 
-  postDirectMessage(directMessage) {
-    return this.http.post(`${this.postDirectMessageToViewedUser}`, directMessage);
+    if (userDTO.firstName === "" || userDTO.firstName.length < 3 || userDTO.firstName.length > 20) {
+      message1 = {
+        message: 1,
+        contents: "UserName must be between 3-20 characters"
+      };
+      response.push(message1);
+    }
+    if (userDTO.lastName === "" || userDTO.lastName.length < 3 || userDTO.lastName.length > 20) {
+      message2 = {
+        message: 2,
+        contents: "Last Name must be between 3-20 characters"
+      };
+      response.push(message2);
+    }
+    if (userDTO.neighborhood === "" || userDTO.neighborhood.length < 3 || userDTO.neighborhood.length > 20) {
+      message3 = {
+        message: 3,
+        contents: "Neighborhood must be between 3-20 characters (Drop Down Menu Pending...)"
+      };
+      response.push(message3);
+    }
+    if (userDTO.city === "" || userDTO.city.length < 3 || userDTO.city.length > 20) {
+      message4 = {
+        message: 4,
+        contents: "City must be between 3-20 characters (Drop Down Menu Pending...)"
+      };
+      response.push(message4);
+    }
+    if (userDTO.state === "" || userDTO.state.length < 2 || userDTO.state.length > 20) {
+      message5 = {
+        message: 5,
+        contents: "State must be between 2-20 characters (Drop Down Menu Pending...)"
+      };
+      response.push(message5);
+    }
+
+    return response;
   }
+
+
 
 }

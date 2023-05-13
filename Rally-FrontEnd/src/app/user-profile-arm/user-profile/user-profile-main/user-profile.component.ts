@@ -56,7 +56,6 @@ export class UserProfileComponent implements OnInit {
   uploadedImage: File;
   dbImage: any;
   postResponse: any;
-  successResponse: string;
   image: any;
 
   constructor(private http: HttpClient, 
@@ -116,6 +115,7 @@ export class UserProfileComponent implements OnInit {
   
   /* Learning about LifeCycle Hooks in Angular / prevents error in the console when viewing 
     direct messages while using the [scrollTop]="scrollMe.scrollHeight" */
+  /* Might be causing memory leak, further investigation required */
   ngAfterContentChecked() {
     this.scrollMe = this.scrollMe;
     this.cdref.detectChanges();
@@ -146,8 +146,7 @@ export class UserProfileComponent implements OnInit {
     for (let event of events) {
       bigJoin.push(event);
     }
-    this.allPost = bigJoin;
-    console.log(this.allPost);
+    this.allPost = bigJoin.sort();
   }
 
 
@@ -173,13 +172,13 @@ export class UserProfileComponent implements OnInit {
     const imageFormData = new FormData();
     imageFormData.append('image', this.uploadedImage, this.userEntity.id);
 
-    this.http.post('http://localhost:8080/user/upload/image', imageFormData, {observe: 'response'}).subscribe((response) => {
+    this.http.post('http://localhost:8080/user/upload/image', imageFormData, {observe: 'response'}).subscribe((response: any) => {
       console.log(response);
       if (response.status === 200) {
         this.postResponse = response;
-        console.log(this.postResponse)
       } else { 
-        this.successResponse = 'Image not uploaded due to an error!';
+        console.log(response)
+        return;
       }
       location.reload();
     })

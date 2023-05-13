@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserInfoDTO } from '../../models/dto/UserInfoDTO';
 import { UserBundleDTO } from '../../models/dto/UserBundleDTO';
+import { ViewUserService } from '../../user-profile/services/view-user.service';
 
 @Component({
   selector: 'app-register-user',
@@ -17,13 +18,23 @@ export class RegisterUserComponent implements OnInit {
   incorrectPassword: boolean;
   registerUser: RegisterDTO;
   message: string;
+  userInformationCheck: any[] = [];
+  errorInFormSubmit: boolean = true;
 
   constructor(private http: HttpClient, 
-              private router: Router) {
+              private router: Router, 
+              private registerService: ViewUserService) {
    }
 
   ngOnInit(): void {
   } 
+
+  clearForms() {
+    this.userInformationCheck = [];
+    this.registerUser = null;
+    this.passwordsMatch = true;
+
+  }
 
   registerNewUser(userInformation: NgForm) {
     this.incorrectPassword = false;
@@ -62,23 +73,32 @@ export class RegisterUserComponent implements OnInit {
       state: userDetails.value.state
     }
 
-    let userBundle: UserBundleDTO = {
-      registerDTO: this.registerUser,
-      userInfoDTO: userInfo
+    let response: any[] = this.registerService.userInformationCheck(userInfo);
+    if (response.length === 0) {
+      
+      let userBundle: UserBundleDTO = {
+        registerDTO: this.registerUser,
+        userInfoDTO: userInfo
+      }
+  
+      this.http.post('http://localhost:8080/api/register', userBundle).subscribe((response: any) => {
+          if (response.failed) {
+            this.message = response.failed
+            return;
+          }  else {
+            localStorage.setItem('userName', this.registerUser.userName)
+            localStorage.setItem('id', response.id)
+            this.router.navigate(["/myProfile"])
+            }
+        });
+
+    } else {
+    for (let i = 0; i < response.length; i++) {
+      this.userInformationCheck.push(response[i].contents);
+     }
+     this.errorInFormSubmit = false;
+     return;
     }
-
-    this.http.post('http://localhost:8080/api/register', userBundle).subscribe((response: any) => {
-        if (response.failed) {
-          this.message = response.failed
-          this.incorrectPassword = true;
-          return;
-        }  else {
-          localStorage.setItem('userName', this.registerUser.userName)
-          localStorage.setItem('id', response.id)
-          this.router.navigate(["/myProfile"])
-          }
-      });
-
   }
 
 }

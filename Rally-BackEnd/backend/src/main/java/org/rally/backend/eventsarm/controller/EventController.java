@@ -34,10 +34,11 @@ public class EventController {
         return new ResponseEntity<>(eventRepository.findById(id), HttpStatus.OK);
     }
 
-//    @PostMapping("/event/{id}")
-//    public ResponseEntity<?>deleteEvent(@PathVariable int id) {
-//        return new ResponseEntity<>(eventRepository.deleteById(id), HttpStatus.OK);
-//    }
+    @PostMapping("/event")
+    public void deleteEvent(@RequestBody int id) {
+        eventRepository.deleteById(id);
+
+    }
 
 
     @PostMapping("/create")
@@ -78,7 +79,7 @@ public class EventController {
 //
 //    }
 
-    @PostMapping("/edit/event/{id}")
+    @PostMapping("/edit/event")
     public ResponseEntity<?> editEventForm(@RequestBody EventDTO eventDTO) {
 
         Optional<Event> result = eventRepository.findById(eventDTO.getId());
@@ -89,6 +90,7 @@ public class EventController {
         updatedEvent.setDatetime(eventDTO.getDatetime());
         updatedEvent.setEventAddress(eventDTO.getEventAddress());
         updatedEvent.setEventCategory(eventDTO.getEventCategory());
+        updatedEvent.setDescription(eventDTO.getDescription());
         updatedEvent.setImageId(eventDTO.getImageId());
         eventRepository.save(updatedEvent);
 

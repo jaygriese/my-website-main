@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from '../models/event';
 import { EventService } from '../services/event.service';
@@ -22,7 +22,7 @@ export class EventComponent implements OnInit {
   id: string;
   eventDetails: Event;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private eventService: EventService) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private eventService: EventService) {
     // this.logInStatus = false;
     // this.eventUrl = 'http://localhost:8080/events/event/{id}/'
     this.eventDetails;
@@ -55,6 +55,7 @@ deleteEvent() {
   this.eventService.deleteEvent(this.id).subscribe(data => {
     console.log(data);
   })
+  this.router.navigate(["/events"]);
 }
 
   // verifyLoggedIn() {

@@ -26,7 +26,7 @@ export class EventService {
   }
 
   deleteEvent(id: string) {
-    return this.http.delete(`${this.getEventByIdUrl}` + id, { responseType: 'text'});
+    return this.http.post('http://localhost:8080/events/event', +id);
     //is this right?
   }
 

@@ -40,6 +40,7 @@
             <!-- <form #eventInformation="ngForm" (ngSubmit)="onSubmit(buttonType)"> -->
                 <!-- <form #eventInformation="ngForm" (ngSubmit)="onSubmit()"> -->
             <div style=float:left; id="form_1">
+                <input type="hidden" id="id" name="eventId" value="event.id" ngModel>
                 <label>host</label><br>
                 <input type="text" id="host" required [(ngModel)]="event.eventHost" name="eventHost" ngModel>
                 <br>

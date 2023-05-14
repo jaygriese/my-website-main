@@ -23,13 +23,14 @@ export class EventEditComponent implements OnInit {
   id: string;
   event: Event;
   // buttonType: string;
+  eventId: number;
 
 
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private eventService: EventService) {
  this.logInStatus = false;
-    this.getEventUrl = 'http://localhost:8080/events/event/{id}/'
-    this.updateEventUrl = 'http://localhost:8080/events/edit/event/{id}'
+    this.getEventUrl = 'http://localhost:8080/events/event'
+    this.updateEventUrl = 'http://localhost:8080/events/edit/event'
     this.event;
     this.id = this.route.snapshot.params['id'];
    }
@@ -43,7 +44,7 @@ export class EventEditComponent implements OnInit {
     this.eventService.getEvent(this.id).subscribe((response: Event) => {
       this.event = response;
       console.log(response);
-    
+    this.eventId = +this.event.id;
     })
 
 
@@ -82,7 +83,10 @@ export class EventEditComponent implements OnInit {
 
 
 updateEvent(eventInformation: NgForm) {
+
+
   let updateEvent: EventDTO = {
+    id: this.eventId,
 
     // id: this.getIdNum(localStorage.getItem('id')),
     eventHost: eventInformation.value.eventHost,

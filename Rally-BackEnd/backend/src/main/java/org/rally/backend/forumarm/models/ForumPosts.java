@@ -1,8 +1,6 @@
 package org.rally.backend.forumarm.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.rally.backend.userprofilearm.model.UserEntity;
 
@@ -15,10 +13,10 @@ public class ForumPosts extends AbstractEntity{
     private UserEntity userEntity;
     @OneToMany(mappedBy = "forumPosts")
     private final List<Replies> replies = new ArrayList<>();
+    @OneToOne
+    private ForumPostLike forumPostLike;
 
-    @NotNull
     private String title;
-
     private String description;
     private String category;
     public ForumPosts(String title, String description, String category) {
@@ -27,6 +25,14 @@ public class ForumPosts extends AbstractEntity{
         this.category = category;
     }
     public ForumPosts(){}
+
+    public void setForumPostLike(ForumPostLike forumPostLike) {
+        this.forumPostLike = forumPostLike;
+    }
+
+    public ForumPostLike getForumPostLike() {
+        return forumPostLike;
+    }
 
     public String getCategory() {
         return category;

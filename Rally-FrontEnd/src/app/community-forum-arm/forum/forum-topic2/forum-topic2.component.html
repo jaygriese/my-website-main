@@ -47,7 +47,10 @@
         <div class="container-fluid" style="text-align: left;" *ngFor="let test of newArray">
             <div class="black-background">
                 <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                    <p>Posted by {{test.userEntity.userName}}</p>
+                    <p>Posted by {{test.userEntity.userName}}</p> <p>{{test.forumPostLike.likes}} likes</p>
+            </div>
+            <div *ngIf="logInStatus">
+                <button (click)="LikePost(test.id)"> Like Post?</button>
             </div>
         </div>
     </div>
@@ -56,9 +59,12 @@
         <div style="text-align: left;" *ngFor="let test of newArray">
             <div class="white-theme">
                 <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                    <p>Posted by {{test.userEntity.userName}}</p>
+                    <p>Posted by {{test.userEntity.userName}}</p> <p>{{test.forumPostLike.likes}} likes</p>
             </div>
             <br><br>
+            <div *ngIf="logInStatus">
+                <button (click)="LikePost(test.id)"> Like Post</button>
+            </div>
         </div>
     </ng-template>
     <!-- light theme posts -->

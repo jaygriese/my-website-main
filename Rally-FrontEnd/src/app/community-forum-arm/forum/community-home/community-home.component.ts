@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
 import { map } from 'rxjs/operators';
 import { ForumPost } from '../../models/ForumPost';
+import { ReplyDTO } from '../../models/ReplyDTO';
 @Component({
   selector: 'app-community-home',
   templateUrl: './community-home.component.html',
@@ -18,6 +19,7 @@ export class CommunityHomeComponent implements OnInit {
   testArray;
   newArray;
   createPostBoolean: boolean;
+  userLiked: boolean;
   constructor(private http: HttpClient, private router: Router, private themeservice: ThemeserviceService) {
     this.logInStatus = false;
     this.createPostBoolean = false;
@@ -54,7 +56,9 @@ export class CommunityHomeComponent implements OnInit {
   }
   getPosts(){
     this.themeservice.getForumTopicPosts(this.forumTopic).subscribe((posts) =>{
-      this.newArray = this.themeservice.sortPosts(posts)})
+      this.newArray = this.themeservice.sortPosts(posts)
+      console.log(this.newArray)   
+    })
   }
   Light(){
       this.themeservice.switchToLightTheme();
@@ -72,5 +76,16 @@ export class CommunityHomeComponent implements OnInit {
   Search(searchInformation: NgForm){
     localStorage.setItem('searchTerm', searchInformation.value.description)
     this.router.navigate(["/forum/search"]);
+  }
+  LikePost(postId: number){
+    let likeDetails : ReplyDTO = {
+      username: localStorage.getItem('userName'),
+      description: "",
+      id: postId
+    }
+    this.http.post('http://localhost:8080/LikePost', likeDetails).subscribe((res) => {
+      console.log(res)
+    });
+    window.location.reload();
   }
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
 import { map } from 'rxjs/operators';
 import { ForumPost } from '../../models/ForumPost';
+import { ReplyDTO } from '../../models/ReplyDTO';
 @Component({
   selector: 'app-forum-topic1',
   templateUrl: './forum-topic1.component.html',
@@ -72,5 +73,16 @@ export class ForumTopic1Component implements OnInit {
   Search(searchInformation: NgForm){
     localStorage.setItem('searchTerm', searchInformation.value.description)
     this.router.navigate(["/forum/search"]);
+  }
+  LikePost(postId: number){
+    let likeDetails : ReplyDTO = {
+      username: localStorage.getItem('userName'),
+      description: "",
+      id: postId
+    }
+    this.http.post('http://localhost:8080/LikePost', likeDetails).subscribe((res) => {
+      console.log(res)
+    });
+    window.location.reload();
   }
 }

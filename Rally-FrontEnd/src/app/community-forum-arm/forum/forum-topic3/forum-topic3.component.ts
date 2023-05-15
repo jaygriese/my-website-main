@@ -7,6 +7,7 @@ import { ForumPostDTO } from '../../models/ForumPostDTO';
 import { UserEntity } from 'src/app/user-profile-arm/models/UserEntity';
 import { ForumPost } from '../../models/ForumPost';
 import { map } from 'rxjs/operators';
+import { ReplyDTO } from '../../models/ReplyDTO';
 
 @Component({
   selector: 'app-forum-topic3',
@@ -75,5 +76,16 @@ export class ForumTopic3Component implements OnInit {
   Search(searchInformation: NgForm){
     localStorage.setItem('searchTerm', searchInformation.value.description)
     this.router.navigate(["/forum/search"]);
+  }
+  LikePost(postId: number){
+    let likeDetails : ReplyDTO = {
+      username: localStorage.getItem('userName'),
+      description: "",
+      id: postId
+    }
+    this.http.post('http://localhost:8080/LikePost', likeDetails).subscribe((res) => {
+      console.log(res)
+    });
+    window.location.reload();
   }
 }

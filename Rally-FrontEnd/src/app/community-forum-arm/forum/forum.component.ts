@@ -52,4 +52,5 @@ Search(searchInformation: NgForm){
   localStorage.setItem('searchTerm', searchInformation.value.description)
   this.router.navigate(["/forum/search"]);
 }
+
 }

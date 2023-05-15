@@ -4,6 +4,7 @@ import org.rally.backend.forumarm.models.*;
 import org.rally.backend.forumarm.models.dto.ForumPostDTO;
 import org.rally.backend.forumarm.models.dto.ReplyDTO;
 import org.rally.backend.forumarm.repository.*;
+import org.rally.backend.userprofilearm.model.UserEntity;
 import org.rally.backend.userprofilearm.model.response.AuthenticationSuccess;
 import org.rally.backend.userprofilearm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class ForumController {
     public ResponseEntity<?>createForumPost(@RequestBody ForumPostDTO forumPostDTO){
         ForumPosts forumPost = new ForumPosts(forumPostDTO.getTitle(), forumPostDTO.getDescription(), forumPostDTO.getCategory());
         forumPost.setUserEntity(userRepository.findByUserName(forumPostDTO.getUsername()));
+        forumPost.setForumPostLike(new ForumPostLike());
         forumPostRepository.save(forumPost);
         AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
         return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
@@ -92,5 +94,27 @@ public class ForumController {
         forumPostRepository.deleteById(id);
         AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
         return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
+    }
+    @PostMapping("/LikePost")
+    public ResponseEntity<?> likePost(@RequestBody ReplyDTO replyDTO){
+        boolean changed = false;
+        Optional <ForumPosts> result = forumPostRepository.findById(replyDTO.getId());
+        ForumPosts post = result.get();
+        UserEntity user = userRepository.findByUserName(replyDTO.getUsername());
+        for( UserEntity aUser: post.getForumPostLike().getUsers()){
+            if (user.getUserName().toLowerCase().equals(aUser.getUserName().toLowerCase())){
+                post.getForumPostLike().subtractLike();
+                post.getForumPostLike().removeUser(aUser);
+                changed = true;
+                break;
+            }
+        }
+        if(!changed){
+            post.getForumPostLike().addLike();
+            post.getForumPostLike().addUser(user);
+        }
+        forumPostRepository.save(post);
+        AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
+        return new ResponseEntity<>(post, HttpStatus.OK);
     }
 }

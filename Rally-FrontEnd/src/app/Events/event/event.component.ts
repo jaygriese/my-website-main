@@ -50,35 +50,35 @@ export class EventComponent implements OnInit {
 
   }
 
-  openDelete() {
-    const modelDiv = document.getElementById('deleteModal');
-    if(modelDiv!=null) {
-      modelDiv.style.display = 'block';
-    }
+//   openDelete() {
+//     const modelDiv = document.getElementById('deleteModal');
+//     if(modelDiv!=null) {
+//       modelDiv.style.display = 'block';
+//     }
 
-  }
+//   }
 
-  closeDelete() {
-    const modelDiv = document.getElementById('deleteModal');
-    if(modelDiv!=null) {
-      modelDiv.style.display = 'none';
-    }
+//   closeDelete() {
+//     const modelDiv = document.getElementById('deleteModal');
+//     if(modelDiv!=null) {
+//       modelDiv.style.display = 'none';
+//     }
 
-  }
+//   }
 
-noDelete() {
-  const deleteDiv = document.getElementById('noDelete');
-  if(deleteDiv!=null) {
-    deleteDiv.style.display = 'none';
-  }
-}
+// noDelete() {
+//   const deleteDiv = document.getElementById('noDelete');
+//   if(deleteDiv!=null) {
+//     deleteDiv.style.display = 'none';
+//   }
+// }
 
-yesDelete() {
-  const yesDeleteDiv = document.getElementById('yesDelete');
-  if(yesDeleteDiv!=null) {
-    this.deleteEvent();
-  }
-}
+// yesDelete() {
+//   const yesDeleteDiv = document.getElementById('yesDelete');
+//   if(yesDeleteDiv!=null) {
+//     this.deleteEvent();
+//   }
+// }
 
 
 deleteEvent() {

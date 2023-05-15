@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/resources")
@@ -22,7 +21,7 @@ public class ResourceController {
 
         Resource newResource = new Resource(resourceDTO.getResourceName(), resourceDTO.getCategory(), resourceDTO.getAddress(), resourceDTO.getWebsite(), resourceDTO.getTelephoneNumber(), resourceDTO.getEmailAddress(), resourceDTO.getDescription());
         resourceRepository.save(newResource);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(newResource, HttpStatus.OK);
     }
 
 }

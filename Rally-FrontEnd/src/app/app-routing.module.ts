@@ -6,6 +6,8 @@ import { EventViewComponent } from './Events/event-view/event-view.component';
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
 import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
 import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
+import { ResourcesListComponent } from './resources-arm/resources-list/resources-list.component';
+import { ResourcesSearchComponent } from './resources-arm/resources-search/resources-search.component';
 import { EventComponent } from './Events/event/event.component';
 import { EventCreateComponent } from './Events/event-create/event-create.component';
 import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
@@ -30,6 +32,8 @@ const routes: Routes = [
   {path: 'communityHomeForum', component: CommunityHomeComponent},
   {path: 'resources', component: ResourcesHomeComponent},
   {path: 'resourcesAdd', component: ResourcesAddComponent},
+  {path: 'resourcesList', component: ResourcesListComponent},
+  {path: 'resourcesSearch', component: ResourcesSearchComponent},
   {path: 'event', component: EventComponent },
   {path: 'create', component: EventCreateComponent},
   {path: 'services', component: ServicesHomeComponent},

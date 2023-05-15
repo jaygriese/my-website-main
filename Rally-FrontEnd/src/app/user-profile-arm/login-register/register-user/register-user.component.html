@@ -1,19 +1,18 @@
 <div style="text-align:center" class="container">
 
-    <div *ngIf="passwordsMatch; else nextForm" class="form-group">
+    <div *ngIf="nextFormInfo; else nextForm" class="form-group">
         <h2>Register</h2>
+        <p>UserName and Passwords must be between 3 to 20 characters</p>
         <form #userInformation="ngForm" (ngSubmit)="registerNewUser(userInformation)">
             <br>
             <label>Enter a user name: <input type="text" name="userName" ngModel></label>        
-            <br><br>
+            <div *ngIf="noUserNameError; else userNameError"><br><br></div>
             <label>Enter your password: <input type="password" name="password" ngModel></label>
-            <br><br>
+            <div *ngIf="passwordForm; else incorrectPassword"><br><br></div>
             <label>Please re-enter your password: <input type="password" name="verify" ngModel></label>
-            <br><br>
+            <div *ngIf="passwordMatchIssue; else matchIssue"></div><br><br>
             <input type="submit" value="Submit">
-            <div *ngIf="incorrectPassword">
-                <p style="color: crimson;">{{ this.message }}</p>
-            </div>
+
             <div >
             </div>
         </form>       
@@ -22,32 +21,71 @@
     <ng-template #nextForm>
     <div class="form-group"> 
         <h2>Register</h2>
+        <p>Names must be between 3 to 20 characters</p>
         <form #userDetails="ngForm" (ngSubmit)="completeRegisteration(userDetails)">
-            <div *ngIf="errorInFormSubmit; else errors"></div>
-            <br><br>
+            <br>
             <label>First Name: <input type="text" name="firstName" ngModel></label>
-            <br><br>
+            <div *ngIf="noFirstNameError; else firstNameError"><br><br></div>
             <label>Last Name: <input type="text" name="lastName" ngModel></label>                
+            <div *ngIf="noLastNameError; else lastNameError"><br><br></div>
+            <br>
+            <h6>Drop down options required</h6>
+            <label for="category-drop">Neighborhood: </label>
+            <select id="category-drop" name="neighborhood" ngModel>
+                <option value="" disabled selected>Select your neighborhood</option>
+                <option value="Compton Heights">Compton Heights</option>
+                <option value="Central West End">Central West End</option>
+                <option value="The Hill">The Hill</option>
+                <option value="Soulard">Soulard</option>
+                <option value="Bevo">Bevo</option>
+                <option value="Gravois Park">Gravois Park</option>
+                <option value="Tower Grove South">Tower Grove South</option>
+                <option value="Downtown">Down Town</option>
+                <option value="Midtown">Midtown</option>
+            </select>
             <br><br>
-            <label>Neighborhood: <input type="text" name="neighborhood" ngModel></label>
+            <label for="category-drop">City:</label>
+            <select id="category-drop" name="city" ngModel>
+                <option value="" disabled selected>Select your city</option>
+                <option value="Saint Louis">Saint Louis</option>
+                <option value="Jennings">Jennings</option>
+                <option value="Clayton">Clayton</option>
+                <option value="University City">University City</option>
+                <option value="Affton">Affton</option>
+                <option value="Ferguson">Ferguson</option>
+            </select>             
             <br><br>
-            <label>City: <input type="text" name="city" ngModel></label>                
+            <label for="category-drop">State: </label>
+            <select id="category-drop" name="state" ngModel>
+                <option value="" disabled selected>Select your state</option>
+                <option value="Missouri">Missouri</option>
+                <option value="Illinois">Illinois</option>
+            </select>
             <br><br>
-            <label>State: <input type="text" name="state" ngModel></label>
-            <br><br>
+            <div *ngIf="createNewUser; else userExists"><br><br></div> 
             <input type="submit" value="Submit">
             <button type="button" (click)="clearForms()">Go back</button>
-            <ng-template #errors>
-                <div *ngFor="let response of userInformationCheck">
-                    <p style="color: crimson;">{{ response }}</p>
-                </div>
-            </ng-template>
         </form>
     </div>
     </ng-template>
-
         <br><br>
         <p>Already have an account? <a routerLink="/login" routerLinkActive="active">Login</a></p>
-   
-     
 </div>
+<ng-template #userNameError>
+    <p style="color: crimson">{{ errorUserName }}</p>
+</ng-template>
+<ng-template #incorrectPassword>
+    <p style="color: crimson">{{ errorPassword }}</p>
+</ng-template>
+<ng-template #matchIssue>
+    <p style="color: crimson;">{{ passWordsDontMatch }}</p>
+</ng-template>
+<ng-template #firstNameError>
+    <p style="color: crimson;">{{ firstNameMessage }}</p>
+</ng-template>
+<ng-template #lastNameError>
+    <p style="color: crimson;">{{ lastNameMessage }}</p>
+</ng-template>
+<ng-template #userExists>
+    <p style="color: crimson;"> {{ postResponseMessage }}</p>
+</ng-template>

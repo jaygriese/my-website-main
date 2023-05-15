@@ -22,7 +22,11 @@ export class LoginUserComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (localStorage.getItem("userName") !== null) {
+      this.router.navigate(["/myProfile"])
+    }
+  }
 
   login(userInformation: NgForm ) {
       

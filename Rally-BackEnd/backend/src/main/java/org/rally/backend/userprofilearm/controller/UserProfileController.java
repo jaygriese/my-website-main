@@ -274,9 +274,13 @@ public class UserProfileController {
         UserDmHistory targetDirectMessages = activeUserDirectMessageHistory(directMessageDTO.getSentByUserId());
         List<DirectMessage> allDirectMessageHistory = targetDirectMessages.getDirectMessageList();
 
+
+
         return new ResponseEntity<>(allDirectMessageHistory, HttpStatus.OK);
 
     }
+
+
 
 
     /** Service **/

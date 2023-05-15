@@ -97,7 +97,6 @@ export class UserProfileComponent implements OnInit {
         this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user !== remove);
 
         this.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
-        // console.log(this.allPost)
       })
 
       /* Get user Profile pic */

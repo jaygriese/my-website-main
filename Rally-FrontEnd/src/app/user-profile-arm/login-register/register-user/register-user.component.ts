@@ -14,12 +14,31 @@ import { ViewUserService } from '../../user-profile/services/view-user.service';
 })
 export class RegisterUserComponent implements OnInit {
 
-  passwordsMatch: boolean = true;
-  incorrectPassword: boolean;
+  /* Temp container for register forms */
   registerUser: RegisterDTO;
-  message: string;
+
+  /* Error Messages */
+  
+  newUserEntityCheck: any[] = [];
   userInformationCheck: any[] = [];
-  errorInFormSubmit: boolean = true;
+
+  /* Booleans for HTML form change and Error display */
+  nextFormInfo: boolean = true;
+  noErrorInFormSubmit: boolean;
+
+  /* Form Error handling */
+  noUserNameError: boolean;
+  errorUserName: string;
+  passwordForm: boolean;
+  errorPassword: string;
+  passwordMatchIssue: boolean;
+  passWordsDontMatch: string;
+  noFirstNameError: boolean;
+  firstNameMessage: string;
+  noLastNameError: boolean;
+  lastNameMessage: string;
+  createNewUser: boolean;
+  postResponseMessage: string;
 
   constructor(private http: HttpClient, 
               private router: Router, 
@@ -27,44 +46,61 @@ export class RegisterUserComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    if (localStorage.getItem("userName") !== null) {
+      this.router.navigate(["/myProfile"])
+    }
   } 
 
   clearForms() {
     this.userInformationCheck = [];
+    this.newUserEntityCheck = [];
+    this.errorUserName = "";
+    this.errorPassword = "";
+    this.passWordsDontMatch = "";
+    this.firstNameMessage = "";
+    this.lastNameMessage = "";
+    this.postResponseMessage = "";
     this.registerUser = null;
-    this.passwordsMatch = true;
-
+    this.nextFormInfo = true;
   }
 
   registerNewUser(userInformation: NgForm) {
-    this.incorrectPassword = false;
+    this.errorUserName = "";
+    this.errorPassword = "";
+    this.passWordsDontMatch = "";
+
     let submitNewUser: RegisterDTO = {
       userName: userInformation.value.userName,
       password: userInformation.value.password,
       verifyPassword: userInformation.value.verify
     }
 
-    if ( submitNewUser.password.length < 3 || submitNewUser.verifyPassword.length < 3) {
-      this.message = "Password needs to be longer than 3 characters"
-      this.incorrectPassword = true;
-      return;
-    } else if (submitNewUser.userName.length < 3) {
-      this.message = "userName needs to be longer than 3 characters";
-      this.incorrectPassword = true;
-      return;
-    } else if (submitNewUser.password !== submitNewUser.verifyPassword) {
-      this.message = "Passwords need to match"
-      this.incorrectPassword = true;
+    let response: any[] = this.registerService.checkUserInformation(submitNewUser);
+    if (response.length === 0) {
+      this.registerUser = submitNewUser;
+      this.nextFormInfo = false;
       return;
     } else {
-      this.registerUser = submitNewUser;
-      this.passwordsMatch = false;
+      for (let i = 0; i < response.length; i++) {
+        this.newUserEntityCheck.push(response[i].contents)
+        if (response[i].message === 1) {
+          this.errorUserName = response[i].contents;
+        }
+        if (response[i].message === 2) {
+          this.errorPassword = response[i].contents;
+        }
+        if (response[i].message === 3) {
+          this.passWordsDontMatch = response[i].contents;
+        }
+      }
       return;
     }
 
   }
 
   completeRegisteration(userDetails: NgForm) {
+    this.userInformationCheck = [];
+
     let userInfo: UserInfoDTO = {
       firstName: userDetails.value.firstName,
       lastName: userDetails.value.lastName, 
@@ -82,10 +118,11 @@ export class RegisterUserComponent implements OnInit {
       }
   
       this.http.post('http://localhost:8080/api/register', userBundle).subscribe((response: any) => {
-          if (response.failed) {
-            this.message = response.failed
+        if (response.message) {
+            this.postResponseMessage = response.message;
             return;
           }  else {
+
             localStorage.setItem('userName', this.registerUser.userName)
             localStorage.setItem('id', response.id)
             this.router.navigate(["/myProfile"])
@@ -94,9 +131,14 @@ export class RegisterUserComponent implements OnInit {
 
     } else {
     for (let i = 0; i < response.length; i++) {
-      this.userInformationCheck.push(response[i].contents);
+      if (response[i].message === 1) {
+        this.firstNameMessage = response[i].contents;
+      }
+      if (response[i].message === 2) {
+        this.lastNameMessage = response[i].contents;
+      }
      }
-     this.errorInFormSubmit = false;
+     this.noErrorInFormSubmit = false;
      return;
     }
   }

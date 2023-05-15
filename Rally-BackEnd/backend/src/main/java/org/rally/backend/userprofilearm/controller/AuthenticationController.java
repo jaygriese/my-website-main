@@ -17,6 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+import java.util.Optional;
+
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/api")
@@ -50,8 +53,6 @@ public class AuthenticationController {
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
-
-
         UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()), userBundleDTO.getRegisterDTO().getPassword());
         userRepository.save(registerNewUser);
 
@@ -79,9 +80,7 @@ public class AuthenticationController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> processLoginForm(@RequestBody LoginDTO loginDTO,
-                                              Errors errors, HttpServletRequest request,
-                                              Model model) {
+    public ResponseEntity<?> processLoginForm(@RequestBody LoginDTO loginDTO) {
 
         UserEntity theUser = userRepository.findByUserName(loginDTO.getUserName());
 

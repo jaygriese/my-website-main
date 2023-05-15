@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ViewUserService {
 
-  private getUserListUrl = 'http://localhost:8080/user/search';
+  private masterUrl = 'http://localhost:8080/user';
+  private getUserListUrl = this.masterUrl + '/search';
   private getUserBundleByUserName = 'http://localhost:8080/user/getViewUserBundleInformation/';
   private getMainUserBundle = 'http://localhost:8080/user/getMainUserBundleInformation/';
 
@@ -63,7 +64,7 @@ export class ViewUserService {
     if (userDTO.firstName === "" || userDTO.firstName.length < 3 || userDTO.firstName.length > 20) {
       message1 = {
         message: 1,
-        contents: "UserName must be between 3-20 characters"
+        contents: "First Name must be between 3-20 characters"
       };
       response.push(message1);
     }
@@ -95,10 +96,38 @@ export class ViewUserService {
       };
       response.push(message5);
     }
-
     return response;
   }
 
+  checkUserInformation(userDTO) {
+    let response: object[] = [];
+    let message1: object;
+    let message2: object;
+    let message3: object;
+    
+    if (userDTO.userName === "" || userDTO.userName.length < 3 || userDTO.userName.length > 20) {
+      message1 = {
+        message: 1,
+        contents: "User Name must be between 3-20 characters"
+      };
+      response.push(message1)
+    }
+    if ( userDTO.password === "" || userDTO.password.length < 3 || userDTO.password.length > 15) {
+      message2 = {
+        message: 2,
+        contents: "Password must be between 3-20 characters"
+      };
+      response.push(message2);
+    }
+    if (userDTO.verifyPassword === "" || userDTO.password !== userDTO.verifyPassword) {
+      message3 = {
+        message: 3,
+        contents: "Passwords must match"
+      };
+      response.push(message3)
+    }
+    return response;
+  }
 
 
 }

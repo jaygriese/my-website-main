@@ -8,25 +8,27 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 public class Event extends AbstractEntity {
 
-//    @NotBlank(message = "Who can your community thank for hosting this event?")
+    @NotBlank(message = "Who can we thank for hosting?")
     private String eventHost;
 
-//    @NotBlank(message = "But how will your community know who to contact?")
-//    @Email(message = "Whoops! Try entering your email again.")
+    @NotBlank(message = "Who can we contact?")
+    @Email(message = "Whoops! Try entering your email again.")
     private String contactEmail;
 
+    @NotBlank(message = "Please provide an event name")
     private String eventTitle;
 
+    @NotBlank(message = "When should we show up?")
     private String datetime;
 
-//    @NotBlank(message = "But how will your community know where to go?")
+    @NotBlank(message = "Where should we go?")
     private String eventAddress;
 
 //    private EventCategory eventCategory;
 
     private String eventCategory;
 
-//    @NotBlank(message = "Tell your community what this event is all about!")
+    @NotBlank(message = "Tell us what this event is all about!")
     private String description;
 
     private String imageId;

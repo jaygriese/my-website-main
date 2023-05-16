@@ -35,9 +35,7 @@
         <form #eventInformation="ngForm" (ngSubmit)="registerNewEvent(eventInformation)">
             <div style=float:left; id="form_1">
                 
-                <!-- <input type=hidden id="id" name="id" ngModel> -->
                 <label>host</label><br>
-                <!-- <input type="text" id="host" name="eventHost" ngModel> -->
                 <input type="text" required #eventHost="ngModel" id="host" name="eventHost" ngModel>
                 <br> 
 
@@ -56,7 +54,7 @@
                     </div>    
 
                     <div *ngIf="contactEmail.errors.email">
-                        Whoops! Try entering an email again.
+                        Whoops! We need a valid email address.
                     </div>
                 
                 </div>
@@ -67,7 +65,7 @@
                 <br>
 
                 <div *ngIf="eventTitle.invalid && (eventTitle.dirty || eventTitle.touched)" class="alert alert-danger">
-                    Please provide an event name.
+                    What should we call this event?
                 </div>
 
                 <br>
@@ -91,13 +89,18 @@
    
                 <label>category</label>
                 <hr style="width:550px; margin-top:0;">
-                <input type="radio" value="connect" name="eventCategory" ngModel> connect
-                <input type="radio" value="volunteer" name="eventCategory" ngModel> volunteer
-                <input type="radio" value="learn" name="eventCategory" ngModel> learn <br>
-                <input type="radio" value="donate" name="eventCategory" ngModel> donate
-                <input type="radio" value="celebrate" name="eventCategory" ngModel> celebrate
+                <input type="radio" value="connect" required #eventCategory="ngModel" name="eventCategory" ngModel> connect
+                <input type="radio" value="volunteer" required #eventCategory="ngModel" name="eventCategory" ngModel> volunteer
+                <input type="radio" value="learn" required #eventCategory="ngModel"  name="eventCategory" ngModel> learn <br>
+                <input type="radio" value="donate" required #eventCategory="ngModel"  name="eventCategory" ngModel> donate
+                <input type="radio" value="celebrate" required #eventCategory="ngModel"  name="eventCategory" ngModel> celebrate
 
                 <br>
+
+                <!-- <div *ngIf="eventCategory.invalid && eventCategory.touched" class="alert alert-danger">
+                    Tell us the event category.
+                </div> -->
+
                 <br>
                 <br>
                 <br>
@@ -127,8 +130,8 @@
                 <!-- <button (click)="list()" type="submit" id="create_btn">SUBMIT</button> -->
                 <button [disabled]="eventInformation.invalid" type="submit" id="create_btn">SUBMIT</button>
                 <br>
-                    <div *ngIf="eventInformation.invalid && (eventInformation.dirty || eventInformation.touched)" class="alert alert-danger">
-                        Make sure you've filled out each field!
+                    <div *ngIf="eventInformation.invalid && eventInformation.touched" class="alert alert-danger">
+                        Make sure you've filled out the whole form!
                     </div>
 
                 <br>

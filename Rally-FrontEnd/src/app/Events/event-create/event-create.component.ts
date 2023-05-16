@@ -76,9 +76,12 @@ export class EventCreateComponent implements OnInit {
       console.log(res)
     });
 
-    eventInformation.reset();
+    // eventInformation.reset();
 
-    // this.router.navigate(["/events"]);
+    this.router.navigate(['/events'])
+  .then(() => {
+    window.location.reload();
+  });
    
 
   }

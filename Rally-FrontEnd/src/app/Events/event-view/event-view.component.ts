@@ -43,7 +43,12 @@ export class EventViewComponent implements OnInit {
   
   }
 
-
+// dateFilter(string: string) {
+//   this.filteredEvents.splice(0);
+//   for(let i = 0; i < this.eventList.length; i++) {
+//     if ( this.eventList[i].datetime === {{this.event.datetime}})
+//   }
+// }
 
   
 filter(string: string) {

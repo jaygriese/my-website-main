@@ -13,7 +13,7 @@ public class ForumPosts extends AbstractEntity{
     private UserEntity userEntity;
     @OneToMany(mappedBy = "forumPosts")
     private final List<Replies> replies = new ArrayList<>();
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private ForumPostLike forumPostLike;
 
     private String title;

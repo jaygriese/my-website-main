@@ -37,8 +37,8 @@ public class ForumController {
         AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
         return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
     }
-    @PostMapping("viewPost")
-    public ResponseEntity<?>getForumPost(@RequestBody int id){
+    @GetMapping("viewPost/{id}")
+    public ResponseEntity<?>getForumPost(@PathVariable int id){
         Optional <ForumPosts> result = forumPostRepository.findById(id);
         ForumPosts post = result.get();
         return new ResponseEntity<>(post, HttpStatus.OK);

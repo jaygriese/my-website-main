@@ -73,4 +73,10 @@ searchPosts(posts: ForumPost[]){
     }
     return sortedPosts;
 }
+testPost = async () => {
+  const resp = await fetch('http://localhost:8080/Posts');
+  const data = await resp.json();
+  let newArray = data;
+  return newArray
+}
 }

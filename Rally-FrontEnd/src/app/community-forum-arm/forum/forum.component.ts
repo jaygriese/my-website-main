@@ -22,6 +22,7 @@ constructor(private http: HttpClient, private router: Router, private themeservi
 ngOnInit(): void {
   this.verifyLoggedIn();
   this.checkTheme();
+  this.experimenting();
 }
 checkTheme(){
     if (localStorage.getItem('theme') == 'dark'){
@@ -48,9 +49,14 @@ logOut() {
   console.log(localStorage.getItem('userName'))
   this.logInStatus = false;
 }
-Search(searchInformation: NgForm){
+async Search(searchInformation: NgForm){
   localStorage.setItem('searchTerm', searchInformation.value.description)
   this.router.navigate(["/forum/search"]);
 }
+experimenting = async () => {
+  const resp = await fetch('http://localhost:8080/Posts');
+  const data = await resp.json();
 
+  console.log(data)
+}
 }

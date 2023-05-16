@@ -14,7 +14,7 @@ import { ForumPost } from '../../models/ForumPost';
 })
 export class ViewPostComponent implements OnInit {
   postId: number;
-  postObject: ForumPost;
+  postObject: ForumPost[];
   currentUser: string;
   postReplyBoolean: boolean;
   logInStatus: Boolean;
@@ -30,16 +30,17 @@ export class ViewPostComponent implements OnInit {
     this.postReplyBoolean = false;
     this.logInStatus = false;
     this.replies = [];
+    this.postObject = [];
     this.updateDescription = false;
     this.editAndDeleteButtons = true;
     this.postEditAndDeleteButtons = true;
     this.updatePostDescription = false;
     this.darktheme = false;
   }
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getPost();
     this.verifyLoggedIn();
     this.checkTheme();
-    this.getPost();
     this.getReplies();
   }
   checkTheme(){
@@ -50,14 +51,15 @@ export class ViewPostComponent implements OnInit {
       this.Light();
     }
   }
-  async getPost(){    
-    const response =  await this.http.post('http://localhost:8080/viewPost', this.postId).subscribe((res: ForumPost)=> {
-        this.postObject = res;
+  getPost(){    
+    this.http.get('http://localhost:8080/viewPost/' + this.postId).subscribe((post: ForumPost)=> {
+        if(post != null){
+          this.postObject.push(post); 
+        }
       })
   }
   getReplies(){
     this.http.get('http://localhost:8080/Replies').subscribe((res)=> {
-      console.log(res)
         for(const k in res){
           if(res[k].forumPosts.id == this.postId){
             this.replies.push(res[k])
@@ -125,8 +127,8 @@ export class ViewPostComponent implements OnInit {
   editPostWithNewDescription(updateDescription: NgForm){
       let newPostDescription: ReplyDTO = {
         description: updateDescription.value.newDescription,
-        username: this.postObject.userEntity.userName,
-        id: this.postObject.id
+        username: this.postObject[0].userEntity.userName,
+        id: this.postObject[0].id
       }
       console.log(newPostDescription)
       this.http.post(`http://localhost:8080/UpdatePost`, newPostDescription).subscribe((res) => {
@@ -138,7 +140,7 @@ export class ViewPostComponent implements OnInit {
   deletePost(idString){
     this.http.post('http://localhost:8080/DeletePost', +idString).subscribe((res) => {
       console.log(res);
-      this.router.navigate(["/forum/" + this.postObject.category.toLowerCase()]);
+      this.router.navigate(["/forum/" + this.postObject[0].category.toLowerCase()]);
     })
   }
   Light(){

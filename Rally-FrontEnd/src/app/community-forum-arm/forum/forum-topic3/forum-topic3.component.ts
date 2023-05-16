@@ -29,6 +29,7 @@ export class ForumTopic3Component implements OnInit {
     this.darktheme = false;
     this.testArray;
     this.forumTopic = "topic3"
+    this.newArray = []
    }
   
   ngOnInit(): void {
@@ -87,5 +88,11 @@ export class ForumTopic3Component implements OnInit {
       console.log(res)
     });
     window.location.reload();
+  }
+  experimenting = async () => {
+    const resp = await fetch('http://localhost:8080/Posts');
+    const data = await resp.json();
+  
+    console.log(data)
   }
 }

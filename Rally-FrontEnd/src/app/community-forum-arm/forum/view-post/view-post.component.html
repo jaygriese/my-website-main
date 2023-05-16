@@ -19,53 +19,53 @@
     <!-- light/dark theme buttons    -->
 <div id="theme" class="white">
     <!-- background theme -->
-    <div *ngFor="let post of postObject">
+    <div *ngIf="!isLoading">
         <div *ngIf="!darktheme; else darkSections">
-    <body class="white-theme">
-        <h1 style="border: 1px solid black;">{{post.title}}</h1>
-    </body>
+            <body class="white-theme">
+                <h1 style="border: 1px solid black;">{{postObject.title}}</h1>
+            </body>
     <!-- Title of Post -->
                 <br><br>
-    <body class="white-theme">
-        <h5 style="padding-top: 5px;">{{post.userEntity.userName}} says</h5>
-    </body>
-</div>
-<ng-template #darkSections>
-    <body class="black-background">
-        <h1 style="border: 1px solid black;">{{post.title}}</h1>
-    </body>
-    <!-- Title of Post -->
-                <br><br>
-    <body class="black-background">
-        <h5 style="padding-top: 5px;">{{post.userEntity.userName}} says</h5>
-    </body>
-</ng-template>
-    <!-- Username of Poster -->
-    <div *ngIf="!updatePostDescription; else editPostDescription">
-        <span><div class="thought">{{post.description}}</div></span>
-        <div *ngIf="postObject[0].userEntity.userName == currentUser">
-            <div *ngIf="postEditAndDeleteButtons">
-                <button (click)="editPost()">Edit Post Description</button>
-                <button (click)="deletePost(postObject[0].id)">Delete Post</button>
-            </div>
+            <body class="white-theme">
+                <h5 style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h5>
+            </body>
         </div>
+        <ng-template #darkSections>
+            <body class="black-background">
+                <h1 style="border: 1px solid black;">{{postObject.title}}</h1>
+            </body>
+    <!-- Title of Post -->
+                <br><br>
+            <body class="black-background">
+                <h5 style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h5>
+            </body>
+        </ng-template>
+    <!-- Username of Poster -->
+        <div *ngIf="!updatePostDescription; else editPostDescription">
+            <span><div class="thought">{{postObject.description}}</div></span>
+            <div *ngIf="postObject.userEntity.userName == currentUser">
+                <div *ngIf="postEditAndDeleteButtons">
+                    <button (click)="editPost()">Edit Post Description</button>
+                    <button (click)="deletePost(postObject.id)">Delete Post</button>
+                </div>
+            </div>
                 <br>
-    </div>
+        </div>
     <!-- Post Description and Edit/Delete Buttons -->
-    <ng-template #editPostDescription>
-        <form #editPostAttempt="ngForm" (ngSubmit)="editPostWithNewDescription(editPostAttempt)">
-            <input type="text" name="newDescription" [(ngModel)]="postObject[0].description" required ngModel>
-            <input type="submit" value="Submit">
-        </form>
-    </ng-template>
+        <ng-template #editPostDescription>
+            <form #editPostAttempt="ngForm" (ngSubmit)="editPostWithNewDescription(editPostAttempt)">
+                <input type="text" name="newDescription" [(ngModel)]="postObject.description" required ngModel>
+                <input type="submit" value="Submit">
+            </form>
+        </ng-template>
     <!-- Edit Post Form -->
                 <br><br>
-    <div *ngIf="!postReplyBoolean; else createReplyForm">   
-        <div *ngIf="logInStatus">
-            <button (click)="populateForm()" class="btn btn-primary">Create Reply</button>
+        <div *ngIf="!postReplyBoolean; else createReplyForm">   
+            <div *ngIf="logInStatus">
+                <button (click)="populateForm()" class="btn btn-primary">Create Reply</button>
+            </div>
         </div>
-    </div>
-</div>
+    
     <!-- Create Reply Button -->
     <ng-template #createReplyForm>
         <div *ngIf="logInStatus">
@@ -78,7 +78,7 @@
     </ng-template>
     <!-- Reply Form -->
                 <br><br>
-    <body>
+    <body class="white-theme">
         <h1>Replies:</h1>
     </body>
     <br><br>
@@ -116,6 +116,7 @@
             <!-- Update and Delete Reply Buttons -->
                 <br><br>
         </div>
+    </div>
     </div>
 </div>
 

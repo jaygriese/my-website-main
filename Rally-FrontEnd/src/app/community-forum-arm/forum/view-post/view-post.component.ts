@@ -14,7 +14,7 @@ import { ForumPost } from '../../models/ForumPost';
 })
 export class ViewPostComponent implements OnInit {
   postId: number;
-  postObject: ForumPost[];
+  postObject: ForumPost;
   currentUser: string;
   postReplyBoolean: boolean;
   logInStatus: Boolean;
@@ -24,18 +24,20 @@ export class ViewPostComponent implements OnInit {
   editAndDeleteButtons: boolean;
   postEditAndDeleteButtons: boolean;
   updatePostDescription: boolean;
-  darktheme: Boolean;
+  darktheme: boolean;
+  isLoading: boolean;
   constructor(private route: ActivatedRoute, private http: HttpClient, private themeservice: ThemeserviceService, private router: Router) { 
     this.postId = +this.route.snapshot.paramMap.get('id');
     this.postReplyBoolean = false;
     this.logInStatus = false;
     this.replies = [];
-    this.postObject = [];
+    this.postObject;
     this.updateDescription = false;
     this.editAndDeleteButtons = true;
     this.postEditAndDeleteButtons = true;
     this.updatePostDescription = false;
     this.darktheme = false;
+    this.isLoading = true;
   }
   ngOnInit() {
     this.getPost();
@@ -54,7 +56,8 @@ export class ViewPostComponent implements OnInit {
   getPost(){    
     this.http.get('http://localhost:8080/viewPost/' + this.postId).subscribe((post: ForumPost)=> {
         if(post != null){
-          this.postObject.push(post); 
+          this.postObject = post;
+          this.isLoading = false;
         }
       })
   }

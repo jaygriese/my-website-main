@@ -153,12 +153,11 @@
 
 
             <div class="col-7">
-                <!-- <div class="card mb-3" style="max-width: 900px;" *ngFor="let event of eventList"> -->
                     <div class="card mb-3" style="max-width: 900px;" *ngFor="let event of filteredEvents">
-                    <div class="row no-gutters">
+                    <!-- <div class="row no-gutters"> -->
+                    <div class="row g-0">
                         <div class="col-md-4">
-                            <!-- <img src="{{event.imageId}}" class="card-img" alt="IMAGE" > -->
-                            <img src="..." class="img-fluid rounded-start" alt="...">
+                            <img src="/assets/events-assests/connect.jpg" class="card-img img-fluid rounded-start" alt="image">
                         </div>
                         <div class="col-md-10">
                             <div class="card-body">
@@ -167,7 +166,6 @@
                                 <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory}}</p>
                                 <p style="font-size: 15px; font-style: italic; margin-top: 90px;">hosted by {{event.eventHost}}</p>
 
-                                <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" class="btn btn-outline-info btn-xm">learn more</a> -->
 
                                 <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
 

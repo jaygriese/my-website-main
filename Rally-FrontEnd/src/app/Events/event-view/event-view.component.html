@@ -93,12 +93,20 @@
                       </mat-card>
                 </div> -->
 
+                <!-- <span class="datepicker-toggle">
+                    <span class="datepicker-toggle-button"></span>
+                    <input type="date" class="datepicker-input">
+                  </span> -->
+                  
+
+        
+
                 <div class="card w-100">
                     <div class="card-body">
                       <h3 class="card-title">
                         I'm available on: <input type="date" [(ngModel)]="DateSelected">
                       </h3>
-                      <button class="button2" style="width: 100%;" (click)="byDate()" >filter</button>
+                      <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
                     </div>
                   </div>
                
@@ -170,6 +178,9 @@
                         </div>
                     </div>
 
+                </div>
+                <div *ngIf="isEmpty === true">
+                    <p>No events found at this time.</p>
                 </div>
 
             </div>

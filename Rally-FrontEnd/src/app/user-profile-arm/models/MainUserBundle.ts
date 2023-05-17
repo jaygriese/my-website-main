@@ -1,5 +1,4 @@
-import { HiddenPost } from "./HiddenPost";
-import { MainUserDmHistory } from "./MainUserDmHistory";
+import { UserDmHistory } from "./UserDmHistory";
 import { UserEntity } from "./UserEntity";
 import { UserInformation } from "./UserInformation";
 import { UserPostHistory } from "./UserPostHistory";
@@ -7,16 +6,16 @@ import { UserPostHistory } from "./UserPostHistory";
 export class MainUserBundle {
 	viewUser: UserEntity;
 	viewUserInformation: UserInformation;
-	viewMainUserDmHistory: MainUserDmHistory;
+	viewUserDmHistory: UserDmHistory;
 	viewUserPostHistory: UserPostHistory;
 
 	constructor(viewUser: UserEntity, 
-				mainUserInformation: UserInformation, 
-				targetDirectMessages: MainUserDmHistory,
+				viewUserInformation: UserInformation, 
+				viewUserDmHistory: UserDmHistory,
 				viewUserPostHistory: UserPostHistory){
 		this.viewUser = viewUser,
-		this.viewUserInformation = mainUserInformation,
-		this.viewMainUserDmHistory = targetDirectMessages,
+		this.viewUserInformation = viewUserInformation,
+		this.viewUserDmHistory = viewUserDmHistory,
 		this.viewUserPostHistory = viewUserPostHistory
 	}
 }

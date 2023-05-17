@@ -132,14 +132,37 @@
                 <label for="lastName">Last Name:<br>
                 <input type="text" name="lastName" id="lastName" placeholder={{userInformation?.lastName}} [(ngModel)]="model.lastName" #lastName="ngModel"></label>                
                 <br><br>
-                <label for="neighborhood">Neighborhood:<br>
-                <input type="text" name="neighborhood" id="neighborhood" placeholder={{userInformation?.neighborhood}} [(ngModel)]="model.neigborhood" #neigborhood="ngModel"></label>
+                <label for="category-drop">Neighborhood:</label><br>
+                <select name="neighborhood" id="category-drop" [(ngModel)]="model.neigborhood" #neigborhood="ngModel">
+                    <option value="" disabled selected>Select your neighborhood</option>
+                    <option value="Compton Heights">Compton Heights</option>
+                    <option value="Central West End">Central West End</option>
+                    <option value="The Hill">The Hill</option>
+                    <option value="Soulard">Soulard</option>
+                    <option value="Bevo">Bevo</option>
+                    <option value="Gravois Park">Gravois Park</option>
+                    <option value="Tower Grove South">Tower Grove South</option>
+                    <option value="Downtown">Down Town</option>
+                    <option value="Midtown">Midtown</option>
+                </select>
                 <br><br>
-                <label for="city">City:<br>
-                <input type="text" name="city" id="city" placeholder={{userInformation?.city}} [(ngModel)]="model.city" #city="ngModel"></label>                
+                <label for="category-drop">City:</label><br>
+                <select name="city" id="category-drop" [(ngModel)]="model.city" #city="ngModel">
+                    <option value="" disabled selected>Select your city</option>
+                    <option value="Saint Louis">Saint Louis</option>
+                    <option value="Jennings">Jennings</option>
+                    <option value="Clayton">Clayton</option>
+                    <option value="University City">University City</option>
+                    <option value="Affton">Affton</option>
+                    <option value="Ferguson">Ferguson</option>
+                </select> 
                 <br><br>
-                <label for="state">State:<br>
-                <input type="text" name="state" id="state" placeholder={{userInformation?.state}} [(ngModel)]="model.state" #state="ngModel"></label>                
+                <label for="category-drop">State:</label><br>
+                <select name="state" id="category-drop" [(ngModel)]="model.state" #state="ngModel">
+                    <option value="" disabled selected>Select your state</option>
+                    <option value="Missouri">Missouri</option>
+                    <option value="Illinois">Illinois</option>
+                </select>
                 <br><br>
                 <input type="submit" value="Submit">
               </form>
@@ -153,9 +176,9 @@
             <h2>Post History</h2>
             <!-- Some type of way to view only certain classes -->
             <div class="scroll-posthistory">
-                <ul *ngFor="let post of this?.allPost">
-                    <div class="card" >                        
-                        <input type="button" (click)="hidePost(post.id)" value="Hide this Post"/>
+                <ul *ngFor="let post of this.allPost">
+                    <div class="card" >
+                        <button type="button" (click)="hidePost(post.id)" >Hide this Post</button>
                         <h2><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h2>
                         <h2><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.eventTitle}}</a></h2>
                         <h6>{{ post.description }}</h6>

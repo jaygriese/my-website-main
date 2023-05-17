@@ -1,7 +1,7 @@
 import { DirectMessage } from "./Directmessage";
 import { UserEntity } from "./UserEntity";
 
-export class MainUserDmHistory {
+export class UserDmHistory {
 
     userEntities: UserEntity[];
     directMessageList: DirectMessage[];

@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface ProfilePictureRepository extends JpaRepository<ProfilePicture, Long> {
     Optional<ProfilePicture> findByUserId(String name);
 
+
     @Override
     void deleteById(Long aLong);
 }

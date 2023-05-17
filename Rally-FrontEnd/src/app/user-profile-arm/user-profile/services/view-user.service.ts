@@ -3,18 +3,19 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserEntity } from '../../models/UserEntity';
 import { Router } from '@angular/router';
+import { ViewUserBundle } from '../../models/ViewUserBundle';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ViewUserService {
 
-  private masterUrl = 'http://localhost:8080/user';
-  private getUserListUrl = this.masterUrl + '/search';
-  private getUserBundleByUserName = 'http://localhost:8080/user/getViewUserBundleInformation/';
-  private getMainUserBundle = 'http://localhost:8080/user/getMainUserBundleInformation/';
+  private hostUrl = 'http://localhost:8080';
+  private getUserListUrl = this.hostUrl + '/user/search';
+  private getUserBundleByUserName = this.hostUrl + '/user/getViewUserBundleInformation/';
+  private getMainUserBundle = this.hostUrl + '/user/getMainUserBundleInformation/';
 
-  private postDirectMessageToViewedUser = 'http://localhost:8080/user/sendDirectMessage';
+  private postDirectMessageToViewedUser = this.hostUrl + '/user/sendDirectMessage';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -26,8 +27,8 @@ export class ViewUserService {
     return this.http.get<UserEntity[]>(`${this.getUserListUrl}`);
   }
 
-  getViewUserBundleByUserName(username: string) {
-    return this.http.get(`${this.getUserBundleByUserName}` + username);
+  getViewUserBundleByUserName(username: string): Observable<ViewUserBundle>{
+    return this.http.get<ViewUserBundle>(`${this.getUserBundleByUserName}` + username);
   }
 
   getMainUserBundleByUserName(userName: string) {

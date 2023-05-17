@@ -1,5 +1,8 @@
 package org.rally.backend.userprofilearm.model;
 
+import org.rally.backend.forumarm.models.ForumPosts;
+
+import java.util.List;
 import java.util.Optional;
 
 public class UserBundle {
@@ -8,10 +11,12 @@ public class UserBundle {
     Optional<UserInformation> viewUserInformation;
     UserDmHistory viewUserDmHistory;
     UserPostHistory viewUserPostHistory;
+    /** updatedPostHistoryViewUser is temporary until all postable objects are active.
+     * Will become a list of all events to display on searched users page that reflects
+     * the updated hidden posts information. **/
+    List<ForumPosts> updatedPostHistoryViewUser;
 
-    public UserBundle(UserEntity viewUser, Optional<UserInformation> viewUserInformation) {
-        this.viewUser = viewUser;
-        this.viewUserInformation = viewUserInformation;
+    public UserBundle() {
     }
 
     public UserBundle(UserEntity viewUser, Optional<UserInformation> viewUserInformation, UserDmHistory viewUserDmHistory, UserPostHistory viewUserPostHistory) {
@@ -21,10 +26,19 @@ public class UserBundle {
         this.viewUserPostHistory = viewUserPostHistory;
     }
 
-    public UserBundle(UserEntity viewUser, Optional<UserInformation> viewUserInformation, UserDmHistory viewUserDmHistory) {
+    public UserBundle(UserEntity viewUser, Optional<UserInformation> viewUserInformation, UserDmHistory viewUserDmHistory, List<ForumPosts> updatedPostHistoryViewUser) {
         this.viewUser = viewUser;
         this.viewUserInformation = viewUserInformation;
         this.viewUserDmHistory = viewUserDmHistory;
+        this.updatedPostHistoryViewUser = updatedPostHistoryViewUser;
+    }
+
+    public List<ForumPosts> getUpdatedPostHistoryViewUser() {
+        return updatedPostHistoryViewUser;
+    }
+
+    public void setUpdatedPostHistoryViewUser(List<ForumPosts> updatedPostHistoryViewUser) {
+        this.updatedPostHistoryViewUser = updatedPostHistoryViewUser;
     }
 
     public UserDmHistory getViewUserDmHistory() {

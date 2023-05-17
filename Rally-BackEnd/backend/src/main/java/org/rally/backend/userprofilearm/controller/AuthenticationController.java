@@ -1,6 +1,6 @@
 package org.rally.backend.userprofilearm.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
+import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.UserInformation;
 import org.rally.backend.userprofilearm.model.dto.UserBundleDTO;
 import org.rally.backend.userprofilearm.exception.AuthenticationFailure;
@@ -13,12 +13,8 @@ import org.rally.backend.userprofilearm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -64,6 +60,10 @@ public class AuthenticationController {
         String neighborhood = userBundleDTO.getUserInfoDTO().getNeighborhood();
         String city = userBundleDTO.getUserInfoDTO().getCity();
         String state = userBundleDTO.getUserInfoDTO().getState();
+
+        if (firstName.toCharArray().length < 3 || lastName.toCharArray().length < 3 || state.toCharArray().length < 1 || neighborhood.toCharArray().length < 3 || city.toCharArray().length < 3) {
+            throw new MinimumCharacterException();
+        }
 
         UserInformation newUserInformation = new UserInformation(userId, firstName, lastName, neighborhood, city, state);
 

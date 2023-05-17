@@ -14,6 +14,7 @@ import org.rally.backend.userprofilearm.model.response.ResponseMessage;
 import org.rally.backend.userprofilearm.model.UserPostHistory;
 import org.rally.backend.userprofilearm.repository.*;
 import org.rally.backend.userprofilearm.utility.ImageUtility;
+import org.rally.backend.userprofilearm.utility.UserProfileControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,15 +43,11 @@ public class UserProfileController {
 
 
     @Autowired
-    public UserProfileController(UserRepository userRepository,
-                                 RoleRepository roleRepository,
+    public UserProfileController(UserRepository userRepository, RoleRepository roleRepository,
                                  UserInformationRepository userInformationRepository,
-                                 DirectMessageRepository directMessageRepository,
-                                 ProfilePictureRepository profilePictureRepository,
-                                 ForumPostRepository forumPostRepository,
-                                 RepliesRepository repliesRepository,
-                                 HiddenPostRepository hiddenPostRepository,
-                                 ServiceRepository serviceRepository,
+                                 DirectMessageRepository directMessageRepository, ProfilePictureRepository profilePictureRepository,
+                                 ForumPostRepository forumPostRepository, RepliesRepository repliesRepository,
+                                 HiddenPostRepository hiddenPostRepository, ServiceRepository serviceRepository,
                                  EventRepository eventRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
@@ -68,6 +65,7 @@ public class UserProfileController {
     /** GET REQUEST **/
     /** GET REQUEST **/
 
+
     @GetMapping("/search")
     public List<UserEntity> displayAllUsers() {
         return this.userRepository.findAll();
@@ -81,12 +79,18 @@ public class UserProfileController {
             return new ResponseEntity<>(new ResponseMessage("404"), HttpStatus.OK);
         }
 
-        /** call post history and favorites here when ready **/
+        /** Find user and set objects to send to the front **/
         UserEntity targetUser = userRepository.findByUserName(userName);
-        Optional<UserInformation> targetInformation = userInformationRepository.findByUserId(targetUser.getId());
-        UserDmHistory targetDirectMessages = activeUserDirectMessageHistory(targetUser.getId());
+        UserBundle viewUserProfileBundle = new UserBundle();
 
-        return new ResponseEntity<>(new UserBundle(targetUser, targetInformation, targetDirectMessages), HttpStatus.OK);
+        /** Find viewing users information **/
+        viewUserProfileBundle.setViewUser(userRepository.findByUserName(userName));
+        viewUserProfileBundle.setViewUserInformation(userInformationRepository.findByUserId(targetUser.getId()));
+        viewUserProfileBundle.setViewUserDmHistory(UserProfileControllerService.activeUserDirectMessageHistory(targetUser.getId()));
+        viewUserProfileBundle.setUpdatedPostHistoryViewUser(UserProfileControllerService.sortUpdatedPostHistoryViewUser(targetUser.getId()));
+
+
+        return new ResponseEntity<>(viewUserProfileBundle, HttpStatus.OK);
 
     }
 
@@ -100,18 +104,17 @@ public class UserProfileController {
 
         UserEntity targetUser = userRepository.findByUserName(userName);
         Optional<UserInformation> targetInformation = userInformationRepository.findByUserId(targetUser.getId());
-        UserDmHistory targetDirectMessages = activeUserDirectMessageHistory(targetUser.getId());
+        UserDmHistory targetDirectMessages = UserProfileControllerService.activeUserDirectMessageHistory(targetUser.getId());
         UserPostHistory targetUserPostHistory = new UserPostHistory();
 
-        List<HiddenPost> targetHiddenPost = getHiddenPostListForUserBundleMain(targetUser.getId());
+        List<HiddenPost> targetHiddenPost = UserProfileControllerService.getHiddenPostListForUserBundleMain(targetUser.getId());
         targetUserPostHistory.setViewUserHiddenPost(targetHiddenPost);
-        List<ForumPosts> targetForumPost = getUserForumPost(targetUser.getId());
+        List<ForumPosts> targetForumPost = UserProfileControllerService.getUserForumPost(targetUser.getId());
         targetUserPostHistory.setViewUserForumPost(targetForumPost);
-        List<Replies> targetForumReplies = getUserReplies(targetUser.getId());
-//        System.out.println(targetForumReplies.get(0));
+        List<Replies> targetForumReplies = UserProfileControllerService.getUserReplies(targetUser.getId());
         targetUserPostHistory.setViewUserForumReplies(targetForumReplies);
         /** Events need username, userid, or UserEntity inside model **/
-        List<Event> targetEventPost = getUserEventPost(targetUser.getUserName());
+        List<Event> targetEventPost = UserProfileControllerService.getUserEventPost(targetUser.getUserName());
         targetUserPostHistory.setViewUserEventPost(targetEventPost);
         /** Services, Resources, RestaurantReview need username, userid, or UserEntity inside model **/
 
@@ -232,30 +235,6 @@ public class UserProfileController {
         }
     }
 
-    @PostMapping("/update-user-information")
-    public ResponseEntity<?> updateUserInformation(@RequestBody UserInfoDTO userInfoDTO) {
-
-        List<UserInformation> userInformationList = userInformationRepository.findAll();
-
-        UserInformation userInformation = new UserInformation(userInfoDTO.getUserId(),
-                                                              userInfoDTO.getFirstName(),
-                                                              userInfoDTO.getLastName(),
-                                                              userInfoDTO.getNeighborhood(),
-                                                              userInfoDTO.getCity(),
-                                                              userInfoDTO.getState());
-
-        for (UserInformation info : userInformationList) {
-            if (info.getUserId() == userInfoDTO.getUserId()) {
-                userInformationRepository.deleteById(info.getId());
-            }
-        }
-
-        userInformationRepository.save(userInformation);
-
-        return new ResponseEntity<>(userInformation, HttpStatus.OK);
-
-    }
-
     @PostMapping("/sendDirectMessage")
     public ResponseEntity<?> updateUserInformation(@RequestBody DirectMessageDTO directMessageDTO) {
 
@@ -271,7 +250,7 @@ public class UserProfileController {
 
         directMessageRepository.save(messageSent);
 
-        UserDmHistory targetDirectMessages = activeUserDirectMessageHistory(directMessageDTO.getSentByUserId());
+        UserDmHistory targetDirectMessages = UserProfileControllerService.activeUserDirectMessageHistory(directMessageDTO.getSentByUserId());
         List<DirectMessage> allDirectMessageHistory = targetDirectMessages.getDirectMessageList();
 
 
@@ -280,77 +259,26 @@ public class UserProfileController {
 
     }
 
+    /** PUT Request **/
+    /** PUT Request **/
+    /** PUT Request **/
 
 
+    @PutMapping("/update-user-information/{userId}")
+    public ResponseEntity<?> updateUserInformation(@PathVariable int userId, @RequestBody UserInfoDTO userInfoDTO) {
 
-    /** Service **/
-    /** Service **/
-    /** Service **/
+        Optional<UserInformation> userInfo = userInformationRepository.findByUserId(userId);
 
-    public UserDmHistory activeUserDirectMessageHistory(int id) {
+        userInfo.get().setFirstName(userInfoDTO.getFirstName());
+        userInfo.get().setLastName(userInfoDTO.getLastName());
+        userInfo.get().setNeighborhood(userInfoDTO.getNeighborhood());
+        userInfo.get().setCity(userInfoDTO.getCity());
+        userInfo.get().setState(userInfoDTO.getState());
 
-        /** Isolating all messages from and to user **/
-        UserEntity targets;
-        List<UserEntity> allUsers = new ArrayList<>();
-        List<DirectMessage> allMessagesRelatedToUser = new ArrayList<>();
+        userInformationRepository.save(userInfo.get());
 
-        for (DirectMessage dm : directMessageRepository.findAll()) {
+        return new ResponseEntity<>(userInfo, HttpStatus.OK);
 
-            if (dm.getReceivedByUserId().equals(id) || dm.getSentByUserId().equals(id)) {
-                allMessagesRelatedToUser.add(dm);
-
-                if (!allUsers.contains(userRepository.findByUserName(dm.getReceivedByUserName()))){
-                    targets = userRepository.findByUserName(dm.getReceivedByUserName());
-                    allUsers.add(targets);
-                } else if (!allUsers.contains(userRepository.findByUserName(dm.getSentByUserName()))) {
-                    targets = userRepository.findByUserName(dm.getSentByUserName());
-                    allUsers.add(targets);
-                }
-            }
-        }
-
-        return new UserDmHistory(allUsers, allMessagesRelatedToUser);
     }
-
-    public List<HiddenPost> getHiddenPostListForUserBundleMain(int userId) {
-        List<HiddenPost> hiddenPostList = new ArrayList<>();
-        for (HiddenPost post : hiddenPostRepository.findAll()) {
-            if (post.getUserId() == userId) {
-                hiddenPostList.add(post);
-            }
-        }
-        return hiddenPostList;
-    }
-
-    public List<ForumPosts> getUserForumPost(int userId) {
-        List<ForumPosts> targetForumPost = new ArrayList<>();
-        for (ForumPosts forumPosts : forumPostRepository.findAll()) {
-            if (forumPosts.getUserEntity().getId() == userId) {
-                targetForumPost.add(forumPosts);
-            }
-        }
-        return targetForumPost;
-    }
-
-    public List<Event> getUserEventPost(String userName) {
-        List<Event> targetEventPost = new ArrayList<>();
-        for (Event eventPosts: eventRepository.findAll()) {
-            if (Objects.equals(eventPosts.getEventHost(), userName)) {
-                targetEventPost.add(eventPosts);
-            }
-        }
-        return targetEventPost;
-    }
-
-    public List<Replies> getUserReplies(int userId){
-        List<Replies> targetForumPostReplies = new ArrayList<>();
-        for (Replies forumReplies: repliesRepository.findAll()) {
-            if (forumReplies.getUserEntity().getId() == userId) {
-                targetForumPostReplies.add(forumReplies);
-            }
-        }
-        return targetForumPostReplies;
-    }
-
 
 }

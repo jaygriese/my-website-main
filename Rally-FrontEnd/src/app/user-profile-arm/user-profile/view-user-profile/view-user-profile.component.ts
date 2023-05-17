@@ -46,27 +46,32 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.logInStatus = this.verifyService.verifyLoggedIn();
+
     /* This method pulls the parameters of the activated route and converts them into a usable string */
     this.activatedRoute.paramMap.subscribe(params => {
     this.viewUserName = params.get('userName');
     this.viewUserId = params.get('id');
     });
 
+    /* If you tried to view yourself, you will be redirected to the 'myProfile' route */
     this.viewUser.redirectWhenViewingSelf(this.viewUserName);
 
     /* This method gets a bundle of information I want to display on the view user page */
     this.viewUser.getViewUserBundleByUserName(this.viewUserName).subscribe((data: any) => {
       if (data.message) {
-        console.log(data);
         this.userReal = false;
         this.router.navigate(['/user/404']);
         return;
       }
       this.userEntityInformation = data;
-      this.dmList = data.viewMainUserDmHistory.directMessageList;
+      this.forumPost = data.updatedPostHistoryViewUser;
+
+      /* Something to address, send the conversation list already sorted from the back */
+      this.dmList = data.viewUserDmHistory.directMessageList;
       this.displayConversation(this.userEntityInformation.viewUser);
       this.scrollToBottom;
     })
+
     /* Get view users profile picture */
     this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserId).subscribe((response: any) => {
       if (response.message) {
@@ -75,24 +80,15 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
       } else {
         this.dbImage = 'data:image/jpeg;base64,' + response.image;
       }
-    })
-    /* Get user post history with hiddenpost removed */
-    this.http.get('http://localhost:8080/user/getUpdatedPostHistoryViewUser/' + this.viewUserId).subscribe((response: any) => {
-      if (response.message) {
-        console.log(response);
-        this.userReal = false;
-        this.router.navigate(['/user/404']);
-        return
-      }
-      this.forumPost = response;
-    })
-  
+    })  
   }
 
+  /* Lifecycle hook learnings, this scrolls the dm display to the bottom automatically */
   ngAfterViewChecked() {        
     this.scrollToBottom();        
   } 
 
+  /* Method to scroll dm display to the bottom automatically */
   scrollToBottom() {
     this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
   }

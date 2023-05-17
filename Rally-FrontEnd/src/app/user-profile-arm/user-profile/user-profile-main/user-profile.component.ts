@@ -43,6 +43,7 @@ export class UserProfileComponent implements OnInit {
   eventPost: any[];
   
   /* HTML booleans */
+  notHidden: boolean = true;
   noError: boolean = true;
   changeInfo: boolean = true;
   userDms: boolean = true;
@@ -76,8 +77,8 @@ export class UserProfileComponent implements OnInit {
       this.activeUserService.getMainUserBundleByUserName(localStorage.getItem('userName')).subscribe((data: MainUserBundle) => {
         this.userEntity = data.viewUser;
         this.userInformation = data.viewUserInformation;
-        this.allDmHistory = data.viewMainUserDmHistory.directMessageList;
-        this.userEntityDmList = data.viewMainUserDmHistory.userEntities;
+        this.allDmHistory = data.viewUserDmHistory.directMessageList;
+        this.userEntityDmList = data.viewUserDmHistory.userEntities;
         this.hiddenPost = data.viewUserPostHistory.viewUserHiddenPost;
         this.forumPost = data.viewUserPostHistory.viewUserForumPost;
         this.forumReplies = data.viewUserPostHistory.viewUserForumReplies;
@@ -113,7 +114,7 @@ export class UserProfileComponent implements OnInit {
   }
   
   /* Learning about LifeCycle Hooks in Angular / prevents error in the console when viewing 
-    direct messages while using the [scrollTop]="scrollMe.scrollHeight" */
+    direct messages while using the [scrollTop]="scrollMe.scrollHeight" in HTML*/
   /* Might be causing memory leak, further investigation required */
   ngAfterContentChecked() {
     this.scrollMe = this.scrollMe;
@@ -185,6 +186,7 @@ export class UserProfileComponent implements OnInit {
 
   /* Display conversation with user selected */
   displayConversation( userDms: UserEntity) {
+    this.conversation = [];
     this.respondToDm = null;
 
     for (let i = 0; i < this.userEntityDmList.length; i++) {
@@ -246,8 +248,7 @@ export class UserProfileComponent implements OnInit {
       city: userDetails.value.city,
       state: userDetails.value.state
     }
-    console.log(userInfo)
-    this.http.post('http://localhost:8080/user/update-user-information', userInfo).subscribe((response: UserInformation) => {
+    this.http.put<any>('http://localhost:8080/user/update-user-information/' + localStorage.getItem("id"), userInfo).subscribe((response: UserInformation) => {
         this.userInformation = response
         this.changeInfo=true;
         return;

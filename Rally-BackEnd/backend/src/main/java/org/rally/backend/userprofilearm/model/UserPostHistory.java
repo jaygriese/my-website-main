@@ -5,7 +5,6 @@ import org.rally.backend.forumarm.models.ForumPosts;
 import org.rally.backend.forumarm.models.Replies;
 import org.rally.backend.resourcearm.model.response.Resource;
 import org.rally.backend.servicesarm.model.response.Service;
-import org.rally.backend.userprofilearm.model.HiddenPost;
 
 import java.util.List;
 

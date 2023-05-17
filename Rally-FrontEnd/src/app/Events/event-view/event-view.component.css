@@ -25,13 +25,14 @@
     text-align: left;
     font-size: 35px;
     font-family: arial;
+    /* margin-bottom: -5px; */
 }
 
 #event_display2 {
     text-align: left;
     font-size: 35px;
     font-family: arial;
-    margin-bottom: -5px; 
+    /* margin-bottom: -5px;  */
 }
 
 .rectangle {
@@ -63,6 +64,20 @@
 
 .card-img {
     /* background-color: aqua; */
+}
+
+/* .demo-inline-calendar-card {
+    width: 300px;
+  } */
+
+  div#calendar_3 {
+    display: inline !important;
+    margin-left: 600px !important;
+    margin-top: -522px !important;
+}
+
+#id_3 {
+    padding-bottom: 350px !important;
 }
 
 

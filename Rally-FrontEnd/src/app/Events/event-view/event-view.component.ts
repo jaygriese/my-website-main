@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from '../models/event';
 
+
 @Component({
   selector: 'app-event-view',
   templateUrl: './event-view.component.html',
@@ -19,6 +20,8 @@ export class EventViewComponent implements OnInit {
 
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
+
+  DateSelected: any;
   
 
   constructor(private http: HttpClient, private router: Router) {
@@ -26,6 +29,7 @@ export class EventViewComponent implements OnInit {
     this.eventsUrl = 'http://localhost:8080/events/events/'
     this.eventList;
     this.filteredEvents;
+    this.DateSelected;
 
    }
 
@@ -43,14 +47,19 @@ export class EventViewComponent implements OnInit {
   
   }
 
-// dateFilter(string: string) {
-//   this.filteredEvents.splice(0);
-//   for(let i = 0; i < this.eventList.length; i++) {
-//     if ( this.eventList[i].datetime === {{this.event.datetime}})
-//   }
-// }
 
-  
+byDate() {
+  this.filteredEvents.splice(0);
+  for(let i = 0; i < this.eventList.length; i++) {
+    if(this.eventList[i].datetime.includes(this.DateSelected)) {
+      this.filteredEvents.push(this.eventList[i])
+    }
+  }
+  return this.filteredEvents;
+}
+
+
+
 filter(string: string) {
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {

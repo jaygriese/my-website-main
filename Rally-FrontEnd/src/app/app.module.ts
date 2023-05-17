@@ -27,6 +27,9 @@ import { ForumTopic3Component } from './community-forum-arm/forum/forum-topic3/f
 import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-post.component';
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+// import {MatDatepickerModule} from '@angular/material/datepicker';
+// import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { EventEditComponent } from './Events/event-edit/event-edit.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    // MatDatepickerModule,
+    // MatCardModule,
   ],
   providers: [CookieService, ThemeserviceService],
   bootstrap: [AppComponent]

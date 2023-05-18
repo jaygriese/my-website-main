@@ -153,20 +153,22 @@
 
 
             <div class="col-7">
-                    <div class="card mb-3" style="max-width: 900px;" *ngFor="let event of filteredEvents">
+                    <div class="card mb-4" style="max-width: 900px;" *ngFor="let event of filteredEvents">
                     <!-- <div class="row no-gutters"> -->
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="/assets/events-assests/connect.jpg" class="card-img img-fluid rounded-start" alt="image">
+                            <img src="/assets/events-assets/volunteer.jpg"  class="card-img img-fluid rounded-start;" alt="volunteer">
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <div class="card-body">
+                                <!-- <h3 class="card-title">{{event.datetime | date:'short'}}</h3>
+                                <h2 class="card-title">{{event.eventTitle}}</h2>
+                                <p class="card-text">category: {{event.eventCategory}}</p>
+                                <p class="card-text"><small class="text-muted">hosted by {{event.eventHost}}</small></p> -->
                                 <p style="font-family:Impact;  font-size: 15;">{{event.datetime | date:'short'}}</p>
                                 <p style="font-weight: bold; margin-top: -20px;">{{event.eventTitle}}</p>
                                 <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory}}</p>
                                 <p style="font-size: 15px; font-style: italic; margin-top: 90px;">hosted by {{event.eventHost}}</p>
-
-
                                 <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
 
                                 <!-- <button class="btn btn-outline-info btn-xs" type="button"><a class="nav-link" routerLink="'http://localhost:4200/event/?id=' + event.id" routerLinkActive="active">learn more</a></button> -->

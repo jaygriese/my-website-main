@@ -13,6 +13,8 @@ import { DirectMessage } from '../../models/Directmessage';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { NgUserInformation } from '../../models/ng-model/UserInformation';
 import { HiddenPost } from '../../models/HiddenPost';
+import { Event } from 'src/app/Events/models/event';
+import { HidePostDTO } from '../../models/dto/HidePostDTO';
 
 @Component({
   selector: 'app-user-profile',
@@ -22,7 +24,6 @@ import { HiddenPost } from '../../models/HiddenPost';
 export class UserProfileComponent implements OnInit {
   
   /* logged in user information */
-  currentUser = localStorage.getItem('userName');
   logInStatus: boolean = false;
   userEntity: UserEntity;
   userInformation: UserInformation;
@@ -40,7 +41,7 @@ export class UserProfileComponent implements OnInit {
   hiddenPost: HiddenPost[];
   forumPost: any[];
   forumReplies: any[];
-  eventPost: any[];
+  eventPost: Event[];
   
   /* HTML booleans */
   notHidden: boolean = true;
@@ -52,6 +53,7 @@ export class UserProfileComponent implements OnInit {
 
   /* HTML variables */
   @ViewChild('dmBottomOfScroll') private scrollMe: ElementRef;
+  currentUser = localStorage.getItem('userName');
 
   /* Image uploading */
   uploadedImage: File;
@@ -80,6 +82,7 @@ export class UserProfileComponent implements OnInit {
         this.allDmHistory = data.viewUserDmHistory.directMessageList;
         this.userEntityDmList = data.viewUserDmHistory.userEntities;
         this.hiddenPost = data.viewUserPostHistory.viewUserHiddenPost;
+        console.log(this.hiddenPost)
         this.forumPost = data.viewUserPostHistory.viewUserForumPost;
         this.forumReplies = data.viewUserPostHistory.viewUserForumReplies;
         this.eventPost = data.viewUserPostHistory.viewUserEventPost;
@@ -97,7 +100,8 @@ export class UserProfileComponent implements OnInit {
         }
         this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user !== remove);
 
-        this.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
+        this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
+        this.updateHiddenPost();
       })
 
       /* Get user Profile pic */
@@ -121,34 +125,47 @@ export class UserProfileComponent implements OnInit {
     this.cdref.detectChanges();
   }
 
+  updateHiddenPost() {
+    for (let hide of this.hiddenPost) {
+      for (let post of this.allPost) {
+        if (hide.postType === post.type && hide.hidePostId === post.id) {
+          post.hidden = true;
+        }
+      }
+    }
+  }
+
   /* Hide requested post from profile */
-  hidePost(postId: string) {
-    this.http.post('http://localhost:8080/user/hidePostList', postId).subscribe((response) => {
+  hidePost(post: any) {
+
+    let hidePostDTO: HidePostDTO = {
+      postType: post.type,
+      hidePostId: post.id,
+      userId: Number(localStorage.getItem("id"))
+    }
+
+    this.http.post('http://localhost:8080/user/hidePostList', hidePostDTO).subscribe((response) => {
       console.log(response);
+      location.reload();
     })
   }
 
   /* Remove post from hidden post / Make post public */
-  unhidePost(postId: string) {
-    this.http.post('http://localhost:8080/user/unhidePost', postId).subscribe((response) => {
+  unhidePost(post: any) {
+
+    let hidePostDTO: HidePostDTO = {
+      postType: post.type,
+      hidePostId: post.id,
+      userId: Number(localStorage.getItem("id"))
+    }
+
+    console.log(hidePostDTO.hidePostId)
+
+    this.http.post('http://localhost:8080/user/unhidePost', hidePostDTO).subscribe((response) => {
       console.log(response);
+      location.reload();
     })
   }
-
-  oneBigList(forumPost, forumReplies, events) {  // , resources, restaurantReview, services
-    let bigJoin: any[] = [];
-    for (let post of forumPost) {
-      bigJoin.push(post);
-    }
-    for (let reply of forumReplies) {
-      bigJoin.push(reply);
-    }
-    for (let event of events) {
-      bigJoin.push(event);
-    }
-    this.allPost = bigJoin.sort();
-  }
-
 
   /* Select file to be uploaded */
   public onImageUpload(event) {

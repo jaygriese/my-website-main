@@ -9,6 +9,7 @@ import org.rally.backend.forumarm.repository.RepliesRepository;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.*;
 import org.rally.backend.userprofilearm.model.dto.DirectMessageDTO;
+import org.rally.backend.userprofilearm.model.dto.HidePostDTO;
 import org.rally.backend.userprofilearm.model.dto.UserInfoDTO;
 import org.rally.backend.userprofilearm.model.response.ResponseMessage;
 import org.rally.backend.userprofilearm.model.UserPostHistory;
@@ -206,24 +207,39 @@ public class UserProfileController {
     }
 
     @PostMapping("/hidePostList")
-    public ResponseEntity<?> hiddenPosts(@RequestBody int postId) {
-        Optional<ForumPosts> forumPosts = forumPostRepository.findById(postId);
+    public ResponseEntity<?> hiddenPosts(@RequestBody HidePostDTO hidePostDTO) {
 
-        for (HiddenPost post : hiddenPostRepository.findAll()) {
-            if (post.getHidePostId() == forumPosts.get().getId()) {
-                ResponseMessage responseMessage = new ResponseMessage("Post Already Hidden");
-                return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+        /** hide post based on their postType, sort through repos to find the right object to hide **/
+
+            for (HiddenPost post : hiddenPostRepository.findAll()) {
+                if (Objects.equals(hidePostDTO.getPostType(), "ForumPost") && !Objects.equals(post.getHidePostId(), hidePostDTO.getHidePostId())) {
+                    System.out.println("Forum Post triggering");
+                    ResponseMessage responseMessage = new ResponseMessage("Post Already Hidden");
+                    return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+                }
+                if (Objects.equals(hidePostDTO.getPostType(), "ForumReply") && !Objects.equals(post.getHidePostId(), hidePostDTO.getHidePostId())) {
+                    System.out.println("Forum Reply triggering");
+                    ResponseMessage responseMessage = new ResponseMessage("Post Already Hidden");
+                    return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+                }
+                if (Objects.equals(hidePostDTO.getPostType(), "Event") && !Objects.equals(post.getHidePostId(), hidePostDTO.getHidePostId())) {
+                    System.out.println("Event triggering");
+                    ResponseMessage responseMessage = new ResponseMessage("Post Already Hidden");
+                    return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+                }
             }
-        }
 
-        HiddenPost hiddenPost = new HiddenPost(forumPosts.get().getId(), forumPosts.get().getUserEntity().getId());
+        HiddenPost hiddenPost = new HiddenPost(hidePostDTO.getPostType(), hidePostDTO.getHidePostId(), hidePostDTO.getUserId());
         hiddenPostRepository.save(hiddenPost);
+
         return new ResponseEntity<>(hiddenPostRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/unhidePost")
-    public ResponseEntity<?> unhidePostFromProfile(@RequestBody int postId) {
-        Optional<ForumPosts> forumPosts = forumPostRepository.findById(postId);
+    public ResponseEntity<?> unhidePostFromProfile(@RequestBody HidePostDTO hidePostDTO) {
+
+
+        Optional<ForumPosts> forumPosts = forumPostRepository.findById(hidePostDTO.getHidePostId());
         if (forumPosts.isPresent()) {
             HiddenPost hiddenPost = hiddenPostRepository.findByHidePostId(forumPosts.get().getId());
             hiddenPostRepository.delete(hiddenPost);

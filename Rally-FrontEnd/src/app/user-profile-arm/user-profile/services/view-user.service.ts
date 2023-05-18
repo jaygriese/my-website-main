@@ -76,6 +76,7 @@ export class ViewUserService {
       };
       response.push(message2);
     }
+    /* Might not need these lines anymore */
     if (userDTO.neighborhood === "" || userDTO.neighborhood.length < 3 || userDTO.neighborhood.length > 20) {
       message3 = {
         message: 3,
@@ -130,5 +131,42 @@ export class ViewUserService {
     return response;
   }
 
+  oneBigList(forumPost, forumReplies, events) {  // , resources, restaurantReview, services
+    let bigJoin: any[] = [];
+    for (let post of forumPost) {
+      let uniForumPost = {
+        id: Number(post.id),
+        type: "ForumPost",
+        title: post.title,
+        description: post.description,
+        hidden: false,
+        originalObj: post
+      }
+      bigJoin.push(uniForumPost);
+    }
+    for (let reply of forumReplies) {
+      let uniForumReply = {
+        id: Number(reply.forumPosts.id),
+        type: "ForumReply",
+        title: `${reply.userEntity.userName} replied in ${reply.forumPosts.title}`,
+        description: reply.description,
+        hidden: false,
+        originalObj: reply
+      }
+      bigJoin.push(uniForumReply);
+    }
+    for (let event of events) {
+      let uniEvent = {
+        id: Number(event.id),
+        type: "Event",
+        title: event.eventTitle,
+        description: event.description,
+        hidden: false,
+        originalObj: event
+      }
+      bigJoin.push(uniEvent);
+    }
+    return bigJoin.sort();
+  }
 
 }

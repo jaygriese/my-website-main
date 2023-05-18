@@ -178,21 +178,55 @@
             <div class="scroll-posthistory">
                 <ul *ngFor="let post of this.allPost">
                     <div class="card" >
-                        <button type="button" (click)="hidePost(post.id)" >Hide this Post</button>
-                        <h2><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h2>
-                        <h2><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.eventTitle}}</a></h2>
+                        <div *ngIf="post.type === 'ForumPost'">
+                        <div *ngIf="post.hidden === false; else hiddenPost">
+                        <div class="card"><h6>{{ post.type }}</h6></div>
+                        <h3><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h3>
                         <h6>{{ post.description }}</h6>
-                        <div *ngFor="let hide of this?.hiddenPost">
-                        <div *ngIf="hide.hidePostId !== post.id; else hiddenPost">
+                        <div style="text-align: left;"><button type="button" (click)="hidePost(post)" >Hide this Post</button></div>
                         </div>
                         <ng-template #hiddenPost>
-                            <div style="text-align: left;">
-                            <button type="button" (click)="unhidePost(post.id)">Unhide Post?</button>
+                            <div class="card"><h6>{{ post.type }}</h6></div>
+                            <h3><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h3>
+                            <h6>{{ post.description }}</h6>
+                            <div style="text-align: left;"><button type="button" (click)="unhidePost(post)">Unhide Post?</button>
                             <p>This post is hidden.</p>
                             </div>
                         </ng-template>
                         </div>
-                    </div>
+                        <div *ngIf="post.type === 'ForumReply'">
+                            <div *ngIf="post.hidden === false; else hiddenPost">
+                            <div class="card"><h6>{{ post.type }}</h6></div>
+                            <h3><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h3>
+                            <h6>{{ post.description }}</h6>
+                            <div style="text-align: left;"><button type="button" (click)="hidePost(post)" >Hide this Post</button></div>
+                            </div>
+                            <ng-template #hiddenPost>
+                                <div class="card"><h6>{{ post.type }}</h6></div>
+                                <h3><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h3>
+                                <h6>{{ post.description }}</h6>
+                                <div style="text-align: left;"><button type="button" (click)="unhidePost(post)">Unhide Post?</button>
+                                <p>This post is hidden.</p>
+                                </div>
+                            </ng-template>
+                            </div>
+                            <div *ngIf="post.type === 'Event'">
+                                <div *ngIf="post.hidden === false; else hiddenPost">
+                                <div class="card"><h6>{{ post.type }}</h6></div>
+                                <h3><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h3>
+                                <h6>{{ post.description }}</h6>
+                                <div style="text-align: left;"><button type="button" (click)="hidePost(post)" >Hide this Post</button></div>
+                                </div>
+                                <ng-template #hiddenPost>
+                                    <div class="card"><h6>{{ post.type }}</h6></div>
+                                    <h3>{{ post.title }}</h3> <a routerLink='/forum/post/{{post.id}}' routerLinkActive="active"></a>
+                                    <h6>{{ post.description }}</h6>
+                                    <div style="text-align: left;"><button type="button" (click)="unhidePost(post)">Unhide Post?</button>
+                                    <p>This post is hidden.</p>
+                                    </div>
+                                </ng-template>
+                                </div>
+                </div>
                 </ul>
             </div>
         </div>

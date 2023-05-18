@@ -11,8 +11,15 @@ public class HiddenPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String postType;
     private Integer hidePostId;
     private Integer userId;
+
+    public HiddenPost(String postType, Integer hidePostId, Integer userId) {
+        this.postType = postType;
+        this.hidePostId = hidePostId;
+        this.userId = userId;
+    }
 
     public HiddenPost(Integer hidePostId, Integer userId) {
         this.hidePostId = hidePostId;
@@ -20,6 +27,14 @@ public class HiddenPost {
     }
 
     public HiddenPost() {
+    }
+
+    public String getPostType() {
+        return postType;
+    }
+
+    public void setPostType(String postType) {
+        this.postType = postType;
     }
 
     public Integer getId() {

@@ -1,13 +1,11 @@
-export class HiddenPost {
+export class HidePostDTO {
 
-	id: string;
 	postType: string;
     hidePostId: number;
     userId: number;
 
 	
-	constructor(id: string, postType: string, hidePostId: number, userId: number){
-		this.id = id;
+	constructor(postType: string, hidePostId: number, userId: number){
 		this.postType = postType;
 		this.hidePostId = hidePostId;
         this.userId = userId;

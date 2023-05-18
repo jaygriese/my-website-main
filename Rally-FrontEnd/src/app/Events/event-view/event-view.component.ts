@@ -51,6 +51,16 @@ export class EventViewComponent implements OnInit {
   }
 
 
+// byDate() {
+//   this.filteredEvents.splice(0);
+//   for(let i = 0; i < this.eventList.length; i++) {
+//     if(this.eventList[i].datetime.includes(this.DateSelected)) {
+//       this.filteredEvents.push(this.eventList[i])
+//     } 
+//   }
+//   return this.filteredEvents;
+// }
+
 byDate() {
   this.filteredEvents.splice(0);
   for(let i = 0; i < this.eventList.length; i++) {
@@ -58,7 +68,12 @@ byDate() {
       this.filteredEvents.push(this.eventList[i])
     } 
   }
-  return this.filteredEvents;
+  if(this.filteredEvents.length === 0) {
+    return this.isEmpty;
+  } else {
+    return this.filteredEvents;
+  }
+  // return this.filteredEvents;
 }
 
 

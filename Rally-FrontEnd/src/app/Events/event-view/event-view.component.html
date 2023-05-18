@@ -149,6 +149,13 @@
 
 
             <div class="col-7">
+
+                 <!-- <div *ngIf="isEmpty; else notEmpty">
+                    <p>No events found at this time.</p>
+                </div> -->
+
+                <!-- <ng-template #notEmpty> -->
+
                     <div class="card mb-4" style="max-width: 900px;" *ngFor="let event of filteredEvents">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -166,7 +173,7 @@
                                 <p class="card-text"><small class="text-muted">hosted by {{event.eventHost}}</small></p> -->
                                 <p style="font-family:Impact;  font-size: 15;">{{event.datetime | date:'short'}}</p>
                                 <p style="font-weight: bold; margin-top: -10px;">{{event.eventTitle}}</p>
-                                <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory}}</p>
+                                <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
                                 <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>
                                 <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
 
@@ -176,11 +183,11 @@
                              </div>
                         </div>
                     </div>
-
                 </div>
-                <!-- <div *ngIf="isEmpty === true">
-                    <p>No events found at this time.</p>
-                </div> -->
+
+
+            <!-- </ng-template> -->
+               
 
             </div>
         </div>

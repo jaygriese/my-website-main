@@ -35,13 +35,13 @@
 <body style="margin-top: 80px;">
     <div class="container" *ngIf="eventDetails">
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col">
                 <a href="http://localhost:4200/create/" class="myButton">JOIN</a>
             </div>
         </div>
         <br>
-        <br>
+        <br> -->
         <br>
         <br>
 
@@ -57,7 +57,7 @@
                 <hr style="height:4px; color: #0097b2; background-color: #0097b2;">
             </div>
         </div>
-        <br>
+        <!-- <br> -->
        
         <div class="row" >
             <div class="col-3">
@@ -86,10 +86,17 @@
 
             <div class="col-7">
                 <div id="details">
-                    <p style="font-size: 15px; margin-top: -12px;"><span style="font-weight: bolder;">CATEGORY: </span> {{eventDetails.eventCategory}}</p>
-                    <img src="/assets/events-assets/volunteer.jpg"  width="300" height="300" />
                     <br>
-                    <p style="font-size: 15px; font-style: italic; font-weight: bolder;">hosted by: {{eventDetails.eventHost}}</p>  
+                    <p style="font-size: 15px; margin-top: -12px;">category: <span style="font-weight: bolder;">{{eventDetails.eventCategory | uppercase}}</span> </p>
+                    <div>
+                        <img *ngIf="eventDetails.eventCategory === 'connect'" src="/assets/events-assets/connect.jpg" width="300" height="300">
+                        <img *ngIf="eventDetails.eventCategory === 'learn'" src="/assets/events-assets/learn.jpg" width="300" height="300">
+                        <img *ngIf="eventDetails.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg" width="300">
+                        <img *ngIf="eventDetails.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg" width="300" height="300">
+                        <img *ngIf="eventDetails.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg" width="300" height="300">
+                    </div>
+                    <br>
+                    <p style="font-size: 15px; font-style: italic;">hosted by: <span style="font-weight: bolder;">{{eventDetails.eventHost}}</span></p>  
                     <br>
                     <p style="font-size: 20px; font-weight: bolder;">address:</p>
                     <p style="margin-top: -15px;">{{eventDetails.eventAddress}}</p>

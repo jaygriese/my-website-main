@@ -133,17 +133,13 @@
 
                     <div>
                         <button class="button2" (click)="filter('connect')" >connect</button>
-                        <!-- <button class="button2" (click)="connect()" >connect</button> -->
                         <button class="button2" (click)="filter('learn')" >learn</button>
                         <button class="button2" (click)="filter('volunteer')">volunteer</button>
                         <button class="button2" (click)="filter('donate')">donate</button>
                         <button class="button2" (click)="filter('celebrate')">celebrate</button>
-                        <!-- <button class="button2" (click)="reset()">reset</button> -->
                         <button class="button2" (click)="viewAll()">view all</button>
                     </div>
                    
-
-                
             </span>
             </div>
 
@@ -154,10 +150,13 @@
 
             <div class="col-7">
                     <div class="card mb-4" style="max-width: 900px;" *ngFor="let event of filteredEvents">
-                    <!-- <div class="row no-gutters"> -->
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="/assets/events-assets/volunteer.jpg"  class="card-img img-fluid rounded-start;" alt="volunteer">
+                                <img *ngIf="event.eventCategory === 'connect'" src="/assets/events-assets/connect.jpg"  class="card-img img-fluid rounded-start;">
+                                <img *ngIf="event.eventCategory === 'learn'" src="/assets/events-assets/learn.jpg"  class="card-img img-fluid rounded-start;">
+                                <img *ngIf="event.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg"  class="card-img img-fluid rounded-start;">
+                                <img *ngIf="event.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg"  class="card-img img-fluid rounded-start;">
+                                <img *ngIf="event.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg"  class="card-img img-fluid rounded-start;">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -166,9 +165,9 @@
                                 <p class="card-text">category: {{event.eventCategory}}</p>
                                 <p class="card-text"><small class="text-muted">hosted by {{event.eventHost}}</small></p> -->
                                 <p style="font-family:Impact;  font-size: 15;">{{event.datetime | date:'short'}}</p>
-                                <p style="font-weight: bold; margin-top: -20px;">{{event.eventTitle}}</p>
+                                <p style="font-weight: bold; margin-top: -10px;">{{event.eventTitle}}</p>
                                 <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory}}</p>
-                                <p style="font-size: 15px; font-style: italic; margin-top: 90px;">hosted by {{event.eventHost}}</p>
+                                <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>
                                 <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
 
                                 <!-- <button class="btn btn-outline-info btn-xs" type="button"><a class="nav-link" routerLink="'http://localhost:4200/event/?id=' + event.id" routerLinkActive="active">learn more</a></button> -->
@@ -179,9 +178,9 @@
                     </div>
 
                 </div>
-                <div *ngIf="isEmpty === true">
+                <!-- <div *ngIf="isEmpty === true">
                     <p>No events found at this time.</p>
-                </div>
+                </div> -->
 
             </div>
         </div>

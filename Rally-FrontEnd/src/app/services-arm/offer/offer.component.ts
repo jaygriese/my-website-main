@@ -18,14 +18,12 @@ export class OfferComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
-    this.userUrl = 'http://localhost:8080/service/offer';
+    this.userUrl = 'http://localhost:8080/services/offer';
    }
 
   ngOnInit(): void {
 
-
     this.verifyLoggedIn();
-
     
   }
 
@@ -36,6 +34,12 @@ export class OfferComponent implements OnInit {
       this.logInStatus = true;
     }
 
+  }
+
+  logOut() {
+    localStorage.clear();
+    console.log(localStorage.getItem('userName'))
+    this.logInStatus = false;
   }
 
   // Validations
@@ -53,15 +57,9 @@ export class OfferComponent implements OnInit {
 
   model = new Name(localStorage.getItem('userName'), localStorage.getItem('service'), localStorage.getItem('description'), localStorage.getItem('email'));
 
-
-  logOut() {
-    localStorage.clear();
-    console.log(localStorage.getItem('userName'))
-    this.logInStatus = false;
-  }
-
   submitted = false;
 
+  // submit form method
   onSubmit(f: NgForm ) {
 
     this.submitted = true;

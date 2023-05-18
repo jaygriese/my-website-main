@@ -69,4 +69,9 @@ public class Service extends AbstractEntity {
     public void setType(Type type) {
         this.type = type;
     }
+
+    public String getTime() {
+        return time;
+    }
+
 }

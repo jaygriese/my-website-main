@@ -37,8 +37,6 @@
 
     <div id="event_details">
         <form #eventInformation="ngForm" (ngSubmit)="updateEvent(eventInformation)">
-            <!-- <form #eventInformation="ngForm" (ngSubmit)="onSubmit(buttonType)"> -->
-                <!-- <form #eventInformation="ngForm" (ngSubmit)="onSubmit()"> -->
             <div style=float:left; id="form_1">
                 <input type="hidden" id="id" name="eventId" value="event.id" ngModel>
                 <label>host</label><br>
@@ -64,12 +62,11 @@
    
                 <label>category</label>
                 <hr style="width:550px; margin-top:0;">
-                    <input type="radio" value="connect" [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> connect
-                    <input type="radio" value="volunteer" [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> volunteer
-                    <input type="radio" value="learn" [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> learn <br>
-                    <input type="radio" value="donate"  [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> donate
-                    <input type="radio" value="celebrate"  [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> celebrate
-               
+                    <input type="radio" value="connect" required [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> connect
+                    <input type="radio" value="volunteer" required [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> volunteer
+                    <input type="radio" value="learn" required [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> learn <br>
+                    <input type="radio" value="donate"  required [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> donate
+                    <input type="radio" value="celebrate" required [(ngModel)]="event.eventCategory" name="eventCategory" ngModel> celebrate
 
                 <br>
                 <br>
@@ -86,21 +83,14 @@
                 <br>
                 <br>
 
-
                 <!-- <label>Would you like to add a photo?</label><br>
                 <input type="file" id="imageId" name="imageId" accept="image/*" ngModel="value"> -->
 
-
                 <br>
                 <br>
                 <br>
                 <br>
-                
-                <!-- <input type="submit" value="SUBMIT"> -->
-                <!-- <button type="submit" id="create_btn">SUBMIT</button> -->
-                <!-- <button (click)="list()" type="submit" id="create_btn">SUBMIT</button> -->
-                
-                <!-- <button type="submit" id="edit_btn" (click)="onSubmit('update')">UPDATE</button> -->
+            
                 
                 <button type="submit" id="edit_btn" >EDIT</button>
                 <br>

@@ -76,31 +76,8 @@
         
         <div class="row">
             <div class="col-3">
-                <!-- <p id="event_display1">event calendar</p> -->
                 <p id="event_display1">search by date</p>
-
-                <!-- <div>
-                <input [matDatepicker]="basicDatepicker">
-                <mat-datepicker-toggle [for]="basicDatepicker"></mat-datepicker-toggle>
-                <mat-datepicker #basicDatepicker></mat-datepicker>
-
-                </div> -->
                 
-
-                <!-- <div>
-                    <mat-card class="demo-inline-calendar-card">
-                        <mat-calendar (selectedChange)="selected = $event"></mat-calendar>
-                      </mat-card>
-                </div> -->
-
-                <!-- <span class="datepicker-toggle">
-                    <span class="datepicker-toggle-button"></span>
-                    <input type="date" class="datepicker-input">
-                  </span> -->
-                  
-
-        
-
                 <div class="card w-100">
                     <div class="card-body">
                       <h3 class="card-title">
@@ -109,13 +86,6 @@
                       <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
                     </div>
                   </div>
-               
-                 <!-- <div>
-
-                       I'm available: <input type="date" [(ngModel)]="DateSelected"><br>
-                        <button class="button2" style="width: 300px;" (click)="byDate()" >Filter</button> -->
-                        <!-- <p>Events happening on: {{DateSelected | date}}</p> -->
-                 <!-- </div> -->
 
             <br>
             <br>
@@ -138,22 +108,19 @@
 
             <div class="col-2"></div>
 
-            <div class="col-7">
+                <div class="col-7">
 
                    <div class="card mb-4" style="max-width: 900px;" *ngFor="let event of filteredEvents">
-
-                        <!-- <div *ngIf="filteredEvents.length === 0; else notEmpty">
-                            <p>No events found at this time.</p>
-                        </div> -->
-                    <!-- <ng-template #notEmpty> -->
-                        <div class="row g-0">
-                            <div class="col-md-4">
+                        
+                    <ng-container *ngIf="filteredEvents.length !== 0">
+                       <div class="row g-0">
+                                <div class="col-md-4">
                                     <img *ngIf="event.eventCategory === 'connect'" src="/assets/events-assets/connect.jpg"  class="card-img img-fluid rounded-start;">
                                     <img *ngIf="event.eventCategory === 'learn'" src="/assets/events-assets/learn.jpg"  class="card-img img-fluid rounded-start;">
                                     <img *ngIf="event.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg"  class="card-img img-fluid rounded-start;">
                                     <img *ngIf="event.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg"  class="card-img img-fluid rounded-start;">
                                     <img *ngIf="event.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg"  class="card-img img-fluid rounded-start;">
-                            </div>
+                                </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <!-- <h3 class="card-title">{{event.datetime | date:'short'}}</h3>
@@ -165,25 +132,18 @@
                                     <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
                                     <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>
                                     <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
-
-                                    <!-- <button class="btn btn-outline-info btn-xs" type="button"><a class="nav-link" routerLink="'http://localhost:4200/event/?id=' + event.id" routerLinkActive="active">learn more</a></button> -->
-                                    <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" style="font-size: 15px;">learn more</a> -->
-
                                 </div>
                             </div>
-                        </div>
-                    <!-- </ng-template> -->
+                        </div>    
+                    </ng-container>
 
-                        <ng-template #empty>
-                            <p>No events found at this time.</p>
-                        </ng-template>
-                </div>
+                    </div> 
 
-
-           
-               
-
-            </div>
+                    <ng-container *ngIf="filteredEvents.length===0">
+                        <p style="font-size: 25px;">No events found at this time.</p>
+                    </ng-container>
+                     
+                </div>             
         </div>
     </div>
 </body>

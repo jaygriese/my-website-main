@@ -22,8 +22,6 @@ export class EventViewComponent implements OnInit {
   filteredEvents: Event[] = [];
 
   DateSelected: any;
-
-  // isEmpty: Boolean;
   
 
   constructor(private http: HttpClient, private router: Router) {
@@ -32,7 +30,6 @@ export class EventViewComponent implements OnInit {
     this.eventList;
     this.filteredEvents;
     this.DateSelected;
-    // this.isEmpty = false;
 
    }
 
@@ -60,7 +57,6 @@ byDate() {
   }
   return this.filteredEvents;
 }
-
 
 
 filter(string: string) {

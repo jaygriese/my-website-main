@@ -25,14 +25,12 @@
     text-align: left;
     font-size: 35px;
     font-family: arial;
-    /* margin-bottom: -5px; */
 }
 
 #event_display2 {
     text-align: left;
     font-size: 35px;
     font-family: arial;
-    /* margin-bottom: -5px;  */
 }
 
 .rectangle {
@@ -41,7 +39,6 @@
     width: auto;
     box-sizing: border-box;
     border: 1px solid black;
-    /* border: 1px solid #f4d668; */
 }
 
 .button2 {
@@ -68,6 +65,17 @@
   height: 100%;
   object-fit: cover;
 }
+
+.btn {
+    background-color: #fff;
+    border-color: #5AD5E7;
+    transition: all .7s;
+  }
+  .btn:hover {
+    color: #fff;
+    background-color: #5AD5E7;
+    border-color:#5AD5E7;
+  }
 
 
 

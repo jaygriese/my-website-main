@@ -117,76 +117,70 @@
                         <!-- <p>Events happening on: {{DateSelected | date}}</p> -->
                  <!-- </div> -->
 
-
-                <!-- <div class="rectangle">
-
-                </div> -->
-                 <!-- <div >
-
-                </div> -->
             <br>
             <br>
             <br>
             
-            <span>
-                <p id="event_display2">search by category</p>
+                <span>
+                    <p id="event_display2">search by category</p>
 
-                    <div>
-                        <button class="button2" (click)="filter('connect')" >connect</button>
-                        <button class="button2" (click)="filter('learn')" >learn</button>
-                        <button class="button2" (click)="filter('volunteer')">volunteer</button>
-                        <button class="button2" (click)="filter('donate')">donate</button>
-                        <button class="button2" (click)="filter('celebrate')">celebrate</button>
-                        <button class="button2" (click)="viewAll()">view all</button>
-                    </div>
-                   
-            </span>
+                        <div>
+                            <button class="button2" (click)="filter('connect')" >connect</button>
+                            <button class="button2" (click)="filter('learn')" >learn</button>
+                            <button class="button2" (click)="filter('volunteer')">volunteer</button>
+                            <button class="button2" (click)="filter('donate')">donate</button>
+                            <button class="button2" (click)="filter('celebrate')">celebrate</button>
+                            <button class="button2" (click)="viewAll()">view all</button>
+                        </div>
+                    
+                </span>
             </div>
 
-            <div class="col-2">
-
-            </div>
-
+            <div class="col-2"></div>
 
             <div class="col-7">
 
-                 <!-- <div *ngIf="isEmpty; else notEmpty">
-                    <p>No events found at this time.</p>
-                </div> -->
+                   <div class="card mb-4" style="max-width: 900px;" *ngFor="let event of filteredEvents">
 
-                <!-- <ng-template #notEmpty> -->
+                        <!-- <div *ngIf="filteredEvents.length === 0; else notEmpty">
+                            <p>No events found at this time.</p>
+                        </div> -->
+                    <!-- <ng-template #notEmpty> -->
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                    <img *ngIf="event.eventCategory === 'connect'" src="/assets/events-assets/connect.jpg"  class="card-img img-fluid rounded-start;">
+                                    <img *ngIf="event.eventCategory === 'learn'" src="/assets/events-assets/learn.jpg"  class="card-img img-fluid rounded-start;">
+                                    <img *ngIf="event.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg"  class="card-img img-fluid rounded-start;">
+                                    <img *ngIf="event.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg"  class="card-img img-fluid rounded-start;">
+                                    <img *ngIf="event.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg"  class="card-img img-fluid rounded-start;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <!-- <h3 class="card-title">{{event.datetime | date:'short'}}</h3>
+                                    <h2 class="card-title">{{event.eventTitle}}</h2>
+                                    <p class="card-text">category: {{event.eventCategory}}</p>
+                                    <p class="card-text"><small class="text-muted">hosted by {{event.eventHost}}</small></p> -->
+                                    <p style="font-family:Impact;  font-size: 15;">{{event.datetime | date:'short'}}</p>
+                                    <p style="font-weight: bold; margin-top: -10px;">{{event.eventTitle}}</p>
+                                    <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
+                                    <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>
+                                    <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
 
-                    <div class="card mb-4" style="max-width: 900px;" *ngFor="let event of filteredEvents">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                                <img *ngIf="event.eventCategory === 'connect'" src="/assets/events-assets/connect.jpg"  class="card-img img-fluid rounded-start;">
-                                <img *ngIf="event.eventCategory === 'learn'" src="/assets/events-assets/learn.jpg"  class="card-img img-fluid rounded-start;">
-                                <img *ngIf="event.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg"  class="card-img img-fluid rounded-start;">
-                                <img *ngIf="event.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg"  class="card-img img-fluid rounded-start;">
-                                <img *ngIf="event.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg"  class="card-img img-fluid rounded-start;">
+                                    <!-- <button class="btn btn-outline-info btn-xs" type="button"><a class="nav-link" routerLink="'http://localhost:4200/event/?id=' + event.id" routerLinkActive="active">learn more</a></button> -->
+                                    <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" style="font-size: 15px;">learn more</a> -->
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <!-- <h3 class="card-title">{{event.datetime | date:'short'}}</h3>
-                                <h2 class="card-title">{{event.eventTitle}}</h2>
-                                <p class="card-text">category: {{event.eventCategory}}</p>
-                                <p class="card-text"><small class="text-muted">hosted by {{event.eventHost}}</small></p> -->
-                                <p style="font-family:Impact;  font-size: 15;">{{event.datetime | date:'short'}}</p>
-                                <p style="font-weight: bold; margin-top: -10px;">{{event.eventTitle}}</p>
-                                <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
-                                <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>
-                                <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
+                    <!-- </ng-template> -->
 
-                                <!-- <button class="btn btn-outline-info btn-xs" type="button"><a class="nav-link" routerLink="'http://localhost:4200/event/?id=' + event.id" routerLinkActive="active">learn more</a></button> -->
-                                <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" style="font-size: 15px;">learn more</a> -->
-
-                             </div>
-                        </div>
-                    </div>
+                        <ng-template #empty>
+                            <p>No events found at this time.</p>
+                        </ng-template>
                 </div>
 
 
-            <!-- </ng-template> -->
+           
                
 
             </div>

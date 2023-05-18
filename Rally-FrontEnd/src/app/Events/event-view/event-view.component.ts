@@ -23,7 +23,7 @@ export class EventViewComponent implements OnInit {
 
   DateSelected: any;
 
-  isEmpty: Boolean;
+  // isEmpty: Boolean;
   
 
   constructor(private http: HttpClient, private router: Router) {
@@ -32,7 +32,7 @@ export class EventViewComponent implements OnInit {
     this.eventList;
     this.filteredEvents;
     this.DateSelected;
-    this.isEmpty = false;
+    // this.isEmpty = false;
 
    }
 
@@ -51,16 +51,6 @@ export class EventViewComponent implements OnInit {
   }
 
 
-// byDate() {
-//   this.filteredEvents.splice(0);
-//   for(let i = 0; i < this.eventList.length; i++) {
-//     if(this.eventList[i].datetime.includes(this.DateSelected)) {
-//       this.filteredEvents.push(this.eventList[i])
-//     } 
-//   }
-//   return this.filteredEvents;
-// }
-
 byDate() {
   this.filteredEvents.splice(0);
   for(let i = 0; i < this.eventList.length; i++) {
@@ -68,12 +58,7 @@ byDate() {
       this.filteredEvents.push(this.eventList[i])
     } 
   }
-  if(this.filteredEvents.length === 0) {
-    return this.isEmpty;
-  } else {
-    return this.filteredEvents;
-  }
-  // return this.filteredEvents;
+  return this.filteredEvents;
 }
 
 

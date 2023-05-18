@@ -1,32 +1,30 @@
-<div class="big">
 <div *ngIf="logInStatus; else notLoggedIn">
-    
-    <div style="text-align: right;">
-        <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
-    </div>
-    
-
-
+    <div>
+        <span class="right"><span  class="loginName"> Logged in as: {{currentUser}}</span>  <button style="position: relative" class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
+    </div> 
 </div>
+<!-- log in button -->
 <ng-template #notLoggedIn>
-    <h2></h2>
-
     <p>User is not logged in. </p>
     <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
 </ng-template>
-    <div *ngIf="darktheme; else lightTheme" style="text-align: right;">
-        <button (click)="Light()">Turn on the lights</button>
+<!-- log out button -->
+<div class="left" *ngIf="darktheme; else lightTheme">
+        <button class="btn btn-warning" (click)="Light()">Turn on the lights</button>
+</div>
+<ng-template #lightTheme>
+    <div class="left">
+        <button class="btn btn-dark" (click)="Dark()">Turn off the lights</button>
     </div>
-    <ng-template #lightTheme>
-        <div style="text-align: right;"><button (click)="Dark()">Turn off the lights</button></div>
-    </ng-template>
-    <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
-        <div style="text-align: right;">
-            <input type="text" name="description" required ngModel>
-            <input type="submit" value="Search Posts">
-        </div>
-    </form>
-        <!-- search button -->   
+</ng-template> 
+    <!-- light/dark theme buttons    -->
+<form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
+    <div class="middle">
+        <input type="text" name="description" required ngModel>
+        <input class="btn btn-info" type="submit" value="Search Posts">
+    </div>
+</form>
+<!-- search button -->
 <div id="theme" class="white">
 <body class="white-theme"><div class="container-fluid"><h1>Community Forum</h1></div></body>
 <br>
@@ -69,5 +67,4 @@
     </div>
 </body>
 <br><br>
-</div>
 </div>

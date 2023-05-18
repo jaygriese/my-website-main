@@ -1,38 +1,31 @@
-
-    <div *ngIf="logInStatus; else notLoggedIn">
-        <div style="text-align: right;">
-            <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
-        </div>
+<div *ngIf="logInStatus; else notLoggedIn">
+    <div>
+        <span class="right"><span  class="loginName"> Logged in as: {{currentUser}}</span> <button style="position: relative" class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
+    </div> 
+</div>
+<!-- log in button -->
+<ng-template #notLoggedIn>
+    <p>User is not logged in. </p>
+    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+</ng-template>
+<!-- log out button -->
+<div class="left" *ngIf="darktheme; else lightTheme">
+        <button class="btn btn-warning" (click)="Light()">Turn on the lights</button>
+</div>
+<ng-template #lightTheme>
+    <div class="left">
+        <button class="btn btn-dark" (click)="Dark()">Turn off the lights</button>
     </div>
-    <!-- log in button -->
-    <ng-template #notLoggedIn>
-        <p>User is not logged in. </p>
-        <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
-    </ng-template>
-    <!-- log out button -->
-    <div *ngIf="darktheme; else lightTheme" style="text-align: right;">
-            <button (click)="Light()">Turn on the lights</button>
+</ng-template> 
+    <!-- light/dark theme buttons    -->
+<form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
+    <div class="middle">
+        <input type="text" name="description" required ngModel>
+        <input class="btn btn-info" type="submit" value="Search Posts">
     </div>
-    <ng-template #lightTheme>
-        <div style="text-align: right;">
-            <button (click)="Dark()">Turn off the lights</button>
-        </div>
-    </ng-template> 
-        <!-- light/dark theme buttons    -->
-        <br>
-    <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
-        <div style="text-align: right;">
-            <input type="text" name="description" required ngModel>
-            <input type="submit" value="Search Posts">
-        </div>
-    </form>
-        <!-- search button -->
-    <div *ngIf="!createPostBoolean; else createPostForm">   
-        <div *ngIf="logInStatus">
-            <button (click)="createPostButton()" class="btn btn-primary">Create Post</button>
-        </div>
-    </div>
-        <!-- create post button  -->
+</form>
+<!-- search button -->
+    <!-- create post button  -->
     <div id="theme" class="white">
     <!-- background theme  -->
     <body class="white-theme">
@@ -40,44 +33,63 @@
             <h1>Volunteering/Event Recruitment</h1>
         </div>
     </body>
+    <div *ngIf="!createPostBoolean; else createPostForm">   
+        <div *ngIf="logInStatus">
+            <button (click)="createPostButton()" class="btn btn-primary">Create Post</button>
+        </div>
+    </div>  
     <!-- Page header -->
             <br>
             <br>
-    <div *ngIf="darktheme; else lightSections">
-        <div class="container-fluid" style="text-align: left;" *ngFor="let test of newArray">
-            <div class="black-background">
-                <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                    <p>Posted by {{test.userEntity.userName}}</p> <p>{{test.forumPostLike.likes}} likes</p>
+            <div *ngIf="darktheme; else lightSections">
+                <div style="text-align: left;" *ngFor="let test of newArray">
+                    <div class="black-background">
+                        <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
+                            <p>Posted by {{test.userEntity.userName}}</p> <span>{{test.forumPostLike.likes}} likes</span> &nbsp;&nbsp;&nbsp;
+                            <span *ngIf="logInStatus">
+                                <button style="font-size: 18px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
+                            </span>         
+                    </div>
+                    <br>
+                </div>
             </div>
-            <div *ngIf="logInStatus">
-                <button (click)="LikePost(test.id)"> Like Post?</button>
-            </div>
-        </div>
-    </div>
-    <!-- dark theme posts -->
-    <ng-template #lightSections>
-        <div style="text-align: left;" *ngFor="let test of newArray">
-            <div class="white-theme">
-                <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                    <p>Posted by {{test.userEntity.userName}}</p> <p>{{test.forumPostLike.likes}} likes</p>
-            </div>
-            <br><br>
-            <div *ngIf="logInStatus">
-                <button (click)="LikePost(test.id)"> Like Post?</button>
-            </div>
-        </div>
-    </ng-template>
-    <!-- light theme posts -->
+            <!-- dark theme posts -->
+            <ng-template #lightSections>
+                <div style="text-align: left;" *ngFor="let test of newArray">
+                    <div class="white-theme">
+                        <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
+                            <p>Posted by {{test.userEntity.userName}}     </p> <span>{{test.forumPostLike.likes}} likes</span> &nbsp;&nbsp;&nbsp;
+                            <span *ngIf="logInStatus">
+                                <button style="font-size: 18px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
+                            </span>         
+                    </div>
+                    <br>
+                </div>
+            </ng-template>
+            <!-- light theme posts -->
 </div>
 
 <ng-template #createPostForm>
     <div *ngIf="logInStatus">
         <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">
-            <label>Title: <input type="text" name="title" required ngModel></label>
+            <div *ngIf="darktheme; else lightForm">
+                <body class="black-background">
+                    <label>Title: <input type="text" name="title" required ngModel></label>
                                 <br><br>
-            <label>Description: <input type="text" name="description" required ngModel></label>     
+                    <label>Description: <input type="text" name="description" required ngModel></label>     
                                 <br><br>
-            <input type="submit" value="Submit">
+                    <input type="submit" value="Submit">
+                </body>
+            </div>
+            <ng-template #lightForm>
+                <body class="white-theme">
+                    <label>Title: <input type="text" name="title" required ngModel></label>
+                                <br><br>
+                    <label>Description: <input type="text" name="description" required ngModel></label>     
+                                <br><br>
+                    <input type="submit" value="Submit">
+                </body>
+            </ng-template>
         </form>
     </div>
 </ng-template>

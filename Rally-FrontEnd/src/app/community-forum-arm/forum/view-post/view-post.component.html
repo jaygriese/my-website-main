@@ -1,21 +1,23 @@
 <div *ngIf="logInStatus; else notLoggedIn">
-    <div style="text-align: right;">
-        <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
-    </div>
+    <div>
+        <span class="right"><span  class="loginName"> Logged in as: {{currentUser}}</span>  <button style="position: relative" class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
+    </div> 
 </div>
+<!-- log in button -->
 <ng-template #notLoggedIn>
     <p>User is not logged in. </p>
     <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
 </ng-template>
-    <!-- User login status -->
-<div *ngIf="darktheme; else lightTheme" style="text-align: right;">
-    <button (click)="Light()">Turn on the lights</button>
+<!-- log out button -->
+<div class="left" *ngIf="darktheme; else lightTheme">
+        <button class="btn btn-warning" (click)="Light()">Turn on the lights</button>
 </div>
 <ng-template #lightTheme>
-    <div style="text-align: right;">
-        <button (click)="Dark()">Turn off the lights</button>
+    <div class="left">
+        <button class="btn btn-dark" (click)="Dark()">Turn off the lights</button>
     </div>
 </ng-template> 
+<br><br>
     <!-- light/dark theme buttons    -->
 <div id="theme" class="white">
     <!-- background theme -->
@@ -45,8 +47,8 @@
             <span><div class="thought">{{postObject.description}}</div></span>
             <div *ngIf="postObject.userEntity.userName == currentUser">
                 <div *ngIf="postEditAndDeleteButtons">
-                    <button (click)="editPost()">Edit Post Description</button>
-                    <button (click)="deletePost(postObject.id)">Delete Post</button>
+                    <button class="btn btn-info" (click)="editPost()">Edit Post Description</button>
+                    <button class="btn btn-danger" (click)="deletePost(postObject.id)">Delete Post</button>
                 </div>
             </div>
                 <br>
@@ -70,26 +72,38 @@
     <ng-template #createReplyForm>
         <div *ngIf="logInStatus">
             <form #createdReplyAttempt="ngForm" (ngSubmit)="createReply(createdReplyAttempt)">
-                <label>Reply: <input type="text" name="description" required ngModel></label>     
-                <br><br>
-                <input type="submit" value="Submit">
+                <div *ngIf="darktheme; else lightForm">
+                    <body class="black-background">
+                        <label>Reply: <input type="text" name="description" required ngModel></label>     
+                        <br><br>
+                        <input type="submit" value="Submit">
+                    </body>
+                </div>
+                <ng-template #lightForm>
+                    <body class="white-theme">
+                        <label>Reply: <input type="text" name="description" required ngModel></label>     
+                        <br><br>
+                        <input type="submit" value="Submit">
+                    </body>
+                </ng-template>
             </form>
         </div>
     </ng-template>
     <!-- Reply Form -->
                 <br><br>
-    <body class="white-theme">
-        <h1>Replies:</h1>
-    </body>
     <br><br>
     <div id="parent{{reply.id}}" *ngFor="let reply of replies">
         <div id="{{reply.id}}">
             <div *ngIf="darktheme; else lightSections">
+                <h1 class="black-background">Replies:</h1>
+                <br><br>
                 <body class="black-background">
                     <h5 style="padding-top: 5px;">{{reply.userEntity.userName}} says</h5>
                 </body>
             </div>
             <ng-template #lightSections>
+                <h1 class="white-theme">Replies:</h1>
+                <br><br>
                 <body class="white-theme">
                     <h5 style="padding-top: 5px;">{{reply.userEntity.userName}} says</h5>
                 </body>
@@ -109,8 +123,8 @@
             <!-- Reply Description -->
             <div *ngIf="reply.userEntity.userName == currentUser">
                 <div *ngIf="editAndDeleteButtons">
-                    <button (click)="editDescription(reply.id)">Update reply</button>
-                    <button (click)="deleteReply(reply.id)">Delete</button>
+                    <button class="btn btn-info" (click)="editDescription(reply.id)">Update reply</button>
+                    <button class="btn btn-danger" (click)="deleteReply(reply.id)">Delete</button>
                 </div>
             </div>
             <!-- Update and Delete Reply Buttons -->

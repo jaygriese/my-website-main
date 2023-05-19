@@ -82,7 +82,7 @@ export class UserProfileComponent implements OnInit {
         this.allDmHistory = data.viewUserDmHistory.directMessageList;
         this.userEntityDmList = data.viewUserDmHistory.userEntities;
         this.hiddenPost = data.viewUserPostHistory.viewUserHiddenPost;
-        console.log(this.hiddenPost)
+        // console.log(this.hiddenPost)
         this.forumPost = data.viewUserPostHistory.viewUserForumPost;
         this.forumReplies = data.viewUserPostHistory.viewUserForumReplies;
         this.eventPost = data.viewUserPostHistory.viewUserEventPost;
@@ -143,6 +143,7 @@ export class UserProfileComponent implements OnInit {
       hidePostId: post.id,
       userId: Number(localStorage.getItem("id"))
     }
+    console.log(hidePostDTO)
 
     this.http.post('http://localhost:8080/user/hidePostList', hidePostDTO).subscribe((response) => {
       console.log(response);
@@ -159,9 +160,9 @@ export class UserProfileComponent implements OnInit {
       userId: Number(localStorage.getItem("id"))
     }
 
-    console.log(hidePostDTO.hidePostId)
+    console.log(hidePostDTO)
 
-    this.http.post('http://localhost:8080/user/unhidePost', hidePostDTO).subscribe((response) => {
+    this.http.post('http://localhost:8080/user/unHidePost', hidePostDTO).subscribe((response) => {
       console.log(response);
       location.reload();
     })

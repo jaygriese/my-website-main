@@ -14,7 +14,7 @@ public class UserBundle {
     /** updatedPostHistoryViewUser is temporary until all postable objects are active.
      * Will become a list of all events to display on searched users page that reflects
      * the updated hidden posts information. **/
-    List<ForumPosts> updatedPostHistoryViewUser;
+    List<CurrentUserPostHistory> updatedPostHistoryViewUser;
 
     public UserBundle() {
     }
@@ -26,18 +26,18 @@ public class UserBundle {
         this.viewUserPostHistory = viewUserPostHistory;
     }
 
-    public UserBundle(UserEntity viewUser, Optional<UserInformation> viewUserInformation, UserDmHistory viewUserDmHistory, List<ForumPosts> updatedPostHistoryViewUser) {
+    public UserBundle(UserEntity viewUser, Optional<UserInformation> viewUserInformation, UserDmHistory viewUserDmHistory, List<CurrentUserPostHistory> updatedPostHistoryViewUser) {
         this.viewUser = viewUser;
         this.viewUserInformation = viewUserInformation;
         this.viewUserDmHistory = viewUserDmHistory;
         this.updatedPostHistoryViewUser = updatedPostHistoryViewUser;
     }
 
-    public List<ForumPosts> getUpdatedPostHistoryViewUser() {
+    public List<CurrentUserPostHistory> getUpdatedPostHistoryViewUser() {
         return updatedPostHistoryViewUser;
     }
 
-    public void setUpdatedPostHistoryViewUser(List<ForumPosts> updatedPostHistoryViewUser) {
+    public void setUpdatedPostHistoryViewUser(List<CurrentUserPostHistory> updatedPostHistoryViewUser) {
         this.updatedPostHistoryViewUser = updatedPostHistoryViewUser;
     }
 

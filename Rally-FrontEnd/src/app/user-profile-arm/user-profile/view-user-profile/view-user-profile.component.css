@@ -1,6 +1,6 @@
 div.scroll {
     column-width: auto;
-    background-color: #5e6b6b;
+    background-color: #546e6c;
     height: 290px;
     overflow: auto;
     resize: vertical;
@@ -10,7 +10,7 @@ div.scroll {
 
   div.scroll-posthistory {
     column-width: auto;
-    background-color: #5e6b6b;
+    background-color: #546e6c;
     height: auto;
     overflow: auto;
     resize: vertical;

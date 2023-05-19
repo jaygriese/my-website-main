@@ -212,18 +212,7 @@ public class UserProfileController {
         /** hide post based on their postType, sort through repos to find the right object to hide **/
 
             for (HiddenPost post : hiddenPostRepository.findAll()) {
-                if (Objects.equals(hidePostDTO.getPostType(), "ForumPost") && !Objects.equals(post.getHidePostId(), hidePostDTO.getHidePostId())) {
-                    System.out.println("Forum Post triggering");
-                    ResponseMessage responseMessage = new ResponseMessage("Post Already Hidden");
-                    return new ResponseEntity<>(responseMessage, HttpStatus.OK);
-                }
-                if (Objects.equals(hidePostDTO.getPostType(), "ForumReply") && !Objects.equals(post.getHidePostId(), hidePostDTO.getHidePostId())) {
-                    System.out.println("Forum Reply triggering");
-                    ResponseMessage responseMessage = new ResponseMessage("Post Already Hidden");
-                    return new ResponseEntity<>(responseMessage, HttpStatus.OK);
-                }
-                if (Objects.equals(hidePostDTO.getPostType(), "Event") && !Objects.equals(post.getHidePostId(), hidePostDTO.getHidePostId())) {
-                    System.out.println("Event triggering");
+                if (Objects.equals(hidePostDTO.getPostType(), post.getPostType()) && Objects.equals(post.getHidePostId(), hidePostDTO.getHidePostId()) && Objects.equals(hidePostDTO.getUserId(), post.getUserId())) {
                     ResponseMessage responseMessage = new ResponseMessage("Post Already Hidden");
                     return new ResponseEntity<>(responseMessage, HttpStatus.OK);
                 }
@@ -235,20 +224,18 @@ public class UserProfileController {
         return new ResponseEntity<>(hiddenPostRepository.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/unhidePost")
-    public ResponseEntity<?> unhidePostFromProfile(@RequestBody HidePostDTO hidePostDTO) {
+    @PostMapping("/unHidePost")
+    public ResponseEntity<?> unHidePostFromProfile(@RequestBody HidePostDTO hidePostDTO) {
 
-
-        Optional<ForumPosts> forumPosts = forumPostRepository.findById(hidePostDTO.getHidePostId());
-        if (forumPosts.isPresent()) {
-            HiddenPost hiddenPost = hiddenPostRepository.findByHidePostId(forumPosts.get().getId());
-            hiddenPostRepository.delete(hiddenPost);
-            ResponseMessage responseMessage = new ResponseMessage("Post is no longer hidden.");
-            return new ResponseEntity<>(responseMessage, HttpStatus.OK);
-        } else {
-            ResponseMessage responseMessage = new ResponseMessage("No Post with that ID found.");
-            return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+        for (HiddenPost post : hiddenPostRepository.findAll()) {
+            if (Objects.equals(hidePostDTO.getHidePostId(), post.getHidePostId()) && Objects.equals(hidePostDTO.getPostType(), post.getPostType()) && Objects.equals(hidePostDTO.getUserId(), post.getUserId())) {
+                hiddenPostRepository.delete(post);
+                ResponseMessage responseMessage = new ResponseMessage("Post is no longer hidden.");
+                return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+            }
         }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/sendDirectMessage")

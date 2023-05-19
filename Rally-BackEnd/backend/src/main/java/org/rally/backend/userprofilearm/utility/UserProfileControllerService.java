@@ -6,10 +6,7 @@ import org.rally.backend.forumarm.models.ForumPosts;
 import org.rally.backend.forumarm.models.Replies;
 import org.rally.backend.forumarm.repository.ForumPostRepository;
 import org.rally.backend.forumarm.repository.RepliesRepository;
-import org.rally.backend.userprofilearm.model.DirectMessage;
-import org.rally.backend.userprofilearm.model.HiddenPost;
-import org.rally.backend.userprofilearm.model.UserDmHistory;
-import org.rally.backend.userprofilearm.model.UserEntity;
+import org.rally.backend.userprofilearm.model.*;
 import org.rally.backend.userprofilearm.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserProfileControllerService {
@@ -58,11 +56,12 @@ public class UserProfileControllerService {
 
     /** This method is the list that displays the users post history when viewing a user profile
      * It doesn't display a post marked as hidden by the user account being viewed **/
-    public static List<ForumPosts> sortUpdatedPostHistoryViewUser(int userId) {
+    public static List<CurrentUserPostHistory> sortUpdatedPostHistoryViewUser(int userId) {
 
-        List<ForumPosts> currentPostSettings = new ArrayList<>();
+        Optional<UserEntity> user = userRepository.findById(userId);
         List<HiddenPost> hiddenPostList = new ArrayList<>();
-        List<ForumPosts> userPost = new ArrayList<>();
+
+        List<CurrentUserPostHistory> currentUserPostHistories = new ArrayList<>();
 
         for (HiddenPost post : hiddenPostRepository.findAll()) {
             if (post.getUserId() == userId) {
@@ -72,20 +71,24 @@ public class UserProfileControllerService {
 
         for (ForumPosts post : forumPostRepository.findAll()) {
             if (post.getUserEntity().getId() == userId) {
-                userPost.add(post);
-                currentPostSettings.add(post);
+                currentUserPostHistories.add(new CurrentUserPostHistory(post.getId(), "ForumPost", post.getTitle(), false, post.getDescription()));
+            }
+        }
+        for (Event event : eventRepository.findAll()) {
+            if (Objects.equals(event.getEventHost(), user.get().getUserName())) {
+                currentUserPostHistories.add(new CurrentUserPostHistory(event.getId(), "Event", event.getEventTitle(), false, event.getDescription()));
             }
         }
 
-        for (ForumPosts post : userPost) {
-            for (HiddenPost hidden : hiddenPostList) {
-                if (post.getId() == hidden.getHidePostId()) {
-                    currentPostSettings.remove(post);
+        for (CurrentUserPostHistory post : currentUserPostHistories) {
+            for (HiddenPost hide : hiddenPostList) {
+                if (Objects.equals(post.getId(), hide.getHidePostId()) && Objects.equals(post.getType(), hide.getPostType())) {
+                    post.setHidden(true);
                 }
             }
         }
 
-        return currentPostSettings;
+        return currentUserPostHistories;
     }
 
     /** This method returns 2 lists in an object.

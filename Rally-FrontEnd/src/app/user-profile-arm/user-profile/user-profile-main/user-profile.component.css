@@ -1,7 +1,19 @@
-div.scroll {
+
+
+  div.parent {
+    position: relative;
+    height: 200vh;
+  }
+
+  div.head-row {
+    position: absolute;
+    background-color: #cce0df;
+  }
+
+  div.scroll {
     column-width: auto;
-    background-color: #5e6b6b;
-    height: 300px;
+    background-color: #546e6c;
+    height: auto;
     overflow: auto;
     resize: vertical;
     text-align: center;
@@ -10,7 +22,7 @@ div.scroll {
 
   div.scroll-posthistory {
     column-width: auto;
-    background-color: #5e6b6b;
+    background-color: #546e6c;
     height: auto;
     overflow: auto;
     resize: vertical;
@@ -18,16 +30,9 @@ div.scroll {
     padding: 8px;
   }
 
-.cell.sent-received {
-  column-width: 10%;
-  display: flex;
-  margin: auto;
-  background-color: rgb(253, 203, 142);
-}
-
 .thought {
   display:flex;
-  background-color:#e0d5d5;
+  background-color:#e6e0cc;
   padding:20px;
   border-radius:30px;
   min-width:200px;

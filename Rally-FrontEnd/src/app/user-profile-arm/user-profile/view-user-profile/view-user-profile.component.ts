@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { DirectMessage } from '../../models/Directmessage';
 import { HttpClient } from '@angular/common/http';
+import { HiddenPost } from '../../models/HiddenPost';
 @Component({
   selector: 'app-view-user-profile',
   templateUrl: './view-user-profile.component.html',
@@ -20,13 +21,18 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
   viewUserName: string;
   viewUserId: string;
   userEntityInformation: ViewUserBundle;
+
   /* Direct Message with active user */
   dmList: DirectMessage[];
   conversation: DirectMessage[];
   commentBox: any;
+
   /* User Profile Pic */
   dbImage: any;
+
   /* Post History */
+  allPost: any[] = [];
+  hiddenPost: HiddenPost[];
   forumPost: any = [];
   
   /* HTML booleans */
@@ -63,8 +69,10 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
         this.router.navigate(['/user/404']);
         return;
       }
+      console.log(data)
       this.userEntityInformation = data;
       this.forumPost = data.updatedPostHistoryViewUser;
+
 
       /* Something to address, send the conversation list already sorted from the back */
       this.dmList = data.viewUserDmHistory.directMessageList;

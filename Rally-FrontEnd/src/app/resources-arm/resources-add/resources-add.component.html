@@ -7,8 +7,6 @@
             <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
         </div>
         
-    
-    
     </div>
     <ng-template #notLoggedIn>
     
@@ -22,13 +20,14 @@
     <!--Banner-->
     <div class="black"><h1>Add a Neighborhood Resource</h1></div>
     <!--Form-->
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <form class = "form container border" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div [hidden] ="f.submitted">
         <div class="form-group text-white accent">
             <br>      
             <!--Resource-->
             <label class = "text-black" for="resourceName">Resource Name</label>
             <br>
-            <input type ="text" class="form-control-center" style="width:25%" id="resourceName" ngModel="value" name ="type">
+            <input type ="text" class="form-control-center" style="width:25%" id="resourceName" ngModel name ="resourceName">
             <br>
             <br>
             <!--Category-->
@@ -66,23 +65,26 @@
             <!--Telephone Number-->
             <label class = "text-black" for="telephoneNumber">Telephone Number</label>
             <br>
-            <input type ="text" class="form-control-center" style="width: 25%" id="telephoneNumber" name = "telephone number" ngModel>
+            <input type ="text" class="form-control-center" style="width: 25%" id="telephoneNumber" name = "telephoneNumber" ngModel>
             <br>
             <br>
             <!--Email Address-->
-            <label class = "text-black" for="resourceName">Email Address</label>
+            <label class = "text-black" for="emailAddress">Email Address</label>
             <br>
-            <input type ="text" class="form-control-center" style="width: 25%" id="resourceName" name = "email address" ngModel>
-            <br>
-            <br>
-            <!--Description-->
-            <label class = "text-black" for="description">Description</label>
-            <br>
-            <textarea class ="text" class="form-control-center" style="width: 50%" id="description" rows="4" name="description" ngModel></textarea>
-            <br>
-            <br>    
+            <input type = email class="form-control-center" style="width: 25%;" id="email" required 
+            ngModel="model.email" #email="ngModel" email="true">
+            <!--<div *ngIf="description.invalid" class ="alert text-red">Resource description is required and must be between 5 and 100 characters.</div>
+            --><br>
+            <br>  
+        </div>  
         </div>
-        <input type="submit" value="Submit" class="button-blue button-hover">
+        <button type="submit" class="button-blue button-hover">Submit</button>
+
+        <!--Reset form with New Resource button-->
+        <div class=submitted-resource *ngIf="f.submitted">
+            <p class = "text-orage">You've submitted {{ f.value.resourceName }}</p>
+            <button class="button-blue button-hover" type="button" (click)="f.resetForm()">Add new resource</button>
+        </div>
         <br>
         <br>
     </form>

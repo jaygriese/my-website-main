@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ResourceDTO } from '../model/Resource';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-resources-add',
@@ -41,12 +42,12 @@ export class ResourcesAddComponent implements OnInit {
       address: f.value.address,
       website: f.value.website,
       telephoneNumber: f.value.telephoneNumber,
-      emailAddress: f.value.emailAddress,
+      email: f.value.email,
       description: f.value.description
     }
+    console.log(submitResource);
     this.http.post(this.userUrl, submitResource).subscribe((res) => {
       console.log(res);
     })
   }
-
 }

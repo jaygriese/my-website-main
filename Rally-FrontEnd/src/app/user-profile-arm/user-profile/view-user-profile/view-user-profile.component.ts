@@ -32,14 +32,16 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
   /* Post History */
   allPost: any[] = [];
+  allPostFilter: any[];
   hiddenPost: HiddenPost[];
   forumPost: any = [];
-  
+
   /* HTML booleans */
   noError: boolean = true;
   showDmHistory = false;
   dmCharacters = true;
   userReal = true;
+  filterActive = false;
 
   @ViewChild('dmBottomOfScroll') private myScrollContainer: ElementRef;
 
@@ -71,7 +73,8 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
       }
       console.log(data)
       this.userEntityInformation = data;
-      this.forumPost = data.updatedPostHistoryViewUser;
+      this.allPost = data.updatedPostHistoryViewUser;
+      this.allPostFilter = this.allPost;
 
 
       /* Something to address, send the conversation list already sorted from the back */
@@ -99,6 +102,31 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
   /* Method to scroll dm display to the bottom automatically */
   scrollToBottom() {
     this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+  }
+
+  userPostHistoryFilter(event) {
+    if (event.target.checked) {
+      if (this.filterActive === false) {
+        this.filterActive = true;
+        this.allPost = [];
+      }
+      for (let obj of this.allPostFilter) {
+        if (obj.type === event.target.name) {
+          this.allPost.push(obj);
+        }
+      }
+      return this.allPost
+    } else {
+
+      this.allPost = this.allPost.filter((obj) => obj.type !== event.target.name);
+
+      if (this.allPost.length === 0) {
+        this.filterActive = false;
+        return this.allPost = this.allPostFilter;
+      } else {
+        return this.allPost;
+      }      
+    }
   }
 
   viewingUserSendDM(dmMessageDetails: NgForm) {

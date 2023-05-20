@@ -38,6 +38,7 @@ export class UserProfileComponent implements OnInit {
 
   /* Post History */
   allPost: any[] = [];
+  allPostFilter: any[];
   hiddenPost: HiddenPost[];
   forumPost: any[];
   forumReplies: any[];
@@ -49,6 +50,7 @@ export class UserProfileComponent implements OnInit {
   changeInfo: boolean = true;
   userDms: boolean = true;
   changeProfilePic: boolean = true;
+  filterActive: boolean = false;
   uploadErrorMsg: any[];
 
   /* HTML variables */
@@ -101,6 +103,7 @@ export class UserProfileComponent implements OnInit {
         this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user !== remove);
 
         this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
+        this.allPostFilter = this.allPost;
         this.updateHiddenPost();
       })
 
@@ -115,6 +118,36 @@ export class UserProfileComponent implements OnInit {
         }
       })
     }
+  }
+
+  /* This method controls what is visible on the users post history based on checkbox input in html */
+  userPostHistoryFilter(event) {
+    if (event.target.checked) {
+      if (this.filterActive === false) {
+        this.filterActive = true;
+        this.filterHistory();
+      }
+      for (let obj of this.allPostFilter) {
+        if (obj.type === event.target.name) {
+          this.allPost.push(obj);
+        }
+      }
+      return this.allPost
+    } else {
+
+      this.allPost = this.allPost.filter((obj) => obj.type !== event.target.name);
+
+      if (this.allPost.length === 0) {
+        this.filterActive = false;
+        return this.allPost = this.allPostFilter;
+      } else {
+        return this.allPost;
+      }      
+    }
+  }
+
+  filterHistory(){
+    this.allPost = [];
   }
   
   /* Learning about LifeCycle Hooks in Angular / prevents error in the console when viewing 
@@ -201,6 +234,8 @@ export class UserProfileComponent implements OnInit {
       location.reload();
     })
   }  
+
+
 
   /* Display conversation with user selected */
   displayConversation( userDms: UserEntity) {

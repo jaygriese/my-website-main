@@ -19,7 +19,7 @@
         <div class="profilepic">
         <h4>Hello<br>{{currentUser}}</h4>
         <div class="card">
-            <div style="align-content: center;" *ngIf="dbImage; else default">               
+            <div class="card" style="align-content: center;" *ngIf="dbImage; else default">               
                 <img [src]="dbImage" width="100%" height="auto">
             </div>
             <ng-template #default>
@@ -40,10 +40,6 @@
 
                     <input style="background-color:  #85CDE3;" type="button" value="upload" (click)="imageUploadAction()">
                 </div>
-                <!-- <div class="form-group">
-                    <input type="text" id="image" placeholder="Search Image" [(ngModel)]="image" name="image" />
-                    <input type="button" (click)="viewImage()" value="View Image" class="btn1">
-                </div> -->
             </form>
             </ng-template>
         </div>
@@ -55,7 +51,7 @@
     <div class="card" style="background-color: #0EBB9A;">
         <h4>{{ userEntity?.userName }}'s<br>Information</h4>
         <div *ngIf="changeInfo; else changeForm"> 
-        <div class="card" style="background-color: #ecdfc3;">
+        <div class="card">
             <br> 
             <label>First Name:<br><h4>{{ userInformation?.firstName }}</h4></label>
             <br>
@@ -132,11 +128,20 @@
 <div class="row">
 
 
-    <div class="col-sm-5">
+    <div class="col-5">
         <div class="card" style="background-color: #0EBB9A;">
             <h2>Post History</h2>
-            <!-- Some type of way to view only certain classes -->
+            
             <div class="scroll-posthistory">
+                <div *ngIf="this?.allPost.length === 0"><h3 style="color: #ffffff;">User Does not have any post history</h3></div>
+                
+                <!-- Display only specific posts under construction -->
+                <div>
+                <label >Show Forum Post: <input type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
+                <label >Show Event Post: <input type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
+                <label >Show Forum Replies: <input type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
+                </div>
+                
                 <ul *ngFor="let post of this.allPost">
                     <div class="card" style="background-color: #ecdfc3;">
                         <div *ngIf="post.type === 'ForumPost'">
@@ -187,9 +192,9 @@
                                     </div>
                                 </ng-template>
                                 </div>
-                </div>
-                </ul>
-            </div>
+                        </div>
+                        </ul>
+                    </div>
         </div>
     </div>
 

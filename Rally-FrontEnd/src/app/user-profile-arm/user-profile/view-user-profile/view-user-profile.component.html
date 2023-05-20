@@ -86,7 +86,11 @@
         <div class="card" style="background-color: #0EBB9A;">
             <h2>Post History</h2>
             <div class="scroll-posthistory">
-            <ul *ngFor="let post of forumPost">
+                <div>
+                    <label >Show Forum Post: <input type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
+                    <label >Show Event Post: <input type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
+                </div>
+            <ul *ngFor="let post of allPost">
                 <div *ngIf="post.hidden === false">
                 <div *ngIf="post.type === 'ForumPost'">
                 <div class="card" style="background-color: #F9A605">

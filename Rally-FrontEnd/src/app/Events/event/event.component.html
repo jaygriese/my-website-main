@@ -61,14 +61,30 @@
         <div class="row" >
             <div class="col-3">
                 <p id="event_display1">location</p>
-                <iframe
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6235.150903512339!2d-90.2485586!3d38.612640850000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87d8b4f665510415%3A0x7045b7225c22f7c6!2sShaw%2C%20St.%20Louis%2C%20MO!5e0!3m2!1sen!2sus!4v1684598180204!5m2!1sen!2sus" 
+                    width="300" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <!-- <iframe
                     width="300"
                     height="400"
                     frameborder="0" style="border:0"
                     referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps/embed/v1/search?key=KEYGOESHERE&q=st+louis+mo"
+                    src="https://www.google.com/maps/embed/v1/search?key=MYKEYHERE&q=shaw+neighborhood+st+louis+mo"
                     allowfullscreen>
-                </iframe>
+                </iframe> -->
+                <!-- <iframe
+                width="300"
+                height="400"
+                frameborder="0" style="border:0"
+                referrerpolicy="no-referrer-when-downgrade"
+                [src]='mapUrl'
+                allowfullscreen>
+            </iframe> -->
                 <p style="font-size: 15px; font-style:italic;">expand map to search event address</p>
             <br>
             <br>
@@ -103,7 +119,7 @@
                         <img *ngIf="eventDetails.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg" width="300" height="300">
                     </div>
                     <br>
-                    <p style="font-size: 15px; font-style: italic;">hosted by: <span style="font-weight: bolder;">{{eventDetails.eventHost}}</span></p>  
+                    <p style="font-size: 15px; font-style: italic;">hosted by: <span style="font-weight: bolder;">{{eventDetails.eventHost}} <span style="font-weight: lighter;">|</span> {{eventDetails.contactEmail}}</span></p> 
                     <br>
                     <p style="font-size: 20px; font-weight: bolder;">address:</p>
                     <p style="margin-top: -15px;">{{eventDetails.eventAddress}}</p>

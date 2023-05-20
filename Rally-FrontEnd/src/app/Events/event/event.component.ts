@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Event } from '../models/event';
 import { EventService } from '../services/event.service';
 import { EventViewComponent } from '../event-view/event-view.component';
+// import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 // import { Component, Input} from '@angular/core'
 
 @Component({
@@ -21,12 +22,14 @@ export class EventComponent implements OnInit {
   // private eventUrl: string;
   id: string;
   eventDetails: Event;
+  // mapUrl: string;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private eventService: EventService) {
     // this.logInStatus = false;
     // this.eventUrl = 'http://localhost:8080/events/event/{id}/'
     this.eventDetails;
     this.id = this.route.snapshot.params['id'];
+    // this.mapUrl = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyAh6PKyQT9CBCOKjubHp1_0DCk58freoL0&q=st_louis_mo' 
 
     
    }
@@ -100,6 +103,7 @@ deleteEvent() {
   }
  
 }
+
 
   // verifyLoggedIn() {
 

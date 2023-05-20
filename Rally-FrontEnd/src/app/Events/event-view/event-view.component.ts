@@ -21,7 +21,10 @@ export class EventViewComponent implements OnInit {
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
 
-  DateSelected: any;
+  // DateSelected: any;
+
+  selected: string;
+
   
 
   constructor(private http: HttpClient, private router: Router) {
@@ -29,7 +32,9 @@ export class EventViewComponent implements OnInit {
     this.eventsUrl = 'http://localhost:8080/events/events/'
     this.eventList;
     this.filteredEvents;
-    this.DateSelected;
+    // this.DateSelected;
+    this.selected;
+  
 
    }
 
@@ -47,16 +52,26 @@ export class EventViewComponent implements OnInit {
   
   }
 
-
-byDate() {
-  this.filteredEvents.splice(0);
-  for(let i = 0; i < this.eventList.length; i++) {
-    if(this.eventList[i].datetime.includes(this.DateSelected)) {
-      this.filteredEvents.push(this.eventList[i])
-    } 
+  byDate() {
+    this.filteredEvents.splice(0);
+    for(let i = 0; i < this.eventList.length; i++) {
+      if(this.eventList[i].datetime.includes(this.selected.toString())) {
+        this.filteredEvents.push(this.eventList[i])
+      } 
+    }
+    return this.filteredEvents;
   }
-  return this.filteredEvents;
-}
+
+
+// byDate() {
+//   this.filteredEvents.splice(0);
+//   for(let i = 0; i < this.eventList.length; i++) {
+//     if(this.eventList[i].datetime.includes(this.DateSelected)) {
+//       this.filteredEvents.push(this.eventList[i])
+//     } 
+//   }
+//   return this.filteredEvents;
+// }
 
 
 filter(string: string) {

@@ -77,19 +77,41 @@
             <div class="col-3">
                 <p id="event_display1">search by date</p>
 
+                    <div>
+                        <div>
+                        <mat-card class="demo-inline-calendar-card">
+                            <mat-calendar [(selected)]="selected"></mat-calendar>
+                          </mat-card>
+                        </div>
+                        <br>
+                          <!-- <p style="font-size: 15px;">I'm available on: {{selected | date}}</p> -->
+                          <div style="margin-top: -15px;">
+                            <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
+                          </div>   
+                    </div>
+
+                    <!-- <div>
+                        <mat-card class="demo-inline-calendar-card">
+                            <mat-calendar [(ngModel)]="DateSelected"></mat-calendar>
+                        </mat-card>
+                        <br>
+                        <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
+
+                    </div> -->
+               
                 <!-- <mat-card class="demo-inline-calendar-card">
                     <mat-calendar (selectedChange)="selected = $event"></mat-calendar>
                   </mat-card>
                   <p>Selected date: {{selected}}</p> -->
                 
-                <div class="card w-100">
+                <!-- <div class="card w-100">
                     <div class="card-body">
                       <h3 class="card-title">
                         I'm available on: <input type="date" [(ngModel)]="DateSelected">
                       </h3>
                       <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
                     </div>
-                  </div>
+                  </div> -->
 
             <br>
             <br>

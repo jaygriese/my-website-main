@@ -29,8 +29,9 @@ import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-u
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 // import { AgmCoreModule } from '@agm/core';
-// import {MatDatepickerModule} from '@angular/material/datepicker';
-// import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -63,8 +64,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     NoopAnimationsModule,
-    // MatDatepickerModule,
-    // MatCardModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule,
     // AgmCoreModule.forRoot({
     //   apiKey:'AIzaSyAh6PKyQT9CBCOKjubHp1_0DCk58freoL0'
     // })

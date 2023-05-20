@@ -29,6 +29,9 @@ export class ResourcesAddComponent implements OnInit {
       this.logInStatus = true;
     }
   }
+  // Validations
+
+  
   logOut() {
     localStorage.clear();
     console.log(localStorage.getItem('userName'))

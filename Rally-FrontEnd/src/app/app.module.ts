@@ -28,6 +28,7 @@ import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-po
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+// import { AgmCoreModule } from '@agm/core';
 // import {MatDatepickerModule} from '@angular/material/datepicker';
 // import {MatCardModule} from '@angular/material/card';
 
@@ -64,6 +65,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     NoopAnimationsModule,
     // MatDatepickerModule,
     // MatCardModule,
+    // AgmCoreModule.forRoot({
+    //   apiKey:'AIzaSyAh6PKyQT9CBCOKjubHp1_0DCk58freoL0'
+    // })
   ],
   providers: [CookieService, ThemeserviceService],
   bootstrap: [AppComponent]

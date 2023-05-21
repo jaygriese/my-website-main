@@ -32,6 +32,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     ViewUserProfileComponent,
     UserProfileComponent,
     EventEditComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

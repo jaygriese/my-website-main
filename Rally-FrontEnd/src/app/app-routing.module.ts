@@ -20,6 +20,7 @@ import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-u
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
 import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
   {path: 'myProfile', component: UserProfileComponent},
   {path: 'user/:userName/:id', component: ViewUserProfileComponent},
   {path: 'edit/:id', component: EventEditComponent},
+  {path: 'home', component: HomeComponent},
 ];
 
 @NgModule({

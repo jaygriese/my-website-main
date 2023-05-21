@@ -44,3 +44,16 @@
     font-size: 80px;
     text-align: center;
 }
+
+.RP2 {
+    font-family: Oswald, sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: left;
+}
+
+.RP3 {
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+    text-align: left;
+}

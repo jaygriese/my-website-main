@@ -44,8 +44,8 @@ input[type=text] {
  }
 
  #edit_btn {
-    background-color: #2e9abc;
-	border-radius:7px;
+    background-color: #0EBB9A;
+	/* border-radius:7px; */
 	display: internal;
 	color:#ffffff;
 	font-family: Arial;

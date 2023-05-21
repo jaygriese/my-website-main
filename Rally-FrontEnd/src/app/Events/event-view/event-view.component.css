@@ -8,8 +8,9 @@
 
 
 .myButton {
-    background-color: #2e9abc;
-	border-radius:7px;
+    /* background-color: #2e9abc; */
+    background-color: #0EBB9A;
+	/* border-radius:7px; */
 	display: internal;
 	color:#ffffff;
 	font-family: Arial;
@@ -42,8 +43,9 @@
 }
 
 .button2 {
-    background-color: #e5642b;
-	border-radius:6px; 
+    /* background-color: #e5642b; */
+    background-color: #F9A605;
+	/* border-radius:6px;  */
 	color:#ffffff;
 	font-family:Trebuchet MS;
 	font-size:25px;
@@ -68,18 +70,33 @@
 
 .btn {
     background-color: #fff;
-    border-color: #5AD5E7;
+    /* border-color: #5AD5E7; */
+    border-color:  #85CDE3;
     transition: all .7s;
+    border-radius: 0;
   }
   .btn:hover {
     color: #fff;
-    background-color: #5AD5E7;
-    border-color:#5AD5E7;
+    /* background-color: #5AD5E7; */
+    background-color:  #85CDE3;
+    /* border-color:#5AD5E7; */
+    border-color:  #85CDE3;
   }
 
   .demo-inline-calendar-card {
     width: 300px;
   }
+
+  /* .mat-calendar-body-active>.mat-calendar-body-cell-content.mat-focus-indicator{
+    background:transparent !important
+} */
+
+/* .mat-calendar-body-today
+:not(.mat-calendar-body-selected)
+:not(.mat-calendar-body-comparison-identical) {
+background-color: rgb(255 255 255) !important;
+border: none !important;
+} */
 
 
 

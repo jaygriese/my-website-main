@@ -1,6 +1,6 @@
 .myButton {
-    background-color: #2e9abc;
-	border-radius:7px;
+    background-color: #0EBB9A;
+	/* border-radius:7px; */
 	display: internal;
 	color:#ffffff;
 	font-family: Arial;
@@ -25,17 +25,17 @@ font-size: 35px;
 font-family: arial;
 }
 
-.rectangle {
+/* .rectangle {
 margin-top: -5px;
 height: 300px;
 width: auto;
 box-sizing: border-box;
 border: 1px solid #f4d668;
-}
+} */
 
 .button2 {
-  background-color: #e5642b;
-  border-radius:6px; 
+  background-color: #F9A605;
+  /* border-radius:6px;  */
   color:#ffffff;
   font-family:Trebuchet MS;
   font-size:25px;

@@ -16,14 +16,14 @@
     font-size: 15px;
 }
 
-.RH5 {
+/* .RH5 {
     font-family: montserrat, sans-serif;
     text-align: left;
     font-size: 100px;
     font-weight: 900;
-}
+} */
 
-.RH3 {
+.RH1 {
     font-family: Oswald, sans-serif;
     font-size: 60px;
     text-align: left;
@@ -37,4 +37,10 @@
     margin-top: -20px;
     margin-bottom: 75px;
 
+}
+
+.RH2 {
+    font-family: Oswald, sans-serif;
+    font-size: 80px;
+    text-align: center;
 }

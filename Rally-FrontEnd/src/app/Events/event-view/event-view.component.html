@@ -84,7 +84,7 @@
                           </mat-card>
                         </div>
                         <br>
-                          <!-- <p style="font-size: 15px;">I'm available on: {{selected | date}}</p> -->
+                          <p style="font-size: 15px;">I'm available on: {{selected}}</p>
                           <div style="margin-top: -15px;">
                             <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
                           </div>   
@@ -153,7 +153,8 @@
                                     <h2 class="card-title">{{event.eventTitle}}</h2>
                                     <p class="card-text">category: {{event.eventCategory}}</p>
                                     <p class="card-text"><small class="text-muted">hosted by {{event.eventHost}}</small></p> -->
-                                    <p style="font-family:Impact;  font-size: 15;">{{event.datetime | date:'short'}}</p>
+                                    <!-- <p style="font-family:Impact;  font-size: 15;">{{event.datetime | date:'short'}}</p> -->
+                                    <p style="font-family:Impact;  font-size: 15;">{{event.datetime}}</p>
                                     <p style="font-weight: bold; margin-top: -10px;">{{event.eventTitle}}</p>
                                     <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
                                     <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>

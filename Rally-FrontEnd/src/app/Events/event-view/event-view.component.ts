@@ -23,7 +23,9 @@ export class EventViewComponent implements OnInit {
 
   // DateSelected: any;
 
-  selected: string;
+  selected: Date;
+
+  formattedDate: any;
 
   
 
@@ -34,6 +36,11 @@ export class EventViewComponent implements OnInit {
     this.filteredEvents;
     // this.DateSelected;
     this.selected;
+    this.formattedDate;
+    // this.formattedDate = this.selected().toString();
+    // this.formattedDate = new Date().toISOString;
+
+    
   
 
    }
@@ -48,17 +55,24 @@ export class EventViewComponent implements OnInit {
       this.allEvents();
     })
 
+    this.selected = new Date();
+   this.formattedDate = this.selected.toISOString();
+    console.log("the date object after converting to string using the toString() method: " + this.formattedDate)
+
 
   
   }
 
+
+
   byDate() {
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
-      if(this.eventList[i].datetime.includes(this.selected.toString())) {
+      if(this.eventList[i].datetime.includes(this.formattedDate)) {
         this.filteredEvents.push(this.eventList[i])
       } 
     }
+    console.log(this.formattedDate);
     return this.filteredEvents;
   }
 

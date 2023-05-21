@@ -1,0 +1,17 @@
+.myButton {
+    background-color: #0EBB9A;
+	color:#ffffff;
+	font-family: Arial;
+	font-size:20px;
+    font-weight: 700;
+    width: 125px;
+    height: 75px;
+    padding-top: 27px;
+	text-decoration: none;
+}
+
+.nav-link {
+    color: black;
+    font-weight: 450;
+    font-size: 15px;
+}

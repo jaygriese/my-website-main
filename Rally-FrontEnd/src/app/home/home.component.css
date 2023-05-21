@@ -23,6 +23,10 @@
     font-weight: 900;
 } */
 
+.card-body {
+    background-color: F9A605;
+}
+
 .RH1 {
     font-family: Oswald, sans-serif;
     font-size: 60px;
@@ -30,20 +34,21 @@
     margin-top: 75px;
 }
 
-.RP1 {
-    font-family: montserrat, sans-serif;
-    font-size: 20px;
-    text-align: left;
-    margin-top: -20px;
-    margin-bottom: 75px;
-
-}
-
 .RH2 {
     font-family: Oswald, sans-serif;
     font-size: 80px;
     text-align: center;
 }
+
+.RP1 {
+    font-family: montserrat, sans-serif;
+    font-size: 20px;
+    text-align: left;
+    margin-top: -15px;
+    margin-bottom: 75px;
+
+}
+
 
 .RP2 {
     font-family: Oswald, sans-serif;
@@ -56,4 +61,12 @@
     font-family: Montserrat, sans-serif;
     font-size: 20px;
     text-align: left;
+}
+
+.RP4 {
+    font-family: Oswald, sans-serif;
+    font-size: 25px;
+    font-weight: 800;
+    text-align: left;
+    margin-top: 30px;
 }

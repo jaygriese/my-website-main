@@ -22,3 +22,19 @@
     font-size: 100px;
     font-weight: 900;
 }
+
+.RH3 {
+    font-family: Oswald, sans-serif;
+    font-size: 60px;
+    text-align: left;
+    margin-top: 75px;
+}
+
+.RP1 {
+    font-family: montserrat, sans-serif;
+    font-size: 20px;
+    text-align: left;
+    margin-top: -20px;
+    margin-bottom: 75px;
+
+}

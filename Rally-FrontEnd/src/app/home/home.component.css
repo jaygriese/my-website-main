@@ -1,12 +1,12 @@
-.myButton {
+.logInButton {
     background-color: #0EBB9A;
 	color:#ffffff;
 	font-family: Arial;
 	font-size:20px;
-    font-weight: 700;
+    font-weight: 600;
     width: 125px;
-    height: 75px;
-    padding-top: 27px;
+    height: 65px;
+    padding-top: 21px;
 	text-decoration: none;
 }
 

@@ -15,7 +15,6 @@ import { EventCreateComponent } from './Events/event-create/event-create.compone
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
 import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
 import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
-
 import { ServicesHomeComponent } from './services-arm/services-home/services-home.component';
 import { OfferComponent } from './services-arm/offer/offer.component';
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
@@ -26,6 +25,7 @@ import { ThemeserviceService } from './services/themeservice.service';
 import { ForumTopic3Component } from './community-forum-arm/forum/forum-topic3/forum-topic3.component';
 import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-post.component';
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
+import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +50,7 @@ import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-u
     ViewPostComponent,
     ViewUserProfileComponent,
     UserProfileComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

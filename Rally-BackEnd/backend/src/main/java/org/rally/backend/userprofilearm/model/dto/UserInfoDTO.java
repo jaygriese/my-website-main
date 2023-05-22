@@ -14,7 +14,7 @@ public class UserInfoDTO {
     private String lastName;
 
     @NotNull
-    private String neigborhood;
+    private String neighborhood;
 
     @NotNull
     private String city;
@@ -30,12 +30,12 @@ public class UserInfoDTO {
         this.state = state;
     }
 
-    public String getNeigborhood() {
-        return neigborhood;
+    public String getNeighborhood() {
+        return neighborhood;
     }
 
-    public void setNeigborhood(String neigborhood) {
-        this.neigborhood = neigborhood;
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
     }
 
     public String getCity() {

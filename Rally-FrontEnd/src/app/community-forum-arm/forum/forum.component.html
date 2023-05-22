@@ -1,3 +1,4 @@
+<div class="marginResetting">
 <div *ngIf="logInStatus; else notLoggedIn">
     <div>
         <span class="right"><span  class="loginName"> Logged in as: {{currentUser}}</span>  <button style="position: relative" class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
@@ -27,7 +28,7 @@
 <!-- search button -->
 <div id="theme" class="white">
 <body class="white-theme"><div class="container-fluid"><h1>Community Forum</h1></div></body>
-<br>
+<br><br><br>
 
 <body class="white-theme">
     <div class="container-fluid" style="text-align: left;">
@@ -67,4 +68,5 @@
     </div>
 </body>
 <br><br>
+</div>
 </div>

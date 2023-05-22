@@ -1,21 +1,22 @@
-<div *ngIf="logInStatus; else notLoggedIn">
-        <div>
-            <span class="right"><span class="loginName">Logged in as: {{currentUser}} </span><button style="position: relative" class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
-        </div> 
-    </div>
+
+<div class="marginResetting">
+<div class="buttonsPosition">
+<span *ngIf="logInStatus; else notLoggedIn">
+    <span class="right"><span class="loginName">Logged in as: {{currentUser}} </span><button class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
+</span>
     <!-- log in button -->
     <ng-template #notLoggedIn>
         <p>User is not logged in. </p>
         <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
     </ng-template>
     <!-- log out button -->
-    <div class="left" *ngIf="darktheme; else lightTheme">
+    <span class="left" *ngIf="darktheme; else lightTheme">
             <button class="btn btn-warning" (click)="Light()">Turn on the lights</button>
-    </div>
+    </span>
     <ng-template #lightTheme>
-        <div class="left">
+        <span class="left">
             <button class="btn btn-dark" (click)="Dark()">Turn off the lights</button>
-        </div>
+        </span>
     </ng-template> 
         <!-- light/dark theme buttons    -->
     <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
@@ -24,46 +25,50 @@
             <input class="btn btn-info" type="submit" value="Search Posts">
         </div>
     </form>
+</div>
     <!-- search button -->
         <!-- create post button  -->
     <div id="theme" class="white">
     <!-- background theme  -->
-    <body class="white-theme">
-        <div class="container-fluid">
+    <body style="min-width: 100%;" class="white-theme">
             <h1>Community Home</h1>
-        </div>
     </body>
     <div *ngIf="!createPostBoolean; else createPostForm">   
         <div *ngIf="logInStatus">
             <button (click)="createPostButton()" class="btn btn-primary">Create Post</button>
         </div>
-    </div>  
+    </div>
+  
     <!-- Page header -->
             <br>
             <br>
             <div *ngIf="darktheme; else lightSections">
                 <div style="text-align: left;" *ngFor="let test of newArray">
-                    <div class="black-background">
+                    
+                    <span *ngIf="logInStatus">
+                        <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
+                    </span>         
+                    <body style="min-width: 90%;" class="black-background">
                         <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                            <p>Posted by {{test.userEntity.userName}}</p> <span>{{test.forumPostLike.likes}} likes</span> &nbsp;&nbsp;&nbsp;
-                            <span *ngIf="logInStatus">
-                                <button style="font-size: 18px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
-                            </span>         
-                    </div>
-                    <br>
+                        <a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">Posted by {{test.userEntity.userName}}</a> 
+                        <span><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.forumPostLike.likes}} likes</a> </span> 
+                    </body>
+                    <br><br>
                 </div>
             </div>
             <!-- dark theme posts -->
             <ng-template #lightSections>
                 <div style="text-align: left;" *ngFor="let test of newArray">
-                    <div class="white-theme">
+                    
+                    <span *ngIf="logInStatus">
+                        <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
+                    </span>         
+                    <body style="min-width: 90%;" class="white-theme">
                         <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                            <p>Posted by {{test.userEntity.userName}}     </p> <span>{{test.forumPostLike.likes}} likes</span> &nbsp;&nbsp;&nbsp;
-                            <span *ngIf="logInStatus">
-                                <button style="font-size: 18px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
-                            </span>         
-                    </div>
-                    <br>
+                        <a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">Posted by {{test.userEntity.userName}}</a> 
+                        <span><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.forumPostLike.likes}} likes</a> </span> 
+                    </body>
+                    <br><br>
                 </div>
             </ng-template>
             <!-- light theme posts -->
@@ -93,3 +98,4 @@
     </div>
 </ng-template>
     <!-- create post form  -->
+</div>

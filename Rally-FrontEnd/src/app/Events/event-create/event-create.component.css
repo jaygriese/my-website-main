@@ -8,36 +8,26 @@
    margin-top: 80px;
 }
 
-/* div#event_details {
-    text-align: left;
-} */
 
 input[type=text] {
-    /* width: 550px; */
     background-color: #f6f4f3;
  }
 
+
  input[type=datetime-local] {
-    /* width: 550px; */
     background-color: #f6f4f3;
  }
+
 
  #description {
     background-color: #f6f4f3;
  }
+ 
 
  label {
     font-family: montserrat, sans-serif;
     font-size: x-large;
  }
-
- /* div#form_1 {
-   float:left;
- }
- div#form_2 {
-    float:right;
- } */
-
 
 
  #create_btn {

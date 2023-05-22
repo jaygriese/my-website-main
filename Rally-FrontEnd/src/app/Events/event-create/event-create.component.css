@@ -1,16 +1,20 @@
-div#list_head {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    display: flex;
-    justify-content: space-between;
+/* div#list_head {
+  
     margin-top: 50px;
     height: 75px;
-    width: auto;
+
     padding-top: 30px;
     padding-bottom: 30px;
-    text-align: left;
-    font-size: 45px;
-    color: black;
-    font-weight: 575;
+   
+} */
+
+#list_head {
+   font-family:Oswald, sans-serif;
+   text-align: left;
+   font-size: 60px;
+   color: black;
+   font-weight: 700;
+   margin-top: 80px;
 }
 
 div#event_details {
@@ -36,14 +40,14 @@ input[type=text] {
     font-size: x-large;
  }
 
- div#form_1 {
+ /* div#form_1 {
    float:left;
  }
  div#form_2 {
     float:right;
- }
+ } */
 
- #create_btn {
+ /* #create_btn {
     background-color: #2e9abc;
 	border-radius:7px;
 	display: internal;
@@ -55,4 +59,19 @@ input[type=text] {
 	padding:15px 75px;
 	text-decoration: none;
     width: 550px;
- }
+ } */
+
+ #create_btn {
+   background-color: #85CDE3;
+  /* border-radius:7px; */
+  display: internal;
+  color:#ffffff;
+  font-family: montserrat, sans-serif;
+  font-size:30px;
+  font-weight: bold;
+   /* text-shadow: 0.5px 0.5px 0px #000; */
+   text-shadow: 1px 1px 1px #000;
+  padding:15px 75px;
+  text-decoration: none;
+   width: 550px;
+}

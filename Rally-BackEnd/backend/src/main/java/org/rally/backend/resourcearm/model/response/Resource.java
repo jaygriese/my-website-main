@@ -2,39 +2,34 @@ package org.rally.backend.resourcearm.model.response;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="resource")
-public class Resource {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id = 1;
+public class Resource extends AbstractEntity{
     private String resourceName;
+   // @ManyToOne(cascade = CascadeType.ALL)
     private String category;
     private String address;
     private String website;
     private String telephoneNumber;
     private String emailAddress;
     private String description;
-
-
-
-    public Resource(String resourceName, String category, String address, String website, String telephoneNumber, String emailAddress, String description, String resourceDTODescription) {
+    public Resource(String resourceName, String category, String address, String website, String telephoneNumber, String emailAddress, String description) {
         this.resourceName = resourceName;
-        this.category = category;
         this.address = address;
         this.website = website;
+        this.category = category;
         this.telephoneNumber = telephoneNumber;
         this.emailAddress = emailAddress;
         this.description = description;
-
     }
+    public Resource () {};
 
-    public Resource(String resourceName, String category, String address, String website, String telephoneNumber, String emailAddress, String description) {};
     public String getResourceName() {
         return resourceName;
     }
     public String getCategory() {
         return category;
+    }
+    public void setCategory(String category) {
+        this.category = category;
     }
     public String getAddress() {
         return address;

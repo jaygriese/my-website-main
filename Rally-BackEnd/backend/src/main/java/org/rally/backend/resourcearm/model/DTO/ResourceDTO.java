@@ -1,6 +1,7 @@
 package org.rally.backend.resourcearm.model.DTO;
 
 import lombok.Data;
+import org.rally.backend.resourcearm.model.response.Category;
 
 @Data
 public class ResourceDTO {
@@ -35,6 +36,11 @@ public class ResourceDTO {
     public String getDescription() {
         return description;
     }
-
+//    @Override
+//    public String toString(){
+//        return "ResourceDTO{" +
+//                "category='" + category + '\'' +
+//                '}';
+//    }
 }
 

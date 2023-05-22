@@ -22,70 +22,75 @@
     <!--Form-->
     <form class = "form container border" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div [hidden] ="f.submitted">
-        <div class="form-group text-white accent">
-            <br>      
-            <!--Resource-->
-            <label class = "text-black" for="resourceName">Resource Name</label>
-            <br>
-            <input type ="text" class="form-control-center" style="width:25%" id="resourceName" ngModel name ="resourceName">
-            <br>
-            <br>
-            <!--Category-->
-            <label class="text-black" for="category-drop">Category</label>
-            <br>
-            <select id="category-drop" name="category" style="width:25%" ngModel="value">
-                <option value="Athletics">Athletics</option>
-                <option value="Arts">Arts</option>
-                <option value="Business">Business</option>
-                <option value="Civic">Civic</option>
-                <option value="Education">Education</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Fitness">Fitness</option>           
-                <option value="Landmark">Landmark</option>
-                <option value="Hospitality">Hospitality</option>
-                <option value="Medical">Medical</option>
-                <option value="Park">Park</option>
-                <option value="Religious">Religious</option>
-                <option value="Retail">Retail</option>
-            </select>
-            <br>
-            <br>
-            <!--Address-->
-            <label class = "text-black" for="Address">Address</label>
-            <br>
-            <input type ="text" class="form-control-center" style="width: 25%" id="address" name="address" ngModel>
-            <br>
-            <br>
-            <!--Website-->
-            <label class = "text-black" for="website">Website</label>
-            <br>
-            <input type ="text" class="form-control-center" style="width: 25%" id="website" name="website" ngModel>
-            <br>
-            <br>
-            <!--Telephone Number-->
-            <label class = "text-black" for="telephoneNumber">Telephone Number</label>
-            <br>
-            <input type ="text" class="form-control-center" style="width: 25%" id="telephoneNumber" name = "telephoneNumber" ngModel>
-            <br>
-            <br>
-            <!--Email Address-->
-            <label class = "text-black" for="emailAddress">Email Address</label>
-            <br>
-            <input type = email class="form-control-center" style="width: 25%;" id="email" required 
-            ngModel="model.email" #email="ngModel" email="true">
-            <!--<div *ngIf="description.invalid" class ="alert text-red">Resource description is required and must be between 5 and 100 characters.</div>
-            --><br>
-            <br>  
-        </div>  
-        </div>
-        <button type="submit" class="button-blue button-hover">Submit</button>
+            <div class="form-group text-white accent">
+                <br>      
+                <!--Resource-->
+                <label class = "text-black" for="resourceName">Resource Name</label>
+                <br>
+                <input type ="text" class="form-control-center" style="width:25%" id="resourceName" ngModel name ="resourceName">
+                <br>
+                <br>
+                <!--Category-->
+                <label class="text-black" for="category-drop">Category</label>
+                <br>
+                <select id="category-drop" name="category" style="width:25%" ngModel="value">
+                    <option value="Athletics">Athletics</option>
+                    <option value="Arts">Arts</option>
+                    <option value="Business">Business</option>
+                    <option value="Civic">Civic</option>
+                    <option value="Education">Education</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Fitness">Fitness</option>           
+                    <option value="Landmark">Landmark</option>
+                    <option value="Hospitality">Hospitality</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Park">Park</option>
+                    <option value="Religious">Religious</option>
+                    <option value="Retail">Retail</option>
+                </select>
+                <br>
+                <br>
+                <!--Address-->
+                <label class = "text-black" for="Address">Address</label>
+                <br>
+                <input type ="text" class="form-control-center" style="width: 25%" id="address" name="address" ngModel>
+                <br>
+                <br>
+                <!--Website-->
+                <label class = "text-black" for="website">Website</label>
+                <br>
+                <input type ="text" class="form-control-center" style="width: 25%" id="website" name="website" ngModel>
+                <br>
+                <br>
+                <!--Telephone Number-->
+                <label class = "text-black" for="telephoneNumber">Telephone Number</label>
+                <br>
+                <input type ="text" class="form-control-center" style="width: 25%" id="telephoneNumber" name = "telephoneNumber" ngModel>
+                <br>
+                <br>
+                <!--Email Address-->
+                <label class = "text-black" for="emailAddress">Email Address</label>
+                <br>
+                <input type = email class="form-control-center" style="width: 25%;" id="emailAddress" required 
+                name ="email" ngModel="" #email="ngModel" email="true">
+                <!--<div *ngIf="description.invalid" class ="alert text-red"> Resource description is required and must be between 5 and 100 characters.</div>
+                -->
+                <br>
+                <br>  
+                <label class = "text-black" for="description">Descripton</label>
+                <br>
+                <input class="form-control-center" style="width:50%" id="description" name="description" rows="4" name="description" placeholder="Provide a description for the resource." required minlength="5" maxlength="255" ngModel="model.description" #description = "ngModel">
+            </div>  
+            <button type="submit" class="button-blue button-hover">Submit</button>
 
-        <!--Reset form with New Resource button-->
-        <div class=submitted-resource *ngIf="f.submitted">
-            <p class = "text-orage">You've submitted {{ f.value.resourceName }}</p>
-            <button class="button-blue button-hover" type="button" (click)="f.resetForm()">Add new resource</button>
+            <!--Reset form with New Resource button-->
+            <div class=submitted-resource *ngIf="f.submitted">
+                <p class = "text-orage">You've submitted {{ f.value.resourceName }}</p>
+                <button class="button-blue button-hover" type="button" (click)="f.resetForm()">Add new resource</button>
+            </div>
         </div>
-        <br>
-        <br>
     </form>
+    <br>
+    <br>
+    <br>
     </body>

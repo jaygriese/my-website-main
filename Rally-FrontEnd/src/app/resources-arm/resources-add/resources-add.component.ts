@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { ResourceDTO } from '../model/Resource';
+import { ResourceDTO } from '../models/Resource';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,9 @@ export class ResourcesAddComponent implements OnInit {
   private userUrl: string;
   currentUser;
   logInStatus: Boolean;
+  // Validations
+  categories = ["Athletics", "Arts", "Business", "Civic", "Education", "Entertainment", "Fitness", "Landmark", "Hospitality", "Medical", "Park", "Religious", "Retail"]
+  cateogryModel = {category: this.categories[0]}
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
@@ -29,8 +32,7 @@ export class ResourcesAddComponent implements OnInit {
       this.logInStatus = true;
     }
   }
-  // Validations
-
+  
   
   logOut() {
     localStorage.clear();
@@ -50,7 +52,12 @@ export class ResourcesAddComponent implements OnInit {
     }
     console.log(submitResource);
     this.http.post(this.userUrl, submitResource).subscribe((res) => {
-      console.log(res);
+      console.log(submitResource.resourceName);
+      console.log(submitResource.category);
+      console.log(submitResource.address);
+      console.log(submitResource.website);
+      console.log(submitResource.telephoneNumber);
+      console.log(submitResource.description);
     })
   }
 }

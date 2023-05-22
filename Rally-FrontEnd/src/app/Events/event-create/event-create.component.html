@@ -33,24 +33,22 @@
             <br>
             <br>
            
-        
-            <div id="event_details">
+                   
                 <form #eventInformation="ngForm" (ngSubmit)="registerNewEvent(eventInformation)">
 
                     <div class="row">
-                        <div class="col-5" id="form_1">
-
-                            <label>host</label><br>
-                            <input type="text" required #eventHost="ngModel" id="host" name="eventHost" ngModel>
-                            <br> 
+                        <div class="col-5">
+                            
+                            <div class="mb-3">
+                            <label class="form-label">host</label><br>
+                            <input class="form-control form-control-lg" type="text" required #eventHost="ngModel" id="host" name="eventHost" ngModel>
             
                             <div *ngIf="eventHost.invalid && (eventHost.dirty || eventHost.touched)" class="alert alert-danger" >
                                 Who can we thank for hosting?</div>
+                            </div>
                                 
-                            <br>
-                            <label>email</label><br>
-                            <input type="text" required email #contactEmail="ngModel" id="email" name="contactEmail" ngModel>
-                            <br>
+                            <label class="form-label">email</label><br>
+                            <input class="form-control form-control-lg" type="text" required email #contactEmail="ngModel" id="email" name="contactEmail" ngModel>
             
                             <div  *ngIf="contactEmail.invalid && (contactEmail.dirty || contactEmail.touched)" class="alert alert-danger">
                                 
@@ -65,49 +63,62 @@
                             </div>
             
                             <br>
-                            <label>event title</label><br>
-                            <input type="text" required #eventTitle="ngModel" id="title" name="eventTitle" ngModel>
+                            <label class="form-label">event title</label><br>
+                            <input class="form-control form-control-lg" type="text" required #eventTitle="ngModel" id="title" name="eventTitle" ngModel>
                             <br>
             
                             <div *ngIf="eventTitle.invalid && (eventTitle.dirty || eventTitle.touched)" class="alert alert-danger">
                                 What should we call this event?
                             </div>
             
-                            <br>
-                            <label>date & time</label><br>
-                            <input type="datetime-local" required #datetime="ngModel" id="datetime" name="datetime" ngModel>
+                            <label class="form-label">date & time</label><br>
+                            <input class="form-control form-control-lg" type="datetime-local" required #datetime="ngModel" id="datetime" name="datetime" ngModel>
                             <br>
             
                             <div *ngIf="datetime.invalid && (datetime.dirty || datetime.touched)" class="alert alert-danger">
                                 When should we show up?
                             </div>
             
-                            <br>
-                            <label>address</label><br>
-                            <input type="text" required #eventAddress="ngModel" id="address" name="eventAddress" ngModel>
+                            <label class="form-label">address</label><br>
+                            <input class="form-control form-control-lg" type="text" required #eventAddress="ngModel" id="address" name="eventAddress" ngModel>
                             <br>
             
                             <div *ngIf="eventAddress.invalid && (eventAddress.dirty || eventAddress.touched)" class="alert alert-danger">
                                Where should we go?
                             </div>
-                            <br>
                
-                            <label>category</label>
-                            <hr style="width:550px; margin-top:0;">
-                            <input type="radio" value="connect" required #eventCategory="ngModel" name="eventCategory" ngModel> connect
-                            <input type="radio" value="volunteer" required #eventCategory="ngModel" name="eventCategory" ngModel> volunteer
-                            <input type="radio" value="learn" required #eventCategory="ngModel"  name="eventCategory" ngModel> learn <br>
-                            <input type="radio" value="donate" required #eventCategory="ngModel"  name="eventCategory" ngModel> donate
-                            <input type="radio" value="celebrate" required #eventCategory="ngModel"  name="eventCategory" ngModel> celebrate
+                            <label class="form-label">category</label>
+                            <hr style="width:530px; margin-top:0;">
 
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="eventCategory" value="connect" required #eventCategory="ngModel" ngModel>
+                                <label class="form-check-label" for="eventCategory">connect</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="eventCategory" value="volunteer" required #eventCategory="ngModel" ngModel>
+                                <label class="form-check-label" for="eventCategory">volunteer</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="eventCategory" value="learn" required #eventCategory="ngModel" ngModel>
+                                <label class="form-check-label" for="eventCategory">learn</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="eventCategory" value="donate" required #eventCategory="ngModel" ngModel>
+                                <label class="form-check-label" for="eventCategory">donate</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="eventCategory" value="celebrate" required #eventCategory="ngModel" ngModel>
+                                <label class="form-check-label" for="eventCategory">celebrate</label>
+                            </div>
+                              
 
                         </div>
 
                         <div class="col-2"></div>
 
                         <div class="col-5">
-                            <label>description</label><br>
-                            <textarea cols="65" rows="9" type="text" required #description="ngModel" id=description name="description" ngModel></textarea>
+                            <label class="form-label">description</label><br>
+                            <textarea class="form-control" rows="9" required #description="ngModel" id=description name="description" ngModel></textarea>
                             <br>
             
                             <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
@@ -119,181 +130,19 @@
                            
                             <button [disabled]="eventInformation.invalid" type="submit" id="create_btn">SUBMIT</button>
                             <br>
-                                <div *ngIf="eventInformation.invalid && eventInformation.touched" class="alert alert-danger">
+                                <!-- <div *ngIf="eventInformation.invalid && eventInformation.touched" class="alert alert-danger">
                                     Make sure you've filled out the whole form!
-                                </div>
+                                </div> -->
             
                         </div>
                     </div>
  
                 </form>
                
-            </div>
+
 
     </div>
 </body>
 </html>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div *ngIf="logInStatus; else notLoggedIn">
-    
-    <div style="text-align: right;  display: flex; justify-content:space-between;">
-        <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
-        <button (click)="logOut()"> Log Out?</button>
-    </div>
-   
-
-</div>
-
-
-<ng-template #notLoggedIn>
-    <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
-</ng-template>
-
-
-
-
-
-<div id="main_container">
-    <div id="list_head">
-            <p>Create Event</p> 
-    </div>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <div id="event_details">
-        <form #eventInformation="ngForm" (ngSubmit)="registerNewEvent(eventInformation)">
-            <div style=float:left; id="form_1">
-                
-                <label>host</label><br>
-                <input type="text" required #eventHost="ngModel" id="host" name="eventHost" ngModel>
-                <br> 
-
-                <div *ngIf="eventHost.invalid && (eventHost.dirty || eventHost.touched)" class="alert alert-danger" >
-                    Who can we thank for hosting?</div>
-                    
-                <br>
-                <label>email</label><br>
-                <input type="text" required email #contactEmail="ngModel" id="email" name="contactEmail" ngModel>
-                <br>
-
-                <div  *ngIf="contactEmail.invalid && (contactEmail.dirty || contactEmail.touched)" class="alert alert-danger">
-                    
-                    <div *ngIf="contactEmail.errors.required">
-                        Who can we contact?
-                    </div>    
-
-                    <div *ngIf="contactEmail.errors.email">
-                        Whoops! We need a valid email address.
-                    </div>
-                
-                </div>
-
-                <br>
-                <label>event title</label><br>
-                <input type="text" required #eventTitle="ngModel" id="title" name="eventTitle" ngModel>
-                <br>
-
-                <div *ngIf="eventTitle.invalid && (eventTitle.dirty || eventTitle.touched)" class="alert alert-danger">
-                    What should we call this event?
-                </div>
-
-                <br>
-                <label>date & time</label><br>
-                <input type="datetime-local" required #datetime="ngModel" id="datetime" name="datetime" ngModel>
-                <br>
-
-                <div *ngIf="datetime.invalid && (datetime.dirty || datetime.touched)" class="alert alert-danger">
-                    When should we show up?
-                </div>
-
-                <br>
-                <label>address</label><br>
-                <input type="text" required #eventAddress="ngModel" id="address" name="eventAddress" ngModel>
-                <br>
-
-                <div *ngIf="eventAddress.invalid && (eventAddress.dirty || eventAddress.touched)" class="alert alert-danger">
-                   Where should we go?
-                </div>
-                <br>
-   
-                <label>category</label>
-                <hr style="width:550px; margin-top:0;">
-                <input type="radio" value="connect" required #eventCategory="ngModel" name="eventCategory" ngModel> connect
-                <input type="radio" value="volunteer" required #eventCategory="ngModel" name="eventCategory" ngModel> volunteer
-                <input type="radio" value="learn" required #eventCategory="ngModel"  name="eventCategory" ngModel> learn <br>
-                <input type="radio" value="donate" required #eventCategory="ngModel"  name="eventCategory" ngModel> donate
-                <input type="radio" value="celebrate" required #eventCategory="ngModel"  name="eventCategory" ngModel> celebrate
-
-                <br>
-
-                <div *ngIf="eventCategory.invalid && eventCategory.touched" class="alert alert-danger">
-                    Tell us the event category.
-                </div>
-
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-            </div>
-            <div id="form_2">
-                <label>description</label><br>
-                <textarea cols="60" rows="9" type="text" required #description="ngModel" id=description name="description" ngModel></textarea>
-                <br>
-
-                <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
-                    Tell us what this event is all about!
-                </div>
-
-                <br>
-                <br>
-                <label>Would you like to add a photo?</label><br>
-                <input type="file" id="imageId" name="imageId" accept="image/*" ngModel="value">
-                <br>
-                <br>
-                <br>
-                <br>
-                <button [disabled]="eventInformation.invalid" type="submit" id="create_btn">SUBMIT</button>
-                <br>
-                    <div *ngIf="eventInformation.invalid && eventInformation.touched" class="alert alert-danger">
-                        Make sure you've filled out the whole form!
-                    </div>
-
-                <br>
-                <br>
-                <br>
-                <br>
-            </div>
-        </form>
-       
-    </div>
-</div> -->

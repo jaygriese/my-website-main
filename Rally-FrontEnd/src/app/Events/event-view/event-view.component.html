@@ -66,7 +66,7 @@
 
             </div>
             <div class="col-7">
-                <p style="text-align: left; font-size: 40px; ; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-bottom: -15px;">All Events</p>
+                <p style="text-align: left; font-size: 40px; ; font-family: Oswald, sans-serif; font-weight: 800; margin-bottom: -15px;">All Events</p>
                 <hr style="height:4px; color: black; background-color: black">
             </div>
         </div>
@@ -154,10 +154,9 @@
                                     <h2 class="card-title">{{event.eventTitle}}</h2>
                                     <p class="card-text">category: {{event.eventCategory}}</p>
                                     <p class="card-text"><small class="text-muted">hosted by {{event.eventHost}}</small></p> -->
-                                    <p style="font-family:Impact;  font-size: 15;">{{event.datetime | date:'short'}}</p>
-                                    <!-- <p style="font-family:Impact;  font-size: 15;">{{event.datetime}}</p> -->
-                                    <p style="font-weight: bold; margin-top: -10px;">{{event.eventTitle}}</p>
-                                    <p style="font-size: 25px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
+                                    <p style="font-family:Oswald, sans-serif; font-weight: 700;  font-size: 15;">{{event.datetime | date:'short'}}</p>
+                                    <p style="font-weight: 800; margin-top: -15px;">{{event.eventTitle}}</p>
+                                    <p style="font-size: 23px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
                                     <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>
                                     <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
                                 </div>

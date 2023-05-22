@@ -3,7 +3,7 @@
 	/* border-radius:7px; */
 	display: internal;
 	color:#ffffff;
-	font-family: Arial;
+	font-family: montserrat, sans-serif;
 	font-size:30px;
 	font-weight:bold;
     text-shadow: 0.5px 0.5px 0px #000;
@@ -16,13 +16,13 @@
 #event_display1 {
     text-align: left;
     font-size: 35px;
-    font-family: arial;
+    font-family: montserrat, sans-serif;
 }
 
 #event_display2 {
 text-align: left;
 font-size: 35px;
-font-family: arial;
+font-family: montserrat, sans-serif;
 }
 
 /* .rectangle {
@@ -37,7 +37,7 @@ border: 1px solid #f4d668;
   background-color: #F9A605;
   /* border-radius:6px;  */
   color:#ffffff;
-  font-family:Trebuchet MS;
+  font-family: montserrat, sans-serif;
   font-size:25px;
   font-weight:bold;
   text-shadow: 0.5px 0.5px 0px #000;

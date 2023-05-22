@@ -1,12 +1,13 @@
 .logInButton {
     background-color: #0EBB9A;
+    text-align: center;
 	color:#ffffff;
-	font-family: Arial;
+	font-family: montserrat, sans-serif;
 	font-size:20px;
     font-weight: 600;
     width: 125px;
     height: 65px;
-    padding-top: 21px;
+    padding-top: 17px;
 	text-decoration: none;
 }
 
@@ -31,7 +32,7 @@
     font-family: Oswald, sans-serif;
     font-size: 60px;
     text-align: left;
-    margin-top: 75px;
+    margin-top: 50px;
 }
 
 .Rh2 {
@@ -68,5 +69,6 @@
     font-size: 25px;
     font-weight: 800;
     text-align: left;
-    margin-top: 30px;
+    margin-top: 25px;
+    margin-bottom: -5px;
 }

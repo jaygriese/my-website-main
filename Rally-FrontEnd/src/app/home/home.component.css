@@ -24,23 +24,23 @@
 } */
 
 .card-body {
-    background-color: F9A605;
+    background-color: #F9A605;
 }
 
-.RH1 {
+.Rh1 {
     font-family: Oswald, sans-serif;
     font-size: 60px;
     text-align: left;
     margin-top: 75px;
 }
 
-.RH2 {
+.Rh2 {
     font-family: Oswald, sans-serif;
     font-size: 80px;
     text-align: center;
 }
 
-.RP1 {
+.Rp1 {
     font-family: montserrat, sans-serif;
     font-size: 20px;
     text-align: left;
@@ -50,20 +50,20 @@
 }
 
 
-.RP2 {
+.Rp2 {
     font-family: Oswald, sans-serif;
     font-size: 30px;
     font-weight: 800;
     text-align: left;
 }
 
-.RP3 {
+.Rp3 {
     font-family: Montserrat, sans-serif;
     font-size: 20px;
     text-align: left;
 }
 
-.RP4 {
+.Rp4 {
     font-family: Oswald, sans-serif;
     font-size: 25px;
     font-weight: 800;

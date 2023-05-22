@@ -25,6 +25,12 @@ import { ThemeserviceService } from './services/themeservice.service';
 import { ForumTopic3Component } from './community-forum-arm/forum/forum-topic3/forum-topic3.component';
 import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-post.component';
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
+import { EventEditComponent } from './Events/event-edit/event-edit.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material/core';
+import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 
 @NgModule({
@@ -50,13 +56,20 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     ViewPostComponent,
     ViewUserProfileComponent,
     UserProfileComponent,
+    EventEditComponent,
+    HomeComponent,
     PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule,
+  
   ],
   providers: [CookieService, ThemeserviceService],
   bootstrap: [AppComponent]

@@ -15,7 +15,6 @@ import { EventCreateComponent } from './Events/event-create/event-create.compone
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
 import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
 import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
-
 import { ServicesHomeComponent } from './services-arm/services-home/services-home.component';
 import { OfferComponent } from './services-arm/offer/offer.component';
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
@@ -28,11 +27,11 @@ import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-po
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-// import { AgmCoreModule } from '@agm/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +58,7 @@ import { HomeComponent } from './home/home.component';
     UserProfileComponent,
     EventEditComponent,
     HomeComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,9 +69,7 @@ import { HomeComponent } from './home/home.component';
     MatDatepickerModule,
     MatCardModule,
     MatNativeDateModule,
-    // AgmCoreModule.forRoot({
-    //   apiKey:'AIzaSyAh6PKyQT9CBCOKjubHp1_0DCk58freoL0'
-    // })
+  
   ],
   providers: [CookieService, ThemeserviceService],
   bootstrap: [AppComponent]

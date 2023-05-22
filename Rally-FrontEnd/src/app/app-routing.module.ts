@@ -21,6 +21,7 @@ import { CommunityHomeComponent } from './community-forum-arm/forum/community-ho
 import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path: 'user/:userName/:id', component: ViewUserProfileComponent},
   {path: 'edit/:id', component: EventEditComponent},
   {path: 'home', component: HomeComponent},
+  {path: 'user/404', component: PageNotFoundComponent}
 ];
 
 @NgModule({

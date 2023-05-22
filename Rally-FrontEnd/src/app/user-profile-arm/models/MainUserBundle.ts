@@ -1,13 +1,21 @@
+import { UserDmHistory } from "./UserDmHistory";
 import { UserEntity } from "./UserEntity";
 import { UserInformation } from "./UserInformation";
+import { UserPostHistory } from "./UserPostHistory";
 
 export class MainUserBundle {
-	mainUser: UserEntity;
+	viewUser: UserEntity;
 	viewUserInformation: UserInformation;
+	viewUserDmHistory: UserDmHistory;
+	viewUserPostHistory: UserPostHistory;
 
-
-	constructor(mainUser: UserEntity, mainUserInformation: UserInformation){
-		this.mainUser = mainUser,
-		this.viewUserInformation = mainUserInformation
+	constructor(viewUser: UserEntity, 
+				viewUserInformation: UserInformation, 
+				viewUserDmHistory: UserDmHistory,
+				viewUserPostHistory: UserPostHistory){
+		this.viewUser = viewUser,
+		this.viewUserInformation = viewUserInformation,
+		this.viewUserDmHistory = viewUserDmHistory,
+		this.viewUserPostHistory = viewUserPostHistory
 	}
 }

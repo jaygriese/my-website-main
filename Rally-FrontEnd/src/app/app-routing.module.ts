@@ -20,6 +20,7 @@ import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-u
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
 import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 import { SearchComponent } from './services-arm/search/search.component';
+import { ServiceItemComponent } from './services-arm/service-item/service-item.component';
 
 
 const routes: Routes = [
@@ -43,7 +44,8 @@ const routes: Routes = [
   {path: 'forum/post/:id', component: ViewPostComponent},
   {path: 'myProfile', component: UserProfileComponent},
   {path: 'user/:userName/:id', component: ViewUserProfileComponent},
-  {path: 'searchservice', component: SearchComponent}
+  {path: 'searchservice', component: SearchComponent},
+  {path: 'serviceitem', component: ServiceItemComponent}
 ];
 
 @NgModule({

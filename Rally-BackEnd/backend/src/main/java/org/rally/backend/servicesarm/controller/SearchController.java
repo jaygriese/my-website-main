@@ -1,6 +1,8 @@
 package org.rally.backend.servicesarm.controller;
 
 
+import jakarta.persistence.Id;
+import org.rally.backend.servicesarm.model.AbstractEntity;
 import org.rally.backend.servicesarm.model.response.Category;
 import org.rally.backend.servicesarm.model.response.Service;
 import org.rally.backend.servicesarm.model.response.Type;
@@ -47,6 +49,7 @@ public class SearchController {
         System.out.println(findAllService);
         return new ResponseEntity<>(findAllService, HttpStatus.OK);
     }
+
 
 
 

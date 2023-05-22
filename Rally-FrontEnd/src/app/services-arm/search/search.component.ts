@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
     this.findService.getService().subscribe((response: Service[]) => {
       this.servicesList = response;
       this.data = response;
-      console.log(this.servicesList);
+      // console.log(this.servicesList);
       }
     )
   }

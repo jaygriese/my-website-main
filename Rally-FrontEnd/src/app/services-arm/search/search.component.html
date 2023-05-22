@@ -39,7 +39,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let s of servicesList | service:filter">
-            <td>{{s.id}}</td>            
+            <td><a href="/{{s.id}}" routerLink='/serviceitem' [queryParams]="{id: s.id}" routerLinkActive="active">{{s.id}}</a></td>      
             <td>{{s.type.type}}</td>
             <td>{{s.service}}</td> 
             <td>{{s.category.category}}</td> 

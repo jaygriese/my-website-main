@@ -28,7 +28,8 @@ import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-po
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { SearchComponent } from './services-arm/search/search.component';
 import { SortableHeaderDirective } from './services-arm/models/Sortable';
-import { ServicePipe } from './services-arm/models/Service.Pipe'
+import { ServicePipe } from './services-arm/models/Service.Pipe';
+import { ServiceItemComponent } from './services-arm/service-item/service-item.component'
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ServicePipe } from './services-arm/models/Service.Pipe'
     SearchComponent,
     SortableHeaderDirective,
     ServicePipe,
+    ServiceItemComponent,
   ],
   imports: [
     BrowserModule,

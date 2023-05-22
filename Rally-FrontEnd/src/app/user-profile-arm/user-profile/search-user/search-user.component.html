@@ -1,22 +1,27 @@
+<!-- Search bar row container -->
 <div class="card" style="background-color: #F9A605">
 <div class="row" >
-        <div class="col">
-                <h2>Search</h2>
-        </div>
-        <div class="col">
-            <div class="topnav">
-                <div class="search-container">
-                  <form #searchUser="ngForm" (ngSubmit)="searchForUser(searchUser)">
-                    <input type="text" placeholder="Search.." name="search" ngModel>
-                    <input type="submit" value="Search">
-                    <input type="button" (click)="resetResults()" value="Reset Search">
-                  </form>
-                  
-                </div>
+    <div class="col">
+            <h2>Search</h2>
+    </div>
+
+    <!-- Search bar inputs -->
+    <div class="col">
+        <div class="topnav">
+            <div class="search-container">
+                <form #searchUser="ngForm" (ngSubmit)="searchForUser(searchUser)">
+                <input type="text" placeholder="Search.." name="search" ngModel>
+                <input type="submit" value="Search">
+                <input type="button" (click)="resetResults()" value="Reset Search">
+                </form>
             </div>
         </div>
+    </div>
 </div>   
 </div>
+
+
+<!-- Display users container/banner -->
 <div class="card" style="background-color: #F9A605">
 <div class="row">
     <div class="col">
@@ -25,6 +30,7 @@
         </div>
     </div>
 </div>
+<!-- Iterate through the userlist to display results -->
 <div class="row" *ngFor = "let user of userList">
     <div class="col">
         <div class="card" style="background-color: #ecdfc3;">

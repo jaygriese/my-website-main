@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class SearchUserComponent implements OnInit {
 
+  /* Search User Variables */
   userList: UserEntity[]; 
   logInStatus: Boolean;
 
@@ -18,19 +19,16 @@ export class SearchUserComponent implements OnInit {
               private verifyService: VerifyLogoutService) { }
 
   ngOnInit(): void {
+    /* Makes sure user is logged in before */
     this.logInStatus = this.verifyService.verifyLoggedIn();
     this.userService.getUserList().subscribe((data: UserEntity[]) => {
       this.userList = data;
-      let remove: UserEntity;
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].userName === localStorage.getItem("userName")) {
-          remove = this.userList[i];
-        }
-      }
-      this.userList = this.userList.filter((user: UserEntity) => user !== remove);
+      /* Remove active user from list */
+      this.userList = this.userList.filter((user: UserEntity) => user.userName !== localStorage.getItem("userName"));
     })
   }
 
+  /* Search for specific user by name or by character */
   searchForUser(searchUser: NgForm) {
     let filterUser: any[] = [];
     let search = searchUser.value.search.toLowerCase().split('');
@@ -56,6 +54,7 @@ export class SearchUserComponent implements OnInit {
     return this.userList = filterUser;
   }
 
+  /* Reset results */
   resetResults() {
     this.userService.getUserList().subscribe((data: UserEntity[]) => {
       this.userList = data;

@@ -104,6 +104,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
     this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
   }
 
+  /* Filter option to display specific posts from viewed user */
   userPostHistoryFilter(event) {
     if (event.target.checked) {
       if (this.filterActive === false) {
@@ -129,6 +130,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  /* Send Dm to viewed user */
   viewingUserSendDM(dmMessageDetails: NgForm) {
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.userEntityInformation.viewUser.id,
@@ -150,6 +152,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  /* Displays the conversation with viewed user */
   displayConversation( userDms: UserEntity) {
     this.conversation = [];
 

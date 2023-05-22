@@ -1,8 +1,9 @@
+<!-- In the event the user page does not get rerouted -->
 <div *ngIf="userReal; else fourOFour"></div>
-
 <ng-template #fourOFour>
 <h1 style="color: crimson;">404 USER NOT FOUND</h1>
 </ng-template>
+<!-- Logout and Search nav bar -->
 <div *ngIf="logInStatus"> 
     <div style="text-align: right;">
         <button style="background-color: #85CDE3;"><a routerLink="/search" routerLinkActive="active">Search</a></button>
@@ -11,87 +12,122 @@
 </div>
 <br>
 
+
+<!-- First Row in User Profile -->
+<!-- First Row in User Profile -->
+<!-- First Row in User Profile -->
 <div class="row">
-<div class="col-sm-3">
-    <div class="card"style="background-color: #0EBB9A;">
-        <h4>Viewing {{ this?.viewUserName }}'s Profile</h4>
-        <div class="card" style="align-content: center;" *ngIf="dbImage; else default">               
-            <img [src]="dbImage" width="100%" height="auto">
-        </div>
-        <ng-template #default>
-            <img src="/assets/user-profile-assets/profile-pic.gif" width="100%" height="auto">
-        </ng-template>
-        </div> 
+
+<!-- User Profile Picture -->
+<!-- User Profile Picture -->
+<!-- User Profile Picture -->
+<div class="col-3">
+<div class="card"style="background-color: #0EBB9A;">
+    <h4>Viewing {{ this?.viewUserName }}'s Profile</h4>
+    <div class="card" style="align-content: center;" *ngIf="dbImage; else default">               
+        <img [src]="dbImage" width="100%" height="auto">
     </div>
-    <div class="col-sm-9">
-        <div class="card" style="background-color: #0EBB9A;">
-            <h4>Direct Messaging: <br>{{ viewUserName }}</h4>
-                <div #dmBottomOfScroll class="scroll">     
-                <table style="width: 100%;" *ngFor="let dm of conversation">
-                    <br>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <td class="card" style="background-color: #F9A605">
-                        <tr style="background-color: #F9A605">Sent: <br>{{dm.sentByUserName}}</tr> 
-                    </td>
-                    <td>
-                        <tr class="thought">Message: <br>{{ dm.messageContent }}</tr> 
-                    </td>
-                    <td class="card" style="background-color: #F9A605">
-                        <tr style="background-color: #F9A605">Recieved: <br>{{ dm.receivedByUserName}}</tr>
-                    </td>
-                    <br><br>
-                </table>
-                <form #dmMessageDetails="ngForm" (ngSubmit)="viewingUserSendDM(dmMessageDetails)">
-                    <div class="card" style="align-items: center; background-color: rgb(126, 161, 154);">
-                        <h3>Respond: </h3>
-                        <textarea rows="3" cols="40" type="text" name="messageContent" [(ngModel)]="commentBox"></textarea> 
-                    <br>
-                    <div *ngIf="dmCharacters; else lengthError"></div>
-                    <input style="background-color: #85CDE3;" type="submit" value="Send Message">    
-                    <ng-template #lengthError>
-                        <h6 style="color:crimson;">Minimum of 3 characters required.</h6>
-                    </ng-template>
-                    </div>
-                </form>
-                
-            </div>
-        </div>
-    </div>
+    <ng-template #default>
+        <img src="/assets/user-profile-assets/profile-pic.gif" width="100%" height="auto">
+    </ng-template>
+</div> 
+</div>
 
 
-<div class="row">
-    <div class="col">
-        <div class="card" style="background-color: #0EBB9A;">
-            <h2>UserDetails</h2>
-
-            <div class="card" style="background-color: #ecdfc3;">
-                <br> 
-                <label>First Name: <h4>{{ userEntityInformation?.viewUserInformation?.firstName }}</h4></label>
+<!-- User Direct Messaging service -->
+<!-- User Direct Messaging service -->
+<!-- User Direct Messaging service -->
+<div class="col-9">
+    <div class="card" style="background-color: #0EBB9A;">
+        <h4>Direct Messaging: <br>{{ viewUserName }}</h4>
+        <div class="card">
+            <div #dmBottomOfScroll class="scroll">
+            <!-- Display the conversation between user and viewed profile -->
+            <table style="width: 100%;" *ngFor="let dm of conversation">
                 <br>
-                <label>Last Name: <h4>{{ userEntityInformation?.viewUserInformation?.lastName }}</h4></label>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <td class="card" style="background-color: #F9A605">
+                    <tr style="background-color: #F9A605">Sent: <br>{{dm.sentByUserName}}</tr> 
+                </td>
+                <td>
+                    <tr class="thought">Message: <br>{{ dm.messageContent }}</tr> 
+                </td>
+                <td class="card" style="background-color: #F9A605">
+                    <tr style="background-color: #F9A605">Recieved: <br>{{ dm.receivedByUserName}}</tr>
+                </td>
+                <br><br>
+            </table>
+            <!-- Respond to message between user and viewed profile -->
+            <form #dmMessageDetails="ngForm" (ngSubmit)="viewingUserSendDM(dmMessageDetails)">
+                <div class="card" style="align-items: center; background-color: rgb(126, 161, 154);">
+                    <h3>Respond: </h3>
+                    <textarea rows="3" cols="40" type="text" name="messageContent" [(ngModel)]="commentBox"></textarea> 
                 <br>
-                <label>Neighborhood: <h4>{{ userEntityInformation?.viewUserInformation?.neighborhood }}</h4></label>
-                <br>
-                <label>City: <h4>{{ userEntityInformation?.viewUserInformation?.city }}</h4></label>
-                <br>       
-                <label>State: <h4>{{ userEntityInformation?.viewUserInformation?.state }}</h4></label>                     
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="card" style="background-color: #0EBB9A;">
-            <h2>Post History</h2>
-            <div class="scroll-posthistory">
-                <div>
-                    <label >Show Forum Post: <input type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
-                    <label >Show Event Post: <input type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
+                <div *ngIf="dmCharacters; else lengthError"></div>
+                <input style="background-color: #85CDE3;" type="submit" value="Send Message">    
+                <ng-template #lengthError>
+                    <h6 style="color:crimson;">Minimum of 3 characters required.</h6>
+                </ng-template>
                 </div>
+            </form>
+            </div>
+        </div>
+    </div>
+<!-- End of First row in User Profile -->
+</div>
+
+
+<!-- Second Row in User Profile -->
+<!-- Second Row in User Profile -->
+<!-- Second Row in User Profile -->
+<div class="row">
+
+
+<!-- User Information -->
+<!-- User Information -->
+<!-- User Information -->
+<div class="col-3">
+    <div class="card" style="background-color: #0EBB9A;">
+        <h2>UserDetails</h2>
+        <div class="card">
+            <br> 
+            <label>First Name: <h4>{{ userEntityInformation?.viewUserInformation?.firstName }}</h4></label>
+            <br>
+            <label>Last Name: <h4>{{ userEntityInformation?.viewUserInformation?.lastName }}</h4></label>
+            <br>
+            <label>Neighborhood: <h4>{{ userEntityInformation?.viewUserInformation?.neighborhood }}</h4></label>
+            <br>
+            <label>City: <h4>{{ userEntityInformation?.viewUserInformation?.city }}</h4></label>
+            <br>       
+            <label>State: <h4>{{ userEntityInformation?.viewUserInformation?.state }}</h4></label>                     
+        </div>
+    </div>
+</div>
+
+
+<!-- User Post History Section -->
+<!-- User Post History Section -->
+<!-- User Post History Section -->
+<div class="col-6">
+    <div class="card" style="background-color: #0EBB9A;">
+        <h2>Post History</h2>
+        <div class="card">
+        <div class="scroll-posthistory">
+            <div *ngIf="this?.allPost.length === 0"><h3>User Does not have any post history</h3></div>
+            <!-- Filter to display posts of a specific type -->
+            <div>
+                <label >Show Forum Post: <input type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
+                <label >Show Event Post: <input type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
+            </div>
+            <!-- Display all user posts that are not hidden -->
             <ul *ngFor="let post of allPost">
+                <!-- If post is not marked hidden, display... -->
                 <div *ngIf="post.hidden === false">
+                <!-- Display ForumPosts -->
                 <div *ngIf="post.type === 'ForumPost'">
                 <div class="card" style="background-color: #F9A605">
                     <h6>{{ post.type }}</h6>
@@ -101,6 +137,7 @@
                 </div>
                 </div> 
                 </div>
+                <!-- Display Event posts -->
                 <div *ngIf="post.type === 'Event'">
                     <div class="card" style="background-color: #F9A605">
                     <h6>{{ post.type }}</h6>
@@ -115,9 +152,17 @@
         </div>
         </div>
     </div>
-    <div class="col">
-        <div class="card" style="background-color: #0EBB9A;">
-            <h2>Favorites</h2>
-        </div>
+</div>
+
+
+<!-- User Profile Favorite Section -->
+<!-- User Profile Favorite Section -->
+<!-- User Profile Favorite Section -->
+<div class="col-3">
+    <div class="card" style="background-color: #0EBB9A;">
+        <h2>Favorites</h2>
     </div>
+</div>
+
+<!-- End of 2nd row on User Profile -->
 </div>

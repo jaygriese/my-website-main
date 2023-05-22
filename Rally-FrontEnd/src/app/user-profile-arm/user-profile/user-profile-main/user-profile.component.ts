@@ -94,13 +94,7 @@ export class UserProfileComponent implements OnInit {
                                            this.userInformation.city,
                                            this.userInformation.state);
         /* Remove active user from dm list */
-        let remove: UserEntity;
-        for (let i = 0; i < this.userEntityDmList.length; i++) {
-          if (localStorage.getItem('userName') === this.userEntityDmList[i].userName) {
-            remove = this.userEntityDmList[i];
-          }
-        }
-        this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user !== remove);
+        this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user.userName !== localStorage.getItem("userName"));
 
         this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
         this.allPostFilter = this.allPost;

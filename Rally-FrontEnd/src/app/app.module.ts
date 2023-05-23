@@ -31,8 +31,8 @@ import { ServicePipe } from './services-arm/models/Service.Pipe';
 import { ServiceItemComponent } from './services-arm/service-item/service-item.component'
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatCardModule} from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
@@ -77,7 +77,6 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     MatDatepickerModule,
     MatCardModule,
     MatNativeDateModule,
-  
   ],
   providers: [CookieService, ThemeserviceService],
   bootstrap: [AppComponent]

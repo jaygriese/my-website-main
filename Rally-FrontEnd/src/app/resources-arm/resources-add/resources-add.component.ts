@@ -15,7 +15,7 @@ export class ResourcesAddComponent implements OnInit {
   currentUser;
   logInStatus: Boolean;
   // Validations
-  categories = ["Athletics", "Arts", "Business", "Civic", "Education", "Entertainment", "Fitness", "Landmark", "Hospitality", "Medical", "Park", "Religious", "Retail"]
+  categories = ["Athletics", "Arts", "Business", "Civic", "Education", "Entertainment", "Fitness", "Hospitality", "Medical", "Park", "Religious", "Retail"]
   cateogryModel = {category: this.categories[0]}
 
   constructor(private http: HttpClient, private router: Router) {
@@ -57,6 +57,7 @@ export class ResourcesAddComponent implements OnInit {
       console.log(submitResource.address);
       console.log(submitResource.website);
       console.log(submitResource.telephoneNumber);
+      console.log(submitResource.email);
       console.log(submitResource.description);
     })
   }

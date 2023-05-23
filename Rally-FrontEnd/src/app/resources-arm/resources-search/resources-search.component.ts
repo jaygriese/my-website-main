@@ -13,7 +13,7 @@ import { SortableHeaderDirective, SortEvent, compare } from '../models/Sortable'
   styleUrls: ['./resources-search.component.css']
 })
 export class ResourcesSearchComponent implements OnInit {
-  //private userUrl: string;
+  private userUrl: string;
   currentUser;
   logInStatus: Boolean;
   data: Resource[];

@@ -25,6 +25,7 @@ import { ThemeserviceService } from './services/themeservice.service';
 import { ForumTopic3Component } from './community-forum-arm/forum/forum-topic3/forum-topic3.component';
 import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-post.component';
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
+import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
 import { SearchComponent } from './services-arm/search/search.component';
 import { SortableHeaderDirective } from './services-arm/models/Sortable';
 import { ServicePipe } from './services-arm/models/Service.Pipe';
@@ -60,6 +61,7 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     ViewPostComponent,
     ViewUserProfileComponent,
     UserProfileComponent,
+    ForumSearchResultsComponent,
     SearchComponent,
     SortableHeaderDirective,
     ServicePipe,

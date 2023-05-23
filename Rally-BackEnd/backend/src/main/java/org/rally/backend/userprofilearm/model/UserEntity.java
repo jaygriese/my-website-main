@@ -22,6 +22,8 @@ public class UserEntity {
     @NotNull
     private String pwHash;
 
+    @ManyToMany (mappedBy = "users")
+    private List<ForumPostLike> forumPostLikes;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",

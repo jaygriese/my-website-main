@@ -27,6 +27,7 @@ import { UserProfileComponent } from './user-profile-arm/user-profile/user-profi
 import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
 import { ViewRestaurantComponent } from './restaurants-homepage/view-restaurant/view-restaurant.component';
 import { SearchRestaurantComponent } from './restaurants-homepage/search/search-restaurant.component';
+import { ResourcesSearchComponent } from './resources-arm/resources-search/resources-search.component';
 import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
 import { SearchComponent } from './services-arm/search/search.component';
 import { ServiceItemComponent } from './services-arm/service-item/service-item.component';
@@ -49,6 +50,8 @@ const routes: Routes = [
   {path: 'restaurants/pizza' , component: RestaurantsPizzaComponent},
   {path: 'resources', component: ResourcesHomeComponent},
   {path: 'resourcesAdd', component: ResourcesAddComponent},
+  {path: 'resourcesSearch', component: ResourcesSearchComponent},
+  {path: 'event', component: EventComponent },
   {path: 'event/:id', component: EventComponent },
   {path: 'create', component: EventCreateComponent},
   {path: 'services', component: ServicesHomeComponent},

@@ -34,7 +34,7 @@ import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-u
 import { ViewRestaurantComponent } from './restaurants-homepage/view-restaurant/view-restaurant.component';
 import { ReviewComponent } from './restaurants-homepage/review/review.component';
 import { SearchRestaurantComponent } from './restaurants-homepage/search/search-restaurant.component';
-
+import { ResourcesSearchComponent } from './resources-arm/resources-search/resources-search.component';
 import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
 import { SearchComponent } from './services-arm/search/search.component';
 import { SortableHeaderDirective } from './services-arm/models/Sortable';
@@ -66,6 +66,7 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     RestaurantsPizzaComponent,
     ResourcesHomeComponent,
     ResourcesAddComponent,
+    ResourcesSearchComponent,
     EventComponent,
     EventCreateComponent,
     ServicesHomeComponent,

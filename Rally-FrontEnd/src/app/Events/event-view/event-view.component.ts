@@ -25,8 +25,6 @@ export class EventViewComponent implements OnInit {
   // DateSelected: any;
 
   selected: Date | null;
-
-  formattedDate: any;
   
 
   constructor(private http: HttpClient, private router: Router) {
@@ -36,7 +34,6 @@ export class EventViewComponent implements OnInit {
     this.filteredEvents;
     // this.DateSelected;
     this.selected;
-    this.formattedDate;
   
 
   

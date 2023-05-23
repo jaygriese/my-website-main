@@ -35,13 +35,13 @@
 <body style="margin-top: 80px;">
     <div class="container" *ngIf="eventDetails">
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col">
                 <a href="http://localhost:4200/create/" class="myButton">JOIN</a>
             </div>
         </div>
         <br>
-        <br>
+        <br> -->
         <br>
         <br>
 
@@ -53,54 +53,83 @@
 
             </div>
             <div class="col-7">
-                <p style="text-align: left; font-size: 40px; ; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-bottom: -15px;">{{eventDetails.eventTitle}}<span style="font-family: arial; font-size: 30px; float: right; margin-top: 15px;">{{eventDetails.datetime}}</span></p>
-                <hr style="height:4px; color: #0097b2; background-color: #0097b2;">
+                <p style="text-align: left; font-size: 30px; ; font-family: Oswald, sans-serif; font-weight: 800; margin-bottom: -15px;">{{eventDetails.eventTitle}}<span style="font-family: oswald, sans-serif; font-size: 30px; font-weight: 700; float: right; margin-bottom: -15px;">{{eventDetails.datetime  |  date:'short'}}</span></p>
+                <hr style="height:4px; color: black; background-color: black">
             </div>
         </div>
-        <br>
        
         <div class="row" >
             <div class="col-3">
                 <p id="event_display1">location</p>
-                <div class="rectangle">
-
-                </div>
-            <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6235.150903512339!2d-90.2485586!3d38.612640850000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87d8b4f665510415%3A0x7045b7225c22f7c6!2sShaw%2C%20St.%20Louis%2C%20MO!5e0!3m2!1sen!2sus!4v1684598180204!5m2!1sen!2sus" 
+                    width="300" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <!-- <iframe
+                    width="300"
+                    height="400"
+                    frameborder="0" style="border:0"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/search?key=MYKEYHERE&q=shaw+neighborhood+st+louis+mo"
+                    allowfullscreen>
+                </iframe> -->
+                <!-- <iframe
+                width="300"
+                height="400"
+                frameborder="0" style="border:0"
+                referrerpolicy="no-referrer-when-downgrade"
+                [src]='mapUrl'
+                allowfullscreen>
+            </iframe> -->
+                <p style="font-size: 15px; font-style:italic;">expand map to search event address</p>
             <br>
             <br>
         
             <span>
-                <p id="event_display2">comments</p>
-                <!-- <button class="button2">connect</button>
-                <button class="button2">learn</button>
-                <button class="button2">volunteer</button>
-                <button class="button2">donate</button>
-                <button class="button2">celebrate</button>
-                <button class="button2">view all</button> -->
+                <p id="event_display2">create this event?</p>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; text-align:center;">edit event</a> 
+                           
+                            <button type="button" class="button2" (click)="deleteEvent()" style="background-color: #C03E24;">delete event</button>
+                          </div>
+                    </div>
+                </div>
+
             </span>
             </div>
 
-            <div class="col-2">
-
-            </div>
+            <div class="col-2"></div>
 
             <div class="col-7">
                 <div id="details">
-                    <p style="font-size: 15px; margin-top: -12px; margin-bottom: -8px;">CATEGORY: {{eventDetails.eventCategory}}</p>
-                    <p>photo goes here</p>
-                    <img src="{{eventDetails.imageId}}" />
+                    <br>
+                    <p style="font-size: 15px; margin-top: -12px;">category: <span style="font-weight: bolder;">{{eventDetails.eventCategory | uppercase}}</span> </p>
+                    <div>
+                        <img *ngIf="eventDetails.eventCategory === 'connect'" src="/assets/events-assets/connect.jpg" width="300" height="300">
+                        <img *ngIf="eventDetails.eventCategory === 'learn'" src="/assets/events-assets/learn.jpg" width="300" height="300">
+                        <img *ngIf="eventDetails.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg" width="300">
+                        <img *ngIf="eventDetails.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg" width="300" height="300">
+                        <img *ngIf="eventDetails.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg" width="300" height="300">
+                    </div>
+                    <!-- <br> -->
+                    <p style="font-size: 15px; font-style: italic; margin-top: 12px; ">hosted by: <span style="font-weight: bolder;">{{eventDetails.eventHost}} <span style="font-weight: lighter;">|</span> {{eventDetails.contactEmail}}</span></p> 
+                    <br>
+                    <p style="font-size: 20px; font-weight: bolder;">address:</p>
+                    <p style="margin-top: -15px;">{{eventDetails.eventAddress}}</p>
+                    <br>
+                    <p style="font-size: 20px; font-weight: bolder;">description:</p>
+                    <p style="margin-top: -15px;">{{eventDetails.description}}</p> 
+                    <br> 
                     <br>
                     <br>
                     <br>
-                    <br>
-                    <br>  
-                    <p style="font-size: 15px; font-style: italic;">hosted by: {{eventDetails.eventHost}}</p>  
-                    <br>
-                    <p style="font-size: 25px;">address:</p><br>
-                    <p>{{eventDetails.eventAddress}}</p>
-                    <br>
-                    <p style="font-size: 25px;">description:</p><br>
-                    <p>{{eventDetails.description}}</p>  
                 </div>
             </div>
         </div>

@@ -1,0 +1,83 @@
+.logInButton {
+    background-color: #0EBB9A;
+    text-align: center;
+	color:#ffffff;
+	font-family: montserrat, sans-serif;
+	font-size:20px;
+    font-weight: 500;
+    width: 125px;
+    height: 65px;
+    padding-top: 17px;
+	text-decoration: none;
+}
+
+.nav-link {
+    color: black;
+    font-weight: 450;
+    font-size: 15px;
+}
+
+/* .RH5 {
+    font-family: montserrat, sans-serif;
+    text-align: left;
+    font-size: 100px;
+    font-weight: 900;
+} */
+
+.card-body {
+    background-color: #0EBB9A;
+}
+
+.Rh1 {
+    font-family: Oswald, sans-serif;
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* .Rh2 {
+    font-family: Oswald, sans-serif;
+    font-size: 80px;
+    text-align: center;
+} */
+
+.Rp1 {
+    font-family: montserrat, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    margin-top: -15px;
+
+}
+
+
+.Rp2 {
+    font-family: Oswald, sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    /* color: white; */
+}
+
+.Rp3 {
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    /* color: white; */
+}
+
+.Rp4 {
+    font-family: Oswald, sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: left;
+    margin-top: 25px;
+    margin-bottom: 0px;
+}
+
+.Rp5 {
+    font-family: montserrat, sans-serif;
+    font-size: 20px;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}

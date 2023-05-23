@@ -15,7 +15,6 @@ import { EventCreateComponent } from './Events/event-create/event-create.compone
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
 import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
 import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
-
 import { ServicesHomeComponent } from './services-arm/services-home/services-home.component';
 import { OfferComponent } from './services-arm/offer/offer.component';
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
@@ -27,6 +26,17 @@ import { ForumTopic3Component } from './community-forum-arm/forum/forum-topic3/f
 import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-post.component';
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
+import { SearchComponent } from './services-arm/search/search.component';
+import { SortableHeaderDirective } from './services-arm/models/Sortable';
+import { ServicePipe } from './services-arm/models/Service.Pipe';
+import { ServiceItemComponent } from './services-arm/service-item/service-item.component'
+import { EventEditComponent } from './Events/event-edit/event-edit.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material/core';
+import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -52,12 +62,23 @@ import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-s
     ViewUserProfileComponent,
     UserProfileComponent,
     ForumSearchResultsComponent,
+    SearchComponent,
+    SortableHeaderDirective,
+    ServicePipe,
+    ServiceItemComponent,
+    EventEditComponent,
+    HomeComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule,
   ],
   providers: [CookieService, ThemeserviceService],
   bootstrap: [AppComponent]

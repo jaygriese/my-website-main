@@ -20,6 +20,11 @@ import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-u
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
 import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
+import { SearchComponent } from './services-arm/search/search.component';
+import { ServiceItemComponent } from './services-arm/service-item/service-item.component';
+import { EventEditComponent } from './Events/event-edit/event-edit.component';
+import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -31,7 +36,7 @@ const routes: Routes = [
   {path: 'communityHomeForum', component: CommunityHomeComponent},
   {path: 'resources', component: ResourcesHomeComponent},
   {path: 'resourcesAdd', component: ResourcesAddComponent},
-  {path: 'event', component: EventComponent },
+  {path: 'event/:id', component: EventComponent },
   {path: 'create', component: EventCreateComponent},
   {path: 'services', component: ServicesHomeComponent},
   {path: 'offer', component: OfferComponent},
@@ -43,7 +48,12 @@ const routes: Routes = [
   {path: 'forum/post/:id', component: ViewPostComponent},
   {path: 'myProfile', component: UserProfileComponent},
   {path: 'user/:userName/:id', component: ViewUserProfileComponent},
-  {path: 'forum/search', component: ForumSearchResultsComponent}
+  {path: 'forum/search', component: ForumSearchResultsComponent},
+  {path: 'searchservice', component: SearchComponent},
+  {path: 'serviceitem', component: ServiceItemComponent},
+  {path: 'edit/:id', component: EventEditComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'user/404', component: PageNotFoundComponent}
 ];
 
 @NgModule({

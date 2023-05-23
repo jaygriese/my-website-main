@@ -1,9 +1,7 @@
 package org.rally.backend.userprofilearm.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class DirectMessage {
@@ -20,7 +18,10 @@ public class DirectMessage {
 
     private String sentByUserName;
 
+    @Column(columnDefinition = "VARCHAR(5000) NOT NULL")
     private String messageContent;
+
+    private String messageHash;
 
     public DirectMessage() {
     }
@@ -32,6 +33,8 @@ public class DirectMessage {
         this.sentByUserName = sentByUserName;
         this.messageContent = messageContent;
     }
+
+
 
     public int getId() {
         return id;
@@ -76,4 +79,10 @@ public class DirectMessage {
     public void setMessageContent(String messageContent) {
         this.messageContent = messageContent;
     }
+
+    public boolean isMessageMatching(String content) {
+        return encoder.matches(content, messageHash);
+    }
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 }

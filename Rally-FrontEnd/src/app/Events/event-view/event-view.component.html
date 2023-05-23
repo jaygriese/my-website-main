@@ -80,24 +80,16 @@
                     <div>
                         <div>
                         <mat-card class="demo-inline-calendar-card">
-                            <!-- <mat-calendar [(ngModel)]="selected"></mat-calendar> -->
-                            <!-- <mat-calendar (selectedChange)="selected = $event"></mat-calendar> -->
-                            <mat-calendar [(selected)]="selected"></mat-calendar>
+                            <mat-calendar (selectedChange)="selected = $event"></mat-calendar>
                           </mat-card>
                         </div>
                         <br>
                           <p style="font-size: 15px; float: left;">I'm available on: {{selected | date}}</p>
                           <div style="margin-top: -15px;">
-                            <button class="button2" style="width: 100%;" (click)="byDate(selected)" >find events</button>
+                            <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
                           </div>   
                     </div>
 
-
-               
-                <!-- <mat-card class="demo-inline-calendar-card">
-                    <mat-calendar (selectedChange)="selected = $event"></mat-calendar>
-                  </mat-card>
-                  <p>Selected date: {{selected}}</p> -->
                 
                 <!-- <div class="card w-100">
                     <div class="card-body">

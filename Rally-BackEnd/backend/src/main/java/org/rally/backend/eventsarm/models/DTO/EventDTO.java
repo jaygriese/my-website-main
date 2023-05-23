@@ -6,42 +6,32 @@ import jakarta.validation.constraints.NotBlank;
 public class EventDTO {
 
 
-    @NotBlank(message = "Who can your community thank for hosting this event?")
+    private int id;
+
+    @NotBlank(message = "Who can we thank for hosting?")
     private String eventHost;
 
-    @NotBlank(message = "But how will your community know who to contact?")
-    @Email(message = "Whoops! Try entering your email again.")
+    @NotBlank(message = "Who can we contact?")
+    @Email(message = "Whoops! We need a valid email address.")
     private String contactEmail;
 
+    @NotBlank(message = "What should we call this event?")
     private String eventTitle;
 
+    @NotBlank(message = "When should we show up?")
     private String datetime;
 
-//    private String datetime;
-//@Basic
-//private java.time.LocalDateTime localDateTime;
-
-    @NotBlank(message = "But how will your community know where to go?")
+    @NotBlank(message = "Where should we go?")
     private String eventAddress;
 
-//    private EventCategory eventCategory;
-
+    @NotBlank(message = "Tell us the event category.")
     private String eventCategory;
 
-    @NotBlank(message = "Tell your community what this event is all about!")
+    @NotBlank(message = "Tell us what this event is all about!")
     private String description;
 
     private String imageId;
 
-//    public Event(String eventHost, String contactEmail, String eventTitle, String datetime, String eventAddress, String eventCategory, String description) {
-//        this.eventHost = eventHost;
-//        this.contactEmail = contactEmail;
-//        this.eventTitle = eventTitle;
-//        this.datetime = datetime;
-//        this.eventAddress = eventAddress;
-//        this.eventCategory = eventCategory;
-//        this.description = description;
-//    }
 
     public String getEventHost() {
         return eventHost;
@@ -75,13 +65,14 @@ public class EventDTO {
         this.eventAddress = eventAddress;
     }
 
-//    public EventCategory getEventCategory() {
-//        return eventCategory;
-//    }
-//
-//    public void setEventCategory(EventCategory eventCategory) {
-//        this.eventCategory = eventCategory;
-//    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getDescription() {
         return description;

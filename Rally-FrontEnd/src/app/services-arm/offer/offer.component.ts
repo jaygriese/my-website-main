@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -12,18 +12,19 @@ import { Name } from '../models/Service';
 })
 export class OfferComponent implements OnInit {
 
-
   private userUrl: string;
   currentUser;
   logInStatus: Boolean;
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
-    this.userUrl = 'http://localhost:8080/service/offer';
+    this.userUrl = 'http://localhost:8080/services/offer';
    }
 
   ngOnInit(): void {
+
     this.verifyLoggedIn();
+    
   }
 
   verifyLoggedIn() {
@@ -35,17 +36,30 @@ export class OfferComponent implements OnInit {
 
   }
 
-  // Attempting validation
-  model = new Name(localStorage.getItem('userName'));
-
   logOut() {
     localStorage.clear();
     console.log(localStorage.getItem('userName'))
     this.logInStatus = false;
   }
 
+  // Validations
+  types = ["Offering", "Requesting"];
+  typeModel = {type: this.types[0]};
+
+  categories = ["Art", "Administrative", "Babysitting", "Dogwalking", "Event", "Music", "Other", "Photography", "Repair", "Rideshare"];
+  categoryModel = {category: this.categories[0]}
+
+  days = ["Any", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  daysModel = {day: this.days[0]}
+
+  times = ["Any", "Morning", "Afternoon", "Evening"];
+  timeModel = {time: this.times[0]}
+
+  model = new Name(localStorage.getItem('userName'), localStorage.getItem('service'), localStorage.getItem('description'), localStorage.getItem('email'));
+
   submitted = false;
 
+  // submit form method
   onSubmit(f: NgForm ) {
 
     this.submitted = true;
@@ -63,11 +77,16 @@ export class OfferComponent implements OnInit {
     
     
     this.http.post(this.userUrl, submitService).subscribe((res) => {
+      console.log(submitService.userName);
+      console.log(submitService.type);
+      console.log(submitService.service);
+      console.log(submitService.category);
+      console.log(submitService.days);
+      console.log(submitService.time);
+      console.log(submitService.description);
+      console.log(submitService.email);
       console.log(res);
-      console.log(f.value.days);
     })
-
-    f.reset();
 
 }
 }

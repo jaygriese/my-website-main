@@ -26,7 +26,13 @@ import { CommunityHomeComponent } from './community-forum-arm/forum/community-ho
 import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
 import { ViewRestaurantComponent } from './restaurants-homepage/view-restaurant/view-restaurant.component';
-import { SearchComponent } from './restaurants-homepage/search/search.component';
+import { SearchRestaurantComponent } from './restaurants-homepage/search/search-restaurant.component';
+import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
+import { SearchComponent } from './services-arm/search/search.component';
+import { ServiceItemComponent } from './services-arm/service-item/service-item.component';
+import { EventEditComponent } from './Events/event-edit/event-edit.component';
+import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -41,10 +47,9 @@ const routes: Routes = [
   {path: 'restaurants/mexican' , component: RestaurantsMexicanComponent},
   {path: 'restaurants/italian' , component: RestaurantsItalianComponent},
   {path: 'restaurants/pizza' , component: RestaurantsPizzaComponent},
-
   {path: 'resources', component: ResourcesHomeComponent},
   {path: 'resourcesAdd', component: ResourcesAddComponent},
-  {path: 'event', component: EventComponent },
+  {path: 'event/:id', component: EventComponent },
   {path: 'create', component: EventCreateComponent},
   {path: 'services', component: ServicesHomeComponent},
   {path: 'offer', component: OfferComponent},
@@ -57,11 +62,17 @@ const routes: Routes = [
   {path: 'myProfile', component: UserProfileComponent},
   {path: 'user/:userName/:id', component: ViewUserProfileComponent},
   {path: 'restaurant/:id', component: ViewRestaurantComponent},
-  {path: 'restaurants/search', component: SearchComponent}
+  {path: 'restaurants/search', component: SearchRestaurantComponent},
+  {path: 'forum/search', component: ForumSearchResultsComponent},
+  {path: 'searchservice', component: SearchComponent},
+  {path: 'serviceitem', component: ServiceItemComponent},
+  {path: 'edit/:id', component: EventEditComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'user/404', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

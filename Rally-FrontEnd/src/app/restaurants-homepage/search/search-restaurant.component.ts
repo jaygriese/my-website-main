@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchRestaurantComponent implements OnInit {
 
   restaurantList: Restaurant[];
     private getRestaurantListUrl: string = 'http://localhost:8080/restaurantList'

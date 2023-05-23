@@ -1,0 +1,25 @@
+.green {
+    background-color: rgb(112, 224, 112);
+
+}
+
+.background {
+    background-color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.form {
+    background-color:rgb(219, 254, 219);
+}
+
+.right {
+    font-size: x-large;
+}
+
+.left {
+    font-size: x-large;
+    text-align: left;
+    padding-left: 250pt;
+}

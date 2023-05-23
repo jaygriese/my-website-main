@@ -33,10 +33,20 @@ import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-po
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { ViewRestaurantComponent } from './restaurants-homepage/view-restaurant/view-restaurant.component';
 import { ReviewComponent } from './restaurants-homepage/review/review.component';
-import { SearchComponent } from './restaurants-homepage/search/search.component';
-// import {Ng2SearchPipeModule} from 'ng-search-filter';
+import { SearchRestaurantComponent } from './restaurants-homepage/search/search-restaurant.component';
 
-
+import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
+import { SearchComponent } from './services-arm/search/search.component';
+import { SortableHeaderDirective } from './services-arm/models/Sortable';
+import { ServicePipe } from './services-arm/models/Service.Pipe';
+import { ServiceItemComponent } from './services-arm/service-item/service-item.component'
+import { EventEditComponent } from './Events/event-edit/event-edit.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material/core';
+import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -70,12 +80,24 @@ import { SearchComponent } from './restaurants-homepage/search/search.component'
     ViewRestaurantComponent,
     ReviewComponent,
     SearchComponent,
+    ForumSearchResultsComponent,
+    SearchRestaurantComponent,
+    SortableHeaderDirective,
+    ServicePipe,
+    ServiceItemComponent,
+    EventEditComponent,
+    HomeComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule,
   ],
   providers: [CookieService, ThemeserviceService],
   bootstrap: [AppComponent]

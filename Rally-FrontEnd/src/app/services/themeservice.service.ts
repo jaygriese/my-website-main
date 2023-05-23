@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ForumPostDTO } from '../community-forum-arm/models/ForumPostDTO';
 import { HttpClient } from '@angular/common/http';
-
+import { ForumPost } from '../community-forum-arm/models/ForumPost';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeserviceService {
+  testArray1: ForumPost[];
   constructor(private http: HttpClient) { 
   }
 
@@ -37,20 +39,44 @@ createAPost(postInfo: NgForm, forumTopic: string){
 window.location.reload();
 }
 getForumTopicPosts(forumTopic: string){
-  let testArray1 = [];
-  let newArray = [];
-  this.http.get(`http://localhost:8080/Posts`).subscribe((res)=>{
-    for(const k in res){
-        if(res[k].title != null){
-          testArray1.push(res[k])
-        }
-    }
-    for(let i = 0; i < testArray1.length; i++){
-      if (testArray1[i].category == forumTopic){
-        newArray.push(testArray1[i]);
+  return this.http.get<{[key: string]: ForumPost}>(`http://localhost:8080/Posts`).pipe(map((res) => {
+    const posts = [];
+    for(const key in res){
+      if (res[key].category == forumTopic){
+          posts.push({...res[key]})
       }
     }
-  });
-  return newArray;
+    return posts;
+  }))
+}
+sortPosts(posts: ForumPost[]){
+  return posts.sort(function(b, a) {
+    return a.id - b.id
+  })
+}
+getAllForumPosts(){
+  return this.http.get<{[key: string]: ForumPost}>('http://localhost:8080/Posts').pipe(map((res) => {
+    const posts = [];
+    for(const key in res){
+          posts.push({...res[key]})
+
+    }
+    return posts;
+  }))
+}
+searchPosts(posts: ForumPost[]){
+    const sortedPosts = [];
+    for(const key in posts){
+      if (posts[key].title.toLowerCase().includes(localStorage.getItem('searchTerm').toLowerCase()) || posts[key].description.toLowerCase().includes(localStorage.getItem('searchTerm').toLowerCase()) || posts[key].userEntity.userName.toLowerCase().includes(localStorage.getItem('searchTerm').toLowerCase())){
+          sortedPosts.push(posts[key]);
+      }
+    }
+    return sortedPosts;
+}
+testPost = async () => {
+  const resp = await fetch('http://localhost:8080/Posts');
+  const data = await resp.json();
+  let newArray = data;
+  return newArray
 }
 }

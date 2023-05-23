@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from '../models/event';
+import { MatCalendar } from '@angular/material/datepicker';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class EventViewComponent implements OnInit {
 
   formattedDate: any;
 
+  // @ViewChild(MatCalendar) _datePicker: MatCalendar<Date>
   
 
   constructor(private http: HttpClient, private router: Router) {
@@ -40,7 +42,6 @@ export class EventViewComponent implements OnInit {
     // this.formattedDate = this.selected().toString();
     // this.formattedDate = new Date().toISOString;
 
-    
   
 
    }
@@ -61,25 +62,45 @@ export class EventViewComponent implements OnInit {
     // console.log(typeof(this.formattedDate));
 
 
+    // this._datePicker.selectedChange.subscribe(x => {
+    //   console.log(x);
+    // });
+
   
   }
 
-
-
-  byDate() {
-    this.selected = new Date();
-    this.formattedDate = this.selected.toISOString();
+ 
+  byDate(event: Date) {
+    event = new Date();
+    this.formattedDate = event.toISOString();
     console.log("the date object after converting to string using the toString() method: " + this.formattedDate)
     console.log(typeof(this.formattedDate));
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
+      console.log(this.eventList[i].datetime);
       if(this.eventList[i].datetime.includes(this.formattedDate)) {
         this.filteredEvents.push(this.eventList[i])
       } 
     }
-    console.log(this.formattedDate);
+    console.log(this.filteredEvents);
     return this.filteredEvents;
   }
+
+
+  // byDate() {
+  //   this.selected = new Date();
+  //   this.formattedDate = this.selected.toISOString();
+  //   console.log("the date object after converting to string using the toString() method: " + this.formattedDate)
+  //   console.log(typeof(this.formattedDate));
+  //   this.filteredEvents.splice(0);
+  //   for(let i = 0; i < this.eventList.length; i++) {
+  //     if(this.eventList[i].datetime.includes(this.formattedDate)) {
+  //       this.filteredEvents.push(this.eventList[i])
+  //     } 
+  //   }
+  //   console.log(this.formattedDate);
+  //   return this.filteredEvents;
+  // }
 
 
 // byDate() {

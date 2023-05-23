@@ -83,11 +83,12 @@
     width: 300px;
   }
 
-  /* .mat-calendar-body-active>.mat-calendar-body-cell-content.mat-focus-indicator{
+/* 
+  .mat-calendar-body-active>.mat-calendar-body-cell-content.mat-focus-indicator{
     background:transparent !important
-} */
+}
 
-/* .mat-calendar-body-today
+.mat-calendar-body-today
 :not(.mat-calendar-body-selected)
 :not(.mat-calendar-body-comparison-identical) {
 background-color: rgb(255 255 255) !important;

@@ -20,8 +20,8 @@ public class ResourceController {
     @PostMapping("/add")
     public ResponseEntity<?> processAddResource(@RequestBody ResourceDTO resourceDTO) {
 
-        Resource newResource = new Resource(resourceDTO.getResourceName(), resourceDTO.getCategory(), resourceDTO.getAddress(), resourceDTO.getWebsite(), resourceDTO.getTelephoneNumber(), resourceDTO.getEmailAddress(), resourceDTO.getDescription());
-        System.out.printf("This is the resource to save: Name %s, category %s, email %s, address: %s, phone: %s, description: %s", newResource.getResourceName(), newResource.getCategory(), newResource.getEmailAddress(), newResource.getAddress(), newResource.getTelephoneNumber(), newResource.getDescription());
+        Resource newResource = new Resource(resourceDTO.getResourceName(), resourceDTO.getCategory(), resourceDTO.getAddress(), resourceDTO.getWebsite(), resourceDTO.getTelephoneNumber(), resourceDTO.getEmail(), resourceDTO.getDescription());
+        System.out.printf("This is the resource to save: Name %s, category %s, email %s, address: %s, phone: %s, description: %s", newResource.getResourceName(), newResource.getCategory(), newResource.getEmail(), newResource.getAddress(), newResource.getTelephoneNumber(), newResource.getDescription());
         resourceRepository.save(newResource);
         return new ResponseEntity<>(HttpStatus.OK);
     }

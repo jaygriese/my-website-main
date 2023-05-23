@@ -9,15 +9,15 @@ public class Resource extends AbstractEntity{
     private String address;
     private String website;
     private String telephoneNumber;
-    private String emailAddress;
+    private String email;
     private String description;
-    public Resource(String resourceName, String category, String address, String website, String telephoneNumber, String emailAddress, String description) {
+    public Resource(String resourceName, String category, String address, String website, String telephoneNumber, String email, String description) {
         this.resourceName = resourceName;
         this.address = address;
         this.website = website;
         this.category = category;
         this.telephoneNumber = telephoneNumber;
-        this.emailAddress = emailAddress;
+        this.email = email;
         this.description = description;
     }
     public Resource () {};
@@ -40,10 +40,11 @@ public class Resource extends AbstractEntity{
     public String getTelephoneNumber() {
         return telephoneNumber;
     }
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
     public String getDescription() {
         return description;
     }
+
 }

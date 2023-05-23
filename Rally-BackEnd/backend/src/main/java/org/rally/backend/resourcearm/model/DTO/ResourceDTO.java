@@ -10,7 +10,7 @@ public class ResourceDTO {
     private String address;
     private String website;
     private String telephoneNumber;
-    private String emailAddress;
+    private String email;
     private String description;
 
 
@@ -29,12 +29,17 @@ public class ResourceDTO {
     public String getTelephoneNumber() {
         return telephoneNumber;
     }
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
     public String getDescription() {
         return description;
     }
-
+//    @Override
+//    public String toString(){
+//        return "ResourceDTO{" +
+//                "category='" + category + '\'' +
+//                '}';
+//    }
 }
 

@@ -19,6 +19,7 @@ import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-po
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
 import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
+import { ResourcesSearchComponent } from './resources-arm/resources-search/resources-search.component';
 import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
 import { SearchComponent } from './services-arm/search/search.component';
 import { ServiceItemComponent } from './services-arm/service-item/service-item.component';
@@ -36,6 +37,8 @@ const routes: Routes = [
   {path: 'communityHomeForum', component: CommunityHomeComponent},
   {path: 'resources', component: ResourcesHomeComponent},
   {path: 'resourcesAdd', component: ResourcesAddComponent},
+  {path: 'resourcesSearch', component: ResourcesSearchComponent},
+  {path: 'event', component: EventComponent },
   {path: 'event/:id', component: EventComponent },
   {path: 'create', component: EventCreateComponent},
   {path: 'services', component: ServicesHomeComponent},

@@ -1,0 +1,52 @@
+<div *ngIf="logInStatus; else notLoggedIn">
+    <div style="text-align: right;">
+        <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
+    </div>
+</div>
+<ng-template #notLoggedIn>
+    <p>User is not logged in. </p>
+    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+</ng-template>
+<div id="theme" class="white">
+        <body class="white-theme">
+            <h1>{{postObject.title}}</h1>
+        </body>
+<br><br>
+<div *ngIf="!postReplyBoolean; else createReplyForm">   
+    <div *ngIf="logInStatus">
+        <button (click)="populateForm()" class="btn btn-primary">Create Reply</button>
+    </div>
+</div>
+<ng-template #createReplyForm>
+<div *ngIf="logInStatus">
+    <form #createdReplyAttempt="ngForm" (ngSubmit)="createReply(createdReplyAttempt)">
+
+        <label>Reply: <input type="text" name="description" required ngModel></label>     
+                            <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</ng-template>
+<section>
+    <article>
+            <span> <div class="thought">{{postObject.description}}</div></span>
+            <br><br>
+            <span style="padding-top: 5px;">{{postObject.userEntity.userName}} says</span>
+
+    </article>
+</section>
+<br><br>
+<h4>Replies</h4>
+<div id="parent{{reply.id}}" *ngFor="let reply of replies">
+<div id="{{reply.id}}">
+<span><div class="thought">{{reply.description}}</div></span>
+<span style="padding-top: 5px;">{{reply.userEntity.userName}} says</span>
+<div *ngIf="reply.userEntity.userName.toLowerCase() == currentUser.toLowerCase()">
+    <button (click)="editDescription(reply.id)">Update reply</button>
+    <button (click)="deleteReply(reply.id)">Delete</button>
+</div>
+<br><br>
+</div>
+</div>
+
+

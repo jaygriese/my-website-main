@@ -1,0 +1,45 @@
+<div *ngIf="logInStatus; else notLoggedIn">
+    
+    <div style="text-align: right;">
+        <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
+    </div>
+    
+
+
+</div>
+<ng-template #notLoggedIn>
+
+    <h2></h2>
+
+    <p>User is not logged in. </p>
+    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+</ng-template>
+
+<br>
+
+<div class="blue"><h2 class="container-fluid border">Resources Home</h2></div>
+<br>
+<br>
+<div class="blue">
+    <div class="container-fluid border" style="text-align: left;">
+        <h2><a class="nav-link" routerLink="/resourcesAdd" routerLinkActive="active">Add</a></h2>
+        <p>Add a community resource here</p>
+    </div>
+</div>
+<br>
+<br>
+<div class="blue">
+    <div class="container-fluid border" style="text-align: left;">
+        <h2><a class="nav-link" routerLink="/resourcesList" routerLinkActive="active">List</a></h2>
+        <p>Display community resources in list format</p>
+    </div>
+</div>
+<br>
+<br>
+<div class="blue">
+    <div class="container-fluid border" style="text-align: left;">
+        <h2><a class="nav-link" routerLink="/resourcesSearch" routerLinkActive="active">Search</a></h2>
+        <p>Search for community resources here</p>
+    </div>
+</div>
+<br>

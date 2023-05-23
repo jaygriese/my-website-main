@@ -1,0 +1,70 @@
+<div class="big">
+    <div *ngIf="logInStatus; else notLoggedIn">
+        <div style="text-align: right;">
+            <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
+        </div>
+    </div>
+    <!-- log in button -->
+    <ng-template #notLoggedIn>
+        <p>User is not logged in. </p>
+        <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+    </ng-template>
+    <!-- log out button -->
+    <div *ngIf="darktheme; else lightTheme" style="text-align: right;">
+            <button (click)="Light()">Turn on the lights</button>
+    </div>
+    <ng-template #lightTheme>
+        <div style="text-align: right;">
+            <button (click)="Dark()">Turn off the lights</button>
+        </div>
+    </ng-template> 
+        <!-- light/dark theme buttons    -->
+    <div *ngIf="!createPostBoolean; else createPostForm">   
+        <div *ngIf="logInStatus">
+            <button (click)="createPostButton()" class="btn btn-primary">Create Post</button>
+        </div>
+    </div>
+        <!-- create post button  -->
+    <div id="theme" class="white">
+    <!-- background theme  -->
+    <body class="white-theme">
+        <div class="container-fluid">
+            <h1>Miscellaneous</h1>
+        </div>
+    </body>
+    <!-- Page header -->
+            <br>
+            <br>
+    <div *ngIf="darktheme; else lightSections">
+        <div style="text-align: left;" *ngFor="let test of newArray">
+            <div class="black-background">
+                <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
+                    <p>Posted by {{test.userEntity.userName}}</p>
+            </div>
+        </div>
+    </div>
+    <!-- dark theme posts -->
+    <ng-template #lightSections>
+        <div style="text-align: left;" *ngFor="let test of newArray">
+            <div class="white-theme">
+                <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
+                    <p>Posted by {{test.userEntity.userName}}</p>
+            </div>
+            <br><br>
+        </div>
+    </ng-template>
+    <!-- light theme posts -->
+</div>
+</div>
+<ng-template #createPostForm>
+    <div *ngIf="logInStatus">
+        <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">
+            <label>Title: <input type="text" name="title" required ngModel></label>
+                                <br><br>
+            <label>Description: <input type="text" name="description" required ngModel></label>     
+                                <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</ng-template>
+    <!-- create post form  -->

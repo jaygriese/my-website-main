@@ -1,25 +1,47 @@
 <div style="text-align:center" class="container">
 
-    <div class="form-group">
+    <div *ngIf="passwordsMatch; else nextForm" class="form-group">
         <h2>Register</h2>
+        <form #userInformation="ngForm" (ngSubmit)="registerNewUser(userInformation)">
+            <br>
+            <label>Enter a user name: <input type="text" name="userName" ngModel></label>        
+            <br><br>
+            <label>Enter your password: <input type="password" name="password" ngModel></label>
+            <br><br>
+            <label>Please re-enter your password: <input type="password" name="verify" ngModel></label>
+            <br><br>
+            <input type="submit" value="Submit">
+            <div *ngIf="incorrectPassword">
+            <p id="IncorrectPW">Passwords don't match!</p>
+            </div>
+            <div >
+            </div>
+        </form>
+        
     </div>
-    <form #userInformation="ngForm" (ngSubmit)="registerNewUser(userInformation)">
-        
-        <br>
-        <label>Enter a user name: <input type="text" name="userName" required ngModel></label>
-        
-        <br><br>
-        <label>Enter your password: <input type="password" name="password" required ngModel></label>
-        
-        <br><br>
-        <label>Please re-enter your password: <input type="password" name="verify" required ngModel></label>
-        
-        <br><br>
-        <input type="submit" value="Submit"> 
+ 
+    <ng-template #nextForm>
+    <div class="form-group"> 
+        <h2>Register</h2>
+        <form #userDetails="ngForm" (ngSubmit)="completeRegisteration(userDetails)">
+            <br><br>
+            <label>First Name: <input type="text" name="firstName" ngModel></label>
+            <br><br>
+            <label>Last Name: <input type="text" name="lastName" ngModel></label>                
+            <br><br>
+            <label>Neigborhood: <input type="text" name="neigborhood" ngModel></label>
+            <br><br>
+            <label>City: <input type="text" name="city" ngModel></label>                
+            <br><br>
+            <label>State: <input type="text" name="state" ngModel></label>                
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    </ng-template>
 
         <br><br>
         <p>Already have an account? <a routerLink="/login" routerLinkActive="active">Login</a></p>
-
-    
-    </form> 
+   
+     
 </div>

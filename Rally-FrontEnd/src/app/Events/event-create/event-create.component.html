@@ -1,0 +1,99 @@
+<div *ngIf="logInStatus; else notLoggedIn">
+    
+    <div style="text-align: right;  display: flex; justify-content:space-between;">
+        <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
+        <button (click)="logOut()"> Log Out?</button>
+    </div>
+   
+
+</div>
+
+
+<ng-template #notLoggedIn>
+    <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
+</ng-template>
+
+
+
+
+
+<div id="main_container">
+    <div id="list_head">
+            <p>Create Event</p> 
+        <!-- <span>
+            <a href="#" class="myButton">SUBMIT</a>
+        </span> -->
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div id="event_details">
+        <form #eventInformation="ngForm" (ngSubmit)="registerNewEvent(eventInformation)">
+            <div style=float:left; id="form_1">
+                <label>host</label><br>
+                <input type="text" id="host" name="eventHost" ngModel>
+                <br>
+                <br>
+                <label>email</label><br>
+                <input type="text" id="email" name="contactEmail" ngModel>
+                <br>
+                <br>
+                <label>event title</label><br>
+                <input type="text" id="title" name="eventTitle" ngModel>
+                <br>
+                <br>
+                <label>date & time</label><br>
+                <input type="datetime-local" id="datetime" name="datetime" ngModel>
+                <br>
+                <br>
+                <label>address</label><br>
+                <input type="text" id="address" name="eventAddress" ngModel>
+                <br>
+                <br>
+   
+                <label>category</label>
+                <hr style="width:550px; margin-top:0;">
+                <input type="radio" value="connect" name="eventCategory" ngModel> connect
+                <input type="radio" value="volunteer" name="eventCategory" ngModel> volunteer
+                <input type="radio" value="learn" name="eventCategory" ngModel> learn <br>
+                <input type="radio" value="donate" name="eventCategory" ngModel> donate
+                <input type="radio" value="celebrate" name="eventCategory" ngModel> celebrate
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+            <div id="form_2">
+                <label>description</label><br>
+                <textarea cols="60" rows="9" type="text" id=description name="description" ngModel></textarea>
+                <br>
+                <br>
+                <br>
+                <label>Would you like to add a photo?</label><br>
+                <input type="file" id="imageId" name="imageId" accept="image/*" ngModel="value">
+                <br>
+                <br>
+                <br>
+                <br>
+                <!-- <input type="submit" value="SUBMIT"> -->
+                <!-- <button type="submit" id="create_btn">SUBMIT</button> -->
+                <!-- <button (click)="list()" type="submit" id="create_btn">SUBMIT</button> -->
+                <button type="submit" id="create_btn">SUBMIT</button>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </form>
+       
+    </div>
+</div>

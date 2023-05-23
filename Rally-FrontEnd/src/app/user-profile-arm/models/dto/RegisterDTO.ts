@@ -1,9 +1,9 @@
 export class RegisterDTO {
-    userName: String;
-	password: String;
-    verifyPassword: String;
+    userName: string;
+	password: string;
+    verifyPassword: string;
 
-	constructor(userName: String, password: String, verifyPassword: String){
+	constructor(userName: string, password: string, verifyPassword: string){
 		this.userName = userName;
 		this.password = password;
         this.verifyPassword = verifyPassword;

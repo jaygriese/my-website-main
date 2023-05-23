@@ -1,0 +1,46 @@
+.text-white {
+    color: white;
+}
+
+.text-orange {
+    color: orange;
+}
+
+.accent {
+    accent-color: blue;
+}
+
+.background {
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.orange {
+    background-color: orange;
+
+}
+
+.button-blue {
+    background-color: blue;
+    color: black;
+    border: 30;
+    border-radius: 12px;
+    width: 25%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 40px;
+    transition-duration: 0.4s;
+}
+
+.button-hover:hover {
+    background-color: white;
+    color: black;
+}
+
+.border-color {
+    border-color: blue;
+    border-width: thick;
+}

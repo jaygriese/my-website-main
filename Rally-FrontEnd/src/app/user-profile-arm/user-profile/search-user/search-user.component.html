@@ -1,1 +1,36 @@
-<p>search-user works!</p>
+<div class="card">
+<div class="row">
+    <!-- <div class="col">
+        <div class="card">
+            <h2>ID</h2>
+        </div>
+    </div> -->
+    <div class="col">
+        <div class="card">
+            <h2>User Name</h2>
+        </div>
+    </div>
+    <!-- <div class="col">
+        <div class="card">
+            <h2>User Role</h2>
+        </div>
+    </div> -->
+</div>
+<div class="row" *ngFor = "let user of userList">
+    <!-- <div class="col">
+        <div class="card">
+            <h2>{{ user.id }}</h2>
+        </div>
+    </div> -->
+    <div class="col">
+        <div class="card">
+            <h2><a routerLink="/user/{{user.userName}}/{{user.id}}" routerLinkActive="active">{{ user.userName }}</a></h2>
+        </div>
+    </div>
+    <!-- <div class="col">
+        <div class="card">
+            <h2 *ngFor="let item of user.roles"> {{ item.name }}</h2>
+        </div>
+    </div> -->
+</div>
+</div>

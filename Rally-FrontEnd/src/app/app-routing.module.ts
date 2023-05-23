@@ -1,42 +1,67 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginUserComponent } from './user-profile-arm/login-register/login-user/login-user.component';
 import { RegisterUserComponent } from './user-profile-arm/login-register/register-user/register-user.component';
-import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile/user-profile.component';
-import { EventViewComponent } from './event-view/event-view.component';
-import { DropdownMenuComponent } from './user-profile-arm/experiments/dropdown-menu/dropdown-menu.component';
+import { EventViewComponent } from './Events/event-view/event-view.component';
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
-import { CommunityHomeComponent } from './community-forum-arm/community-home/community-home.component';
 import { RestaurantsHomepageComponent } from './restaurants-homepage/restaurants-homepage.component';
 import { RestaurantAmericanComponent } from './restaurants-homepage/restaurant-american/restaurant-american.component';
 import { RestaurantAsianComponent } from './restaurants-homepage/restaurant-asian/restaurant-asian.component';
 import { RestaurantsMexicanComponent } from './restaurants-homepage/restaurants-mexican/restaurants-mexican.component';
 import { RestaurantsItalianComponent } from './restaurants-homepage/restaurants-italian/restaurants-italian.component';
 import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pizza/restaurants-pizza.component';
-import { ReviewsAmericanComponent } from './restaurants-homepage/restaurant-american/reviews-american/reviews-american.component';
-
+import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
+import { EventComponent } from './Events/event/event.component';
+import { EventCreateComponent } from './Events/event-create/event-create.component';
+import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
+import { ServicesHomeComponent } from './services-arm/services-home/services-home.component';
+import { OfferComponent } from './services-arm/offer/offer.component';
+import { IntroductionsComponent } from './community-forum-arm/forum/introductions/introductions.component';
+import { ForumTopic1Component } from './community-forum-arm/forum/forum-topic1/forum-topic1.component';
+import { ForumTopic2Component } from './community-forum-arm/forum/forum-topic2/forum-topic2.component';
+import { ForumTopic3Component } from './community-forum-arm/forum/forum-topic3/forum-topic3.component';
+import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-post.component';
+import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
+import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
+import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
+import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
+import { ViewRestaurantComponent } from './restaurants-homepage/view-restaurant/view-restaurant.component';
+import { SearchComponent } from './restaurants-homepage/search/search.component';
 
 
 const routes: Routes = [
   {path: 'login', component: LoginUserComponent},
   {path: 'register', component: RegisterUserComponent},
-  {path: 'myProfile', component: UserProfileComponent},
+  {path: 'search', component: SearchUserComponent},
   {path: 'events', component: EventViewComponent},
-  {path: 'testing', component: DropdownMenuComponent},
   {path: 'forum', component: ForumComponent},
-  {path: 'communityHomeForum', component: CommunityHomeComponent},
   {path: 'restaurants' , component: RestaurantsHomepageComponent},
   {path: 'restaurants/american' , component: RestaurantAmericanComponent},
   {path: 'restaurants/asian' , component: RestaurantAsianComponent},
   {path: 'restaurants/mexican' , component: RestaurantsMexicanComponent},
   {path: 'restaurants/italian' , component: RestaurantsItalianComponent},
   {path: 'restaurants/pizza' , component: RestaurantsPizzaComponent},
-  {path: 'restaurants/reviews/american' , component: ReviewsAmericanComponent}
 
+  {path: 'resources', component: ResourcesHomeComponent},
+  {path: 'resourcesAdd', component: ResourcesAddComponent},
+  {path: 'event', component: EventComponent },
+  {path: 'create', component: EventCreateComponent},
+  {path: 'services', component: ServicesHomeComponent},
+  {path: 'offer', component: OfferComponent},
+  {path: 'forum/communityhome', component: CommunityHomeComponent},
+  {path: 'forum/introductions', component: IntroductionsComponent},
+  {path: 'forum/topic1', component: ForumTopic1Component},
+  {path: 'forum/topic2', component: ForumTopic2Component},
+  {path: 'forum/topic3', component: ForumTopic3Component},
+  {path: 'forum/post/:id', component: ViewPostComponent},
+  {path: 'myProfile', component: UserProfileComponent},
+  {path: 'user/:userName/:id', component: ViewUserProfileComponent},
+  {path: 'restaurant/:id', component: ViewRestaurantComponent},
+  {path: 'restaurants/search', component: SearchComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

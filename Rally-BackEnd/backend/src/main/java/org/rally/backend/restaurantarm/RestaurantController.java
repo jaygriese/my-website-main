@@ -1,20 +1,48 @@
 package org.rally.backend.restaurantarm;
+import org.rally.backend.restaurantarm.data.RestaurantRepository;
+import org.rally.backend.restaurantarm.data.ReviewRepository;
+import org.rally.backend.restaurantarm.models.Review;
+import org.rally.backend.restaurantarm.models.ReviewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin
-@RequestMapping(value="/restaurant")
+@CrossOrigin(origins = "*")
+//@RequestMapping(value="/restaurant")
 public class RestaurantController {
+
+  @Autowired
+  ReviewRepository reviewRepository;
   @Autowired
   RestaurantRepository restaurantRepository;
+
+
+  @GetMapping("/restaurantReviews/{id}")
+  public ResponseEntity<?> getReviews(@PathVariable int id) {
+
+    List<Review> reviewList = new ArrayList<>();
+    for(Review review:reviewRepository.findAll()) {
+      if(review.getRestaurantId() == id) {
+        System.out.println(review.getReview());
+        reviewList.add(review);
+      }
+    }
+    return new ResponseEntity<>(reviewList, HttpStatus.OK);
+  }
+
+  @PostMapping("/reviews")
+  public ResponseEntity<?> addReview (@RequestBody ReviewDTO reviewDTO) {
+    Review newReview = new Review(reviewDTO.getName(), reviewDTO.getDescription(), reviewDTO.getRestaurantId());
+    reviewRepository.save(newReview);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
 
   @GetMapping("/restaurantList")
   public List<Restaurant> getRestaurantList() {
@@ -24,8 +52,13 @@ public class RestaurantController {
     return restaurantList;
   }
 
+  @GetMapping("/viewRestaurant/{id}")
+  public Optional<Restaurant> viewRestaurant(@PathVariable int id) {
+    return restaurantRepository.findById(id);
+  }
+
   public void createRestaurantObjects() {
-    Restaurant restaurant1 = new Restaurant("Hi-Point Drive-In", "1033 McCausland Ave, St. Louis, MO 63117", "https://hipointedrivein.com/", "Clayton", "American");
+    Restaurant restaurant1 = new Restaurant("Hi-Point Drive-In", "1033 McCausland Ave, St. Louis, MO 63117", "https://hipointedrivein.com/", "Clayton","American");
     restaurantRepository.save(restaurant1);
 
     Restaurant restaurant2 = new Restaurant("Mai Lee", "8396 Musick Memorial Dr, Brentwood, MO 63144", "www.maileestl.com/", "Clayton", "Asian");
@@ -42,7 +75,7 @@ public class RestaurantController {
         "www.modpizza.com", "Clayton", "Pizza");
     restaurantRepository.save(restaurant5);
 
-    Restaurant restaurant6 = new Restaurant("City Park Grill", "3157 Morganford Rd, Saint Louis, MO 63116", "www.city-park-grill.com", "Tower Grove", "American");
+    Restaurant restaurant6 = new Restaurant("City Park Grill", "3157 Morganford Rd, Saint Louis, MO 63116", "www.city-park-grill.com", "Tower Grove","American");
     restaurantRepository.save(restaurant6);
 
     Restaurant restaurant7 = new Restaurant("The King and I Thai Cuisine",

@@ -1,0 +1,88 @@
+<body class = "background">
+
+<!--Login Status-->
+<div *ngIf="logInStatus; else notLoggedIn">
+    
+    <div style="text-align: right;">
+        <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
+    </div>
+    
+
+
+</div>
+<ng-template #notLoggedIn>
+
+    <h2></h2>
+
+    <p>User is not logged in. </p>
+    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+</ng-template>
+
+<br>
+<!--Banner-->
+<div class="black"><h1>Add a Neighborhood Resource</h1></div>
+<form class = "form container border" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class="form-group text-white accent">
+        <br>      
+        <!--Resource-->
+        <label class = "text-black" for="resourceName">Resource Name</label>
+        <br>
+        <input type ="text" class="form-control-center" style="width:25%" id="resourceName" ngModel>
+        <br>
+        <br>
+        <!--Category-->
+        <label class="text-black" for="category-drop">Category</label>
+        <br>
+        <select id="category-drop" name="category" style="width:25%" ngModel="value">
+            <option value="Athletics">Athletics</option>
+            <option value="Arts">Arts</option>
+            <option value="Business">Business</option>
+            <option value="Civic">Civic</option>
+            <option value="Education">Education</option>
+            <option value="Entertainment">Education</option>
+            <option value="Fitness">Fitness</option>           
+            <option value="Landmark">Landmark</option>
+            <option value="Hospitality">Hospitality</option>
+            <option value="Medical">Medical</option>
+            <option value="Park">Park</option>
+            <option value="Religious">Religious</option>
+            <option value="Retail">Retail</option>
+        </select>
+        <br>
+        <br>
+        <!--Address-->
+        <label class = "text-black" for="Address">Address</label>
+        <br>
+        <input type ="text" class="form-control-center" style="width: 25%" id="address" ngModel>
+        <br>
+        <br>
+        <!--Website-->
+        <label class = "text-black" for="website">Website</label>
+        <br>
+        <input type ="text" class="form-control-center" style="width: 25%" id="website" ngModel>
+        <br>
+        <br>
+        <!--Telephone Number-->
+        <label class = "text-black" for="telephoneNumber">Telephone Number</label>
+        <br>
+        <input type ="text" class="form-control-center" style="width: 25%" id="telephoneNumber" ngModel>
+        <br>
+        <br>
+        <!--Email Address-->
+        <label class = "text-black" for="resourceName">Email Address</label>
+        <br>
+        <input type ="text" class="form-control-center" style="width: 25%" id="resourceName" ngModel>
+        <br>
+        <br>
+        <!--Description-->
+        <label class = "text-black" for="description">Description</label>
+        <br>
+        <textarea class ="text" class="form-control-center" style="width: 50%" id="description" rows="4" name="description" ngModel></textarea>
+        <br>
+        <br>    
+    </div>
+    <button class="button-blue button-hover">Submit</button>
+    <br>
+    <br>
+</form>
+</body>

@@ -1,0 +1,152 @@
+
+<div *ngIf="logInStatus; else notLoggedIn"> 
+    <div style="text-align: right;">
+        <button><a routerLink="/search" routerLinkActive="active">Search</a></button>
+        <button (click)="logOut()">Log Out</button>
+    </div>
+</div>
+<br>
+
+<div class="row">
+
+
+<div class="col-sm-3 p-1 boarder">
+    <div class="card">
+        <div class="profilepic">
+        <h4>Hello<br>{{currentUser}}</h4>
+        <div class="card">
+            <div style="align-content: center;">
+            <img src="/assets/user-profile-assets/profile-pic.gif" width="200" height="200">
+            </div>
+        </div>
+        </div> 
+    </div>
+</div>
+
+
+<div class="col-sm-8  offset-md-1">
+        <div class="card">
+            <h4 *ngIf="userDms; else differentTitle">View your messages</h4>
+            <ng-template #differentTitle>
+                <h4>Direct Messaging {{ respondToDm.userName }} </h4>
+            </ng-template>
+            <div class="card">
+
+                <div class="scroll" *ngIf="userDms; else showConversations">
+                <ul *ngFor="let user of userEntityDmList">
+                    <div class="card">
+                        <p (click)="displayConversation(user)">{{ user.userName }}</p>
+                    </div>
+                </ul>
+                </div>
+
+                <ng-template #showConversations>
+                    <div class="scroll">
+                        <form #respondToDm="ngForm" (ngSubmit)="respondToUserDm(respondToDm)">
+
+                            <button (click)="reload()">Return to all Messages</button>
+                            
+                            <input type="submit" value="Send Message">
+                            <br>                                  
+                            <ng-template #lengthError>
+                                <h6>Minimum of 3 characters required.</h6>
+                            </ng-template>
+                            <br>
+                            <div *ngIf="noError; else lengthError">
+                            </div>
+                            <h3>Message:</h3>
+                            <textarea rows="3" cols="40" type="text" name="messageContent" minlength="10" ngModel></textarea>
+                            <p>View most recent message below.</p><br>                         
+                        </form>
+                        <table style="width: 100%;" *ngFor="let dm of conversation">
+                            <br>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <td class="card">
+                                <tr class="cell-sent-received">Sent: <br>{{dm.sentByUserName}}</tr> 
+                            </td>
+                            <td>
+                                <tr class="thought">Message: <br>{{ dm.messageContent }}</tr> 
+                            </td>
+                            <td class="cell-sent-received">
+                                <tr class="card">Recieved: <br>{{ dm.receivedByUserName}}</tr>
+                            </td>
+                            <br><br>
+                        </table>
+                        <br><br>
+                        <h3 class="card">End of Messages</h3>
+                        <button (click)="reload()">Return to all Messages</button>
+                    </div>
+                    
+                </ng-template> 
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col" class="col-sm-3 p-1 boarder">
+        <div class="card">
+            <h2>UserDetails</h2>
+            <div *ngIf="changeInfo; else changeForm">
+                <button (click)="editProfileDetails()">Edit Profile Details</button>
+            <div class="card">
+                <br> 
+                <label>First Name: {{ userInformation?.firstName }}</label>
+                <br>
+                <label>Last Name: {{ userInformation?.lastName}}</label>
+                <br>
+                <label>Neigborhood: {{ userInformation?.neigborhood}}</label>
+                <br>
+                <label>City: {{ userInformation?.city}}</label>
+                <br>       
+                <label>State: {{ userInformation?.state}}</label>                     
+            </div>
+            </div>
+            <ng-template #changeForm>
+            <div class="form-group"> 
+              <form #userDetails="ngForm" (ngSubmit)="updateUserInfo(userDetails)">
+                <br><br>
+                <label>First Name: <input type="text" name="firstName" ngModel></label>
+                <br><br>
+                <label>Last Name: <input type="text" name="lastName" ngModel></label>                
+                <br><br>
+                <label>Neigborhood: <input type="text" name="neigborhood" ngModel></label>
+                <br><br>
+                <label>City: <input type="text" name="city" ngModel></label>                
+                <br><br>
+                <label>State: <input type="text" name="state" ngModel></label>                
+                <br><br>
+                <input type="submit" value="Submit">
+              </form>
+              </div>
+            </ng-template>
+            
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <h2>Post History</h2>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <h2>Favorites</h2>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Might not need this section of code -->
+<ng-template #notLoggedIn>
+
+    <h2>User Profile</h2>
+
+    <p>User is not logged in.</p>
+    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+</ng-template>

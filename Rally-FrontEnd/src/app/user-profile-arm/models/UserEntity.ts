@@ -1,8 +1,14 @@
+import { Roles } from "./Roles";
+
 export class UserEntity {
-    username: string;
+
 	id: string;
-	constructor(username: string, id: string){
-		this.username = username;
+    userName: string;
+	roles: Roles[];
+	
+	constructor(id: string, userName: string,  roles: Roles[]){
 		this.id = id;
+		this.userName = userName;
+		this.roles = roles;
 	}
 }

@@ -1,0 +1,124 @@
+<!-- <div *ngIf="logInStatus; else notLoggedIn">
+    
+    <div style="text-align: right;">
+        <button (click)="logOut()"> Log Out?</button>
+    </div>
+
+    <h2>My Profile</h2>
+    <br><br>
+    <p>Logged in as: {{currentUser}}</p>
+
+</div>
+
+
+<ng-template #notLoggedIn>
+
+    <h2>User Profile</h2>
+
+    <p>User is not logged in.</p>
+    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+</ng-template> -->
+
+
+
+
+
+<!-- <div *ngIf="logInStatus; else notLoggedIn">
+    
+    <div style="text-align: right;  display: flex; justify-content:space-between;">
+        <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
+        <button (click)="logOut()"> Log Out?</button>
+    </div>
+   
+
+</div>
+
+
+<ng-template #notLoggedIn>
+    <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
+</ng-template> -->
+
+
+
+<body style="margin-top: 80px;">
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <p id="list_head">What's happening?</p> 
+            </div>
+            <div class="col">
+                <span>
+                    <a href="http://localhost:4200/create/" class="myButton">CREATE EVENT</a>
+                </span>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-3">
+
+            </div>
+            <div class="col-2">
+
+            </div>
+            <div class="col-7">
+                <p style="text-align: left; font-size: 40px; ; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-bottom: -15px;">All Events</p>
+                <hr style="height:4px; color: #0097b2; background-color: #0097b2;">
+            </div>
+        </div>
+        <br>
+       
+        <div class="row">
+            <div class="col-3">
+                <p id="event_display1">event calendar</p>
+                <div class="rectangle">
+
+                </div>
+            <br>
+            <br>
+            <br>
+        
+            <span>
+                <p id="event_display2">search by category</p>
+                <!-- <button class="button2" (click)="filterByConnect()">connect</button> -->
+                <button class="button2">learn</button>
+                <button class="button2">volunteer</button>
+                <button class="button2">donate</button>
+                <button class="button2">celebrate</button>
+                <button class="button2">view all</button>
+            </span>
+            </div>
+
+            <div class="col-2">
+
+            </div>
+
+            <div class="col-7">
+                <div class="card mb-3" style="max-width: 900px;" *ngFor="let event of eventList">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="{{event.imageId}}" class="card-img" alt="IMAGE" >
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card-body">
+                                <p style="font-family:Impact; margin-bottom: -10px;">{{event.datetime}}</p>
+                                <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" style="font-weight: bold;">{{event.eventTitle}}</a> -->
+                                <p style="font-weight: bold; margin-top: -20px;">{{event.eventTitle}}</p>
+                                <p style="font-size: 25px; margin-top: -10px;">{{event.eventCategory}}</p>
+                                <p style="font-size: 15px; font-style: italic; margin-top: 75px;">hosted by {{event.eventHost}}</p>
+                                <a [href]="'http://localhost:4200/event/?id=' + event.id" class="btn btn-outline-info btn-xm">learn more</a>
+                                <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" style="font-size: 15px;">learn more</a> -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>

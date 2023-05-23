@@ -1,4 +1,27 @@
 
-.blue {
-    background-color: turquoise;
+.black {
+    background-image: url('images/black-image.png');
+}
+.white {
+    background-image: linear-gradient(white)
+}
+.white-theme {
+    color:black;
+    background-image: linear-gradient( white, azure);
+    border: 1px solid black;
+}
+.black-background {
+    color:beige;
+    background-color: black;
+}
+.black-theme {
+    color:black;
+    background-image: linear-gradient( white, azure);
+    border: 1px solid black;
+}
+
+.big{
+    position:absolute;
+    left:0;
+    right:0;
 }

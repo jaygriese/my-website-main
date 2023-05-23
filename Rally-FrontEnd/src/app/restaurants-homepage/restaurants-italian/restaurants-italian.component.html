@@ -1,8 +1,11 @@
 <table style width=100% *ngFor="let component of italianRestaurant">
     <td>
-        <div>{{component.restauntName}}</div>
+        <div class="name">{{component.restauntName}}</div>
         <div>{{component.address}}</div>
         <div>{{component.conactInfo}}</div>
+        <a style="color: purple"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
+        <br>
+        <br>
         <br>
         
     </td>
@@ -16,3 +19,5 @@
     
     <button>Upload Review</button>
  </form>
+
+ <img src="https://foodfireknives.com/wp-content/uploads/2022/01/italian-food.jpg">

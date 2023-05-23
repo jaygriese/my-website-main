@@ -12,7 +12,7 @@ export class RestaurantsMexicanComponent implements OnInit {
   mexicanRestaurant: Restaurant[] = [];
   
   restaurantList: Restaurant[];
-  private getRestaurantListUrl: string = 'http://localhost:8080/restaurant/restaurantList'
+  private getRestaurantListUrl: string = 'http://localhost:8080/restaurantList'
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {

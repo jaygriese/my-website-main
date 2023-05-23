@@ -1,0 +1,92 @@
+
+<div *ngIf="logInStatus"> 
+    <div style="text-align: right;">
+        <button><a routerLink="/search" routerLinkActive="active">Search</a></button>
+        <button (click)="logOut()">Log Out</button>
+    </div>
+</div>
+<br>
+
+<div class="row">
+<div class="col-sm-3 p-1 boarder">
+    <div class="card">
+        <h4>Viewing {{ this?.viewUserName }}'s Profile</h4>
+            <div style="align-content: center;">
+            <img src="/assets/user-profile-assets/big-duck.jpg" width="170" height="170">
+            </div>
+        </div> 
+    </div>
+    <div class="col-sm-8 offset-md-1">
+        <div class="card">
+            <h4>Direct Messaging: <br>{{ viewUserName }}</h4>
+                   
+                <div class="scroll">
+                    <form #dmMessageDetails="ngForm" (ngSubmit)="viewingUserSendDM(dmMessageDetails)">
+                        <button (click)="displayConversation(viewUserEntity)">View Message History</button>
+                        <input type="submit" value="Send Message">
+                        <br>
+                        <ng-template #lengthError>
+                            <h6>Minimum of 3 characters required.</h6>
+                        </ng-template>
+                        <br>
+                        <h3>Message:</h3>
+                        <textarea rows="3" cols="40" type="text" name="messageContent" ngModel></textarea>
+                        <p>View most recent message below.</p><br>
+                        <div style="text-align: right;">
+                        </div>
+                      </form>
+                <table style="width: 100%;" *ngFor="let dm of conversation">
+                    <br>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <td class="card">
+                        <tr class="cell-sent-received">Sent: <br>{{dm.sentByUserName}}</tr> 
+                    </td>
+                    <td>
+                        <tr class="thought">Message: <br>{{ dm.messageContent }}</tr> 
+                    </td>
+                    <td class="cell-sent-received">
+                        <tr class="card">Recieved: <br>{{ dm.receivedByUserName}}</tr>
+                    </td>
+                    <br><br>
+                </table>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <h2>UserDetails</h2>
+
+            <div class="card">
+                <br> 
+                <label>First Name: {{ userEntityInformation?.viewUserInformation?.firstName }}</label>
+                <br>
+                <label>Last Name: {{ userEntityInformation?.viewUserInformation?.lastName }}</label>
+                <br>
+                <label>Neigborhood: {{ userEntityInformation?.viewUserInformation?.neigborhood }}</label>
+                <br>
+                <label>City: {{ userEntityInformation?.viewUserInformation?.city }}</label>
+                <br>       
+                <label>State: {{ userEntityInformation?.viewUserInformation?.state }}</label>                     
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <h2>Post History</h2>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <h2>Favorites</h2>
+        </div>
+    </div>
+</div>

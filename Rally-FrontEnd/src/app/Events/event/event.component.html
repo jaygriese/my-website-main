@@ -1,0 +1,108 @@
+<!-- <div *ngIf="logInStatus; else notLoggedIn">
+    
+    <div style="text-align: right;  display: flex; justify-content:space-between;">
+        <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
+        <button (click)="logOut()"> Log Out?</button>
+    </div>
+   
+</div>
+<ng-template #notLoggedIn>
+    <p style="text-align: left; display: flex; justify-content: space-between;">Log in to rally your community!</p>
+    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+</ng-template> -->
+
+
+
+
+<!-- <div *ngIf="logInStatus; else notLoggedIn">
+    
+    <div style="text-align: right;  display: flex; justify-content:space-between;">
+        <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
+        <button (click)="logOut()"> Log Out?</button>
+    </div>
+   
+
+</div>
+
+
+<ng-template #notLoggedIn>
+    <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
+</ng-template> -->
+
+
+
+
+<body style="margin-top: 80px;">
+    <div class="container" *ngIf="eventDetails">
+
+        <div class="row">
+            <div class="col">
+                <a href="http://localhost:4200/create/" class="myButton">JOIN</a>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-3">
+
+            </div>
+            <div class="col-2">
+
+            </div>
+            <div class="col-7">
+                <p style="text-align: left; font-size: 40px; ; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-bottom: -15px;">{{eventDetails.eventTitle}}<span style="font-family: arial; font-size: 30px; float: right; margin-top: 15px;">{{eventDetails.datetime}}</span></p>
+                <hr style="height:4px; color: #0097b2; background-color: #0097b2;">
+            </div>
+        </div>
+        <br>
+       
+        <div class="row" >
+            <div class="col-3">
+                <p id="event_display1">location</p>
+                <div class="rectangle">
+
+                </div>
+            <br>
+            <br>
+            <br>
+        
+            <span>
+                <p id="event_display2">comments</p>
+                <!-- <button class="button2">connect</button>
+                <button class="button2">learn</button>
+                <button class="button2">volunteer</button>
+                <button class="button2">donate</button>
+                <button class="button2">celebrate</button>
+                <button class="button2">view all</button> -->
+            </span>
+            </div>
+
+            <div class="col-2">
+
+            </div>
+
+            <div class="col-7">
+                <div id="details">
+                    <p style="font-size: 15px; margin-top: -12px; margin-bottom: -8px;">CATEGORY: {{eventDetails.eventCategory}}</p>
+                    <p>photo goes here</p>
+                    <img src="{{eventDetails.imageId}}" />
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>  
+                    <p style="font-size: 15px; font-style: italic;">hosted by: {{eventDetails.eventHost}}</p>  
+                    <br>
+                    <p style="font-size: 25px;">address:</p><br>
+                    <p>{{eventDetails.eventAddress}}</p>
+                    <br>
+                    <p style="font-size: 25px;">description:</p><br>
+                    <p>{{eventDetails.description}}</p>  
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

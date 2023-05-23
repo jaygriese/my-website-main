@@ -38,6 +38,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+import { EventJoinComponent } from './Events/event-join/event-join.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     EventEditComponent,
     HomeComponent,
     PageNotFoundComponent,
+    EventJoinComponent,
   ],
   imports: [
     BrowserModule,

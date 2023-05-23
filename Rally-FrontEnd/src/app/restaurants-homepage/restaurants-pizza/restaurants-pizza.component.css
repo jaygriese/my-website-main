@@ -1,0 +1,17 @@
+.pizzaImage {
+    background-image: url('https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1240w,f_auto,q_auto:best/newscms/2014_03/112876/140113-cnbc-pizza-130p.jpg">')
+}
+
+.text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      
+}
+
+.name {
+    font-family: Impact, sans-serif; 
+    color: #0097b2;
+    font-size: 40px;
+}

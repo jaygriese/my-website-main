@@ -4,7 +4,12 @@ import { LoginUserComponent } from './user-profile-arm/login-register/login-user
 import { RegisterUserComponent } from './user-profile-arm/login-register/register-user/register-user.component';
 import { EventViewComponent } from './Events/event-view/event-view.component';
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
-import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
+import { RestaurantsHomepageComponent } from './restaurants-homepage/restaurants-homepage.component';
+import { RestaurantAmericanComponent } from './restaurants-homepage/restaurant-american/restaurant-american.component';
+import { RestaurantAsianComponent } from './restaurants-homepage/restaurant-asian/restaurant-asian.component';
+import { RestaurantsMexicanComponent } from './restaurants-homepage/restaurants-mexican/restaurants-mexican.component';
+import { RestaurantsItalianComponent } from './restaurants-homepage/restaurants-italian/restaurants-italian.component';
+import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pizza/restaurants-pizza.component';
 import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
 import { EventComponent } from './Events/event/event.component';
 import { EventCreateComponent } from './Events/event-create/event-create.component';
@@ -19,6 +24,9 @@ import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-po
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
 import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
+import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
+import { ViewRestaurantComponent } from './restaurants-homepage/view-restaurant/view-restaurant.component';
+import { SearchRestaurantComponent } from './restaurants-homepage/search/search-restaurant.component';
 import { ResourcesSearchComponent } from './resources-arm/resources-search/resources-search.component';
 import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
 import { SearchComponent } from './services-arm/search/search.component';
@@ -34,7 +42,12 @@ const routes: Routes = [
   {path: 'search', component: SearchUserComponent},
   {path: 'events', component: EventViewComponent},
   {path: 'forum', component: ForumComponent},
-  {path: 'communityHomeForum', component: CommunityHomeComponent},
+  {path: 'restaurants' , component: RestaurantsHomepageComponent},
+  {path: 'restaurants/american' , component: RestaurantAmericanComponent},
+  {path: 'restaurants/asian' , component: RestaurantAsianComponent},
+  {path: 'restaurants/mexican' , component: RestaurantsMexicanComponent},
+  {path: 'restaurants/italian' , component: RestaurantsItalianComponent},
+  {path: 'restaurants/pizza' , component: RestaurantsPizzaComponent},
   {path: 'resources', component: ResourcesHomeComponent},
   {path: 'resourcesAdd', component: ResourcesAddComponent},
   {path: 'resourcesSearch', component: ResourcesSearchComponent},
@@ -51,6 +64,8 @@ const routes: Routes = [
   {path: 'forum/post/:id', component: ViewPostComponent},
   {path: 'myProfile', component: UserProfileComponent},
   {path: 'user/:userName/:id', component: ViewUserProfileComponent},
+  {path: 'restaurant/:id', component: ViewRestaurantComponent},
+  {path: 'restaurants/search', component: SearchRestaurantComponent},
   {path: 'forum/search', component: ForumSearchResultsComponent},
   {path: 'searchservice', component: SearchComponent},
   {path: 'serviceitem', component: ServiceItemComponent},

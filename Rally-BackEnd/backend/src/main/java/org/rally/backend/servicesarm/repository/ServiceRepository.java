@@ -1,4 +1,4 @@
-package org.rally.backend.userprofilearm.repository;
+package org.rally.backend.servicesarm.repository;
 
 import org.rally.backend.servicesarm.model.response.Service;
 import org.springframework.data.repository.CrudRepository;

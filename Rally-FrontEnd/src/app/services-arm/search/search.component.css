@@ -1,0 +1,35 @@
+.green {
+    background-color: rgb(112, 224, 112);
+
+}
+
+.background {
+    background-color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+/* sortable header directive */
+th[sortable] {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  
+  th[sortable].desc:before,
+  th[sortable].asc:before {
+    content: "\21D1";
+    display: block;
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
+    float:left;
+    margin-left: -20px;
+    margin-top: 4px;
+  }
+  
+  th[sortable].desc:before {
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }

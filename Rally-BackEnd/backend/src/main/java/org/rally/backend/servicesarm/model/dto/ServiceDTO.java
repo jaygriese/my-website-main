@@ -1,6 +1,7 @@
 package org.rally.backend.servicesarm.model.dto;
 
 import lombok.Data;
+import org.rally.backend.servicesarm.model.response.Category;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,11 @@ public class ServiceDTO {
         return category;
     }
 
+
+//    public Category getCategory() {
+//        return category;
+//    }
+
     public ArrayList<String> getDays() {
         return days;
     }
@@ -57,6 +63,10 @@ public class ServiceDTO {
         return daytimeString;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "ServiceDTO{" +
+                "category='" + category + '\'' +
+                '}';
+    }
 }

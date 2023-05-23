@@ -2,7 +2,7 @@ package org.rally.backend.userprofilearm.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import org.rally.backend.forumarm.models.*;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,12 @@ import java.util.List;
 @Table(name = "users")
 public class UserEntity {
 
-    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
+    @Size(min = 3, max = 20)
     private String userName;
 
     @NotNull
@@ -58,5 +57,6 @@ public class UserEntity {
         return encoder.matches(password, pwHash);
     }
 
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 }

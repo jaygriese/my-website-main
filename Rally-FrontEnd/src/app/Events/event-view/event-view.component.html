@@ -66,59 +66,107 @@
 
             </div>
             <div class="col-7">
-                <p style="text-align: left; font-size: 40px; ; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-bottom: -15px;">All Events</p>
-                <hr style="height:4px; color: #0097b2; background-color: #0097b2;">
+                <p style="text-align: left; font-size: 40px; ; font-family: Oswald, sans-serif; font-weight: 800; margin-bottom: -15px;">All Events</p>
+                <hr style="height:4px; color: black; background-color: black">
             </div>
         </div>
         <br>
-       
+
+        
         <div class="row">
             <div class="col-3">
-                <p id="event_display1">event calendar</p>
-                <div class="rectangle">
+                <p id="event_display1">search by date</p>
 
-                </div>
-            <br>
-            <br>
-            <br>
-        
-            <span>
-                <p id="event_display2">search by category</p>
-                <!-- <button class="button2" (click)="filterByConnect()">connect</button> -->
-                <button class="button2">learn</button>
-                <button class="button2">volunteer</button>
-                <button class="button2">donate</button>
-                <button class="button2">celebrate</button>
-                <button class="button2">view all</button>
-            </span>
-            </div>
-
-            <div class="col-2">
-
-            </div>
-
-            <div class="col-7">
-                <div class="card mb-3" style="max-width: 900px;" *ngFor="let event of eventList">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="{{event.imageId}}" class="card-img" alt="IMAGE" >
+                    <div>
+                        <div>
+                        <mat-card class="demo-inline-calendar-card">
+                            <!-- <mat-calendar [(ngModel)]="selected"></mat-calendar> -->
+                            <mat-calendar [(selected)]="selected"></mat-calendar>
+                          </mat-card>
                         </div>
-                        <div class="col-md-10">
-                            <div class="card-body">
-                                <p style="font-family:Impact; margin-bottom: -10px;">{{event.datetime}}</p>
-                                <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" style="font-weight: bold;">{{event.eventTitle}}</a> -->
-                                <p style="font-weight: bold; margin-top: -20px;">{{event.eventTitle}}</p>
-                                <p style="font-size: 25px; margin-top: -10px;">{{event.eventCategory}}</p>
-                                <p style="font-size: 15px; font-style: italic; margin-top: 75px;">hosted by {{event.eventHost}}</p>
-                                <a [href]="'http://localhost:4200/event/?id=' + event.id" class="btn btn-outline-info btn-xm">learn more</a>
-                                <!-- <a [href]="'http://localhost:4200/event/?id=' + event.id" style="font-size: 15px;">learn more</a> -->
-                            </div>
-                        </div>
+                        <br>
+                          <p style="font-size: 15px; float: left;">I'm available on: {{selected | date}}</p>
+                          <div style="margin-top: -15px;">
+                            <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
+                          </div>   
                     </div>
 
-                </div>
+                    <!-- <div>
+                        <mat-card class="demo-inline-calendar-card">
+                            <mat-calendar [(ngModel)]="DateSelected"></mat-calendar>
+                        </mat-card>
+                        <br>
+                        <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
 
+                    </div> -->
+               
+                <!-- <mat-card class="demo-inline-calendar-card">
+                    <mat-calendar (selectedChange)="selected = $event"></mat-calendar>
+                  </mat-card>
+                  <p>Selected date: {{selected}}</p> -->
+                
+                <!-- <div class="card w-100">
+                    <div class="card-body">
+                      <h3 class="card-title">
+                        I'm available on: <input type="date" [(ngModel)]="DateSelected">
+                      </h3>
+                      <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
+                    </div>
+                  </div> -->
+
+            <br>
+            <br>
+            <br>
+            
+                <span>
+                    <p id="event_display2">search by category</p>
+
+                        <div>
+                            <button class="button2" (click)="filter('connect')" >connect</button>
+                            <button class="button2" (click)="filter('learn')" >learn</button>
+                            <button class="button2" (click)="filter('volunteer')">volunteer</button>
+                            <button class="button2" (click)="filter('donate')">donate</button>
+                            <button class="button2" (click)="filter('celebrate')">celebrate</button>
+                            <button class="button2" (click)="viewAll()">view all</button>
+                        </div>
+                    
+                </span>
             </div>
+
+            <div class="col-2"></div>
+
+                <div class="col-7">
+
+                   <div class="card mb-4" style="max-width: 900px;" *ngFor="let event of filteredEvents">
+                        
+                    <ng-container *ngIf="filteredEvents.length !== 0">
+                       <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img *ngIf="event.eventCategory === 'connect'" src="/assets/events-assets/connect.jpg"  class="card-img img-fluid rounded-start;">
+                                    <img *ngIf="event.eventCategory === 'learn'" src="/assets/events-assets/learn.jpg"  class="card-img img-fluid rounded-start;">
+                                    <img *ngIf="event.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg"  class="card-img img-fluid rounded-start;">
+                                    <img *ngIf="event.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg"  class="card-img img-fluid rounded-start;">
+                                    <img *ngIf="event.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg"  class="card-img img-fluid rounded-start;">
+                                </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <p style="font-family:Oswald, sans-serif; font-weight: 700;  font-size: 15;">{{event.datetime | date:'short'}}</p>
+                                    <p style="font-weight: 800; margin-top: -15px;">{{event.eventTitle}}</p>
+                                    <p style="font-size: 23px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
+                                    <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>
+                                    <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
+                                </div>
+                            </div>
+                        </div>    
+                    </ng-container>
+
+                    </div> 
+
+                    <ng-container *ngIf="filteredEvents.length===0">
+                        <p style="font-size: 25px;">No events found at this time.</p>
+                    </ng-container>
+                     
+                </div>             
         </div>
     </div>
 </body>

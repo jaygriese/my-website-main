@@ -1,7 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Service } from '../models/Search';
-import { Category } from '../models/Search';
-import { Type } from '../models/Search';
 
 @Pipe({ name: 'service' })
 export class ServicePipe implements PipeTransform {

@@ -1,0 +1,97 @@
+<body class="background">
+
+    <!-- login status -->
+    <div *ngIf="logInStatus; else notLoggedIn">
+        
+        <div style="text-align: right;">
+            <p class="text-white">Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
+        </div>
+    
+    </div>
+    <ng-template #notLoggedIn>
+    
+        <p class="text-white">User is not logged in. </p>
+        <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+    </ng-template>
+    
+    <!-- Banner -->
+    <div class="green"><h1>{{serviceName}}</h1></div>
+    <br>
+    <br>
+
+
+    <form>
+        <div class="form-group row form">
+          <label for="staticUser" class="col-sm-10 col-form-label left">Name:</label>
+          <div class="col-lg-2">
+            <input type="text" readonly class="form-control-plaintext right" id="staticUser" value="{{user}}">
+          </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="staticType" class="col-sm-10 col-form-label left">Type:</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext center" id="staticType" value="{{type}}">
+            </div>
+          </div>
+
+          <div class="form-group row form">
+            <label for="staticCategory" class="col-sm-10 col-form-label left">Category of Service:</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext center" id="staticCategory" value="{{category}}">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="staticDay" class="col-sm-10 col-form-label left">Days Available:</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext center" id="staticDay" value="{{day}}">
+            </div>
+          </div>
+
+          <div class="form-group row form">
+            <label for="staticTime" class="col-sm-10 col-form-label left">Times Available:</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext center" id="staticTime" value="{{time}}">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="staticDescription" class="col-sm-10 col-form-label left">Description:</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext center" id="staticDescription" value="{{description}}">
+            </div>
+          </div>
+
+          <div class="form-group row form">
+            <label for="staticEmail" class="col-sm-10 col-form-label left">User Email:</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext center" id="staticEmail" value="{{email}}">
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+    </form>
+
+
+
+
+    <!-- <div>
+        <p>{{serviceId}}</p>    
+        <p>{{type}}</p>
+        <p>{{serviceName}}</p> 
+        <p>{{category}}</p> 
+        <p>{{day}}</p> 
+        <p>{{time}}</p> 
+        <p>{{user}}</p> 
+        <p>{{description}}</p> 
+        <p>{{email}}</p> 
+    </div> -->
+</body>

@@ -1,39 +1,35 @@
 package org.rally.backend.servicesarm.model.response;
 
 import jakarta.persistence.*;
+import org.rally.backend.servicesarm.model.AbstractEntity;
 import org.rally.backend.userprofilearm.model.UserEntity;
 
 import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Entity
-@Table(name="service")
-public class Service {
+public class Service extends AbstractEntity {
 
     private String userName;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id = 1;
-//    private int nextId = 1;
     private String service;
     private String description;
-    private String category;
-//    private ArrayList<String> days;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Category category;
     private String email;
     private String day;
     private String time;
-    private String type;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Type type;
 
-    public Service(String userName, String description, String category, String day, String time, String email, String service, String type) {
+    public Service(String userName, String description, String day, String time, String email, String service) {
         this.userName = userName;
         this.service = service;
         this.description = description;
-        this.category = category;
         this.day = day;
         this.time = time;
         this.email = email;
-        this.type = type;
     }
 
     public Service () {};
@@ -50,14 +46,13 @@ public class Service {
         return description;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-//    public ArrayList<String> getDays() {
-//        return days;
-//    }
-
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public String getDay() {
         return day;
@@ -66,4 +61,17 @@ public class Service {
     public String getEmail() {
         return email;
     }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
 }

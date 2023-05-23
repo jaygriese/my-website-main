@@ -1,3 +1,6 @@
+<!-- TO DO --
+Make Offer styling match Home -->
+
 <body class="background">
 
     <!-- login status -->
@@ -15,136 +18,146 @@
     </ng-template>
     
     <!-- Banner -->
-    <div class="orange"><h1>Offer Service</h1></div>
+    <div class="orange"><h1>Offer or Request Service</h1></div>
     <br>
     <br>
 
     <!-- Offer form -->
         <form class="form container border" #f="ngForm" (ngSubmit)="onSubmit(f)">
-            <div class="form-group text-white accent">
-                <label class="text-orange" for="userName">Name:</label>
-                <br>
+            <div [hidden]="f.submitted">
+               <div class="form-group text-white accent">
+                  <label class="text-orange" for="userName">Name:</label>
+                  <br>
 
-                <!-- Name -->
-                <input type="text" class="form-control-center" style="width: 25%;" id="userName" name="userName" required minlength="3" placeholder={{currentUser}} [(ngModel)]="model.userName" #userName="ngModel">
+                  <!-- Name -->
+                  <input type="text" class="form-control-center" style="width: 25%;" id="userName" name="userName" required minlength="3" placeholder={{currentUser}} [(ngModel)]="model.userName" #userName="ngModel">
 
-                     <div *ngIf="userName.invalid && (userName.dirty || userName.touched)"
-                        class="alert alert-warning">
-                        Name is required and must be at least three characters long.
-                     </div>
+                        <div *ngIf="userName.invalid && (userName.dirty || userName.touched)"
+                           class="alert text-red">
+                           Name is required and must be at least three characters long.
+                        </div>
 
-                     <div *ngIf="userName.errors?.['minlength']">
-                     </div>
+                  <br>
+                  <br>
+                  <br>
+                  <!-- Offer or Request-->
+                  <label class="text-orange" for="category-drop">Are You Offering or Requesting a Service?</label>
+                  <br>
+                  <select id="type-drop" name="type" required [(ngModel)]="typeModel.type" #type="ngModel">
+                     <option *ngFor="let t of types" [value]="t" >{{t}}</option>
+                  </select>
 
-                <br>
-                <br>
-                <br>
-                <!-- Offer or Request-->
-                <label class="text-orange" for="category-drop">Are You Offering or Requesting a Service?</label>
-                <br>
-                <select id="type-drop" name="type" ngModel="value">
-                   <option value="Offering">Offering</option>
-                   <option value="Requesting">Requesting</option>
-                </select>
-            
-                <br>
-                <br>
-                <br>
-                <!-- Service -->
-                <label class="text-orange" for="service">Please Define Your Service:</label>
-                <br>
-                <input type="text" class="form-control-center" style="width: 25%;" id="service" name="service" placeholder="Provide a Short Title... (50 chars max)" ngModel>
-                
-                <br>
-                <br>
-                <br>
+                  <div *ngIf="type.invalid" class="alert text-red">You must select one option</div>
 
-               <!-- Category drop down -->
-               <label class="text-orange" for="category-drop">Pick a Category for the Service:</label>
-               <br>
-               <select id="category-drop" name="category" ngModel="value">
-                  <option value="Art">Art</option>
-                  <option value="Admininstrative">Administrative</option>
-                  <option value="Babysitting">Babysitting</option>
-                  <option value="Dogwalking">Dogwalking</option>
-                  <option value="Event">Event</option>
-                  <option value="Music">Music</option>
-                  <option value="Other">Other</option>
-                  <option value="Photography">Photography</option>
-                  <option value="Repair">Repair</option>
-                  <option value="Rideshare">Rideshare</option>
-                </select>
+                  <br>
+                  <br>
+                  <br>
+                  <!-- Service -->
+                  <label class="text-orange" for="service">Please Title Your Service:</label>
+                  <br>
+                  <input type="text" class="form-control-center" style="width: 25%;" id="service" name="service" placeholder="Short Title... (between 5 and 50 chars)" required minlength="5" maxlength="50" [(ngModel)]="model.service" #service="ngModel">
+                  
+                  <div *ngIf="service.invalid && (service.dirty || service.touched)"
+                     class="alert text-red">
+                     Service title is required and must be between 5 and 50 characters.
+                  </div>
 
-                <br>
-                <br>
-                <br>
+                  <br>
+                  <br>
+                  <br>
 
-               <!-- Days drop down -->
-               <label class="text-orange" for="days-drop">Choose All Days Available or Any:</label>
-               <br>
-               <select id="days-drop" name="days" ngModel="days" multiple>
-                  <option value="Monday">Monday</option>
-                  <option value="Tuesday">Tuesday</option>
-                  <option value="Wednesday">Wednesday</option>
-                  <option value="Thursday">Thursday</option>
-                  <option value="Friday">Friday</option>
-                  <option value="Saturday">Saturday</option>
-                  <option value="Sunday">Sunday</option>
-                  <option value="Any">Any</option>
-                </select>
+                  <!-- Category drop down -->
+                  <label class="text-orange" for="category-drop">Pick a Category for the Service:</label>
+                  <br>
+                  <select id="category-drop" name="category" required [(ngModel)]="categoryModel.category" #category="ngModel">
+                     <option *ngFor="let c of categories" [value]="c">{{c}}</option>
+                  </select>
 
-                <br>
-                <br>
-                <br>
-                <label class="text-orange" for="time-drop">Choose All Times Available or Any:</label>
-                <br>
-                <select id="time-drop" name="time" ngModel="days" multiple>
-                   <option value="Morning">Morning</option>
-                   <option value="Afternoon">Afternoon  </option>
-                   <option value="Evening">Evening</option>
-                   <option value="Any">Any</option>
-                 </select>
+                  <div *ngIf="category.invalid" class="alert text-red">You must select one option.</div>
 
-                    <br>
-                    <br>
-                    <br>
+                  <br>
+                  <br>
+                  <br>
 
-                    <!-- Description -->
-                    <div class="form-group accent">
+                  <!-- Days drop down -->
+                  <label class="text-orange" for="days-drop">Choose All Days Available or Any:</label>
+                  <br>
+                  <select id="days-drop" name="days" required multiple="days[0]" [(ngModel)]="daysModel.day" #day="ngModel">
+                     <option *ngFor="let d of days" [value]="d">{{d}}</option>
+                  </select>
+
+                  <div *ngIf="day.pristine" class="alert text-red">You must select one option.</div>
+
+                  <br>
+                  <br>
+                  <br>
+                  <!-- Time drop down -->
+                  <label class="text-orange" for="time-drop">Choose All Times Available or Any:</label>
+                  <br>
+                  <select id="time-drop" name="time" required multiple [(ngModel)]="timeModel.time" #time="ngModel">
+                     <option *ngFor="let t of times" [value]="t">{{t}}</option>
+                  </select>
+
+                  <div *ngIf="time.pristine" class="alert text-red">You must select one option.</div>
+
+                     <br>
+                     <br>
+                     <br>
+
+                  <!-- Description -->
+                  <div class="form-group accent">
                         <label class="text-orange" for="description">Provide a Description:</label>
                         <br>
-                        <textarea class="form-control-center" style="width:50%" id="description" rows="4" name="description" placeholder="Provide a description for the service, such as location information, whether offered or requested for free or for a fee, how you prefer payment, etc... (255 chars max)" ngModel></textarea>
-                      </div>
-                    <br>
-                    <br>
+                        <textarea class="form-control-center" style="width:50%" id="description" rows="4" name="description" placeholder="Provide a description for the service, such as location information, whether offered or requested for free or for a fee, how you prefer payment, etc... (between 5 and 255 chars)" required minlength="5" maxlength="255" [(ngModel)]="model.description" #description="ngModel"></textarea>
+                  </div>
 
-                     <!-- TEMPORARILY COMMENTED OUT NOT WORKING -->
-                    <!-- <label class="text-orange">Photos</label>
-                    <br>
-                    <br>
-                    <input type="file" name="photo" ngModel/> -->
-                    <br>
-                    <br>
+                  <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                     class="alert text-red">
+                     Description is required and must be between 5 and 255 characters.
+                  </div>
+                  <br>
+                  <br>
 
-                    <!-- Email -->
-                    <label class="text-orange" for="email">Provide Your Email:</label>
-                    <br>
-                    <input type="email" class="form-control-center" style="width: 25%;" id="email" name="email" ngModel>
+                        <!-- TEMPORARILY COMMENTED OUT NOT WORKING -->
+                     <!-- <label class="text-orange">Photos</label>
+                     <br>
+                     <br>
+                     <input type="file" name="photo" ngModel/> -->
+                     <br>
+                     <br>
 
-                <br>
-                <br>
-                <br>
-            </div>
+                  <!-- Email -->
+                  <label class="text-orange" for="email">Provide Your Email:</label>
+                  <br>
+                  <input type="email" class="form-control-center" style="width: 25%;" id="email" name="email" required [(ngModel)]="model.email" #email="ngModel" email="true">
+                  
+                  <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                     class="alert text-red">
+                     Email is required.
+                  </div>
 
-            <button class="button-blue button-hover">Post It!</button>
+
+                  <br>
+                  <br>
+                  <br>
+                  </div>
+                  <button type="submit" *ngIf="!f.invalid && !day.pristine && !time.pristine; else disabled" class="button-blue button-hover">Post It!</button>
+                     <ng-template #disabled>
+                        <p class="text-orange">Please fix errors to enable button</p>
+                        <button type="submit" class="button-red" [disabled]="f.invalid">Input Required</button>
+                     </ng-template>
+                  </div>
+
+               <!-- Reset form with New Service button Once form is submitted -->
+               <div class=submitted-service *ngIf="f.submitted">
+                  <p class="text-orange">You've submitted "{{ f.value.service }}"!</p>
+                  <button class="button-blue button-hover" type="button" (click)="f.resetForm()">Add new service</button>
+
+               </div>
             <br>
             <br>
         </form>
         <br>
         <br>
         <br>
-  
-
-    
-    
     </body>

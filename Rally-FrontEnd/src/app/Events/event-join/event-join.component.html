@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>event-create</title>
+        <title>event-join</title>
       </head>
 
 
@@ -26,7 +26,8 @@
 
    
             <div id="list_head">
-                    <p>Join Event: {{event.eventTitle}}</p> 
+                <p>Join Event</p> 
+                    <!-- <p>Join Event: {{event.eventTitle}}</p>  -->
             </div>
         
             <br>
@@ -69,15 +70,14 @@
                                 How many are coming?
                             </div>
             
-                            <br>
-                            <br>
+                            <br>    
                             <label class="form-label">add comment (optional)</label><br>
-                            <textarea class="form-control" rows="9" id=comment name="comment" ngModel></textarea>
+                            <textarea class="form-control" rows="5" id=comment name="comment" ngModel></textarea>
                                    
                             <br>
                             <br>
                            
-                            <button [disabled]="eventInformation.invalid" type="submit" id="join_btn">SUBMIT</button>
+                            <button [disabled]="eventJoinInformation.invalid" type="submit" id="join_btn">SUBMIT</button>
                             <br>
                                 <!-- <div *ngIf="eventInformation.invalid && eventInformation.touched" class="alert alert-danger">
                                     Make sure you've filled out the whole form!

@@ -1,0 +1,15 @@
+<table style width=100% *ngFor="let component of asianRestaurant">
+    <td>
+        <div class = "name">{{component.restauntName}}</div>
+        <div>{{component.address}}</div>
+        <div>{{component.conactInfo}}</div>
+        <a style="color: purple"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
+        <br>
+        <br>
+        <br>
+
+    </td>
+</table>
+
+ <img src="https://blobsvc.wort.lu/picture/d5b89ff6beb0c3070433fcfac5326bd5/1200/823/wortv3/793afb54d5f8232a6fcbce6516bfe815a0e3f211">ng
+

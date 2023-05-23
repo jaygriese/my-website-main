@@ -13,6 +13,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { EventComponent } from './Events/event/event.component';
 import { EventCreateComponent } from './Events/event-create/event-create.component';
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
+import { RestaurantsHomepageComponent } from './restaurants-homepage/restaurants-homepage.component';
+import { RestaurantAmericanComponent } from './restaurants-homepage/restaurant-american/restaurant-american.component';
+import { RestaurantAsianComponent } from './restaurants-homepage/restaurant-asian/restaurant-asian.component';
+import { RestaurantsMexicanComponent } from './restaurants-homepage/restaurants-mexican/restaurants-mexican.component';
+import { RestaurantsItalianComponent } from './restaurants-homepage/restaurants-italian/restaurants-italian.component';
+import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pizza/restaurants-pizza.component';
 import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
 import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
 import { ServicesHomeComponent } from './services-arm/services-home/services-home.component';
@@ -25,6 +31,9 @@ import { ThemeserviceService } from './services/themeservice.service';
 import { ForumTopic3Component } from './community-forum-arm/forum/forum-topic3/forum-topic3.component';
 import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-post.component';
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
+import { ViewRestaurantComponent } from './restaurants-homepage/view-restaurant/view-restaurant.component';
+import { ReviewComponent } from './restaurants-homepage/review/review.component';
+import { SearchRestaurantComponent } from './restaurants-homepage/search/search-restaurant.component';
 import { ResourcesSearchComponent } from './resources-arm/resources-search/resources-search.component';
 import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
 import { SearchComponent } from './services-arm/search/search.component';
@@ -49,6 +58,12 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     EventViewComponent,
     ForumComponent,
     CommunityHomeComponent,
+    RestaurantsHomepageComponent,
+    RestaurantAmericanComponent,
+    RestaurantAsianComponent,
+    RestaurantsMexicanComponent,
+    RestaurantsItalianComponent,
+    RestaurantsPizzaComponent,
     ResourcesHomeComponent,
     ResourcesAddComponent,
     ResourcesSearchComponent,
@@ -63,8 +78,11 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     ViewPostComponent,
     ViewUserProfileComponent,
     UserProfileComponent,
-    ForumSearchResultsComponent,
+    ViewRestaurantComponent,
+    ReviewComponent,
     SearchComponent,
+    ForumSearchResultsComponent,
+    SearchRestaurantComponent,
     SortableHeaderDirective,
     ServicePipe,
     ServiceItemComponent,

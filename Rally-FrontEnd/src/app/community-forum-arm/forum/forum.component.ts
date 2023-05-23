@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
 
@@ -9,9 +10,10 @@ import { ThemeserviceService } from 'src/app/services/themeservice.service';
   styleUrls: ['./forum.component.css']
 })
 export class ForumComponent implements OnInit {
-currentUser: String;
-logInStatus: Boolean;
-darktheme: Boolean;
+currentUser: string;
+logInStatus: boolean;
+darktheme: boolean;
+
 constructor(private http: HttpClient, private router: Router, private themeservice: ThemeserviceService) {
   this.logInStatus = false;
   this.darktheme = false;
@@ -20,6 +22,7 @@ constructor(private http: HttpClient, private router: Router, private themeservi
 ngOnInit(): void {
   this.verifyLoggedIn();
   this.checkTheme();
+  this.experimenting();
 }
 checkTheme(){
     if (localStorage.getItem('theme') == 'dark'){
@@ -46,5 +49,14 @@ logOut() {
   console.log(localStorage.getItem('userName'))
   this.logInStatus = false;
 }
+async Search(searchInformation: NgForm){
+  localStorage.setItem('searchTerm', searchInformation.value.description)
+  this.router.navigate(["/forum/search"]);
+}
+experimenting = async () => {
+  const resp = await fetch('http://localhost:8080/Posts');
+  const data = await resp.json();
 
+  console.log(data)
+}
 }

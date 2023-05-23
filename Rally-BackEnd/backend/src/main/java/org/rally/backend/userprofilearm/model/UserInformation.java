@@ -2,6 +2,7 @@ package org.rally.backend.userprofilearm.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class UserInformation {
@@ -13,13 +14,15 @@ public class UserInformation {
     private int userId;
 
     @NotNull
+    @Size(min = 3, max = 20)
     private String firstName;
 
     @NotNull
+    @Size(min = 3, max = 20)
     private String lastName;
 
     @NotNull
-    private String neigborhood;
+    private String neighborhood;
 
     @NotNull
     private String city;
@@ -30,11 +33,11 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(int userId, String firstName, String lastName, String neigborhood, String city, String state) {
+    public UserInformation(int userId, String firstName, String lastName, String neighborhood, String city, String state) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.neigborhood = neigborhood;
+        this.neighborhood = neighborhood;
         this.city = city;
         this.state = state;
     }
@@ -47,12 +50,12 @@ public class UserInformation {
         this.state = state;
     }
 
-    public String getNeigborhood() {
-        return neigborhood;
+    public String getNeighborhood() {
+        return neighborhood;
     }
 
-    public void setNeigborhood(String neigborhood) {
-        this.neigborhood = neigborhood;
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
     }
 
     public String getCity() {

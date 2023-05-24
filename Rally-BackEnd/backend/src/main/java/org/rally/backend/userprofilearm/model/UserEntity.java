@@ -37,6 +37,7 @@ public class UserEntity {
 
     public UserEntity(String userName, String password) {
         this.userName = userName;
+//        this.pwHash = password;
         this.pwHash = encoder.encode(password);
     }
 
@@ -57,6 +58,7 @@ public class UserEntity {
     }
 
     public boolean isMatchingPassword(String password) {
+//        return true;
         return encoder.matches(password, pwHash);
     }
 

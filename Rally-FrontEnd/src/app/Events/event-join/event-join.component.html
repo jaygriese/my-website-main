@@ -64,7 +64,7 @@
             
                             <br>
                             <label class="form-label">number attending</label><br>
-                            <input class="form-control form-control-lg" type="text" required #numAttending="ngModel" id="numAttending" name="numAttending" ngModel>
+                            <input class="form-control form-control-lg" type="number" required #numAttending="ngModel" id="numAttending" name="numAttending" ngModel>
                             
                             <div *ngIf="numAttending.invalid && (numAttending.dirty || numAttending.touched)" class="alert alert-danger">
                                 How many are coming?

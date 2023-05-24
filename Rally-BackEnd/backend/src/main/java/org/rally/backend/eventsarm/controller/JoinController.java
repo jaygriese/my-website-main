@@ -25,6 +25,11 @@ public class JoinController {
     private EventRepository eventRepository;
 
 
+    @GetMapping("/join/")
+    public ResponseEntity<?>displayAllJoin() {
+        return new ResponseEntity<>(joinRepository.findAll(), HttpStatus.OK);
+    }
+
 
     @PostMapping("/join")
     public ResponseEntity<?> joinEventForm(@RequestBody JoinDTO joinDTO) {
@@ -39,6 +44,8 @@ public class JoinController {
         return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
 
     }
+
+
 
 
 }

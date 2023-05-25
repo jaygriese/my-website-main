@@ -42,7 +42,6 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> processRegistrationForm(@RequestBody UserBundleDTO userBundleDTO) {
-
         UserProfileControllerService.generateRoles();
 
         UserEntity existingUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
@@ -62,7 +61,7 @@ public class AuthenticationController {
         UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()), userBundleDTO.getRegisterDTO().getPassword());
 
         if (registerNewUser.getRoles().size() == 0) {
-            Role roles = roleRepository.findByName(ERole.ROLE_USER).get();
+                Role roles = roleRepository.findByName("USER").get();
             registerNewUser.setRoles(Collections.singletonList(roles));
         }
 

@@ -56,6 +56,10 @@ public class UserEntity {
         return userName;
     }
 
+    public String getPwHash() {
+        return pwHash;
+    }
+
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);
     }

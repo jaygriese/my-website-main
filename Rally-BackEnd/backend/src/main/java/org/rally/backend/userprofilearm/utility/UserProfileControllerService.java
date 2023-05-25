@@ -170,16 +170,16 @@ public class UserProfileControllerService {
     public static void generateRoles() {
         if (roleRepository.findAll().size() == 0) {
             Role role = new Role();
-            role.setName(ERole.ROLE_USER);
+            role.setName("USER");
             Role role1 = new Role();
-            role1.setName(ERole.ROLE_ADMIN);
+            role1.setName("ADMIN");
             Role role2 = new Role();
-            role2.setName(ERole.ROLE_MODERATOR);
+            role2.setName("MODERATOR");
             roleRepository.save(role);
             roleRepository.save(role1);
             roleRepository.save(role2);
         } else {
-            System.out.println("List made");
+            System.out.println("Role list made");
         }
     }
 }

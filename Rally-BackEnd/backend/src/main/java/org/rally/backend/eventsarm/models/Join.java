@@ -1,20 +1,24 @@
 package org.rally.backend.eventsarm.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Join extends AbstractEntity {
 
-    @NotBlank(message = "Who is joining the event?")
+    @ManyToOne
+    private Event event;
+
+//    @NotBlank(message = "Who is joining the event?")
     private String name;
 
-    @NotBlank(message = "Who can we contact?")
-    @Email(message = "Whoops! We need a valid email address.")
+//    @NotBlank(message = "Who can we contact?")
+//    @Email(message = "Whoops! We need a valid email address.")
     private String contactEmail;
 
-    @NotBlank(message = "How many are coming?")
+//    @NotBlank(message = "How many are coming?")
     private int numAttending;
 
     private String comment;

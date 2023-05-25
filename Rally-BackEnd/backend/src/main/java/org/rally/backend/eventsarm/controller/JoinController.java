@@ -18,32 +18,32 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/join")
 public class JoinController {
 
-    @Autowired
-    private JoinRepository joinRepository;
-
-    @Autowired
-    private EventRepository eventRepository;
-
-
-    @GetMapping("/join/")
-    public ResponseEntity<?>displayAllJoin() {
-        return new ResponseEntity<>(joinRepository.findAll(), HttpStatus.OK);
-    }
+//    @Autowired
+//    private JoinRepository joinRepository;
+//
+//    @Autowired
+//    private EventRepository eventRepository;
 
 
-    @PostMapping("/join")
-    public ResponseEntity<?> joinEventForm(@RequestBody JoinDTO joinDTO) {
-
-        Join createNewJoin = new Join(joinDTO.getName(),
-                joinDTO.getContactEmail(),
-                joinDTO.getNumAttending(),
-                joinDTO.getComment());
-
-        joinRepository.save(createNewJoin);
-        AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
-        return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
-
-    }
+//    @GetMapping("/join/")
+//    public ResponseEntity<?>displayAllJoin() {
+//        return new ResponseEntity<>(joinRepository.findAll(), HttpStatus.OK);
+//    }
+//
+//
+//    @PostMapping("/join")
+//    public ResponseEntity<?> joinEventForm(@RequestBody JoinDTO joinDTO) {
+//
+//        Join createNewJoin = new Join(joinDTO.getName(),
+//                joinDTO.getContactEmail(),
+//                joinDTO.getNumAttending(),
+//                joinDTO.getComment());
+//
+//        joinRepository.save(createNewJoin);
+//        AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
+//        return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
+//
+//    }
 
 
 

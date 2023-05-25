@@ -21,6 +21,7 @@
     vertical-align: middle;
     border: 2px solid black;
     min-width: 100%;
+    box-shadow: 5px 5px 6px #000;
 }
 .black-background {
     color:beige;
@@ -71,3 +72,14 @@
 .center {
     text-align: center;
 }
+a:hover {
+    color: #039be5;
+  }
+  h2{
+    font-size: 30px;
+    font-weight: bolder;
+  }
+  h1{
+    font-size: 40px;
+    font-weight: bolder;
+  }

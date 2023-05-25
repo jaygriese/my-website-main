@@ -20,6 +20,7 @@
     display: inline-block;
     vertical-align: middle;
     border: 2px solid black;
+    box-shadow: 5px 5px 6px #000;
 }
 .black-background {
     color:beige;
@@ -64,6 +65,7 @@
 	font-weight:bold;
     text-shadow: 2px 2px 0px #000;
     color:rgb(255, 255, 255);
+    box-shadow: 5px 5px 6px #000;
 }
 .loginName{
     font-size: 22px;
@@ -82,3 +84,15 @@
 .center {
     text-align: center;
 }
+a:hover {
+    color: #039be5;
+  }
+  .postTitle{
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 30px;
+    font-weight: bolder;
+  }
+  .nav-link {
+    display: inline-block;
+  }

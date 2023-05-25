@@ -26,6 +26,7 @@ export class ViewPostComponent implements OnInit {
   updatePostDescription: boolean;
   darktheme: boolean;
   isLoading: boolean;
+  replyTooLong: boolean;
   constructor(private route: ActivatedRoute, private http: HttpClient, private themeservice: ThemeserviceService, private router: Router) { 
     this.postId = +this.route.snapshot.paramMap.get('id');
     this.postReplyBoolean = false;
@@ -38,12 +39,12 @@ export class ViewPostComponent implements OnInit {
     this.updatePostDescription = false;
     this.darktheme = false;
     this.isLoading = true;
+    this.replyTooLong = false;
   }
   ngOnInit() {
     this.getPost();
     this.verifyLoggedIn();
     this.checkTheme();
-    this.getReplies();
   }
   checkTheme(){
     if (localStorage.getItem('theme') == 'dark'){
@@ -58,10 +59,14 @@ export class ViewPostComponent implements OnInit {
         if(post != null){
           this.postObject = post;
           this.isLoading = false;
+          this.postEditAndDeleteButtons = true;
+          this.updatePostDescription = false;
         }
       })
+      this.getReplies();
   }
   getReplies(){
+    this.replies = [];
     this.http.get('http://localhost:8080/Replies').subscribe((res)=> {
         for(const k in res){
           if(res[k].forumPosts.id == this.postId){
@@ -79,6 +84,11 @@ export class ViewPostComponent implements OnInit {
     })
   }
   createReply(replyInformation: NgForm){
+      this.replyTooLong = false;
+      if (replyInformation.value.description.length > 245){
+          this.replyTooLong = true;
+      }
+      else {
       this.postReplyBoolean = false;
       let replyDetails: ReplyDTO ={
         description: replyInformation.value.description,
@@ -86,12 +96,15 @@ export class ViewPostComponent implements OnInit {
         id: this.postId
       }
       this.http.post(`http://localhost:8080/Replies`, replyDetails).subscribe((res) => {
-    console.log(res)
+    this.getPost();
     });
-    window.location.reload();
+  }
   }
   populateForm(){
     this.postReplyBoolean = true;
+  }
+  cancelCreateReply(){
+    this.postReplyBoolean = false;
   }
   editDescription(idString){
     this.editAndDeleteButtons = false;
@@ -111,6 +124,11 @@ export class ViewPostComponent implements OnInit {
     }
   }
   updateDescription1(updateInformation: NgForm){
+    this.replyTooLong = false;
+    if (updateInformation.value.newDescription.length > 245){
+        this.replyTooLong = true;
+    }
+    else {
     let newReplyDescription: ReplyDTO = {
         description: updateInformation.value.newDescription,
         username: updateInformation.value.username,
@@ -123,15 +141,28 @@ export class ViewPostComponent implements OnInit {
     this.updateDescription = false;
     });
   }
+  }
   editPost(){
     this.postEditAndDeleteButtons = false;
     this.updatePostDescription = true;
   }
+  cancelPostDescription(){
+    this.getPost();
+  }
+  cancelReplyDescription(){
+    this.editAndDeleteButtons = true;
+    this.updateDescription = false;
+  }
   editPostWithNewDescription(updateDescription: NgForm){
+    this.replyTooLong = false;
+    if (updateDescription.value.newDescription.length > 245){
+        this.replyTooLong = true;
+    }
+    else {
       let newPostDescription: ReplyDTO = {
         description: updateDescription.value.newDescription,
-        username: this.postObject[0].userEntity.userName,
-        id: this.postObject[0].id
+        username: this.postObject.userEntity.userName,
+        id: this.postObject.id
       }
       console.log(newPostDescription)
       this.http.post(`http://localhost:8080/UpdatePost`, newPostDescription).subscribe((res) => {
@@ -139,11 +170,12 @@ export class ViewPostComponent implements OnInit {
         this.postEditAndDeleteButtons = true;
         this.updatePostDescription = false;
       })
+    }
   }
   deletePost(idString){
     this.http.post('http://localhost:8080/DeletePost', +idString).subscribe((res) => {
       console.log(res);
-      this.router.navigate(["/forum/" + this.postObject[0].category.toLowerCase()]);
+      this.router.navigate(["/forum/" + this.postObject.category.toLowerCase()]);
     })
   }
   Light(){

@@ -6,8 +6,7 @@
 </span>
     <!-- log in button -->
     <ng-template #notLoggedIn>
-        <p>User is not logged in. </p>
-        <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+        <span class="right"><span class="loginName">User is not logged in. </span><a class="btn btn-info" routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span>
     </ng-template>
     <!-- log out button -->
     <span class="left" *ngIf="darktheme; else lightTheme">
@@ -20,7 +19,7 @@
     </ng-template> 
         <!-- light/dark theme buttons    -->
     <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
-        <div class="middle">
+        <div class="center">
             <input type="text" name="description" required ngModel>
             <input class="btn btn-info" type="submit" value="Search Posts">
         </div>
@@ -48,9 +47,28 @@
                         <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
                     </span>         
                     <body style="min-width: 90%;" class="white-theme">
-                        <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                        <a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">Posted by {{test.userEntity.userName}}</a> 
-                        <span><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.forumPostLike.likes}} likes</a> </span> 
+                        <h1 class="postTitle"><a style="display: block;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h1>
+                        <span>Posted by </span><a class="nav-link" routerLink="/user/{{test.userEntity.userName}}/{{test.userEntity.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a> 
+                        <br>
+                        <br>
+                        <div *ngIf="test.forumPostLike.users.length == 0">
+                            <span> Nobody has liked this yet.</span>
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 1">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}} likes this</a>
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 2">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a> and
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active">{{test.forumPostLike.users[1].userName}}</a> like this
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 3">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} other like this
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length > 3">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} others like this
+                        </div>
                     </body>
                     <br><br>
                 </div>
@@ -90,9 +108,28 @@
                         <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
                     </span>         
                     <body style="min-width: 90%;" class="black-background">
-                        <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                        <a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">Posted by {{test.userEntity.userName}}</a> 
-                        <span><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.forumPostLike.likes}} likes</a> </span> 
+                        <h1 class="postTitle"><a style="display: block;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h1>
+                        <span>Posted by </span><a class="nav-link" routerLink="/user/{{test.userEntity.userName}}/{{test.userEntity.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a> 
+                        <br>
+                        <br>
+                        <div *ngIf="test.forumPostLike.users.length == 0">
+                            <span> Nobody has liked this yet.</span>
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 1">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}} likes this</a>
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 2">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a> and
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active">{{test.forumPostLike.users[1].userName}}</a> like this
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 3">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} other like this
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length > 3">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} others like this
+                        </div>
                     </body>
                     <br><br>
                 </div>

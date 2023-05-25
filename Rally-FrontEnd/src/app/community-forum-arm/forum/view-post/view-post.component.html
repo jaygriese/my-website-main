@@ -24,18 +24,18 @@
     <!-- background theme -->
     <div *ngIf="!isLoading">
             <body class="white-theme">
-                <h1 class="center" style="border: 1px solid black;">{{postObject.title}}</h1>
+                <h1 class="title">{{postObject.title}}</h1>
             </body>
     <!-- Title of Post -->
                 <br><br>
             <body class="white-theme">
-                <h5 class="center" style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h5>
+                <h2 class="center" style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h2>
             </body>
     <!-- Username of Poster -->
         <div *ngIf="!updatePostDescription; else editPostDescription">
             <span><div class="thought">{{postObject.description}}</div></span>
             <div *ngIf="postObject.userEntity.userName == currentUser">
-                <div *ngIf="postEditAndDeleteButtons">
+                <div class="center" *ngIf="postEditAndDeleteButtons">
                     <button class="btn btn-info" (click)="editPost()">Edit Post Description</button>
                     <button class="btn btn-danger" (click)="deletePost(postObject.id)">Delete Post</button>
                 </div>
@@ -45,8 +45,14 @@
     <!-- Post Description and Edit/Delete Buttons -->
         <ng-template #editPostDescription>
             <form #editPostAttempt="ngForm" (ngSubmit)="editPostWithNewDescription(editPostAttempt)">
-                <input type="text" name="newDescription" [(ngModel)]="postObject.description" required ngModel>
+                <div class="center">
+                <input class="form-control" type="text" name="newDescription" [(ngModel)]="postObject.description" required ngModel>
                 <input type="submit" value="Submit">
+                <button (click)="cancelPostDescription()">Cancel</button>
+                <div *ngIf="replyTooLong">
+                    <p style="color:red;">Description is too long, please keep it under 245 characters.</p>
+                </div>
+                </div>
             </form>
         </ng-template>
     <!-- Edit Post Form -->
@@ -65,6 +71,10 @@
                         <label>Reply: <input type="text" name="description" required ngModel></label>     
                         <br><br>
                         <input type="submit" value="Submit">
+                        <button (click)="cancelCreateReply()">Cancel</button>
+                        <div class="center" *ngIf="replyTooLong">
+                        <p style="color:red"> Reply too long, please keep it under 245 characters.</p>
+                        </div>
                     </body>
             </form>
         </div>
@@ -72,21 +82,27 @@
     <!-- Reply Form -->
                 <br><br>
     <br><br>
+    <div class="center">
+        <h1 class="big-white">Replies:</h1>
+    </div>
     <div id="parent{{reply.id}}" *ngFor="let reply of replies">
         <div id="{{reply.id}}">
-                <div class="center">
-                    <h1 class="white-theme">Replies:</h1>
-                </div>
                 <br><br>
                 <body class="white-theme">
-                    <h5 class="center" style="padding-top: 5px;">{{reply.userEntity.userName}} says</h5>
+                    <h2 class="center" style="padding-top: 5px;">{{reply.userEntity.userName}} says</h2>
                 </body>
             <!-- Username of Replier theme  -->
             <div *ngIf="updateDescription && editReplyDescription1 == reply.id; else editReplyDescription">
                 <form #editReplyAttempt="ngForm" (ngSubmit)="updateDescription1(editReplyAttempt)">
-                    <input type="text" name="newDescription" [(ngModel)]="reply.description" required ngModel>
+                    <div class="center">
+                    <input class="form-control" type="text" name="newDescription" [(ngModel)]="reply.description" required ngModel>
                     <input type="hidden" name="username" [(ngModel)]="reply.userEntity.userName" required ngModel>
                     <input type="submit" value="Submit">
+                    <button (click)="cancelReplyDescription()">Cancel</button>
+                    <div *ngIf="replyTooLong">
+                    <p style="color: red;"> Reply too long, please keep it under 245 characters.</p>
+                    </div>
+                     </div>
                 </form>
             </div>
             <!-- Edit Reply Form -->
@@ -113,18 +129,18 @@
         <!-- background theme -->
         <div *ngIf="!isLoading">
                 <body class="black-background">
-                    <h1 class="center" style="border: 1px solid black;">{{postObject.title}}</h1>
+                    <h1 class="title">{{postObject.title}}</h1>
                 </body>
         <!-- Title of Post -->
                     <br><br>
                 <body class="black-background">
-                    <h5 class="center" style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h5>
+                    <h2 class="center" style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h2>
                 </body>
         <!-- Username of Poster -->
             <div *ngIf="!updatePostDescription; else editPostDescription">
                 <span><div class="thought">{{postObject.description}}</div></span>
                 <div *ngIf="postObject.userEntity.userName == currentUser">
-                    <div *ngIf="postEditAndDeleteButtons">
+                    <div class="center" *ngIf="postEditAndDeleteButtons">
                         <button class="btn btn-info" (click)="editPost()">Edit Post Description</button>
                         <button class="btn btn-danger" (click)="deletePost(postObject.id)">Delete Post</button>
                     </div>
@@ -134,8 +150,14 @@
         <!-- Post Description and Edit/Delete Buttons -->
             <ng-template #editPostDescription>
                 <form #editPostAttempt="ngForm" (ngSubmit)="editPostWithNewDescription(editPostAttempt)">
-                    <input type="text" name="newDescription" [(ngModel)]="postObject.description" required ngModel>
+                    <div class="center">
+                    <input class="form-control" type="text" name="newDescription" [(ngModel)]="postObject.description" required ngModel>
                     <input type="submit" value="Submit">
+                    <button (click)="cancelPostDescription()">Cancel</button>
+                    <div *ngIf="replyTooLong">
+                        <p style="color:red;">Description is too long, please keep it under 245 characters.</p>
+                    </div>
+                    </div>
                 </form>
             </ng-template>
         <!-- Edit Post Form -->
@@ -154,6 +176,10 @@
                             <label>Reply: <input type="text" name="description" required ngModel></label>     
                             <br><br>
                             <input type="submit" value="Submit">
+                            <button (click)="cancelCreateReply()">Cancel</button>
+                            <div class="center" *ngIf="replyTooLong">
+                                <p style="color:red"> Reply too long, please keep it under 245 characters.</p>
+                            </div>
                         </body>
                 </form>
             </div>
@@ -161,21 +187,28 @@
         <!-- Reply Form -->
                     <br><br>
         <br><br>
+        <div class="center">
+        <h1 class="big-black">Replies:</h1>
+        </div>
         <div id="parent{{reply.id}}" *ngFor="let reply of replies">
             <div id="{{reply.id}}">
                 <div class="center">
-                    <h1 class="black-background">Replies:</h1>
                     <br><br>
                     <body class="black-background">
-                        <h5 style="padding-top: 5px;">{{reply.userEntity.userName}} says</h5>
+                        <h2 style="padding-top: 5px;">{{reply.userEntity.userName}} says</h2>
                     </body>
                 </div>
                 <!-- Username of Replier theme  -->
                 <div *ngIf="updateDescription && editReplyDescription1 == reply.id; else editReplyDescription">
                     <form #editReplyAttempt="ngForm" (ngSubmit)="updateDescription1(editReplyAttempt)">
-                        <input type="text" name="newDescription" [(ngModel)]="reply.description" required ngModel>
+                        <div class="center">
+                        <input class="form-control" type="text" name="newDescription" [(ngModel)]="reply.description" required ngModel>
                         <input type="hidden" name="username" [(ngModel)]="reply.userEntity.userName" required ngModel>
                         <input type="submit" value="Submit">
+                        <div *ngIf="replyTooLong">
+                        <p style="color: red;"> Reply too long, please keep it under 245 characters.</p>
+                        </div>
+                         </div>
                     </form>
                 </div>
                 <!-- Edit Reply Form -->

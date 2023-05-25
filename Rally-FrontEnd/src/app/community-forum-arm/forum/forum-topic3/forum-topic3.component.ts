@@ -85,14 +85,8 @@ Dark(){
       id: postId
     }
     this.http.post('http://localhost:8080/LikePost', likeDetails).subscribe((res) => {
-      console.log(res)
+      this.getPosts();
     });
-    window.location.reload();
-  }
-  experimenting = async () => {
-    const resp = await fetch('http://localhost:8080/Posts');
-    const data = await resp.json();
-  
-    console.log(data)
+
   }
 }

@@ -85,7 +85,7 @@ Dark(){
     }
     this.http.post('http://localhost:8080/LikePost', likeDetails).subscribe((res) => {
       console.log(res)
+      this.getPosts();
     });
-    window.location.reload();
   }
 }

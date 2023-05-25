@@ -54,6 +54,7 @@ export class IntroductionsComponent implements OnInit {
   createPost(postInformation: NgForm){
       this.createPostBoolean = false;
       this.themeservice.createAPost(postInformation, this.forumTopic);
+      this.getPosts();
   }
   getPosts(){
     this.themeservice.getForumTopicPosts(this.forumTopic).subscribe((posts) =>{
@@ -85,8 +86,8 @@ Dark(){
       id: postId
     }
     this.http.post('http://localhost:8080/LikePost', likeDetails).subscribe((res) => {
-      console.log(res)
+      this.getPosts();
     });
-    window.location.reload();
+
   }
 }

@@ -6,8 +6,7 @@
 </div>
 <!-- log in button -->
 <ng-template #notLoggedIn>
-    <p>User is not logged in. </p>
-    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+    <span class="right"><span class="loginName">User is not logged in. </span><a class="btn btn-info" routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span>
 </ng-template>
 <!-- log out button -->
 <div class="left" *ngIf="darktheme; else lightTheme">
@@ -20,7 +19,7 @@
 </ng-template> 
     <!-- light/dark theme buttons    -->
 <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
-    <div class="middle">
+    <div class="center">
         <input type="text" name="description" required ngModel>
         <input class="btn btn-info" type="submit" value="Search Posts">
     </div>
@@ -32,39 +31,34 @@
 <br><br><br>
         <body class="white-theme">
             <div class="container-fluid" style="text-align: left;">
-                <h2><a class="nav-link" routerLink="/forum/communityhome" routerLinkActive="active">Community Home</a></h2>
-                <p>Post about, discuss and find out what's going on across the Community.  Keep it civil!</p>
+                <h2><a class="nav-link" routerLink="/forum/communityhome" routerLinkActive="active">Community Home <br><p style="font-size: 18px;">Post about, discuss and find out what's going on across the Community. Keep it civil! </p> </a></h2>
             </div>
         </body>
 <br>
 <br>
         <body class="white-theme">
             <div class="container-fluid" style="text-align: left;">
-                <h2 ><a class="nav-link" routerLink="/forum/introductions" routerLinkActive="active">Introductions</a></h2>
-                <p >Introduce yourself to the community. Don't be shy, say hi!</p>
+                <h2 ><a class="nav-link" routerLink="/forum/introductions" routerLinkActive="active">Introductions <p style="font-size: 18px;">Introduce yourself to the community. Don't be shy, say hi!</p></a></h2>
             </div>
         </body>
 <br>
 <br>
         <body class="white-theme">
             <div class="container-fluid" style="text-align: left;">
-                <h2><a class="nav-link" routerLink="/forum/topic1" routerLinkActive="active">Volunteering/Event Recruitment</a></h2>
-                <p> Discuss getting together as a group for Events.</p>
+                <h2><a class="nav-link" routerLink="/forum/topic1" routerLinkActive="active">Volunteering/Event Recruitment <p style="font-size: 18px;">Discuss getting together as a group for Events.</p></a></h2>
             </div>
         </body>
 <br>
 <br>
         <body class="white-theme">
             <div class="container-fluid" style="text-align: left;">
-                <h2><a class="nav-link" routerLink="/forum/topic2" routerLinkActive="active">Help Requests/Home Improvement</a></h2>
-                <p>Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here.</p>
+                <h2><a class="nav-link" routerLink="/forum/topic2" routerLinkActive="active">Help Requests/Home Improvement <p style="font-size: 18px;">Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here.</p></a></h2>
             </div>
         </body>
 <br><br>
         <body class="white-theme">
             <div class="container-fluid" style="text-align: left;">
-                <h2><a class="nav-link" routerLink="/forum/topic3" routerLinkActive="active">Miscellaneous</a></h2>
-                <p>Be as random as you want, but keep it appropiate and civil!</p>
+                <h2><a class="nav-link" routerLink="/forum/topic3" routerLinkActive="active">Miscellaneous <p style="font-size: 18px;">Be as random as you want, but keep it appropiate and civil!</p></a></h2>
             </div>
         </body>
     </div>
@@ -75,39 +69,34 @@
 <br><br><br>
         <body class="black-background">
             <div class="container-fluid" style="text-align: left;">
-                <h2><a class="nav-link" routerLink="/forum/communityhome" routerLinkActive="active">Community Home</a></h2>
-                <p>Post about, discuss and find out what's going on across the Community.  Keep it civil!</p>
+                <h2><a class="nav-link" routerLink="/forum/communityhome" routerLinkActive="active">Community Home <br><p style="font-size: 18px;">Post about, discuss and find out what's going on across the Community. Keep it civil! </p> </a></h2>
             </div>
         </body>
 <br>
 <br>
         <body class="black-background">
             <div class="container-fluid" style="text-align: left;">
-                <h2 ><a class="nav-link" routerLink="/forum/introductions" routerLinkActive="active">Introductions</a></h2>
-                <p >Introduce yourself to the community. Don't be shy, say hi!</p>
+                <h2 ><a class="nav-link" routerLink="/forum/introductions" routerLinkActive="active">Introductions <p style="font-size: 18px;">Introduce yourself to the community. Don't be shy, say hi!</p></a></h2>
             </div>
         </body>
 <br>
 <br>
         <body class="black-background">
             <div class="container-fluid" style="text-align: left;">
-                <h2><a class="nav-link" routerLink="/forum/topic1" routerLinkActive="active">Volunteering/Event Recruitment</a></h2>
-                <p> Discuss getting together as a group for Events.</p>
+                <h2><a class="nav-link" routerLink="/forum/topic1" routerLinkActive="active">Volunteering/Event Recruitment <p style="font-size: 18px;">Discuss getting together as a group for Events.</p></a></h2>
             </div>
         </body>
 <br>
 <br>
         <body class="black-background">
             <div class="container-fluid" style="text-align: left;">
-                <h2><a class="nav-link" routerLink="/forum/topic2" routerLinkActive="active">Help Requests/Home Improvement</a></h2>
-                <p>Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here.</p>
+                <h2><a class="nav-link" routerLink="/forum/topic2" routerLinkActive="active">Help Requests/Home Improvement <p style="font-size: 18px;">Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here.</p></a></h2>
             </div>
         </body>
 <br><br>
         <body class="black-background">
             <div class="container-fluid" style="text-align: left;">
-                <h2><a class="nav-link" routerLink="/forum/topic3" routerLinkActive="active">Miscellaneous</a></h2>
-                <p>Be as random as you want, but keep it appropiate and civil!</p>
+                <h2><a class="nav-link" routerLink="/forum/topic3" routerLinkActive="active">Miscellaneous <p style="font-size: 18px;">Be as random as you want, but keep it appropiate and civil!</p></a></h2>
             </div>
         </body>
     </div>

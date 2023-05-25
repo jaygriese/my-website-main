@@ -19,6 +19,18 @@
     color:black;
     background: transparent;
 }
+.big-white{
+    color:black;
+    background: transparent;
+    font-size: 40px;
+    font-weight: bolder;
+}
+.title {
+    text-align: center;
+    border: 1px solid black;
+    font-weight: bolder;
+    font-size: 30px;
+}
 .black-background {
     color:beige;
     background: transparent;
@@ -103,5 +115,14 @@
 .center {
     text-align: center;
 }
-
-  
+.big-black{
+    color:beige;
+    background: transparent;
+    font-size: 40px;
+    font-weight: bolder;
+}
+.form-control {
+ position: relative;
+ margin: auto;
+ width: 30%;
+}

@@ -1,3 +1,4 @@
+
 <div class="marginResetting">
     <div class="buttonsPosition">
     <span *ngIf="logInStatus; else notLoggedIn">
@@ -5,8 +6,7 @@
     </span>
         <!-- log in button -->
         <ng-template #notLoggedIn>
-            <p>User is not logged in. </p>
-            <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+            <span class="right"><span class="loginName">User is not logged in. </span><a class="btn btn-info" routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span>
         </ng-template>
         <!-- log out button -->
         <span class="left" *ngIf="darktheme; else lightTheme">
@@ -19,7 +19,7 @@
         </ng-template> 
             <!-- light/dark theme buttons    -->
         <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
-            <div class="middle">
+            <div class="center">
                 <input type="text" name="description" required ngModel>
                 <input class="btn btn-info" type="submit" value="Search Posts">
             </div>
@@ -27,89 +27,127 @@
     </div>
         <!-- search button -->
             <!-- create post button  -->
-            <div *ngIf="!darktheme; else darkSections">
-                <div id="theme" class="white">
-                <!-- background theme  -->
-                <body style="min-width: 100%;" class="white-theme">
-                        <h1 class="center">Introductions</h1>
-                </body>
-                <div *ngIf="!createPostBoolean; else createPostForm">   
-                    <div class="center" *ngIf="logInStatus">
-                        <button (click)="createPostButton()" class="btn btn-primary">Create Post</button>
-                    </div>
-                </div>
-                <!-- Page header -->
-                        <br>
-                        <br>
-                            <div style="text-align: left;" *ngFor="let test of newArray">
-                                
-                                <span *ngIf="logInStatus">
-                                    <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
-                                </span>         
-                                <body style="min-width: 90%;" class="white-theme">
-                                    <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                                    <a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">Posted by {{test.userEntity.userName}}</a> 
-                                    <span><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.forumPostLike.likes}} likes</a> </span> 
-                                </body>
-                                <br><br>
+      <div *ngIf="!darktheme; else darkSections">
+        <div id="theme" class="white">
+        <!-- background theme  -->
+        <body style="min-width: 100%;" class="white-theme">
+                <h1 class="center">Introductions</h1>
+        </body>
+        <div *ngIf="!createPostBoolean; else createPostForm">   
+            <div class="center" *ngIf="logInStatus">
+                <button (click)="createPostButton()" class="btn btn-primary">Create Post</button>
+            </div>
+        </div>
+        <!-- Page header -->
+                <br>
+                <br>
+                    <div style="text-align: left;" *ngFor="let test of newArray">
+                        
+                        <span *ngIf="logInStatus">
+                            <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
+                        </span>         
+                        <body style="min-width: 90%;" class="white-theme">
+                            <h1 class="postTitle"><a style="display: block;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h1>
+                            <span>Posted by </span><a class="nav-link" routerLink="/user/{{test.userEntity.userName}}/{{test.userEntity.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a> 
+                            <br>
+                            <br>
+                            <div *ngIf="test.forumPostLike.users.length == 0">
+                                <span> Nobody has liked this yet.</span>
                             </div>
-                        <!-- light theme posts -->
-            </div>
-            <ng-template #createPostForm>
-                <div *ngIf="logInStatus">
-                    <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">
-                            <body class="white-theme">
-                                <label>Title: <input type="text" name="title" required ngModel></label>
-                                            <br><br>
-                                <label>Description: <input type="text" name="description" required ngModel></label>     
-                                            <br><br>
-                                <input type="submit" value="Submit">
-                            </body>
-                    </form>
-                </div>
-            </ng-template>
-            </div>
-            <ng-template #darkSections>
-            <div id="theme" class="black">
-                <!-- background theme  -->
-                <body style="min-width: 100%;" class="black-background">
-                        <h1 class="center">Introductions</h1>
-                </body>
-                <div *ngIf="!createPostBoolean; else createPostForm">   
-                    <div class="center" *ngIf="logInStatus">
-                        <button (click)="createPostButton()" class="btn btn-primary">Create Post</button>
-                    </div>
-                </div>
-                <!-- Page header -->
-                        <br>
-                        <br>
-                            <div style="text-align: left;" *ngFor="let test of newArray">
-                                
-                                <span *ngIf="logInStatus">
-                                    <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
-                                </span>         
-                                <body style="min-width: 90%;" class="black-background">
-                                    <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                                    <a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">Posted by {{test.userEntity.userName}}</a> 
-                                    <span><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.forumPostLike.likes}} likes</a> </span> 
-                                </body>
-                                <br><br>
+                            <div *ngIf="test.forumPostLike.users.length == 1">
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}} likes this</a>
                             </div>
-                        <!-- dark theme posts -->
+                            <div *ngIf="test.forumPostLike.users.length == 2">
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a> and
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active">{{test.forumPostLike.users[1].userName}}</a> like this
+                            </div>
+                            <div *ngIf="test.forumPostLike.users.length == 3">
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} other like this
+                            </div>
+                            <div *ngIf="test.forumPostLike.users.length > 3">
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} others like this
+                            </div>
+                        </body>
+                        <br><br>
+                    </div>
+                <!-- light theme posts -->
+    </div>
+    <ng-template #createPostForm>
+        <div *ngIf="logInStatus">
+            <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">
+                    <body class="white-theme">
+                        <label>Title: <input type="text" name="title" required ngModel></label>
+                                    <br><br>
+                        <label>Description: <input type="text" name="description" required ngModel></label>     
+                                    <br><br>
+                        <input type="submit" value="Submit">
+                    </body>
+            </form>
+        </div>
+    </ng-template>
+    </div>
+    <ng-template #darkSections>
+    <div id="theme" class="black">
+        <!-- background theme  -->
+        <body style="min-width: 100%;" class="black-background">
+                <h1 class="center">Introductions</h1>
+        </body>
+        <div *ngIf="!createPostBoolean; else createPostForm">   
+            <div class="center" *ngIf="logInStatus">
+                <button (click)="createPostButton()" class="btn btn-primary">Create Post</button>
             </div>
-            <ng-template #createPostForm>
-                <div *ngIf="logInStatus">
-                    <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">            
-                            <body class="black-background">
-                                <label>Title: <input type="text" name="title" required ngModel></label>
-                                            <br><br>
-                                <label>Description: <input type="text" name="description" required ngModel></label>     
-                                            <br><br>
-                                <input type="submit" value="Submit">
-                            </body>
-                    </form>
-                </div>
-            </ng-template>
-            </ng-template>
+        </div>
+        <!-- Page header -->
+                <br>
+                <br>
+                    <div style="text-align: left;" *ngFor="let test of newArray">
+                        
+                        <span *ngIf="logInStatus">
+                            <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
+                        </span>         
+                        <body style="min-width: 90%;" class="black-background">
+                            <h1 class="postTitle"><a style="display: block;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h1>
+                            <span>Posted by </span><a class="nav-link" routerLink="/user/{{test.userEntity.userName}}/{{test.userEntity.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a> 
+                            <br>
+                            <br>
+                            <div *ngIf="test.forumPostLike.users.length == 0">
+                                <span> Nobody has liked this yet.</span>
+                            </div>
+                            <div *ngIf="test.forumPostLike.users.length == 1">
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}} likes this</a>
+                            </div>
+                            <div *ngIf="test.forumPostLike.users.length == 2">
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a> and
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active">{{test.forumPostLike.users[1].userName}}</a> like this
+                            </div>
+                            <div *ngIf="test.forumPostLike.users.length == 3">
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} other like this
+                            </div>
+                            <div *ngIf="test.forumPostLike.users.length > 3">
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                                <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} others like this
+                            </div>
+                        </body>
+                        <br><br>
+                    </div>
+                <!-- dark theme posts -->
+    </div>
+    <ng-template #createPostForm>
+        <div *ngIf="logInStatus">
+            <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">            
+                    <body class="black-background">
+                        <label>Title: <input type="text" name="title" required ngModel></label>
+                                    <br><br>
+                        <label>Description: <input type="text" name="description" required ngModel></label>     
+                                    <br><br>
+                        <input type="submit" value="Submit">
+                    </body>
+            </form>
+        </div>
+    </ng-template>
+    </ng-template>  
         <!-- create post form  -->
     </div>

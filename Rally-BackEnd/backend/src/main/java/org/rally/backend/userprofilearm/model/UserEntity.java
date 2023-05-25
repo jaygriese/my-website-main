@@ -64,6 +64,15 @@ public class UserEntity {
         return encoder.matches(password, pwHash);
     }
 
+    public String unEncodePassword(String password) {
+        if (encoder.matches(password, pwHash)) {
+            return password;
+        } else {
+            return null;
+        }
+
+    }
+
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 }

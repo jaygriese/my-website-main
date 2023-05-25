@@ -1,4 +1,4 @@
-package org.rally.backend.springsecurity.security.jwt;
+package org.rally.backend.springsecurity.security;
 
 public class SecurityConstants {
 

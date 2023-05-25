@@ -36,16 +36,17 @@ export class LoginUserComponent implements OnInit {
       userName: userInformation.value.userName,
       password: userInformation.value.password
     }
-    this.http.post('http://localhost:8080/api/login', loginInfo).subscribe((response: UserEntity) => {    
+    this.http.post('http://localhost:8080/api/login', loginInfo).subscribe((response: any) => {    
       for (const k in response){
         if (k === "failed"){
           this.incorrectPassword = true;
           return;
         } else {            
           this.userLogginIn = response;
+          console.log(response);
           localStorage.setItem('userName', this.userLogginIn.userName)
           localStorage.setItem('id', this.userLogginIn.id)
-          this.router.navigate(["/myProfile"]);
+          // this.router.navigate(["/myProfile"]);
         }
       }
        

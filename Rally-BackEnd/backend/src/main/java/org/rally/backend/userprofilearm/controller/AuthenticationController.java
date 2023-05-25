@@ -1,9 +1,10 @@
 package org.rally.backend.userprofilearm.controller;
 
+import org.rally.backend.springsecurity.security.JWTGenerator;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
-import org.rally.backend.userprofilearm.model.ERole;
 import org.rally.backend.userprofilearm.model.Role;
 import org.rally.backend.userprofilearm.model.UserInformation;
+import org.rally.backend.userprofilearm.model.dto.AuthResponseDTO;
 import org.rally.backend.userprofilearm.model.dto.UserBundleDTO;
 import org.rally.backend.userprofilearm.exception.AuthenticationFailure;
 import org.rally.backend.userprofilearm.model.UserEntity;
@@ -16,12 +17,14 @@ import org.rally.backend.userprofilearm.utility.UserProfileControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -32,12 +35,24 @@ public class AuthenticationController {
     UserRepository userRepository;
     UserInformationRepository userInformationRepository;
     RoleRepository roleRepository;
+    private AuthenticationManager authenticationManager;
+    private PasswordEncoder passwordEncoder;
+    private JWTGenerator jwtGenerator;
+
 
     @Autowired
-    public AuthenticationController(UserRepository userRepository, RoleRepository roleRepository, UserInformationRepository userInformationRepository) {
+    public AuthenticationController(UserRepository userRepository,
+                                    RoleRepository roleRepository,
+                                    UserInformationRepository userInformationRepository,
+                                    AuthenticationManager authenticationManager,
+                                    PasswordEncoder passwordEncoder,
+                                    JWTGenerator jwtGenerator) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
+        this.authenticationManager = authenticationManager;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtGenerator = jwtGenerator;
     }
 
     @PostMapping("/register")
@@ -106,7 +121,16 @@ public class AuthenticationController {
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(theUser, HttpStatus.OK);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginDTO.getUserName(),
+                        loginDTO.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        /** JWT Generator isn't working atm **/
+        String token = jwtGenerator.generateToken(authentication);
+
+
+        return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
     }
 
 

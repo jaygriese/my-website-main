@@ -24,7 +24,7 @@ switchToDarkTheme(){
   let sections = document.querySelectorAll("body");
   sections.forEach((section) => {section.setAttribute('class', 'black-background')});
   background.setAttribute('class', 'black');
-  localStorage.setItem('theme', 'dark');
+  localStorage.setItem('theme', 'dark'); 
 }
 createAPost(postInfo: NgForm, forumTopic: string){
   let postDetails: ForumPostDTO = {

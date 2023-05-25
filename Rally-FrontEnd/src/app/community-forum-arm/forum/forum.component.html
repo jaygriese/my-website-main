@@ -26,47 +26,91 @@
     </div>
 </form>
 <!-- search button -->
-<div id="theme" class="white">
-<body class="white-theme"><div class="container-fluid"><h1>Community Forum</h1></div></body>
+<div *ngIf="!darktheme; else darkSections">
+    <div id="theme" class="white">
+        <body class="white-theme"><div class="container-fluid"><h1>Community Forum</h1></div></body>
 <br><br><br>
-
-<body class="white-theme">
-    <div class="container-fluid" style="text-align: left;">
-        <h2><a class="nav-link" routerLink="/forum/communityhome" routerLinkActive="active">Community Home</a></h2>
-        <p>Post about, discuss and find out what's going on across the Community.  Keep it civil!</p>
-    </div>
-</body>
+        <body class="white-theme">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/communityhome" routerLinkActive="active">Community Home</a></h2>
+                <p>Post about, discuss and find out what's going on across the Community.  Keep it civil!</p>
+            </div>
+        </body>
 <br>
 <br>
-<body class="white-theme">
-    <div class="container-fluid" style="text-align: left;">
-        <h2 ><a class="nav-link" routerLink="/forum/introductions" routerLinkActive="active">Introductions</a></h2>
-        <p >Introduce yourself to the community. Don't be shy, say hi!</p>
-    </div>
-</body>
+        <body class="white-theme">
+            <div class="container-fluid" style="text-align: left;">
+                <h2 ><a class="nav-link" routerLink="/forum/introductions" routerLinkActive="active">Introductions</a></h2>
+                <p >Introduce yourself to the community. Don't be shy, say hi!</p>
+            </div>
+        </body>
 <br>
 <br>
-<body class="white-theme">
-    <div class="container-fluid" style="text-align: left;">
-        <h2><a class="nav-link" routerLink="/forum/topic1" routerLinkActive="active">Volunteering/Event Recruitment</a></h2>
-        <p> Discuss getting together as a group for Events.</p>
-    </div>
-</body>
+        <body class="white-theme">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic1" routerLinkActive="active">Volunteering/Event Recruitment</a></h2>
+                <p> Discuss getting together as a group for Events.</p>
+            </div>
+        </body>
 <br>
 <br>
-<body class="white-theme">
-    <div class="container-fluid" style="text-align: left;">
-        <h2><a class="nav-link" routerLink="/forum/topic2" routerLinkActive="active">Help Requests/Home Improvement</a></h2>
-        <p>Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here.</p>
-    </div>
-</body>
+        <body class="white-theme">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic2" routerLinkActive="active">Help Requests/Home Improvement</a></h2>
+                <p>Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here.</p>
+            </div>
+        </body>
 <br><br>
-<body class="white-theme">
-    <div class="container-fluid" style="text-align: left;">
-        <h2><a class="nav-link" routerLink="/forum/topic3" routerLinkActive="active">Miscellaneous</a></h2>
-        <p>Be as random as you want, but keep it appropiate and civil!</p>
+        <body class="white-theme">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic3" routerLinkActive="active">Miscellaneous</a></h2>
+                <p>Be as random as you want, but keep it appropiate and civil!</p>
+            </div>
+        </body>
     </div>
-</body>
-<br><br>
 </div>
+<ng-template #darkSections>
+    <div id="theme" class="black">
+        <body class="black-background"><div class="container-fluid"><h1>Community Forum</h1></div></body>
+<br><br><br>
+        <body class="black-background">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/communityhome" routerLinkActive="active">Community Home</a></h2>
+                <p>Post about, discuss and find out what's going on across the Community.  Keep it civil!</p>
+            </div>
+        </body>
+<br>
+<br>
+        <body class="black-background">
+            <div class="container-fluid" style="text-align: left;">
+                <h2 ><a class="nav-link" routerLink="/forum/introductions" routerLinkActive="active">Introductions</a></h2>
+                <p >Introduce yourself to the community. Don't be shy, say hi!</p>
+            </div>
+        </body>
+<br>
+<br>
+        <body class="black-background">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic1" routerLinkActive="active">Volunteering/Event Recruitment</a></h2>
+                <p> Discuss getting together as a group for Events.</p>
+            </div>
+        </body>
+<br>
+<br>
+        <body class="black-background">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic2" routerLinkActive="active">Help Requests/Home Improvement</a></h2>
+                <p>Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here.</p>
+            </div>
+        </body>
+<br><br>
+        <body class="black-background">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic3" routerLinkActive="active">Miscellaneous</a></h2>
+                <p>Be as random as you want, but keep it appropiate and civil!</p>
+            </div>
+        </body>
+    </div>
+</ng-template>
+<br><br>
 </div>

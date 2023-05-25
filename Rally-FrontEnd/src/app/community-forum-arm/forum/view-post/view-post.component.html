@@ -19,29 +19,18 @@
 </ng-template> 
 <br><br>
     <!-- light/dark theme buttons    -->
+<div *ngIf="!darktheme; else darkerSections">
 <div id="theme" class="white">
     <!-- background theme -->
     <div *ngIf="!isLoading">
-        <div *ngIf="!darktheme; else darkSections">
             <body class="white-theme">
-                <h1 style="border: 1px solid black;">{{postObject.title}}</h1>
+                <h1 class="center" style="border: 1px solid black;">{{postObject.title}}</h1>
             </body>
     <!-- Title of Post -->
                 <br><br>
             <body class="white-theme">
-                <h5 style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h5>
+                <h5 class="center" style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h5>
             </body>
-        </div>
-        <ng-template #darkSections>
-            <body class="black-background">
-                <h1 style="border: 1px solid black;">{{postObject.title}}</h1>
-            </body>
-    <!-- Title of Post -->
-                <br><br>
-            <body class="black-background">
-                <h5 style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h5>
-            </body>
-        </ng-template>
     <!-- Username of Poster -->
         <div *ngIf="!updatePostDescription; else editPostDescription">
             <span><div class="thought">{{postObject.description}}</div></span>
@@ -63,29 +52,20 @@
     <!-- Edit Post Form -->
                 <br><br>
         <div *ngIf="!postReplyBoolean; else createReplyForm">   
-            <div *ngIf="logInStatus">
+            <div class="center" *ngIf="logInStatus">
                 <button (click)="populateForm()" class="btn btn-primary">Create Reply</button>
             </div>
         </div>
     
     <!-- Create Reply Button -->
     <ng-template #createReplyForm>
-        <div *ngIf="logInStatus">
+        <div class="center" *ngIf="logInStatus">
             <form #createdReplyAttempt="ngForm" (ngSubmit)="createReply(createdReplyAttempt)">
-                <div *ngIf="darktheme; else lightForm">
-                    <body class="black-background">
-                        <label>Reply: <input type="text" name="description" required ngModel></label>     
-                        <br><br>
-                        <input type="submit" value="Submit">
-                    </body>
-                </div>
-                <ng-template #lightForm>
                     <body class="white-theme">
                         <label>Reply: <input type="text" name="description" required ngModel></label>     
                         <br><br>
                         <input type="submit" value="Submit">
                     </body>
-                </ng-template>
             </form>
         </div>
     </ng-template>
@@ -94,20 +74,13 @@
     <br><br>
     <div id="parent{{reply.id}}" *ngFor="let reply of replies">
         <div id="{{reply.id}}">
-            <div *ngIf="darktheme; else lightSections">
-                <h1 class="black-background">Replies:</h1>
-                <br><br>
-                <body class="black-background">
-                    <h5 style="padding-top: 5px;">{{reply.userEntity.userName}} says</h5>
-                </body>
-            </div>
-            <ng-template #lightSections>
-                <h1 class="white-theme">Replies:</h1>
+                <div class="center">
+                    <h1 class="white-theme">Replies:</h1>
+                </div>
                 <br><br>
                 <body class="white-theme">
-                    <h5 style="padding-top: 5px;">{{reply.userEntity.userName}} says</h5>
+                    <h5 class="center" style="padding-top: 5px;">{{reply.userEntity.userName}} says</h5>
                 </body>
-            </ng-template>
             <!-- Username of Replier theme  -->
             <div *ngIf="updateDescription && editReplyDescription1 == reply.id; else editReplyDescription">
                 <form #editReplyAttempt="ngForm" (ngSubmit)="updateDescription1(editReplyAttempt)">
@@ -122,7 +95,7 @@
             </ng-template>
             <!-- Reply Description -->
             <div *ngIf="reply.userEntity.userName == currentUser">
-                <div *ngIf="editAndDeleteButtons">
+                <div class="center" *ngIf="editAndDeleteButtons">
                     <button class="btn btn-info" (click)="editDescription(reply.id)">Update reply</button>
                     <button class="btn btn-danger" (click)="deleteReply(reply.id)">Delete</button>
                 </div>
@@ -133,5 +106,98 @@
     </div>
     </div>
 </div>
+</div>
+<ng-template #darkerSections>
+
+    <div id="theme" class="black">
+        <!-- background theme -->
+        <div *ngIf="!isLoading">
+                <body class="black-background">
+                    <h1 class="center" style="border: 1px solid black;">{{postObject.title}}</h1>
+                </body>
+        <!-- Title of Post -->
+                    <br><br>
+                <body class="black-background">
+                    <h5 class="center" style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h5>
+                </body>
+        <!-- Username of Poster -->
+            <div *ngIf="!updatePostDescription; else editPostDescription">
+                <span><div class="thought">{{postObject.description}}</div></span>
+                <div *ngIf="postObject.userEntity.userName == currentUser">
+                    <div *ngIf="postEditAndDeleteButtons">
+                        <button class="btn btn-info" (click)="editPost()">Edit Post Description</button>
+                        <button class="btn btn-danger" (click)="deletePost(postObject.id)">Delete Post</button>
+                    </div>
+                </div>
+                    <br>
+            </div>
+        <!-- Post Description and Edit/Delete Buttons -->
+            <ng-template #editPostDescription>
+                <form #editPostAttempt="ngForm" (ngSubmit)="editPostWithNewDescription(editPostAttempt)">
+                    <input type="text" name="newDescription" [(ngModel)]="postObject.description" required ngModel>
+                    <input type="submit" value="Submit">
+                </form>
+            </ng-template>
+        <!-- Edit Post Form -->
+                    <br><br>
+            <div *ngIf="!postReplyBoolean; else createReplyForm">   
+                <div class="center" *ngIf="logInStatus">
+                    <button (click)="populateForm()" class="btn btn-primary">Create Reply</button>
+                </div>
+            </div>
+        
+        <!-- Create Reply Button -->
+        <ng-template #createReplyForm>
+            <div class="center" *ngIf="logInStatus">
+                <form #createdReplyAttempt="ngForm" (ngSubmit)="createReply(createdReplyAttempt)">
+                        <body class="black-background">
+                            <label>Reply: <input type="text" name="description" required ngModel></label>     
+                            <br><br>
+                            <input type="submit" value="Submit">
+                        </body>
+                </form>
+            </div>
+        </ng-template>
+        <!-- Reply Form -->
+                    <br><br>
+        <br><br>
+        <div id="parent{{reply.id}}" *ngFor="let reply of replies">
+            <div id="{{reply.id}}">
+                <div class="center">
+                    <h1 class="black-background">Replies:</h1>
+                    <br><br>
+                    <body class="black-background">
+                        <h5 style="padding-top: 5px;">{{reply.userEntity.userName}} says</h5>
+                    </body>
+                </div>
+                <!-- Username of Replier theme  -->
+                <div *ngIf="updateDescription && editReplyDescription1 == reply.id; else editReplyDescription">
+                    <form #editReplyAttempt="ngForm" (ngSubmit)="updateDescription1(editReplyAttempt)">
+                        <input type="text" name="newDescription" [(ngModel)]="reply.description" required ngModel>
+                        <input type="hidden" name="username" [(ngModel)]="reply.userEntity.userName" required ngModel>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+                <!-- Edit Reply Form -->
+                <ng-template #editReplyDescription>
+                    <span><div class="thought">{{reply.description}}</div></span>
+                </ng-template>
+                <!-- Reply Description -->
+                <div *ngIf="reply.userEntity.userName == currentUser">
+                    <div class="center" *ngIf="editAndDeleteButtons">
+                        <button class="btn btn-info" (click)="editDescription(reply.id)">Update reply</button>
+                        <button class="btn btn-danger" (click)="deleteReply(reply.id)">Delete</button>
+                    </div>
+                </div>
+                <!-- Update and Delete Reply Buttons -->
+                    <br><br>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</ng-template>
+
+
 
 

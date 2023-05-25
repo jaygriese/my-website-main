@@ -60,13 +60,13 @@ export class ForumTopic2Component implements OnInit {
   }
 
   Light(){
-      this.themeservice.switchToLightTheme();
-      this.darktheme = false;
-  }
-  Dark(){
-    this.themeservice.switchToDarkTheme();
-    this.darktheme = true;
-  }
+    this.darktheme = false;
+    localStorage.setItem('theme', 'light')
+}
+Dark(){
+  this.darktheme = true;
+  localStorage.setItem('theme', 'dark')
+}
   logOut() {
     localStorage.removeItem('userName');
     console.log(localStorage.getItem('userName'));

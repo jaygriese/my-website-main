@@ -147,11 +147,11 @@ export class ViewPostComponent implements OnInit {
     })
   }
   Light(){
-    this.themeservice.switchToLightTheme();
     this.darktheme = false;
+    localStorage.setItem('theme', 'light')
 }
-  Dark(){
-    this.themeservice.switchToDarkTheme();
-    this.darktheme = true;
+Dark(){
+  this.darktheme = true;
+  localStorage.setItem('theme', 'dark')
 }
 }

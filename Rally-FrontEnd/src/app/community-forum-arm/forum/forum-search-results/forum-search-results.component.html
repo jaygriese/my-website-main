@@ -22,7 +22,7 @@
 <!-- background theme  -->
 <body class="white-theme">
     <div class="container-fluid">
-        <h1 id="title">Search Results:</h1>
+        <h1 class="center" id="title">Search Results:</h1>
     </div>
 </body>
 <!-- Page header -->
@@ -31,7 +31,7 @@
 <div *ngIf="darktheme; else lightSections">
     <div class="container-fluid" style="text-align: left;" *ngFor="let test of newArray">
         <div class="black-background">
-            <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
+            <h3 class="center"><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
                 <p>Posted by {{test.userEntity.userName}}</p>
         </div>
     </div>

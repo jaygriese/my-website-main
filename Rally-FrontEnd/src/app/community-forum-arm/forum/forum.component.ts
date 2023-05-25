@@ -28,6 +28,9 @@ checkTheme(){
     if (localStorage.getItem('theme') == 'dark'){
         this.Dark();
     }
+    else {
+      this.Light();
+    }
 }
 verifyLoggedIn() {
 
@@ -37,12 +40,12 @@ verifyLoggedIn() {
   }
 }
 Light(){
-    this.themeservice.switchToLightTheme();
     this.darktheme = false;
+    localStorage.setItem('theme', 'light')
 }
 Dark(){
-  this.themeservice.switchToDarkTheme();
   this.darktheme = true;
+  localStorage.setItem('theme', 'dark')
 }
 logOut() {
   localStorage.removeItem('userName');

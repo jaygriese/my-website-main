@@ -1,6 +1,8 @@
 package org.rally.backend.userprofilearm.controller;
 
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
+import org.rally.backend.userprofilearm.model.ERole;
+import org.rally.backend.userprofilearm.model.Role;
 import org.rally.backend.userprofilearm.model.UserInformation;
 import org.rally.backend.userprofilearm.model.dto.UserBundleDTO;
 import org.rally.backend.userprofilearm.exception.AuthenticationFailure;
@@ -10,10 +12,16 @@ import org.rally.backend.userprofilearm.model.response.ResponseMessage;
 import org.rally.backend.userprofilearm.repository.RoleRepository;
 import org.rally.backend.userprofilearm.repository.UserInformationRepository;
 import org.rally.backend.userprofilearm.repository.UserRepository;
+import org.rally.backend.userprofilearm.utility.UserProfileControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -35,6 +43,8 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> processRegistrationForm(@RequestBody UserBundleDTO userBundleDTO) {
 
+        UserProfileControllerService.generateRoles();
+
         UserEntity existingUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
 
         if (existingUser != null) {
@@ -50,6 +60,12 @@ public class AuthenticationController {
         }
 
         UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()), userBundleDTO.getRegisterDTO().getPassword());
+
+        if (registerNewUser.getRoles().size() == 0) {
+            Role roles = roleRepository.findByName(ERole.ROLE_USER).get();
+            registerNewUser.setRoles(Collections.singletonList(roles));
+        }
+
         userRepository.save(registerNewUser);
 
         UserEntity newestUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
@@ -66,11 +82,6 @@ public class AuthenticationController {
         }
 
         UserInformation newUserInformation = new UserInformation(userId, firstName, lastName, neighborhood, city, state);
-
-        /** Roles are not enabled for now, leave these rows commented out **/
-//        Role roles = roleRepository.findByName("USER").get();
-//        registerNewUser.setRoles(Collections.singletonList(roles));
-
 
         userInformationRepository.save(newUserInformation);
 

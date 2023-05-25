@@ -166,4 +166,20 @@ public class UserProfileControllerService {
         }
         return targetForumPostReplies;
     }
+
+    public static void generateRoles() {
+        if (roleRepository.findAll().size() == 0) {
+            Role role = new Role();
+            role.setName(ERole.ROLE_USER);
+            Role role1 = new Role();
+            role1.setName(ERole.ROLE_ADMIN);
+            Role role2 = new Role();
+            role2.setName(ERole.ROLE_MODERATOR);
+            roleRepository.save(role);
+            roleRepository.save(role1);
+            roleRepository.save(role2);
+        } else {
+            System.out.println("List made");
+        }
+    }
 }

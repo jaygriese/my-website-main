@@ -15,26 +15,27 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/join")
+@RequestMapping("/events")
 public class JoinController {
 
     @Autowired
     private JoinRepository joinRepository;
 
-    @Autowired
-    private EventRepository eventRepository;
+//    @Autowired
+//    private EventRepository eventRepository;
 
 
-    @GetMapping("/join/")
-    public ResponseEntity<?>displayAllJoin() {
-        return new ResponseEntity<>(joinRepository.findAll(), HttpStatus.OK);
-    }
+//    @GetMapping("/join/")
+//    public ResponseEntity<?>displayAllJoin() {
+//        return new ResponseEntity<>(joinRepository.findAll(), HttpStatus.OK);
+//    }
 
 
-    @PostMapping("/join")
+    @PostMapping("/join/event")
     public ResponseEntity<?> joinEventForm(@RequestBody JoinDTO joinDTO) {
 
-        Join createNewJoin = new Join(joinDTO.getName(),
+        Join createNewJoin = new Join(joinDTO.getEvent(),
+                joinDTO.getAttending(),
                 joinDTO.getContactEmail(),
                 joinDTO.getNumAttending(),
                 joinDTO.getComment());

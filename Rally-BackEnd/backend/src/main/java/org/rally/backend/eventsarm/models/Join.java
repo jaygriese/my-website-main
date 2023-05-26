@@ -12,7 +12,7 @@ public class Join extends AbstractEntity {
     private Event event;
 
     @NotBlank(message = "Who is joining the event?")
-    private String name;
+    private String attending;
 
     @NotBlank(message = "Who can we contact?")
     @Email(message = "Whoops! We need a valid email address.")
@@ -23,9 +23,9 @@ public class Join extends AbstractEntity {
 
     private String comment;
 
-    public Join(Event event, String name, String contactEmail, int numAttending, String comment) {
+    public Join(Event event, String attending, String contactEmail, int numAttending, String comment) {
         this.event = event;
-        this.name = name;
+        this.attending = attending;
         this.contactEmail = contactEmail;
         this.numAttending = numAttending;
         this.comment = comment;
@@ -41,12 +41,12 @@ public class Join extends AbstractEntity {
         this.event = event;
     }
 
-    public String getName() {
-        return name;
+    public String getAttending() {
+        return attending;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAttending(String attending) {
+        this.attending = attending;
     }
 
     public String getContactEmail() {

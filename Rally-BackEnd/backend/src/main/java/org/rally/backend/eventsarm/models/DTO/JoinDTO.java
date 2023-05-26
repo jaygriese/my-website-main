@@ -11,7 +11,7 @@ public class JoinDTO {
     private Event event;
 
     @NotBlank(message = "Who is joining the event?")
-    private String name;
+    private String attending;
 
     @NotBlank(message = "Who can we contact?")
     @Email(message = "Whoops! We need a valid email address.")
@@ -40,12 +40,12 @@ public class JoinDTO {
         this.event = event;
     }
 
-    public String getName() {
-        return name;
+    public String getAttending() {
+        return attending;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAttending(String attending) {
+        this.attending = attending;
     }
 
     public String getContactEmail() {

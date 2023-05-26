@@ -37,8 +37,8 @@ public class Event extends AbstractEntity {
 
     private String imageId;
 
-    @OneToMany
-    @JoinColumn(name = "event_id")
+    @OneToMany(mappedBy = "event")
+//    @JoinColumn(name = "event_id")
     private List<Join>joined = new ArrayList<>();
 
     public Event(String eventHost, String contactEmail, String eventTitle, String datetime, String eventAddress, String eventCategory, String description, String imageId) {

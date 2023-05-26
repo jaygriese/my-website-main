@@ -2,7 +2,6 @@ package org.rally.backend.eventsarm.models;
 
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -39,7 +38,7 @@ public class Event extends AbstractEntity {
 
     @OneToMany(mappedBy = "event")
 //    @JoinColumn(name = "event_id")
-    private List<Join>joined = new ArrayList<>();
+    private final List<JoinEvent>joined = new ArrayList<>();
 
     public Event(String eventHost, String contactEmail, String eventTitle, String datetime, String eventAddress, String eventCategory, String description, String imageId) {
         this.eventHost = eventHost;

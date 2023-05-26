@@ -1,12 +1,10 @@
 package org.rally.backend.eventsarm.controller;
 
 
-import org.rally.backend.eventsarm.models.DTO.EventDTO;
-import org.rally.backend.eventsarm.models.DTO.JoinDTO;
-import org.rally.backend.eventsarm.models.Event;
-import org.rally.backend.eventsarm.models.Join;
+import org.rally.backend.eventsarm.models.DTO.JoinEventDTO;
+import org.rally.backend.eventsarm.models.JoinEvent;
 import org.rally.backend.eventsarm.repository.EventRepository;
-import org.rally.backend.eventsarm.repository.JoinRepository;
+import org.rally.backend.eventsarm.repository.JoinEventRepository;
 import org.rally.backend.userprofilearm.model.response.AuthenticationSuccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,14 +13,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/events")
-public class JoinController {
+@RequestMapping("/join")
+public class JoinEventController {
 
     @Autowired
-    private JoinRepository joinRepository;
+    private JoinEventRepository joinEventRepository;
 
-//    @Autowired
-//    private EventRepository eventRepository;
+    @Autowired
+    private EventRepository eventRepository;
 
 
 //    @GetMapping("/join/")
@@ -31,16 +29,16 @@ public class JoinController {
 //    }
 
 
-    @PostMapping("/join/event")
-    public ResponseEntity<?> joinEventForm(@RequestBody JoinDTO joinDTO) {
+    @PostMapping("/event")
+    public ResponseEntity<?> joinEventForm(@RequestBody JoinEventDTO joinEventDTO) {
 
-        Join createNewJoin = new Join(joinDTO.getEvent(),
-                joinDTO.getAttending(),
-                joinDTO.getContactEmail(),
-                joinDTO.getNumAttending(),
-                joinDTO.getComment());
+        JoinEvent createNewJoin = new JoinEvent(joinEventDTO.getEvent(),
+                joinEventDTO.getAttending(),
+                joinEventDTO.getContactEmail(),
+                joinEventDTO.getNumAttending(),
+                joinEventDTO.getComment());
 
-        joinRepository.save(createNewJoin);
+        joinEventRepository.save(createNewJoin);
         AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
         return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
 

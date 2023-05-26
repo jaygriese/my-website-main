@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class Join extends AbstractEntity {
+public class JoinEvent extends AbstractEntity {
 
     @ManyToOne
     private Event event;
@@ -23,7 +23,7 @@ public class Join extends AbstractEntity {
 
     private String comment;
 
-    public Join(Event event, String attending, String contactEmail, int numAttending, String comment) {
+    public JoinEvent(Event event, String attending, String contactEmail, int numAttending, String comment) {
         this.event = event;
         this.attending = attending;
         this.contactEmail = contactEmail;
@@ -31,7 +31,7 @@ public class Join extends AbstractEntity {
         this.comment = comment;
     }
 
-    public Join () {};
+    public JoinEvent() {};
 
     public Event getEvent() {
         return event;

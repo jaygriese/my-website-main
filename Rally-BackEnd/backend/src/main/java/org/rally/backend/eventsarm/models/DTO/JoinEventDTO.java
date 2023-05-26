@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import org.rally.backend.eventsarm.models.Event;
 
-public class JoinDTO {
+public class JoinEventDTO {
 
     private int id;
 

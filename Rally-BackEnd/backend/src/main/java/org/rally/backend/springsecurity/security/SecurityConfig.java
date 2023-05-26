@@ -1,5 +1,7 @@
 package org.rally.backend.springsecurity.security;
 
+import org.rally.backend.springsecurity.security.jwt.JWTAuthEntryPoint;
+import org.rally.backend.springsecurity.security.jwt.JWTAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

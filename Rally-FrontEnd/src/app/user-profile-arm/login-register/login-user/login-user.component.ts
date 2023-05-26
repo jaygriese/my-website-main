@@ -42,10 +42,10 @@ export class LoginUserComponent implements OnInit {
           this.incorrectPassword = true;
           return;
         } else {            
-          this.userLogginIn = response;
+          // this.userLogginIn = response;
           console.log(response);
-          localStorage.setItem('userName', this.userLogginIn.userName)
-          localStorage.setItem('id', this.userLogginIn.id)
+          // localStorage.setItem('userName', this.userLogginIn.userName)
+          // localStorage.setItem('id', this.userLogginIn.id)
           // this.router.navigate(["/myProfile"]);
         }
       }

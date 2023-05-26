@@ -1,4 +1,4 @@
-package org.rally.backend.springsecurity.security;
+package org.rally.backend.springsecurity.security.jwt;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

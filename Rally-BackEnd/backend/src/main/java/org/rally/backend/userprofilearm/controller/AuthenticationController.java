@@ -1,6 +1,6 @@
 package org.rally.backend.userprofilearm.controller;
 
-import org.rally.backend.springsecurity.security.JWTGenerator;
+import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.Role;
 import org.rally.backend.userprofilearm.model.UserInformation;
@@ -126,8 +126,9 @@ public class AuthenticationController {
                         loginDTO.getUserName(),
                         loginDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        /** JWT Generator isn't working atm **/
         String token = jwtGenerator.generateToken(authentication);
+
+        /** UserDetailsImpl needed to send JWT response **/
 
 
         return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);

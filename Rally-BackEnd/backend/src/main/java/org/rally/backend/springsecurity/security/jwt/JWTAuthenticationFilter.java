@@ -1,11 +1,11 @@
-package org.rally.backend.springsecurity.security;
+package org.rally.backend.springsecurity.security.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.rally.backend.springsecurity.security.CustomUserDetailsService;
-import org.rally.backend.springsecurity.security.JWTGenerator;
+import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

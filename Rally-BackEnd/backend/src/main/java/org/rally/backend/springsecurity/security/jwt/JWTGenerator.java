@@ -1,10 +1,11 @@
-package org.rally.backend.springsecurity.security;
+package org.rally.backend.springsecurity.security.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import lombok.Builder;
+import org.rally.backend.springsecurity.security.SecurityConstants;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
-import io.jsonwebtoken.Jwts;
+
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

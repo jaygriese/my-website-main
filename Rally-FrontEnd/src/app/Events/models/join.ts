@@ -1,6 +1,6 @@
-import { Event } from "../event";
+import { Event } from "./event";
 
-export class JoinDTO {
+export class Join {
     id: number;
     event: Event;
     name: string;
@@ -16,7 +16,4 @@ export class JoinDTO {
         this.numAttending = numAttending;
         this.comment = comment;
     }
-
-
-
 }

@@ -57,6 +57,7 @@ joinEvent(eventJoinInformation: NgForm) {
   let joinEvent: JoinDTO = {
     id: 0,
    
+    event: eventJoinInformation.value.event,
     name: eventJoinInformation.value.name,
     contactEmail: eventJoinInformation.value.contactEmail,
     numAttending: eventJoinInformation.value.numAttending, 

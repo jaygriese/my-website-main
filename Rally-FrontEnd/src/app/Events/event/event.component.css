@@ -34,13 +34,6 @@ font-size: 35px;
 font-family: montserrat, sans-serif;
 }
 
-/* .rectangle {
-margin-top: -5px;
-height: 300px;
-width: auto;
-box-sizing: border-box;
-border: 1px solid #f4d668;
-} */
 
 .button2 {
   background-color: #F9A605;
@@ -58,4 +51,5 @@ border: 1px solid #f4d668;
 #details {
     text-align: left;
     font-size: 25px;
+    font-family: montserrat, sans-serif;
 }

@@ -7,7 +7,7 @@
     min-height: 900px;
 }
 .white {
-    background-color: #85CDE3;
+    background-color:#e6e6e6;
     position: relative; 
     left: 0; 
     right: 0;
@@ -15,7 +15,7 @@
 }
 .white-theme {
     color:black;
-    background-image: linear-gradient(#F9A605, #ffc95e);
+    background-color:#ffffff;
     border-radius:7px;
     display: inline-block;
     vertical-align: middle;

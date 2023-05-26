@@ -1,50 +1,59 @@
-<div *ngIf="logInStatus; else notLoggedIn">
-    <div style="text-align: right;">
-        <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
-    </div>
-</div>
+<div class="marginResetting">
+    <div class="buttonsPosition">
+    <span *ngIf="logInStatus; else notLoggedIn">
+        <span class="right"><span class="loginName">Logged in as: {{currentUser}} </span><button class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
+    </span>
 <!-- log in button -->
 <ng-template #notLoggedIn>
-    <p>User is not logged in. </p>
-    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+    <span class="right"><span class="loginName">User is not logged in. </span><a class="btn btn-info" routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span>
 </ng-template>
 <!-- log out button -->
-<div *ngIf="darktheme; else lightTheme" style="text-align: right;">
-        <button (click)="Light()">Turn on the lights</button>
-</div>
+<span class="left" *ngIf="darktheme; else lightTheme">
+    <button class="btn btn-warning" (click)="Light()">Turn on the lights</button>
+</span>
 <ng-template #lightTheme>
-    <div style="text-align: right;">
-        <button (click)="Dark()">Turn off the lights</button>
-    </div>
+    <span class="left">
+        <button class="btn btn-dark" (click)="Dark()">Turn off the lights</button>
+    </span>
 </ng-template> 
+</div>
+<br><br>
     <!-- light/dark theme buttons    -->
-<div id="theme" class="white">
+    <div *ngIf="!darktheme; else darkSections">
+        <div id="theme" class="white">
 <!-- background theme  -->
-<body class="white-theme">
-    <div class="container-fluid">
+<div style="min-width: 100%;" class="white-theme">
         <h1 class="center" id="title">Search Results:</h1>
-    </div>
-</body>
+</div>
 <!-- Page header -->
         <br>
         <br>
-<div *ngIf="darktheme; else lightSections">
-    <div class="container-fluid" style="text-align: left;" *ngFor="let test of newArray">
-        <div class="black-background">
-            <h3 class="center"><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                <p>Posted by {{test.userEntity.userName}}</p>
-        </div>
-    </div>
-</div>
-<!-- dark theme posts -->
-<ng-template #lightSections>
     <div style="text-align: left;" *ngFor="let test of newArray">
-        <div class="white-theme">
-            <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                <p>Posted by {{test.userEntity.userName}}</p>
+        <div style="min-width: 100%;" class="white-theme">
+            <h1 class="postTitle"><a style="display: block;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h1>
+            <span>Posted by </span><a class="nav-link" routerLink="/user/{{test.userEntity.userName}}/{{test.userEntity.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a> 
         </div>
         <br><br>
     </div>
-</ng-template>
 <!-- light theme posts -->
+        </div>
+    </div>
+  <ng-template #darkSections>
+    <div id="theme" class="black">
+        <!-- background theme  -->
+        <div style="min-width: 100%;" class="black-background">
+                <h1 class="center" id="title">Search Results:</h1>
+        </div>
+        <!-- Page header -->
+                <br>
+                <br>
+            <div class="container-fluid" style="text-align: left;" *ngFor="let test of newArray">
+                <div style="min-width: 100%;" class="black-background">
+                    <h1 class="postTitle"><a style="display: block;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h1>
+                    <span>Posted by </span><a class="nav-link" routerLink="/user/{{test.userEntity.userName}}/{{test.userEntity.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a> 
+                </div>
+            </div>
+        <!-- dark theme posts -->
+                </div>
+  </ng-template>  
 </div>

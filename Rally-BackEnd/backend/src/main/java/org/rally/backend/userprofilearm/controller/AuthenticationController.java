@@ -132,16 +132,18 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
 
-        /** UserDetailsImpl needed to send JWT response **/
+        /** Is UserDetailsImpl needed to send a legit JWT response? **/
 
         List<String> roles = theUser.getRoles().stream()
-                .map(item -> item.getName())
+                .map(Role::getName)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JWTResponse(token,
+        JWTResponse response = new JWTResponse(token,
                 theUser.getId(),
                 theUser.getUserName(),
-                roles));
+                roles);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 

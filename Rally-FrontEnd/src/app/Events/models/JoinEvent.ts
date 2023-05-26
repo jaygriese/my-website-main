@@ -1,6 +1,6 @@
 import { Event } from "./event";
 
-export class Join {
+export class JoinEvent {
     id: number;
     event: Event;
     attending: string;

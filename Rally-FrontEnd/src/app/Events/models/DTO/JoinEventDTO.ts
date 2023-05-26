@@ -1,6 +1,6 @@
 import { Event } from "../event";
 
-export class JoinDTO {
+export class JoinEventDTO {
     id: number;
     event: Event;
     attending: string;

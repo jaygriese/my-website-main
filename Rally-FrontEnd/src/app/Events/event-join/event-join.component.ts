@@ -2,13 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { JoinDTO } from '../models/DTO/JoinDTO';
 import { NgForm } from '@angular/forms';
 import { EventComponent } from '../event/event.component';
 import { EventService } from '../services/event.service';
 import { Event } from '../models/event';
-import { Join } from '../models/join';
-
+import { JoinEvent } from '../models/JoinEvent';
+import { JoinEventDTO } from '../models/DTO/JoinEventDTO';
 @Component({
   selector: 'app-event-join',
   templateUrl: './event-join.component.html',
@@ -80,18 +79,17 @@ export class EventJoinComponent implements OnInit {
 // }
 
 
-joinEvent(eventJoinInformation: NgForm) {
-  let joinEvent: JoinDTO = {
+joinEvent(joinEventInformation: NgForm) {
+  let joinEvent: JoinEventDTO = {
     // id: 0,
     // id: this.eventId,
     id: 0,
-   
-    // event: eventJoinInformation.value.event,
+  
     event: this.event,
-    attending: eventJoinInformation.value.attending,
-    contactEmail: eventJoinInformation.value.contactEmail,
-    numAttending: eventJoinInformation.value.numAttending, 
-    comment: eventJoinInformation.value.comment
+    attending: joinEventInformation.value.attending,
+    contactEmail: joinEventInformation.value.contactEmail,
+    numAttending: joinEventInformation.value.numAttending, 
+    comment: joinEventInformation.value.comment
   }
 
   console.log(joinEvent);

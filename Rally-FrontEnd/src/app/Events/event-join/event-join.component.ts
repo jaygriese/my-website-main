@@ -32,7 +32,7 @@ export class EventJoinComponent implements OnInit {
     this.logInStatus = false;
 
     this.getEventUrl = 'http://localhost:8080/events/event'
-    this.joinUrl = 'http://localhost:8080/events/join/event'
+    this.joinUrl = 'http://localhost:8080/join/event/'
     // this.join;
     this.event;
     this.id = this.route.snapshot.params['id'];

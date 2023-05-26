@@ -11,19 +11,20 @@ public class Join extends AbstractEntity {
     @ManyToOne
     private Event event;
 
-//    @NotBlank(message = "Who is joining the event?")
+    @NotBlank(message = "Who is joining the event?")
     private String name;
 
-//    @NotBlank(message = "Who can we contact?")
-//    @Email(message = "Whoops! We need a valid email address.")
+    @NotBlank(message = "Who can we contact?")
+    @Email(message = "Whoops! We need a valid email address.")
     private String contactEmail;
 
-//    @NotBlank(message = "How many are coming?")
+    @NotBlank(message = "How many are coming?")
     private int numAttending;
 
     private String comment;
 
-    public Join(String name, String contactEmail, int numAttending, String comment) {
+    public Join(Event event, String name, String contactEmail, int numAttending, String comment) {
+        this.event = event;
         this.name = name;
         this.contactEmail = contactEmail;
         this.numAttending = numAttending;
@@ -31,6 +32,14 @@ public class Join extends AbstractEntity {
     }
 
     public Join () {};
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 
     public String getName() {
         return name;
@@ -64,13 +73,13 @@ public class Join extends AbstractEntity {
         this.comment = comment;
     }
 
-    @Override
-    public String toString() {
-        return "Join{" +
-                "name='" + name + '\'' +
-                ", contactEmail='" + contactEmail + '\'' +
-                ", numAttending=" + numAttending +
-                ", comment='" + comment + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Join{" +
+//                "name='" + name + '\'' +
+//                ", contactEmail='" + contactEmail + '\'' +
+//                ", numAttending=" + numAttending +
+//                ", comment='" + comment + '\'' +
+//                '}';
+//    }
 }

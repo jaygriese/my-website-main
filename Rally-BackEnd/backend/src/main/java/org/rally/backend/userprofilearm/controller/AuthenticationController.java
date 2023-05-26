@@ -1,6 +1,8 @@
 package org.rally.backend.userprofilearm.controller;
 
+import org.rally.backend.springsecurity.payload.response.JWTResponse;
 import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
+import org.rally.backend.springsecurity.security.services.UserDetailsImpl;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.Role;
 import org.rally.backend.userprofilearm.model.UserInformation;
@@ -25,6 +27,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -130,8 +134,14 @@ public class AuthenticationController {
 
         /** UserDetailsImpl needed to send JWT response **/
 
+        List<String> roles = theUser.getRoles().stream()
+                .map(item -> item.getName())
+                .collect(Collectors.toList());
 
-        return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
+        return ResponseEntity.ok(new JWTResponse(token,
+                theUser.getId(),
+                theUser.getUserName(),
+                roles));
     }
 
 

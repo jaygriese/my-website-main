@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { JoinDTO } from '../models/DTO/JoinDTO';
 import { NgForm } from '@angular/forms';
@@ -24,7 +24,7 @@ export class EventJoinComponent implements OnInit {
   private joinUrl: string;
 
   id: string;
-  join: Join;
+  // join: Join;
   event: Event;
   eventId: number;
 
@@ -34,7 +34,7 @@ export class EventJoinComponent implements OnInit {
 
     this.getEventUrl = 'http://localhost:8080/events/event'
     this.joinUrl = 'http://localhost:8080/events/join/event'
-    this.join;
+    // this.join;
     this.event;
     this.id = this.route.snapshot.params['id'];
 
@@ -83,10 +83,12 @@ export class EventJoinComponent implements OnInit {
 joinEvent(eventJoinInformation: NgForm) {
   let joinEvent: JoinDTO = {
     // id: 0,
-    id: this.eventId,
+    // id: this.eventId,
+    id: 0,
    
-    event: eventJoinInformation.value.event,
-    name: eventJoinInformation.value.name,
+    // event: eventJoinInformation.value.event,
+    event: this.event,
+    attending: eventJoinInformation.value.attending,
     contactEmail: eventJoinInformation.value.contactEmail,
     numAttending: eventJoinInformation.value.numAttending, 
     comment: eventJoinInformation.value.comment
@@ -98,7 +100,12 @@ joinEvent(eventJoinInformation: NgForm) {
   });
 
 
-  eventJoinInformation.reset();
+  // eventJoinInformation.reset();
+
+  // this.router.navigate(['/events'])
+  // .then(() => {
+  //   window.location.reload();
+  // });
 
 }
 

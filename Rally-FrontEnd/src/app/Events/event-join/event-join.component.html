@@ -25,7 +25,7 @@
 
 
             <div id="list_head">
-                <p>Join Event:  {{event.eventTitle}}</p> 
+                <p>Join Event:  {{event?.eventTitle}}</p> 
             </div>
         
             <br>
@@ -37,13 +37,14 @@
                     <div class="row">
                         <div class="col-5">
 
-                            <input type="hidden" id="id" name="eventId" value="event.id" ngModel>
+                            <!-- <input type="hidden" id="id" name="eventId" value="event.id" ngModel> -->
+                            <input type="hidden" id="event" name="event" value="event" ngModel>
                             
                             <div class="mb-3">
                             <label class="form-label">name</label><br>
-                            <input class="form-control form-control-lg" type="text" required #name="ngModel" id="name" name="name" ngModel>
+                            <input class="form-control form-control-lg" type="text" required #attending="ngModel" id="attending" name="attending" ngModel>
             
-                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger" >
+                            <div *ngIf="attending.invalid && (attending.dirty || attending.touched)" class="alert alert-danger" >
                                 Who is joining the event?</div>
                             </div>
                                 

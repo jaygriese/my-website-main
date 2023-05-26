@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginDTO } from '../../models/dto/LoginDTO';
 import { NgForm } from '@angular/forms';
 import { UserEntity } from '../../models/UserEntity';
-import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -51,7 +50,8 @@ export class LoginUserComponent implements OnInit {
         password,
       },
       httpOptions
-      ).subscribe((data) => console.log(data));
+      ).subscribe((data) => {
+        console.log(data)});
 
 
     // this.http.post('http://localhost:8080/api/login', loginInfo).subscribe((response: any) => {    

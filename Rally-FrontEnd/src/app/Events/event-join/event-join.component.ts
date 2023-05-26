@@ -1,8 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { JoinDTO } from '../models/DTO/JoinDTO';
 import { NgForm } from '@angular/forms';
+import { EventComponent } from '../event/event.component';
+import { EventService } from '../services/event.service';
+import { Event } from '../models/event';
+import { Join } from '../models/join';
 
 @Component({
   selector: 'app-event-join',
@@ -14,12 +19,26 @@ export class EventJoinComponent implements OnInit {
   currentUser: String;
   //currentUser is String if logged in???
   logInStatus: Boolean;
+
+  private getEventUrl: string;
   private joinUrl: string;
 
-  constructor(private http: HttpClient, private router: Router) { 
+  id: string;
+  join: Join;
+  event: Event;
+  eventId: number;
+
+  constructor(private http: HttpClient, private route: ActivatedRoute, private eventService: EventService) { 
 
     this.logInStatus = false;
-    this.joinUrl = 'http://localhost:8080/events/join'
+
+    this.getEventUrl = 'http://localhost:8080/events/event'
+    this.joinUrl = 'http://localhost:8080/events/join/event'
+    this.join;
+    this.event;
+    this.id = this.route.snapshot.params['id'];
+
+   
 
   }
 
@@ -27,6 +46,14 @@ export class EventJoinComponent implements OnInit {
 
     this.verifyLoggedIn();
     //to authenticate user b4 making event
+
+    console.log(this.id);
+
+    this.eventService.getEvent(this.id).subscribe((response: Event) => {
+      this.event = response;
+      console.log(response);
+    this.eventId = +this.event.id;
+    })
 
   }
 
@@ -47,15 +74,16 @@ export class EventJoinComponent implements OnInit {
     this.logInStatus = false;
   }
 
-  getIdNum(str: string) {
-    let num: number = parseInt(str);
-    return num;
-}
+//   getIdNum(str: string) {
+//     let num: number = parseInt(str);
+//     return num;
+// }
 
 
 joinEvent(eventJoinInformation: NgForm) {
   let joinEvent: JoinDTO = {
-    id: 0,
+    // id: 0,
+    id: this.eventId,
    
     event: eventJoinInformation.value.event,
     name: eventJoinInformation.value.name,
@@ -70,10 +98,7 @@ joinEvent(eventJoinInformation: NgForm) {
   });
 
 
-  this.router.navigate(['/join'])
-.then(() => {
-  window.location.reload();
-});
+  eventJoinInformation.reset();
 
 }
 

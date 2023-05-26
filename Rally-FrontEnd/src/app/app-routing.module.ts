@@ -58,7 +58,7 @@ const routes: Routes = [
   {path: 'edit/:id', component: EventEditComponent},
   {path: 'home', component: HomeComponent},
   {path: 'user/404', component: PageNotFoundComponent},
-  {path: 'join', component: EventJoinComponent},
+  {path: 'join/:id', component: EventJoinComponent},
 ];
 
 @NgModule({

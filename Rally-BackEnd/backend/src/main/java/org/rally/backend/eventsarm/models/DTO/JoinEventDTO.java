@@ -2,6 +2,7 @@ package org.rally.backend.eventsarm.models.DTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.rally.backend.eventsarm.models.Event;
 
 public class JoinEventDTO {
@@ -17,7 +18,7 @@ public class JoinEventDTO {
     @Email(message = "Whoops! We need a valid email address.")
     private String contactEmail;
 
-    @NotBlank(message = "How many are coming?")
+    @NotNull(message = "How many are coming?")
     private int numAttending;
 
     private String comment;

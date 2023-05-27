@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class JoinEvent extends AbstractEntity {
@@ -18,7 +19,8 @@ public class JoinEvent extends AbstractEntity {
     @Email(message = "Whoops! We need a valid email address.")
     private String contactEmail;
 
-    @NotBlank(message = "How many are coming?")
+//    @NotBlank(message = "How many are coming?")
+    @NotNull(message = "How many are coming?")
     private int numAttending;
 
     private String comment;

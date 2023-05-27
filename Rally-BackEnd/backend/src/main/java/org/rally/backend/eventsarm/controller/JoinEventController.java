@@ -19,8 +19,8 @@ public class JoinEventController {
     @Autowired
     private JoinEventRepository joinEventRepository;
 
-    @Autowired
-    private EventRepository eventRepository;
+//    @Autowired
+//    private EventRepository eventRepository;
 
 
 //    @GetMapping("/join/")

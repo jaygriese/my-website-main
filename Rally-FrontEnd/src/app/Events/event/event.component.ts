@@ -74,7 +74,9 @@ export class EventComponent implements OnInit {
 
   getNumJoined() {
     for(let i = 0; i < this.joined.length; i++) {
-      this.numJoined += this.joined[i].numAttending;
+      if(this.joined[i].event.id === this.eventDetails.id) {
+        this.numJoined += this.joined[i].numAttending;
+      } 
     }
     return this.numJoined;
   }
@@ -83,14 +85,14 @@ export class EventComponent implements OnInit {
 
   getComments() {
     for(let i = 0; i < this.joined.length; i++) {
-      if(this.joined[i].comment !== null) {
+      if(this.joined[i].event.id === this.eventDetails.id && this.joined[i].comment !== null) {
         this.commentDisplay.push(this.joined[i].comment);
       }
     }
     return this.commentDisplay;
   }
 
-  
+
 
 
 deleteEvent() {

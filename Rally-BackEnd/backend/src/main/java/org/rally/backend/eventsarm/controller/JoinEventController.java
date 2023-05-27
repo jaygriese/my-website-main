@@ -23,10 +23,10 @@ public class JoinEventController {
 //    private EventRepository eventRepository;
 
 
-//    @GetMapping("/join/")
-//    public ResponseEntity<?>displayAllJoin() {
-//        return new ResponseEntity<>(joinRepository.findAll(), HttpStatus.OK);
-//    }
+    @GetMapping("/join/")
+    public ResponseEntity<?>displayAllJoin() {
+        return new ResponseEntity<>(joinEventRepository.findAll(), HttpStatus.OK);
+    }
 
 
     @PostMapping("/event")

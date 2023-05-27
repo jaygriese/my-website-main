@@ -27,12 +27,12 @@ export class EventJoinComponent implements OnInit {
   event: Event;
   eventId: number;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private eventService: EventService) { 
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private eventService: EventService) { 
 
     this.logInStatus = false;
 
     this.getEventUrl = 'http://localhost:8080/events/event'
-    this.joinUrl = 'http://localhost:8080/join/event/'
+    this.joinUrl = 'http://localhost:8080/join/event'
     // this.join;
     this.event;
     this.id = this.route.snapshot.params['id'];
@@ -100,10 +100,10 @@ joinEvent(joinEventInformation: NgForm) {
 
   // eventJoinInformation.reset();
 
-  // this.router.navigate(['/events'])
-  // .then(() => {
-  //   window.location.reload();
-  // });
+  this.router.navigate(['/events'])
+  .then(() => {
+    window.location.reload();
+  });
 
 }
 

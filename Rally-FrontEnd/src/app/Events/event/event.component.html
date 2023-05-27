@@ -104,17 +104,24 @@
                 <p style="font-size: 15px; font-style:italic;">expand map to search event address</p>
             <br>
             <br>
+            <br>
 
             <span>
-                <p id="event_display2">coming so far: {{this.numJoined}}</p>
-            </span><br>
+                <div class="card">
+                <p style="text-align: center; font-family: Oswald, sans-serif; font-size: 75px; font-weight: 800; color: #0EBB9A; margin-bottom: -10px;">{{this.numJoined}}</p>
+                <p style="text-align: center; font-size: 20px; color: black; margin-top: -10px;">signed up</p>
+            </div>
+            </span>
+            <br>
+            <br>
 
             <span>
                 <p id="event_display2">comments</p>
 
-                <div class="card">
+                <div class="card" *ngFor="let comment of commentDisplay">
                     <div class="card-body">
                         <div class="d-grid gap-2">
+                            <p>{{comment}}</p>
                             <!-- <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; text-align:center;">edit event</a> 
                            
                             <button type="button" class="button2" (click)="deleteEvent()" style="background-color: #C03E24;">delete event</button> -->

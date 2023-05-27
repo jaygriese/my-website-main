@@ -26,6 +26,8 @@ export class EventComponent implements OnInit {
   numJoined: number = 0;
   joinUrl: string;
 
+  commentDisplay: string[] = [];
+
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private eventService: EventService) {
     // this.logInStatus = false;
     // this.eventUrl = 'http://localhost:8080/events/event/{id}/'
@@ -35,6 +37,8 @@ export class EventComponent implements OnInit {
 
     this.joined;
     this.numJoined;
+
+    this.commentDisplay;
 
    }
 
@@ -60,6 +64,7 @@ export class EventComponent implements OnInit {
       this.joined = response;
 
       this.getNumJoined();
+      this.getComments();
      
     })
 
@@ -73,6 +78,19 @@ export class EventComponent implements OnInit {
     }
     return this.numJoined;
   }
+
+
+
+  getComments() {
+    for(let i = 0; i < this.joined.length; i++) {
+      if(this.joined[i].comment !== null) {
+        this.commentDisplay.push(this.joined[i].comment);
+      }
+    }
+    return this.commentDisplay;
+  }
+
+  
 
 
 deleteEvent() {

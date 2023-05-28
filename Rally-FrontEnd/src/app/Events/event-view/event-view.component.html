@@ -66,7 +66,7 @@
 
             </div>
             <div class="col-7">
-                <p style="text-align: left; font-size: 40px; ; font-family: Oswald, sans-serif; font-weight: 800; margin-bottom: -15px;">All Events</p>
+                <p style="text-align: left; font-size: 40px; ; font-family: Oswald, sans-serif; font-weight: 800; margin-bottom: -15px;">Events</p>
                 <hr style="height:4px; color: black; background-color: black">
             </div>
         </div>
@@ -140,6 +140,16 @@
                                     <p style="font-weight: 800; margin-top: -15px;">{{event.eventTitle}}</p>
                                     <p style="font-size: 23px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
                                     <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>
+
+                                    <!-- <div *ngFor="let joined of joinedEvent">
+                                        <div *ngIf="joined.event.id === event.id && joined.numAttending > 0; else signUp">
+                                            <p style="font-size: 15px; font-style: italic; margin-top: 70px;" >{{joined.numAttending}} attending</p>
+                                        </div>
+                                        <ng-template #signUp>
+                                            <p style="font-size: 15px; font-style: italic; margin-top: 70px;">Be the first to sign up!</p> 
+                                        </ng-template>
+                                    </div> -->
+                                   
                                     <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
                                 </div>
                             </div>

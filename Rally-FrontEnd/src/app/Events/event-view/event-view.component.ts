@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from '../models/event';
+import { JoinEvent } from '../models/JoinEvent';
 // import { MatCalendar } from '@angular/material/datepicker';
 
 
@@ -22,18 +23,24 @@ export class EventViewComponent implements OnInit {
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
 
-  // DateSelected: any;
-
   selected: Date | null;
+
+  joinedEvent: JoinEvent [] = [];
+  numJoined: number = 0;
+  joinUrl: string;
+  filteredEventsId: number;
   
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
     this.eventsUrl = 'http://localhost:8080/events/events/'
+    this.joinUrl = 'http://localhost:8080/join/join/'
     this.eventList;
     this.filteredEvents;
-    // this.DateSelected;
     this.selected;
+    this.joinedEvent;
+    this.numJoined;
+    this.filteredEventsId;
   
 
   
@@ -50,8 +57,29 @@ export class EventViewComponent implements OnInit {
       this.allEvents();
     })
 
+
+    console.log(this.joinedEvent);
+
+    this.http.get(this.joinUrl).subscribe((response: JoinEvent[]) => {
+      console.log(response);
+      this.joinedEvent = response;
+
+      // this.getNumJoined();
+     
+    })
+
   
   }
+
+
+  // getNumJoined() {
+  //   for(let i = 0; i < this.joinedEvent.length; i++) {
+  //     if(this.joinedEvent[i].event.id === this.filteredEvents[i].id) {
+  //       this.numJoined += this.joinedEvent[i].numAttending;
+  //     } 
+  //   }
+  //   return this.numJoined;
+  // }
 
 
 

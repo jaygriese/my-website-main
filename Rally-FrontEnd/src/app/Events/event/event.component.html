@@ -104,24 +104,29 @@
                 <p style="font-size: 15px; font-style:italic;">expand map to search event address</p>
             <br>
             <br>
-            <br>
+            <!-- <br> -->
 
-            <span>
-                <div class="card">
-                <p style="text-align: center; font-family: Oswald, sans-serif; font-size: 75px; font-weight: 800; color: #0EBB9A; margin-bottom: -10px;">{{this.numJoined}}</p>
-                <p style="text-align: center; font-size: 20px; color: black; margin-top: -10px;">signed up</p>
-            </div>
-            </span>
+            <!-- <span class="col d-flex justify-content-center">
+                <div class="card" style="width: 10rem; display: center; background-color: #85CDE3; color: white;">
+                <p style="text-align: center; font-family: Oswald, sans-serif; font-size: 75px; font-weight: 800; margin-bottom: -10px;">{{this.numJoined}}</p>
+                    <div class="card-footer">
+                        <p style="text-align: center; font-size: 20px;">signed up</p>
+                    </div>
+                </div>
+            </span> -->
+            <!-- <br>
             <br>
-            <br>
+            <br> -->
+
 
             <span>
                 <p id="event_display2">comments</p>
 
-                <div class="card" *ngFor="let comment of commentDisplay">
-                    <div class="card-body">
+                <!-- <div class="card" style="border-color: #85CDE3" *ngFor="let comment of commentDisplay"> -->
+                    <div class="card" *ngFor="let comment of commentDisplay">
+                    <div class="card-body" style="background-color:#f6f4f3">
                         <div class="d-grid gap-2">
-                            <p>{{comment}}</p>
+                            <p style="font-family: montserrat, sans-serif;">{{comment}}</p>
                           </div>
                     </div>
                 </div>
@@ -160,6 +165,17 @@
                         <img *ngIf="eventDetails.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg" width="300">
                         <img *ngIf="eventDetails.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg" width="300" height="300">
                         <img *ngIf="eventDetails.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg" width="300" height="300">
+
+                        <!-- <span class="col d-flex justify-content-center"> -->
+                            <span style="float: right;">
+                            <div class="card" style="width: 8rem; display: center; background-color:#f6f4f3">
+                            <p style="text-align: center; font-family: Oswald, sans-serif; font-size: 75px; font-weight: 800; margin-bottom: -10px;">{{this.numJoined}}</p>
+                                <div class="card-footer" style="background-color: #f6f4f3;">
+                                    <p style="text-align: center; font-size: 18px; font-family: montserrat, sans-serif;">signed up</p>
+                                </div>
+                            </div>
+                        </span>
+
                     </div>
                     <!-- <br> -->
                     <p style="font-size: 15px; font-style: italic; margin-top: 12px; ">hosted by: <span style="font-weight: bolder;">{{eventDetails.eventHost}} <span style="font-weight: lighter;">|</span> {{eventDetails.contactEmail}}</span></p> 

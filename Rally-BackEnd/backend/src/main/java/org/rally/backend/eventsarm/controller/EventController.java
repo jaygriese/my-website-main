@@ -34,22 +34,23 @@ public class EventController {
         return new ResponseEntity<>(eventRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/event")
-    public void deleteEvent(@RequestBody int id) {
-        eventRepository.deleteById(id);
-
-    }
-
-//    @PostMapping("/edit/event")
+//    @PostMapping("/event")
 //    public void deleteEvent(@RequestBody int id) {
 //        eventRepository.deleteById(id);
+//
 //    }
+
+    @PostMapping("/edit/delete")
+    public void deleteEvent(@RequestBody int id) {
+        eventRepository.deleteById(id);
+    }
 
 
     @PostMapping("/create")
     public ResponseEntity<?> createEventForm(@RequestBody EventDTO eventDTO) {
 
-        Event createNewEvent = new Event(eventDTO.getEventHost(),
+        Event createNewEvent = new Event(eventDTO.getUserName(),
+                eventDTO.getEventHost(),
                 eventDTO.getContactEmail(),
                 eventDTO.getEventTitle(),
                 eventDTO.getDatetime(),

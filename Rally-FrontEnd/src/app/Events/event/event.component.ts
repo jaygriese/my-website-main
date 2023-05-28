@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from '../models/event';
 import { EventService } from '../services/event.service';
-import { EventViewComponent } from '../event-view/event-view.component';
+// import { EventViewComponent } from '../event-view/event-view.component';
 import { JoinEvent } from '../models/JoinEvent';
 
 @Component({
@@ -14,8 +14,8 @@ import { JoinEvent } from '../models/JoinEvent';
 })
 export class EventComponent implements OnInit {
 
-  // currentUser;
-  // logInStatus: Boolean;
+  currentUser;
+  logInStatus: Boolean;
 
 
   // private eventUrl: string;
@@ -29,7 +29,7 @@ export class EventComponent implements OnInit {
   commentDisplay: string[] = [];
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private eventService: EventService) {
-    // this.logInStatus = false;
+    this.logInStatus = false;
     // this.eventUrl = 'http://localhost:8080/events/event/{id}/'
     this.joinUrl = 'http://localhost:8080/join/join/'
     this.eventDetails;
@@ -43,7 +43,7 @@ export class EventComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // this.verifyLoggedIn();
+    this.verifyLoggedIn();
 
     // this.eventDetails = new Event();
 
@@ -109,20 +109,20 @@ deleteEvent() {
 }
 
 
-  // verifyLoggedIn() {
+  verifyLoggedIn() {
 
-  //   if (localStorage.getItem('userName') != null) {
-  //     this.currentUser = localStorage.getItem('userName');
-  //     this.logInStatus = true;
-  //   }
+    if (localStorage.getItem('userName') != null) {
+      this.currentUser = localStorage.getItem('userName');
+      this.logInStatus = true;
+    }
 
   
-  // }
+  }
 
-  // logOut() {
-  //   localStorage.clear();
-  //   console.log(localStorage.getItem('userName'))
-  //   this.logInStatus = false;
-  // }
+  logOut() {
+    localStorage.clear();
+    console.log(localStorage.getItem('userName'))
+    this.logInStatus = false;
+  }
 
 }

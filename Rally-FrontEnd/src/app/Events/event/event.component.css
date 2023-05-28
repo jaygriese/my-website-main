@@ -40,12 +40,14 @@ font-family: montserrat, sans-serif;
   /* border-radius:6px;  */
   color:#ffffff;
   font-family: montserrat, sans-serif;
-  font-size:25px;
-  font-weight:bold;
-  text-shadow: 0.5px 0.5px 0px #000;
-  padding:6px 24px;
+  font-size:20px;
+  font-weight: 500;
+  /* text-shadow: 0.5px 0.5px 0px #000; */
+  padding:12px 12px;
   text-decoration:none;
+  width: 150px;
 }
+
 
 
 #details {

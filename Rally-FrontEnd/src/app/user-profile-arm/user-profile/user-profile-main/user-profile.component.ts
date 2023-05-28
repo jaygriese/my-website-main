@@ -119,7 +119,7 @@ export class UserProfileComponent implements OnInit {
     if (event.target.checked) {
       if (this.filterActive === false) {
         this.filterActive = true;
-        this.filterHistory();
+        this.allPost = [];
       }
       for (let obj of this.allPostFilter) {
         if (obj.type === event.target.name) {
@@ -138,10 +138,6 @@ export class UserProfileComponent implements OnInit {
         return this.allPost;
       }      
     }
-  }
-
-  filterHistory(){
-    this.allPost = [];
   }
   
   /* Learning about LifeCycle Hooks in Angular / prevents error in the console when viewing 

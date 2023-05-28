@@ -47,7 +47,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+import { SecurityComponent } from './security/security.component';
 
+import { httpInterceptorProviders } from './security/Interceptor/jwt-handler.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,6 +91,7 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     EventEditComponent,
     HomeComponent,
     PageNotFoundComponent,
+    SecurityComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,7 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     MatCardModule,
     MatNativeDateModule,
   ],
-  providers: [CookieService, ThemeserviceService],
+  providers: [CookieService, ThemeserviceService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

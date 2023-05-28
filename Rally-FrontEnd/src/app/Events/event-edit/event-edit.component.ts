@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Event } from '../models/event';
 import { EventComponent } from '../event/event.component';
 import { EventService } from '../services/event.service';
@@ -27,7 +28,7 @@ export class EventEditComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private eventService: EventService) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private eventService: EventService) {
  this.logInStatus = false;
     this.getEventUrl = 'http://localhost:8080/events/event'
     this.updateEventUrl = 'http://localhost:8080/events/edit/event'
@@ -80,6 +81,19 @@ export class EventEditComponent implements OnInit {
 //   console.log(typeof num);
 //   return num;
 // }
+
+deleteEvent() {
+  if(confirm("Are you sure you want to delete this event?")) {
+    this.eventService.deleteEvent(this.id).subscribe(data => {
+      console.log(data);
+    })
+    this.router.navigate(["/events"])
+  .then(() => {
+    window.location.reload();
+  });
+  }
+ 
+}
 
 
 updateEvent(eventInformation: NgForm) {

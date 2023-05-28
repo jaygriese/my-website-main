@@ -22,7 +22,7 @@ export class EventComponent implements OnInit {
   id: string;
   eventDetails: Event;
 
-  joined: JoinEvent [] = [];
+  joinedEvent: JoinEvent [] = [];
   numJoined: number = 0;
   joinUrl: string;
 
@@ -35,7 +35,7 @@ export class EventComponent implements OnInit {
     this.eventDetails;
     this.id = this.route.snapshot.params['id'];
 
-    this.joined;
+    this.joinedEvent;
     this.numJoined;
 
     this.commentDisplay;
@@ -57,11 +57,11 @@ export class EventComponent implements OnInit {
     
     })
 
-    console.log(this.joined);
+    console.log(this.joinedEvent);
 
     this.http.get(this.joinUrl).subscribe((response: JoinEvent[]) => {
       console.log(response);
-      this.joined = response;
+      this.joinedEvent = response;
 
       this.getNumJoined();
       this.getComments();
@@ -73,9 +73,9 @@ export class EventComponent implements OnInit {
   }
 
   getNumJoined() {
-    for(let i = 0; i < this.joined.length; i++) {
-      if(this.joined[i].event.id === this.eventDetails.id) {
-        this.numJoined += this.joined[i].numAttending;
+    for(let i = 0; i < this.joinedEvent.length; i++) {
+      if(this.joinedEvent[i].event.id === this.eventDetails.id) {
+        this.numJoined += this.joinedEvent[i].numAttending;
       } 
     }
     return this.numJoined;
@@ -84,9 +84,9 @@ export class EventComponent implements OnInit {
 
 
   getComments() {
-    for(let i = 0; i < this.joined.length; i++) {
-      if(this.joined[i].event.id === this.eventDetails.id && this.joined[i].comment !== null) {
-        this.commentDisplay.push(this.joined[i].comment);
+    for(let i = 0; i < this.joinedEvent.length; i++) {
+      if(this.joinedEvent[i].event.id === this.eventDetails.id && this.joinedEvent[i].comment !== null) {
+        this.commentDisplay.push(this.joinedEvent[i].comment);
       }
     }
     return this.commentDisplay;

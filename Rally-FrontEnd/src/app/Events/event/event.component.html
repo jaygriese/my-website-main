@@ -131,9 +131,9 @@
                     </div>
                 </div>
 
-                <!-- <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; text-align:center;">edit event</a> 
+                <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; text-align:center;">edit event</a> 
                            
-                <button type="button" class="button2" (click)="deleteEvent()" style="background-color: #C03E24;">delete event</button> -->
+                <button type="button" class="button2" (click)="deleteEvent()" style="background-color: #C03E24;">delete event</button>
 
             </span>
         
@@ -167,7 +167,7 @@
                         <img *ngIf="eventDetails.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg" width="300" height="300">
 
                         <!-- <span class="col d-flex justify-content-center"> -->
-                            <span style="float: right;">
+                        <span style="float: right;">
                             <div class="card" style="width: 8rem; display: center; background-color:#f6f4f3">
                             <p style="text-align: center; font-family: Oswald, sans-serif; font-size: 75px; font-weight: 800; margin-bottom: -10px;">{{this.numJoined}}</p>
                                 <div class="card-footer" style="background-color: #f6f4f3;">
@@ -180,7 +180,17 @@
                     <!-- <br> -->
                     <p style="font-size: 15px; font-style: italic; margin-top: 12px; ">hosted by: <span style="font-weight: bolder;">{{eventDetails.eventHost}} <span style="font-weight: lighter;">|</span> {{eventDetails.contactEmail}}</span></p> 
                     <br>
-                    <p style="font-size: 20px; font-weight: bolder;">address:</p>
+                    <p style="font-size: 20px; font-weight: bolder;">address:
+                        <!-- <span style="float: right;">
+                            <div class="card" style="width: 8rem; display: center; background-color:#f6f4f3">
+                            <p style="text-align: center; font-family: Oswald, sans-serif; font-size: 60px; font-weight: 800; margin-bottom: -10px;">{{this.numJoined}}</p>
+                                <div class="card-footer" style="background-color: #f6f4f3;">
+                                    <p style="text-align: center; font-size: 18px; font-family: montserrat, sans-serif;">signed up</p>
+                                </div>
+                            </div>
+                        </span> -->
+                    
+                    </p>
                     <p style="margin-top: -15px;">{{eventDetails.eventAddress}}</p>
                     <br>
                     <p style="font-size: 20px; font-weight: bolder;">description:</p>

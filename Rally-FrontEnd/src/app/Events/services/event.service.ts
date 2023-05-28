@@ -11,6 +11,7 @@ export class EventService {
 
   private getEventByIdUrl = 'http://localhost:8080/events/event/';
   private updateEventUrl = 'http://localhost:8080/events/edit/event/';
+  private deleteEventUrl = 'http://localhost:8080/events/edit/delete/'
   // private deleteEventByIdUrl = 'http://localhost:8080/events/event/';
   
 
@@ -26,8 +27,8 @@ export class EventService {
   }
 
   deleteEvent(id: string) {
-    return this.http.post('http://localhost:8080/events/event', +id);
-    // return this.http.post('http://localhost:8080/edit/event', +id);
+    // return this.http.post('http://localhost:8080/events/event', +id);
+    return this.http.post('http://localhost:8080/events/edit/delete', +id);
     //is this right?
   }
 

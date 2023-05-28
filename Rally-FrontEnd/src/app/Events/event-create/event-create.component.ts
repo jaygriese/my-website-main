@@ -61,6 +61,7 @@ export class EventCreateComponent implements OnInit {
       id: 0,
       // id: eventInformation.value.id,
       // id: this.getIdNum(localStorage.getItem('id')),
+      userName: localStorage.getItem("userName"),
       eventHost: eventInformation.value.eventHost,
       contactEmail: eventInformation.value.contactEmail,
       eventTitle: eventInformation.value.eventTitle, 

@@ -21,6 +21,7 @@ export class EventEditComponent implements OnInit {
 
   private updateEventUrl: string;
   private getEventUrl: string;
+  private deleteEventUrl: string;
   id: string;
   event: Event;
   // buttonType: string;
@@ -32,6 +33,7 @@ export class EventEditComponent implements OnInit {
  this.logInStatus = false;
     this.getEventUrl = 'http://localhost:8080/events/event'
     this.updateEventUrl = 'http://localhost:8080/events/edit/event'
+    this.deleteEventUrl = 'http://localhost:8080/events/edit/delete'
     this.event;
     this.id = this.route.snapshot.params['id'];
    }
@@ -90,6 +92,7 @@ updateEvent(eventInformation: NgForm) {
 
   let updateEvent: EventDTO = {
     id: this.eventId,
+    userName: localStorage.getItem("userName"),
 
     // id: this.getIdNum(localStorage.getItem('id')),
     eventHost: eventInformation.value.eventHost,
@@ -112,18 +115,18 @@ updateEvent(eventInformation: NgForm) {
 
 }
 
-// deleteEvent() {
-//   if(confirm("Are you sure you want to delete this event?")) {
-//     this.eventService.deleteEvent(this.id).subscribe(data => {
-//       console.log(data);
-//     })
-//     this.router.navigate(["/events"])
-//   .then(() => {
-//     window.location.reload();
-//   });
-//   }
+deleteEvent() {
+  if(confirm("Are you sure you want to delete this event?")) {
+    this.eventService.deleteEvent(this.id).subscribe(data => {
+      console.log(data);
+    })
+    this.router.navigate(["/events"])
+  .then(() => {
+    window.location.reload();
+  });
+  }
  
-// }
+}
 
 
     verifyLoggedIn() {

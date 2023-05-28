@@ -42,20 +42,26 @@
 </ng-template> -->
 
 
-<div class="container" *ngIf="logInStatus; else notLoggedIn">
+<div class="container" *ngIf="logInStatus">
     
     <div>
         <br>
         <br>
-        <p style="font-size: 15px; font-weight: bolder;">Welcome, {{currentUser}}!</p>
-        <button class="" (click)="logOut()"> Log Out?</button>
+        <p style="margin-top: 15px; font-size: 18px; font-weight: bolder;">Welcome, {{currentUser}}!</p>
+        <!-- <button class="btn btn-light"  (click)="logOut()">Log Out?</button> -->
     </div>
 
 </div>
 
-<ng-template #notLoggedIn>
-    <p class="container"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Log in</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
-</ng-template>
+
+<!-- <ng-template #notLoggedIn>
+    <div class="container">
+        <br>
+        <br>
+        <p style="margin-top: 15px; font-size: 18px;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Log in</a></span> to <span style="font-family: impact; font-size: 18px;">rally!</span> your community</p>
+    </div>
+</ng-template> -->
+
 
 
 
@@ -159,7 +165,8 @@
                     <div class="card" *ngFor="let comment of commentDisplay">
                         <div class="card-body">
                             <div class="d-grid gap-2">
-                                <p class="overflow-auto" style="font-family: montserrat, sans-serif; margin-top: -10px; margin-bottom: -10px;"><span><img src="/assets/events-assets/megaphone-b2.jpg" height="30" width="30"></span> {{comment}}</p>
+                                <p class="overflow-auto" style="font-family: montserrat, sans-serif; margin-top: -10px; margin-bottom: -10px; margin-left: -5px;">
+                                    <span><img src="/assets/events-assets/megaphone-g2.jpg" height="30" width="30"></span> {{comment}}</p>
                             </div>
                         </div>
                     </div>
@@ -233,11 +240,16 @@
 
 
                     <!-- <ng-container *ngIf="{{currentUser}} === {{eventDetails.eventHost}}"> -->
-                        <div style="float: left">
+                        <!-- <div style="float: left">
                         <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; color: white;">edit event</a> 
                         <br>     
                         <button type="button" class="button2" style="margin-top: 10px; background-color: #C03E24" (click)="deleteEvent()">delete event</button>
-                        </div>
+                        </div> -->
+                        <div style="float: left">
+                            <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="btn btn-link" style="color: #85CDE3;">EDIT EVENT</a> 
+                            <br>     
+                            <button type="button" class="btn btn-link" style="color: #C03E24" (click)="deleteEvent()">DELETE EVENT</button>
+                            </div>
                     <!-- </ng-container> -->
 
                     <br>

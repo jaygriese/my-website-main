@@ -40,6 +40,11 @@ public class EventController {
 
     }
 
+//    @PostMapping("/edit/event")
+//    public void deleteEvent(@RequestBody int id) {
+//        eventRepository.deleteById(id);
+//    }
+
 
     @PostMapping("/create")
     public ResponseEntity<?> createEventForm(@RequestBody EventDTO eventDTO) {

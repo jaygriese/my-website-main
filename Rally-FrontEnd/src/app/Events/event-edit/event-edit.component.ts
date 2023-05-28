@@ -82,18 +82,7 @@ export class EventEditComponent implements OnInit {
 //   return num;
 // }
 
-deleteEvent() {
-  if(confirm("Are you sure you want to delete this event?")) {
-    this.eventService.deleteEvent(this.id).subscribe(data => {
-      console.log(data);
-    })
-    this.router.navigate(["/events"])
-  .then(() => {
-    window.location.reload();
-  });
-  }
- 
-}
+
 
 
 updateEvent(eventInformation: NgForm) {
@@ -122,6 +111,19 @@ updateEvent(eventInformation: NgForm) {
  
 
 }
+
+// deleteEvent() {
+//   if(confirm("Are you sure you want to delete this event?")) {
+//     this.eventService.deleteEvent(this.id).subscribe(data => {
+//       console.log(data);
+//     })
+//     this.router.navigate(["/events"])
+//   .then(() => {
+//     window.location.reload();
+//   });
+//   }
+ 
+// }
 
 
     verifyLoggedIn() {

@@ -32,13 +32,14 @@
 
 
 
-<body style="margin-top: 80px;">
+<!-- <body style="margin-top: 80px;"> -->
+<body style="margin-top: 120px;">
     <div class="container" *ngIf="eventDetails">
 
         <div class="row">
-            <!-- <div class="col">
-                <p id="list_head">The Details</p> 
-            </div> -->
+            <div class="col">
+                <p id="list_head">Rally Up!</p> 
+            </div>
             <div class="col">
                 <span>
                     <!-- <a href="http://localhost:4200/join/" class="myButton">JOIN EVENT</a> -->
@@ -124,16 +125,17 @@
 
                 <!-- <div class="card" style="border-color: #85CDE3" *ngFor="let comment of commentDisplay"> -->
                     <div class="card" *ngFor="let comment of commentDisplay">
-                    <div class="card-body" style="background-color:#f6f4f3">
+                    <!-- <div class="card-body" style="background-color:#f6f4f3"> -->
+                        <div class="card-body">
                         <div class="d-grid gap-2">
-                            <p style="font-family: montserrat, sans-serif;">{{comment}}</p>
+                            <p class="overflow-auto" style="font-family: montserrat, sans-serif; margin-top: -10px; margin-bottom: -10px;"><span><img src="/assets/events-assets/megaphone-b2.jpg" height="50" width="50"></span> {{comment}}</p>
                           </div>
                     </div>
                 </div>
 
-                <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; text-align:center;">edit event</a> 
+                <!-- <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; text-align:center;">edit event</a> 
                            
-                <button type="button" class="button2" (click)="deleteEvent()" style="background-color: #C03E24;">delete event</button>
+                <button type="button" class="button2" (click)="deleteEvent()" style="background-color: #C03E24;">delete event</button> -->
 
             </span>
         
@@ -169,8 +171,10 @@
                         <!-- <span class="col d-flex justify-content-center"> -->
                         <span style="float: right;">
                             <div class="card" style="width: 8rem; display: center; background-color:#f6f4f3">
+                                <!-- <div class="card" style="width: 8rem; display: center;"> -->
                             <p style="text-align: center; font-family: Oswald, sans-serif; font-size: 75px; font-weight: 800; margin-bottom: -10px;">{{this.numJoined}}</p>
                                 <div class="card-footer" style="background-color: #f6f4f3;">
+                                    <!-- <div class="card-footer" style="background-color: #fff;"> -->
                                     <p style="text-align: center; font-size: 18px; font-family: montserrat, sans-serif;">signed up</p>
                                 </div>
                             </div>
@@ -180,23 +184,20 @@
                     <!-- <br> -->
                     <p style="font-size: 15px; font-style: italic; margin-top: 12px; ">hosted by: <span style="font-weight: bolder;">{{eventDetails.eventHost}} <span style="font-weight: lighter;">|</span> {{eventDetails.contactEmail}}</span></p> 
                     <br>
-                    <p style="font-size: 20px; font-weight: bolder;">address:
-                        <!-- <span style="float: right;">
-                            <div class="card" style="width: 8rem; display: center; background-color:#f6f4f3">
-                            <p style="text-align: center; font-family: Oswald, sans-serif; font-size: 60px; font-weight: 800; margin-bottom: -10px;">{{this.numJoined}}</p>
-                                <div class="card-footer" style="background-color: #f6f4f3;">
-                                    <p style="text-align: center; font-size: 18px; font-family: montserrat, sans-serif;">signed up</p>
-                                </div>
-                            </div>
-                        </span> -->
-                    
-                    </p>
+                    <p style="font-size: 20px; font-weight: bolder;">address: </p>
                     <p style="margin-top: -15px;">{{eventDetails.eventAddress}}</p>
                     <br>
                     <p style="font-size: 20px; font-weight: bolder;">description:</p>
                     <p style="margin-top: -15px;">{{eventDetails.description}}</p> 
                     <br> 
-                    <br>
+                    <!-- <br> -->
+
+                    <div style="float: right;">
+                    <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="btn btn-info btn-lg" style="background-color: #85CDE3; color: white;">edit event</a> 
+                    <br>     
+                    <button type="button" class="btn btn-danger btn-lg" style="margin-top: 10px" (click)="deleteEvent()">delete event</button>
+                    </div>
+
                     <br>
                     <br>
                 </div>

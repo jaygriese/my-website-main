@@ -27,6 +27,7 @@ export class EventService {
 
   deleteEvent(id: string) {
     return this.http.post('http://localhost:8080/events/event', +id);
+    // return this.http.post('http://localhost:8080/edit/event', +id);
     //is this right?
   }
 

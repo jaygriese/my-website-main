@@ -26,7 +26,7 @@
 
    
             <div id="list_head">
-                    <p>Edit Event: {{event.eventTitle}}</p> 
+                    <p>Update Event: {{event.eventTitle}}</p> 
             </div>
         
             <br>
@@ -102,7 +102,7 @@
                             <br>
                             <br>
                            
-                            <button [disabled]="eventInformation.invalid" type="submit" id="edit_btn">EDIT</button>
+                            <button [disabled]="eventInformation.invalid" type="submit" id="edit_btn">UPDATE</button>
                             <br>
                                 <div *ngIf="eventInformation.invalid && eventInformation.touched" class="alert alert-danger">
                                     Make sure you've filled out the whole form!
@@ -113,7 +113,18 @@
  
                 </form>
 
-                <button type="button" class="button2" (click)="deleteEvent()" id="edit_btn" style="background-color: #C03E24; float: right; margin-top: -155px; margin-right: -5px;">delete event</button>
+                <!-- <div class="row">
+
+                    <div class="col-7"></div>
+
+                    <div class="col-5">
+
+                        <button type="button" (click)="deleteEvent()" id="edit_btn" style="background-color: #C03E24; float: right; margin-top: -155px; margin-right: -5px;">DELETE</button>
+                    </div>
+
+                </div> -->
+
+                <!-- <button type="button" (click)="deleteEvent()" id="edit_btn" style="background-color: #C03E24; float: right; margin-top: -155px; margin-right: -5px;">DELETE</button> -->
                
 
 

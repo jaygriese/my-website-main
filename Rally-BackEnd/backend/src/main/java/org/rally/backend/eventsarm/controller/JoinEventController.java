@@ -32,7 +32,8 @@ public class JoinEventController {
     @PostMapping("/event")
     public ResponseEntity<?> joinEventForm(@RequestBody JoinEventDTO joinEventDTO) {
 
-        JoinEvent createNewJoin = new JoinEvent(joinEventDTO.getEvent(),
+        JoinEvent createNewJoin = new JoinEvent(joinEventDTO.getUsername(),
+                joinEventDTO.getEvent(),
                 joinEventDTO.getAttending(),
                 joinEventDTO.getContactEmail(),
                 joinEventDTO.getNumAttending(),

@@ -49,7 +49,7 @@ public class EventController {
     @PostMapping("/create")
     public ResponseEntity<?> createEventForm(@RequestBody EventDTO eventDTO) {
 
-        Event createNewEvent = new Event(eventDTO.getUserName(),
+        Event createNewEvent = new Event(eventDTO.getUsername(),
                 eventDTO.getEventHost(),
                 eventDTO.getContactEmail(),
                 eventDTO.getEventTitle(),

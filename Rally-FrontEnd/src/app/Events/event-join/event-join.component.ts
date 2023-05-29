@@ -84,7 +84,7 @@ joinEvent(joinEventInformation: NgForm) {
     // id: 0,
     // id: this.eventId,
     id: 0,
-  
+    userName: localStorage.getItem("userName"),
     event: this.event,
     attending: joinEventInformation.value.attending,
     contactEmail: joinEventInformation.value.contactEmail,

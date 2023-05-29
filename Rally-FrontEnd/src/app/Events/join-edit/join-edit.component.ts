@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { EventComponent } from '../event/event.component';
+// import { EventComponent } from '../event/event.component';
 import { EventService } from '../services/event.service';
 import { Event } from '../models/event';
 import { JoinEvent } from '../models/JoinEvent';
@@ -22,7 +22,7 @@ export class JoinEditComponent implements OnInit {
 
   // private getEventUrl: string;
   private updateJoinUrl: string;
-  private deleteJoinUrl: string;
+  // private deleteJoinUrl: string;
 
   id: string;
   join: JoinEvent;
@@ -35,7 +35,7 @@ export class JoinEditComponent implements OnInit {
 
     // this.getEventUrl = 'http://localhost:8080/events/event'
     this.updateJoinUrl = 'http://localhost:8080/join/edit/event'
-    this.deleteJoinUrl = 'http://localhost:8080/join/edit/delete'
+    // this.deleteJoinUrl = 'http://localhost:8080/join/edit/delete'
 
     this.join;
     this.event;
@@ -72,6 +72,7 @@ export class JoinEditComponent implements OnInit {
 
     let updateJoin: JoinEventDTO = {
     id: this.join.id,
+    userName: localStorage.getItem("userName"),
 
   
      

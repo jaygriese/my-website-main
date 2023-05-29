@@ -14,6 +14,7 @@ import { JoinEventDTO } from '../models/DTO/JoinEventDTO';
   templateUrl: './join-edit.component.html',
   styleUrls: ['./join-edit.component.css']
 })
+
 export class JoinEditComponent implements OnInit {
 
   currentUser: String;
@@ -49,14 +50,7 @@ export class JoinEditComponent implements OnInit {
     this.verifyLoggedIn();
     //to authenticate user b4 making event
 
-    console.log(this.id);
-
-    // this.eventService.getEvent(this.id).subscribe((response: Event) => {
-    //   this.event = response;
-    //   console.log(response);
-    // this.eventId = +this.event.id;
-    // })
-
+   
     this.eventService.getJoin(this.id).subscribe((response: JoinEvent) => {
       this.join = response;
       console.log(response);
@@ -74,7 +68,7 @@ export class JoinEditComponent implements OnInit {
     id: this.join.id,
     userName: localStorage.getItem("userName"),
 
-    event: this.event,
+    event: joinEventInformation.value.event,
     attending: joinEventInformation.value.attending,
     contactEmail: joinEventInformation.value.contactEmail,
     numAttending: joinEventInformation.value.numAttending, 

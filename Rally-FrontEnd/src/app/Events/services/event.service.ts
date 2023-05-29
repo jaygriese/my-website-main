@@ -15,7 +15,7 @@ export class EventService {
   // private deleteEventByIdUrl = 'http://localhost:8080/events/event/';
 
   private getJoinByIdUrl = 'http://localhost8080/join/join'
-  private updateJoinUrl = 'http://localhost8080/join/edit/event/';
+  private updateJoinUrl = 'http://localhost8080/join/edit/join/';
   private deleteJoinUrl = 'http://localhost8080/join/edit/delete/';
   
 
@@ -27,13 +27,11 @@ export class EventService {
 
   updateEvent(id: string, value: any) {
     return this.http.put(`${this.updateEventUrl}` + id, value);
-    //is this right?
   }
 
   deleteEvent(id: string) {
-    // return this.http.post('http://localhost:8080/events/event', +id);
-    return this.http.post('http://localhost:8080/events/edit/delete', +id);
-    //is this right?
+    // return this.http.post('http://localhost:8080/events/edit/delete', +id);
+    return this.http.post(`${this.deleteEventUrl}`, +id);
   }
 
 
@@ -49,7 +47,8 @@ export class EventService {
   }
 
   deleteJoin(id: string) {
-    return this.http.post('http://localhost:8080/join/edit/delete', +id);
+    // return this.http.post('http://localhost:8080/join/edit/delete', +id);
+    return this.http.post(`${this.deleteJoinUrl}`, +id);
   }
 
 

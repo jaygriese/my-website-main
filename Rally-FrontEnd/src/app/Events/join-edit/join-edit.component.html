@@ -32,13 +32,13 @@
             <br>
            
                    
-                <form #joinEventInformation="ngForm" (ngSubmit)="joinUpdate(joinEventInformation)">
+                <form #joinEventInformation="ngForm" (ngSubmit)="updateJoin(joinEventInformation)">
 
                     <div class="row">
                         <div class="col-5">
 
-                            <input type="hidden" id="id" name="joinEventId" value="joinEvent.id" ngModel>
-                            <input type="hidden" id="event" name="event" value="event" ngModel>
+                            <!-- <input type="hidden" id="id" name="joinEventId" value="joinEvent.id" ngModel>
+                            <input type="hidden" id="event" name="event" value="event" ngModel> -->
                             
                             <div class="mb-3">
                             <label class="form-label">name</label><br>
@@ -63,11 +63,13 @@
                                 <div *ngIf="joinEventInformation.invalid && joinEventInformation.touched" class="alert alert-danger">
                                     Make sure you've filled out the whole form!
                                 </div>
-            
+
+
+                            </div>
                         </div>
                     </div>
  
-                </form>
+                    </form>
                
                 <div class="row">
 

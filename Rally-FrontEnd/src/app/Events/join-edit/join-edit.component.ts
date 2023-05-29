@@ -26,7 +26,7 @@ export class JoinEditComponent implements OnInit {
 
   id: string;
   join: JoinEvent;
-  event: Event;
+  // event: Event;
   // eventId: number;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private eventService: EventService) { 
@@ -34,11 +34,11 @@ export class JoinEditComponent implements OnInit {
     this.logInStatus = false;
 
     // this.getEventUrl = 'http://localhost:8080/events/event'
-    this.updateJoinUrl = 'http://localhost:8080/join/edit/event'
+    this.updateJoinUrl = 'http://localhost:8080/join/edit/join'
     // this.deleteJoinUrl = 'http://localhost:8080/join/edit/delete'
 
     this.join;
-    this.event;
+    // this.event;
     this.id = this.route.snapshot.params['id'];
 
   }
@@ -74,10 +74,7 @@ export class JoinEditComponent implements OnInit {
     id: this.join.id,
     userName: localStorage.getItem("userName"),
 
-  
-     
     event: this.event,
-    // userName: localStorage.getItem("userName"),
     attending: joinEventInformation.value.attending,
     contactEmail: joinEventInformation.value.contactEmail,
     numAttending: joinEventInformation.value.numAttending, 
@@ -107,10 +104,6 @@ export class JoinEditComponent implements OnInit {
    
   }
 
-
-
-
-
   verifyLoggedIn() {
 
     if (localStorage.getItem('userName') != null) {
@@ -127,12 +120,6 @@ export class JoinEditComponent implements OnInit {
     console.log(localStorage.getItem('userName'))
     this.logInStatus = false;
   }
-
-
-
-
-
-
 
 
 

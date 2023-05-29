@@ -57,7 +57,7 @@ public class JoinEventController {
 
     }
 
-    @PostMapping("/edit/event")
+    @PostMapping("/edit/join")
     public ResponseEntity<?> editJoinForm(@RequestBody JoinEventDTO joinEventDTO) {
 
         Optional<JoinEvent> result = joinEventRepository.findById(joinEventDTO.getId());

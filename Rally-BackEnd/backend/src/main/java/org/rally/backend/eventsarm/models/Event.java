@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Event extends AbstractEntity {
 
-    private String username;
+    private String userName;
 
     @NotBlank(message = "Who can we thank for hosting?")
     private String eventHost;
@@ -42,8 +42,8 @@ public class Event extends AbstractEntity {
 //    @JoinColumn(name = "event_id")
     private final List<JoinEvent>joined = new ArrayList<>();
 
-    public Event( String username, String eventHost, String contactEmail, String eventTitle, String datetime, String eventAddress, String eventCategory, String description, String imageId) {
-        this.username = username;
+    public Event( String userName, String eventHost, String contactEmail, String eventTitle, String datetime, String eventAddress, String eventCategory, String description, String imageId) {
+        this.userName = userName;
         this.eventHost = eventHost;
         this.contactEmail = contactEmail;
         this.eventTitle = eventTitle;
@@ -56,12 +56,12 @@ public class Event extends AbstractEntity {
 
     public Event() {};
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEventHost() {

@@ -8,7 +8,7 @@ public class EventDTO {
 
     private int id;
 
-    private String username;
+    private String userName;
 
     @NotBlank(message = "Who can we thank for hosting?")
     private String eventHost;
@@ -77,12 +77,12 @@ public class EventDTO {
 //    }
 
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getDescription() {

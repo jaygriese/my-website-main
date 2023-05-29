@@ -21,25 +21,25 @@ export class JoinEditComponent implements OnInit {
   //currentUser is String if logged in???
   logInStatus: Boolean;
 
-  // private getEventUrl: string;
+  private getJoinUrl: string;
   private updateJoinUrl: string;
-  // private deleteJoinUrl: string;
+  private deleteJoinUrl: string;
 
   id: string;
   join: JoinEvent;
-  // event: Event;
+  event: Event;
   // eventId: number;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private eventService: EventService) { 
 
     this.logInStatus = false;
 
-    // this.getEventUrl = 'http://localhost:8080/events/event'
-    this.updateJoinUrl = 'http://localhost:8080/join/edit/join'
-    // this.deleteJoinUrl = 'http://localhost:8080/join/edit/delete'
+    this.getJoinUrl = 'http://localhost8080/join/join';
+    this.updateJoinUrl = 'http://localhost:8080/join/edit/join';
+    this.deleteJoinUrl = 'http://localhost:8080/join/edit/delete';
 
     this.join;
-    // this.event;
+    this.event;
     this.id = this.route.snapshot.params['id'];
 
   }
@@ -55,6 +55,7 @@ export class JoinEditComponent implements OnInit {
       this.join = response;
       console.log(response);
     })
+
 
 
   }

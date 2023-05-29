@@ -43,7 +43,8 @@
                             <div class="mb-3">
                             <label class="form-label">name</label><br>
                             <input class="form-control form-control-lg" type="text" required [(ngModel)]="join.attending" id="attending" name="attending" ngModel>
-                                
+                             
+                            <br>
                             <label class="form-label">email</label><br>
                             <input class="form-control form-control-lg" type="text" required [(ngModel)]="join.contactEmail" id="email" name="contactEmail" ngModel>
             
@@ -73,11 +74,11 @@
                
                 <div class="row">
 
-                    <div class="col-7"></div>
+                    <!-- <div class="col-7"></div> -->
 
                     <div class="col-5">
 
-                        <button type="button" (click)="deleteJoin()" id="edit_btn" style="background-color: #C03E24; float: right; margin-top: -155px; margin-right: -5px;">DELETE</button>
+                        <button type="button" (click)="deleteJoin()" id="edit_btn" style="background-color: #C03E24; float: left;">DELETE</button>
                     </div>
 
                 </div>

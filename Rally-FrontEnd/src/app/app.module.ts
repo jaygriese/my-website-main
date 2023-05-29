@@ -39,6 +39,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 import { EventJoinComponent } from './Events/event-join/event-join.component';
+import { JoinEditComponent } from './Events/join-edit/join-edit.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { EventJoinComponent } from './Events/event-join/event-join.component';
     HomeComponent,
     PageNotFoundComponent,
     EventJoinComponent,
+    JoinEditComponent,
   ],
   imports: [
     BrowserModule,

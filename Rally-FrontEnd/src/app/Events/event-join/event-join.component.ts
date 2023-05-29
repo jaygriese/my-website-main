@@ -27,7 +27,7 @@ export class EventJoinComponent implements OnInit {
   event: Event;
   eventId: number;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private eventService: EventService) { 
+  constructor(private http: HttpClient, private router: Router,private route: ActivatedRoute, private eventService: EventService) { 
 
     this.logInStatus = false;
 

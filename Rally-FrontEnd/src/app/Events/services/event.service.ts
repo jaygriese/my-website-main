@@ -15,7 +15,7 @@ export class EventService {
   // private deleteEventByIdUrl = 'http://localhost:8080/events/event/';
 
   // private getJoinByIdUrl = 'http://localhost8080/join/join';
-  private getJoinByIdUrl = 'http://localhost8080/join/event';
+  // private getJoinByIdUrl = 'http://localhost8080/join/event';
   private updateJoinUrl = 'http://localhost8080/join/edit/join/';
   private deleteJoinUrl = 'http://localhost8080/join/edit/delete/';
   
@@ -38,10 +38,10 @@ export class EventService {
 
 
 
-  getJoin(id: string) {
-    return this.http.get(`${this.getJoinByIdUrl}` + id);
+  // getJoin(id: string) {
+  //   return this.http.get(`${this.getJoinByIdUrl}` + id);
 
-  }
+  // }
 
   updateJoin(id: string, value: any) {
     return this.http.put(`${this.updateJoinUrl}` + id, value);

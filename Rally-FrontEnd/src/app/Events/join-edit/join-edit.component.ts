@@ -26,36 +26,28 @@ export class JoinEditComponent implements OnInit {
   private deleteJoinUrl: string;
 
   id: string;
-  join: JoinEvent;
   event: Event;
-
-  joinUrl: string;
-  joinedEvents: JoinEvent [] = [];
-
-  // joined: JoinEvent;
   eventId: number;
-  // joinEventId: number;
-
-
+ 
+  joinedEvents: JoinEvent [] = [];
+  join: JoinEvent;
+  
+  
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private eventService: EventService) { 
 
     this.logInStatus = false;
 
-    // this.getJoinUrl = 'http://localhost8080/join/event';
-
-    this.joinUrl = 'http://localhost:8080/join/join/'
-  
+   
+    this.getJoinUrl = 'http://localhost:8080/join/join/'
     this.updateJoinUrl = 'http://localhost:8080/join/edit/join';
     this.deleteJoinUrl = 'http://localhost:8080/join/edit/delete';
-
-    this.join;
+ 
+    this.id = this.route.snapshot.params['id'];
     this.event;
     this.eventId;
-    this.id = this.route.snapshot.params['id'];
     
-    // this.joinEventId;
-
     this.joinedEvents;
+    this.join;
 
   }
 
@@ -75,16 +67,9 @@ export class JoinEditComponent implements OnInit {
     console.log(typeof(this.eventId));
     })
 
-   
-    // this.eventService.getJoin(this.id).subscribe((response: JoinEvent) => {
-    //   this.join = response;
-    //   console.log(response);
-    //   this.joinEventId = +this.join.id;
-    
-    // })
 
 
-    this.http.get(this.joinUrl).subscribe((response: JoinEvent[]) => {
+    this.http.get(this.getJoinUrl).subscribe((response: JoinEvent[]) => {
       console.log(response);
       this.joinedEvents = response;
 
@@ -92,9 +77,6 @@ export class JoinEditComponent implements OnInit {
   
      
     })
-
-
-
 
 
   }
@@ -106,10 +88,6 @@ export class JoinEditComponent implements OnInit {
         console.log(this.join);
       }
     }
-    console.log(this.join);
-    console.log(localStorage.getItem('userName'));
-    console.log(this.event);
-    console.log(this.join.event);
     return this.join;
   }
 
@@ -125,7 +103,6 @@ export class JoinEditComponent implements OnInit {
 
 
     event: this.event,
-    // event: joinEventInformation.value.event,
     attending: joinEventInformation.value.attending,
     contactEmail: joinEventInformation.value.contactEmail,
     numAttending: joinEventInformation.value.numAttending, 
@@ -142,20 +119,25 @@ export class JoinEditComponent implements OnInit {
   
   }
 
-  deleteJoin(){}
-  
-  // deleteJoin() {
-  //   if(confirm("Are you sure you want to delete this sign-up?")) {
-  //     this.eventService.deleteJoin(this.id).subscribe(data => {
-  //       console.log(data);
-  //     })
-  //     this.router.navigate(["/events"])
-  //   .then(() => {
-  //     window.location.reload();
-  //   });
+  // deleteJoin(){
+  //   if(confirm("Are you sure you don't want to attend this event?")) {
+
   //   }
-   
   // }
+  
+  deleteJoin() {
+    if(confirm("Are you sure you don't want to attend this event?")) {
+      this.http.post(this.deleteJoinUrl, this.join.id).subscribe(data => {
+      // this.eventService.deleteJoin(this.join.id).subscribe(data => {
+        console.log(data);
+      })
+      this.router.navigate(["/events"])
+    .then(() => {
+      window.location.reload();
+    });
+    }
+   
+  }
 
   verifyLoggedIn() {
 

@@ -15,6 +15,7 @@ import { NgUserInformation } from '../../models/ng-model/UserInformation';
 import { HiddenPost } from '../../models/HiddenPost';
 import { Event } from 'src/app/Events/models/event';
 import { HidePostDTO } from '../../models/dto/HidePostDTO';
+import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,7 +25,6 @@ import { HidePostDTO } from '../../models/dto/HidePostDTO';
 export class UserProfileComponent implements OnInit {
   
   /* logged in user information */
-  logInStatus: boolean = false;
   userEntity: UserEntity;
   userInformation: UserInformation;
   model: NgUserInformation;
@@ -68,18 +68,15 @@ export class UserProfileComponent implements OnInit {
               private viewUser: ViewUserService,
               private verifyService: VerifyLogoutService, 
               private activeUserService: ViewUserService, 
-              private cdref: ChangeDetectorRef) {
+              private cdref: ChangeDetectorRef,
+              private authorize: AuthorizeService) {
   }
 
   ngOnInit(): void {
-    /* Make sure the user is logged in */
-    this.logInStatus = this.verifyService.verifyLoggedIn();
-    
     /* If user is logged in */
-    if (localStorage.getItem('id') !== null) {
+    if (this.authorize.isloggedIn() === true) {  // localStorage.getItem('id') !== null
       /* Get user information and user entity data */
-      this.activeUserService.getMainUserBundleByUserName(localStorage.getItem('userName')).subscribe((data: MainUserBundle) => {
-        console.log(data.viewUser);
+      this.activeUserService.getMainUserBundleByUserName(localStorage.getItem('userName')).subscribe((data: any) => {
         this.userEntity = data.viewUser;
         this.userInformation = data.viewUserInformation;
         this.allDmHistory = data.viewUserDmHistory.directMessageList;
@@ -111,6 +108,8 @@ export class UserProfileComponent implements OnInit {
           this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
         }
       })
+    } else {
+      this.authorize.clean();
     }
   }
 
@@ -303,10 +302,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   logOut() {
-    localStorage.removeItem('userName');
-    localStorage.removeItem('id')
-    this.logInStatus = false;
-    this.router.navigate(["/login"])
-    return;
+    this.authorize.logOut()
   }
 }

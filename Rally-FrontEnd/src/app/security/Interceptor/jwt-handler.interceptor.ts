@@ -8,15 +8,16 @@ import {
 } from '@angular/common/http';
 import { AuthorizeService } from '../security-service/authorize.service';
 import { Observable } from 'rxjs';
+import { StorageService } from '../security-service/storage-service.service';
 
 @Injectable()
 export class JwtHandlerInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthorizeService) {}
+  constructor(private authService: StorageService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
-    const jwt = this.authService.getToken();
+    const jwt = this.authService.getUser();
 
     if (jwt === null) {
       request = request.clone({
@@ -30,7 +31,7 @@ export class JwtHandlerInterceptor implements HttpInterceptor {
       withCredentials: true,
       setHeaders: { authorization: `Bearer ${jwt}`}
     });
-    console.log(request)
+    
     return next.handle(request);
   }
 }

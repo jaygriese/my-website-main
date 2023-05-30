@@ -32,7 +32,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("username not found");
         }
-        /** need to set up userpassword encoder for this to work Maybe.... **/
         return new User(user.getUserName(), user.getPwHash(), mapRolesToAuthorities(user.getRoles()));
     }
 

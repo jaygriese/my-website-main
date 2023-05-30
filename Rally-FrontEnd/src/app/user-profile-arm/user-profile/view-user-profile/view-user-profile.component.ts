@@ -9,6 +9,7 @@ import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { DirectMessage } from '../../models/Directmessage';
 import { HttpClient } from '@angular/common/http';
 import { HiddenPost } from '../../models/HiddenPost';
+import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
 @Component({
   selector: 'app-view-user-profile',
   templateUrl: './view-user-profile.component.html',
@@ -17,7 +18,6 @@ import { HiddenPost } from '../../models/HiddenPost';
 export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
   /* Viewing Users information */
-  logInStatus: Boolean = false;
   viewUserName: string;
   viewUserId: string;
   userEntityInformation: ViewUserBundle;
@@ -48,13 +48,11 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router, 
               private viewUser: ViewUserService,
-              private verifyService: VerifyLogoutService,
+              private authorize: AuthorizeService,
               private http: HttpClient) {
    }
 
   ngOnInit() {
-    this.logInStatus = this.verifyService.verifyLoggedIn();
-
     /* This method pulls the parameters of the activated route and converts them into a usable string */
     this.activatedRoute.paramMap.subscribe(params => {
     this.viewUserName = params.get('userName');
@@ -167,11 +165,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
 
   logOut() {
-    localStorage.removeItem('userName');
-    localStorage.removeItem('id')
-    this.logInStatus = false;
-    this.router.navigate(["/login"])
-    return;
+    this.authorize.logOut();
   }
 
 }

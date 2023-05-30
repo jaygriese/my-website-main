@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginDTO } from '../../models/dto/LoginDTO';
 import { NgForm } from '@angular/forms';
 import { UserEntity } from '../../models/UserEntity';
 import { StorageService } from 'src/app/security/security-service/storage-service.service';
@@ -20,6 +19,7 @@ export class LoginUserComponent implements OnInit {
   userLogginIn: UserEntity;
   incorrectPassword: boolean;
   userEntity: UserEntity;
+  accessExpired: boolean = false;
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -29,9 +29,13 @@ export class LoginUserComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (localStorage.getItem("userName") !== null) {
+    if (sessionStorage.getItem("auth-user") !== null) {
       this.router.navigate(["/myProfile"])
     }
+
+    // if (sessionStorage.getItem("expired")) {
+    //   this.accessExpired = true;
+    // }
   }
 
   login(userInformation: NgForm ) {
@@ -48,34 +52,20 @@ export class LoginUserComponent implements OnInit {
       },
       httpOptions
       ).subscribe((data: any) => {
-        console.log(data);
-        this.storageService.saveUser(data);
-        // localStorage.setItem('userName', data.userName)
-        // localStorage.setItem('id', data.id)
-        // this.router.navigate(["/myProfile"]);
-      });
 
-            // let loginInfo: LoginDTO = {
-    //   userName: userInformation.value.userName,
-    //   password: userInformation.value.password
-    // }
-// 
-    // this.http.post('http://localhost:8080/api/login', loginInfo).subscribe((response: any) => {    
-    //   for (const k in response){
-    //     if (k === "failed"){
-    //       this.incorrectPassword = true;
-    //       return;
-    //     } else {            
-    //       this.userLogginIn = response;
-    //       console.log(response);
-    //       localStorage.setItem('userName', this.userLogginIn.userName)
-    //       localStorage.setItem('id', this.userLogginIn.id)
-    //       this.router.navigate(["/myProfile"]);
-    //     }
-    //   }
-       
-    // });
+        if (data.failed === "Username doesn't exist") {
+          this.incorrectPassword = true;
+          return;
+        }
+        
+        /* use sessionStrorage over localStorage */
+        localStorage.setItem('userName', data.userName)
+        localStorage.setItem('id', data.id)
+
+        /* maybe I can encode incoming data so I don't have to save it to session storage */
+        this.storageService.saveUser(data);
+        this.router.navigate(["/myProfile"]);
+      });
     
-  
   }
 }

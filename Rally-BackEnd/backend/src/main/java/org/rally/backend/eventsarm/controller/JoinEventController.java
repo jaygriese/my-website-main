@@ -35,7 +35,7 @@ public class JoinEventController {
 
 
     @PostMapping("/edit/delete")
-    public void deleteEvent(@RequestBody int id) {
+    public void deleteJoin(@RequestBody int id) {
         joinEventRepository.deleteById(id);
     }
 

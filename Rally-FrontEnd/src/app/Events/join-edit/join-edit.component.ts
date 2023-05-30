@@ -29,26 +29,33 @@ export class JoinEditComponent implements OnInit {
   join: JoinEvent;
   event: Event;
 
+  joinUrl: string;
+  joinedEvents: JoinEvent [] = [];
+
   // joined: JoinEvent;
-  // eventId: number;
+  eventId: number;
   // joinEventId: number;
+
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private eventService: EventService) { 
 
     this.logInStatus = false;
 
-    this.getJoinUrl = 'http://localhost8080/join/event';
-    // this.updateJoinUrl = 'http://localhost:8080/join/edit/join';
-    // this.updateJoinUrl = 'http://localhost:8080/join/edit/join/event';
+    // this.getJoinUrl = 'http://localhost8080/join/event';
+
+    this.joinUrl = 'http://localhost:8080/join/join/'
+  
     this.updateJoinUrl = 'http://localhost:8080/join/edit/join';
     this.deleteJoinUrl = 'http://localhost:8080/join/edit/delete';
 
     this.join;
     this.event;
-    // this.eventId;
+    this.eventId;
     this.id = this.route.snapshot.params['id'];
     
     // this.joinEventId;
+
+    this.joinedEvents;
 
   }
 
@@ -64,21 +71,46 @@ export class JoinEditComponent implements OnInit {
     this.eventService.getEvent(this.id).subscribe((response: Event) => {
       this.event = response;
       console.log(response);
-    // this.eventId = +this.event.id;
+    this.eventId = +this.event.id;
+    console.log(typeof(this.eventId));
     })
 
    
-    this.eventService.getJoin(this.id).subscribe((response: JoinEvent) => {
-      this.join = response;
-      console.log(response);
-      // this.joinEventId = +this.join.id;
+    // this.eventService.getJoin(this.id).subscribe((response: JoinEvent) => {
+    //   this.join = response;
+    //   console.log(response);
+    //   this.joinEventId = +this.join.id;
     
+    // })
+
+
+    this.http.get(this.joinUrl).subscribe((response: JoinEvent[]) => {
+      console.log(response);
+      this.joinedEvents = response;
+
+      this.getJoin();
+  
+     
     })
 
 
 
 
 
+  }
+
+  getJoin() {
+    for(let i = 0; i < this.joinedEvents.length; i++) { 
+      if(this.joinedEvents[i].userName === localStorage.getItem('userName') && this.joinedEvents[i].event.id === this.event.id) {
+        this.join = this.joinedEvents[i];
+        console.log(this.join);
+      }
+    }
+    console.log(this.join);
+    console.log(localStorage.getItem('userName'));
+    console.log(this.event);
+    console.log(this.join.event);
+    return this.join;
   }
 
 
@@ -109,19 +141,21 @@ export class JoinEditComponent implements OnInit {
    
   
   }
+
+  deleteJoin(){}
   
-  deleteJoin() {
-    if(confirm("Are you sure you want to delete this sign-up?")) {
-      this.eventService.deleteJoin(this.id).subscribe(data => {
-        console.log(data);
-      })
-      this.router.navigate(["/events"])
-    .then(() => {
-      window.location.reload();
-    });
-    }
+  // deleteJoin() {
+  //   if(confirm("Are you sure you want to delete this sign-up?")) {
+  //     this.eventService.deleteJoin(this.id).subscribe(data => {
+  //       console.log(data);
+  //     })
+  //     this.router.navigate(["/events"])
+  //   .then(() => {
+  //     window.location.reload();
+  //   });
+  //   }
    
-  }
+  // }
 
   verifyLoggedIn() {
 

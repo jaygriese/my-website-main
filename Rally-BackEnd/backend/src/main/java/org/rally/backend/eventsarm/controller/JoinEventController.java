@@ -23,13 +23,22 @@ public class JoinEventController {
     @Autowired
     private JoinEventRepository joinEventRepository;
 
-//    @Autowired
-//    private EventRepository eventRepository;
+    @Autowired
+    private EventRepository eventRepository;
 
 
     @GetMapping("/join/")
     public ResponseEntity<?>displayAllJoin() {
         return new ResponseEntity<>(joinEventRepository.findAll(), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/join/{id}")
+    public ResponseEntity<?>displayJoinPage(@PathVariable int id) {
+        eventRepository.findById(id);
+//        joinEventRepository.findbyId
+
+//        return new ResponseEntity<>(eventRepository.findById(id), HttpStatus.OK);
     }
 
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Resource } from '../models/resource';
 import { NgForm } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-import { ResourceDTO } from '../models/Resource';
+import { ResourceDTO } from '../models/ResourceDTO';
 
 @Component({
   selector: 'app-resources-add',
@@ -11,16 +11,14 @@ import { ResourceDTO } from '../models/Resource';
   styleUrls: ['./resources-add.component.css']
 })
 export class ResourcesAddComponent implements OnInit {
-  private userUrl: string;
-  currentUser;
+  currentUser: String;
   logInStatus: Boolean;
-  // Validations
-  categories = ["Athletics", "Arts", "Business", "Civic", "Education", "Entertainment", "Fitness", "Hospitality", "Medical", "Park", "Religious", "Retail"]
-  cateogryModel = {category: this.categories[0]}
+  private userUrl: string;
+  private resourceUrl: string;
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
-    this.userUrl = 'http://localhost:8080/resources/add';
+    this.resourceUrl = 'http://localhost:8080/resources/add';
    }
 
   ngOnInit(): void {
@@ -35,30 +33,33 @@ export class ResourcesAddComponent implements OnInit {
   
   
   logOut() {
-    localStorage.clear();
+    //localStorage.clear();
     console.log(localStorage.getItem('userName'))
     this.logInStatus=false;
   }
 
-  onSubmit(f: NgForm ) {
-    let submitResource: ResourceDTO = {
-      resourceName: f.value.resourceName,
-      category: f.value.category,
-      address: f.value.address,
-      website: f.value.website,
-      telephoneNumber: f.value.telephoneNumber,
-      email: f.value.email,
-      description: f.value.description
+  getIdNum(str: string) {
+    let num: number = parseInt(str);
+    return num;
+  }
+
+  onSubmit(resourceForm: NgForm) {
+    let newResource: ResourceDTO = {
+      id: 0, 
+      resourceName: resourceForm.value.resourceName,
+      category: resourceForm.value.category,
+      address: resourceForm.value.address,
+      website: resourceForm.value.website,
+      telephoneNumber: resourceForm.value.telephoneNumber,
+      email: resourceForm.value.email,
+      description: resourceForm.value.description
     }
-    console.log(submitResource);
-    this.http.post(this.userUrl, submitResource).subscribe((res) => {
-      console.log(submitResource.resourceName);
-      console.log(submitResource.category);
-      console.log(submitResource.address);
-      console.log(submitResource.website);
-      console.log(submitResource.telephoneNumber);
-      console.log(submitResource.email);
-      console.log(submitResource.description);
-    })
+    console.log(newResource);
+    this.http.post(this.resourceUrl, newResource).subscribe((res) => {
+      console.log(res)
+    });
+    this.router.navigate(['/resources']).then(()=>{
+      window.location.reload();
+    });
   }
 }

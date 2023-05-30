@@ -1,54 +1,90 @@
-<body class = "background">
+<body style="margin-top: 80px;">
+    <div class="container">
 
-    <!--Login Status-->
-    <div *ngIf="logInStatus; else notLoggedIn">
-        
-        <div style="text-align: right;">
-            <p>Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
+        <div class="row">
+            <div class = "col">
+                <p id="list_head">What are you looking for?</p>
+            </div>
+            <div class="col">
+                <span>
+                    <a href="http://localhost:4200/resourcesAdd/" 
+                    class="myButton">CREATE RESOURCE</a>
+                </span>
+            </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class = "row">
+            <div class = "col-3">
+
+            </div>
+            <div class = "col-2">
+
+            </div>
+            <div class="col-7">
+                <p style="text-align: left; font-size: 40px; font-family: Oswald, sans-serif; font-weight: 800; margin-bottom: -15px;">All Resources</p>
+                <hr style="height:4px; color: black; background-color: black">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
         
+            <span>
+                <p id="resource_display">search by category</p>
+
+                    <div>
+                        <button class="button2" (click)="filterResource('Athletics')" >athletics</button>
+                        <button class="button2" (click)="filterResource('Arts')" >arts</button>
+                        <button class="button2" (click)="filterResource('Business')">business</button>
+                        <button class="button2" (click)="filterResource('Civic')">civic</button>
+                        <button class="button2" (click)="filterResource('Education')">education</button>
+                        <button class="button2" (click)="filterResource('Entertainment')" >entertainment</button>
+                        <button class="button2" (click)="filterResource('Fitness')" >fitness</button>
+                        <button class="button2" (click)="filterResource('Hospitality')">hospitality</button>
+                        <button class="button2" (click)="filterResource('Medical')">medical</button>
+                        <button class="button2" (click)="filterResource('Rark')">park</button>
+                        <button class="button2" (click)="filterResource('Religious')" >religious</button>
+                        <button class="button2" (click)="viewAll()">view all</button>
+                    </div>
+                
+            </span>
+        </div>
+
+        <div class="col-2"></div>
+
+            <div class="col-7">
+
+                <div class="card mb-4" style="max-width: 900px;" *ngFor="let resource of filteredResources">
+                    
+                <ng-container *ngIf="filteredResources.length !== 0">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <p style="font-weight: 800; margin-top: -15px;">{{resource.resourceName}}</p>
+                                <p style="font-size: 23px; margin-top: -10px;">{{resource.category}}</p>
+                                <p style="font-size: 23px; margin-top: -10px;">{{resource.address}}</p>
+                                <p style="font-size: 23px; margin-top: -10px;">{{resource.website}}</p>
+                                <p style="font-size: 23px; margin-top: -10px;">{{resource.telephoneNumber}}</p>
+                                <p style="font-size: 23px; margin-top: -10px;">{{resource.email}}</p>
+                                <p style="font-size: 23px; margin-top: -10px;">{{resource.description}}</p>
+                                <a routerLink="/resources/{{resource.id}}"
+                                routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
+                            </div>
+                        </div>
+                    </div>    
+                </ng-container>
+
+                </div> 
+
+                <ng-container *ngIf="filteredResources.length===0">
+                    <p style="font-size: 25px;">No resources found at this time.</p>
+                </ng-container>
+            
+            </div>  
+        </div>
     </div>
-    <ng-template #notLoggedIn>
-    
-        <h2></h2>
-    
-        <p>User is not logged in. </p>
-        <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
-    </ng-template>
-    
-    <br>
-    <!--Banner-->
-    <div class="black"><h1>Search Resources</h1></div>
-    <br>
-    <br> <!--Not sure i need the filter form group-->
-    <!-- <div class="form-group">
-        <input type ="search" class="form-control" [(ngModel)]="filter" placeholder = "Filter by Category">
-    </div> -->
-    <br>
-    <br>
-    <!--table of all resources from resource repository -->
-    <table class = "table table-striped table-dark table-hover" style = "align-content: center;">
-        <thead>
-            <tr class = "header row">
-                <th>ID</th>
-                <th>Category</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Website</th>
-                <th>Telephone Number</th>
-                <th>Email Address</th>
-            </tr>
-        </thead> 
-        <tbody>
-            <tr class = "data row" *ngFor="let resource of resourceList">
-                <td>{{resource.id}}</td>
-                <td>{{resource.category.category}}</td>
-                <td>{{resource.resourceName}}</td>
-                <td>{{resource.address}}</td> 
-                <td>{{resource.website}}</td>
-                <td>{{resource.telephoneNumber}}</td>
-                <td>{{resource.email}}</td>
-            </tr>
-        </tbody>
-    </table>
 </body>

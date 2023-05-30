@@ -4,7 +4,7 @@ import { LoginUserComponent } from './user-profile-arm/login-register/login-user
 import { RegisterUserComponent } from './user-profile-arm/login-register/register-user/register-user.component';
 import { EventViewComponent } from './Events/event-view/event-view.component';
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
-import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
+import { ResourcesComponent } from './resources-arm/resources/resources.component';
 import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
 import { EventComponent } from './Events/event/event.component';
 import { EventCreateComponent } from './Events/event-create/event-create.component';
@@ -35,7 +35,7 @@ const routes: Routes = [
   {path: 'events', component: EventViewComponent},
   {path: 'forum', component: ForumComponent},
   {path: 'communityHomeForum', component: CommunityHomeComponent},
-  {path: 'resources', component: ResourcesHomeComponent},
+  {path: 'resources', component: ResourcesComponent},
   {path: 'resourcesAdd', component: ResourcesAddComponent},
   {path: 'resourcesSearch', component: ResourcesSearchComponent},
   {path: 'event', component: EventComponent },

@@ -13,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { EventComponent } from './Events/event/event.component';
 import { EventCreateComponent } from './Events/event-create/event-create.component';
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
-import { ResourcesHomeComponent } from './resources-arm/resources-home/resources-home.component';
+import { ResourcesComponent } from './resources-arm/resources/resources.component';
 import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
 import { ServicesHomeComponent } from './services-arm/services-home/services-home.component';
 import { OfferComponent } from './services-arm/offer/offer.component';
@@ -49,7 +49,7 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     EventViewComponent,
     ForumComponent,
     CommunityHomeComponent,
-    ResourcesHomeComponent,
+    ResourcesComponent,
     ResourcesAddComponent,
     ResourcesSearchComponent,
     EventComponent,

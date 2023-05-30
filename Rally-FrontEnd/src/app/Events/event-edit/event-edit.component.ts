@@ -22,9 +22,9 @@ export class EventEditComponent implements OnInit {
   private updateEventUrl: string;
   private getEventUrl: string;
   private deleteEventUrl: string;
+
   id: string;
   event: Event;
-  // buttonType: string;
   eventId: number;
 
 
@@ -34,6 +34,7 @@ export class EventEditComponent implements OnInit {
     this.getEventUrl = 'http://localhost:8080/events/event'
     this.updateEventUrl = 'http://localhost:8080/events/edit/event'
     this.deleteEventUrl = 'http://localhost:8080/events/edit/delete'
+    
     this.event;
     this.id = this.route.snapshot.params['id'];
    }
@@ -53,48 +54,12 @@ export class EventEditComponent implements OnInit {
 
   }
 
-// updateEvent() {
-//   this.eventService.updateEvent(this.id, this.event).subscribe((response: Event) => {
-//     this.event = response;
-//   })
-// }  
-
-// onSubmit() {
-//   this.updateEvent;
-// }
-
-// deleteEvent() {
-//   // this.event.eventTitle = "delete";
-
-// }
-
-// onSubmit(buttonType: string): void {
-//   if(buttonType==="update") {
-//     this.updateEvent();
-//   } else if(buttonType==="delete") {
-//     this.deleteEvent();
-//   }
-// }
-
-
-
-// getIdNum(str: string) {
-//   let num: number = parseInt(str);
-//   console.log(typeof num);
-//   return num;
-// }
-
-
-
-
 updateEvent(eventInformation: NgForm) {
 
 
   let updateEvent: EventDTO = {
     id: this.eventId,
     userName: localStorage.getItem("userName"),
-
-    // id: this.getIdNum(localStorage.getItem('id')),
     eventHost: eventInformation.value.eventHost,
     contactEmail: eventInformation.value.contactEmail,
     eventTitle: eventInformation.value.eventTitle, 
@@ -120,10 +85,10 @@ deleteEvent() {
     this.eventService.deleteEvent(this.id).subscribe(data => {
       console.log(data);
     })
-    this.router.navigate(["/events"])
-  .then(() => {
-    window.location.reload();
-  });
+  //   this.router.navigate(["/events"])
+  // .then(() => {
+  //   window.location.reload();
+  // });
   }
  
 }

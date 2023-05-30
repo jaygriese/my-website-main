@@ -98,10 +98,7 @@ export class JoinEditComponent implements OnInit {
 
     let updateJoin: JoinEventDTO = {
     id: this.join.id,
-    // id: this.joinEventId,
     userName: localStorage.getItem("userName"),
-
-
     event: this.event,
     attending: joinEventInformation.value.attending,
     contactEmail: joinEventInformation.value.contactEmail,
@@ -119,11 +116,7 @@ export class JoinEditComponent implements OnInit {
   
   }
 
-  // deleteJoin(){
-  //   if(confirm("Are you sure you don't want to attend this event?")) {
-
-  //   }
-  // }
+ 
   
   deleteJoin() {
     if(confirm("Are you sure you don't want to attend this event?")) {

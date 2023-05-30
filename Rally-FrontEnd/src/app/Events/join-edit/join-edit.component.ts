@@ -28,14 +28,16 @@ export class JoinEditComponent implements OnInit {
   id: string;
   join: JoinEvent;
   event: Event;
+
+  // joined: JoinEvent;
   // eventId: number;
-  joinEventId: number;
+  // joinEventId: number;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private eventService: EventService) { 
 
     this.logInStatus = false;
 
-    this.getJoinUrl = 'http://localhost8080/join/join';
+    this.getJoinUrl = 'http://localhost8080/join/event';
     // this.updateJoinUrl = 'http://localhost:8080/join/edit/join';
     // this.updateJoinUrl = 'http://localhost:8080/join/edit/join/event';
     this.updateJoinUrl = 'http://localhost:8080/join/edit/join';
@@ -45,7 +47,8 @@ export class JoinEditComponent implements OnInit {
     this.event;
     // this.eventId;
     this.id = this.route.snapshot.params['id'];
-    this.joinEventId;
+    
+    // this.joinEventId;
 
   }
 
@@ -56,7 +59,7 @@ export class JoinEditComponent implements OnInit {
     //to authenticate user b4 making event
 
 
-    // console.log(this.id);
+    console.log(this.id);
 
     this.eventService.getEvent(this.id).subscribe((response: Event) => {
       this.event = response;
@@ -68,8 +71,11 @@ export class JoinEditComponent implements OnInit {
     this.eventService.getJoin(this.id).subscribe((response: JoinEvent) => {
       this.join = response;
       console.log(response);
-      this.joinEventId = +this.join.id;
+      // this.joinEventId = +this.join.id;
+    
     })
+
+
 
 
 
@@ -81,8 +87,8 @@ export class JoinEditComponent implements OnInit {
 
 
     let updateJoin: JoinEventDTO = {
-    // id: this.join.id,
-    id: this.joinEventId,
+    id: this.join.id,
+    // id: this.joinEventId,
     userName: localStorage.getItem("userName"),
 
 

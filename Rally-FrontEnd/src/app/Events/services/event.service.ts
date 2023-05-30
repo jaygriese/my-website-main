@@ -14,7 +14,8 @@ export class EventService {
   private deleteEventUrl = 'http://localhost:8080/events/edit/delete/';
   // private deleteEventByIdUrl = 'http://localhost:8080/events/event/';
 
-  private getJoinByIdUrl = 'http://localhost8080/join/join';
+  // private getJoinByIdUrl = 'http://localhost8080/join/join';
+  private getJoinByIdUrl = 'http://localhost8080/join/event';
   private updateJoinUrl = 'http://localhost8080/join/edit/join/';
   private deleteJoinUrl = 'http://localhost8080/join/edit/delete/';
   

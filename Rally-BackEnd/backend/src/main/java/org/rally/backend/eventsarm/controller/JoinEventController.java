@@ -32,14 +32,19 @@ public class JoinEventController {
         return new ResponseEntity<>(joinEventRepository.findAll(), HttpStatus.OK);
     }
 
+//    @GetMapping("join/{id}")
+//    public ResponseEntity<?>displayJoinPage(@PathVariable int id) {
+//        return new ResponseEntity<>();
+//    }
 
-    @GetMapping("/join/{id}")
-    public ResponseEntity<?>displayJoinPage(@PathVariable int id) {
-        eventRepository.findById(id);
-//        joinEventRepository.findbyId
+
+//    @GetMapping("/join/{id}")
+//    public ResponseEntity<?>displayJoinPage(@PathVariable int id) {
+//        eventRepository.findById(id);
+//
 
 //        return new ResponseEntity<>(eventRepository.findById(id), HttpStatus.OK);
-    }
+//    }
 
 
 

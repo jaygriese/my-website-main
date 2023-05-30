@@ -3,7 +3,7 @@ package org.rally.backend.userprofilearm.model;
 import org.rally.backend.eventsarm.models.Event;
 import org.rally.backend.forumarm.models.ForumPosts;
 import org.rally.backend.forumarm.models.Replies;
-import org.rally.backend.resourcearm.model.response.Resource;
+import org.rally.backend.resourcearm.model.Resource;
 import org.rally.backend.servicesarm.model.response.Service;
 
 import java.util.List;

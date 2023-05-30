@@ -1,4 +1,4 @@
-package org.rally.backend.resourcearm.model.response;
+package org.rally.backend.resourcearm.model;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

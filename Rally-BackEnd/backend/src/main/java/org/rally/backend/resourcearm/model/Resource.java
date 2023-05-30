@@ -1,6 +1,7 @@
-package org.rally.backend.resourcearm.model.response;
+package org.rally.backend.resourcearm.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.rally.backend.resourcearm.model.AbstractEntity;
 
 @Entity
 public class Resource extends AbstractEntity {

@@ -3,6 +3,7 @@ package org.rally.backend.userprofilearm.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.rally.backend.forumarm.models.ForumPostLike;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.ArrayList;
 import java.util.List;

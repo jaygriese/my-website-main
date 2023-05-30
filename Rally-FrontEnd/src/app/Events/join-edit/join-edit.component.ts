@@ -29,18 +29,23 @@ export class JoinEditComponent implements OnInit {
   join: JoinEvent;
   event: Event;
   // eventId: number;
+  joinEventId: number;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private eventService: EventService) { 
 
     this.logInStatus = false;
 
     this.getJoinUrl = 'http://localhost8080/join/join';
+    // this.updateJoinUrl = 'http://localhost:8080/join/edit/join';
+    // this.updateJoinUrl = 'http://localhost:8080/join/edit/join/event';
     this.updateJoinUrl = 'http://localhost:8080/join/edit/join';
     this.deleteJoinUrl = 'http://localhost:8080/join/edit/delete';
 
     this.join;
     this.event;
+    // this.eventId;
     this.id = this.route.snapshot.params['id'];
+    this.joinEventId;
 
   }
 
@@ -50,10 +55,20 @@ export class JoinEditComponent implements OnInit {
     this.verifyLoggedIn();
     //to authenticate user b4 making event
 
+
+    // console.log(this.id);
+
+    this.eventService.getEvent(this.id).subscribe((response: Event) => {
+      this.event = response;
+      console.log(response);
+    // this.eventId = +this.event.id;
+    })
+
    
     this.eventService.getJoin(this.id).subscribe((response: JoinEvent) => {
       this.join = response;
       console.log(response);
+      this.joinEventId = +this.join.id;
     })
 
 
@@ -66,10 +81,13 @@ export class JoinEditComponent implements OnInit {
 
 
     let updateJoin: JoinEventDTO = {
-    id: this.join.id,
+    // id: this.join.id,
+    id: this.joinEventId,
     userName: localStorage.getItem("userName"),
 
-    event: joinEventInformation.value.event,
+
+    event: this.event,
+    // event: joinEventInformation.value.event,
     attending: joinEventInformation.value.attending,
     contactEmail: joinEventInformation.value.contactEmail,
     numAttending: joinEventInformation.value.numAttending, 

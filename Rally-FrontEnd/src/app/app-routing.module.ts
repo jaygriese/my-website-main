@@ -60,7 +60,10 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'user/404', component: PageNotFoundComponent},
   {path: 'join/:id', component: EventJoinComponent},
-  {path: 'join/edit/:id', component: JoinEditComponent},
+  // {path: 'join/edit/:id', component: JoinEditComponent},
+  // {path: 'edit/join/:id', component: JoinEditComponent},
+  // {path: 'edit/:join/:id', component: JoinEditComponent}
+  {path: 'join/edit/:id', component: JoinEditComponent}
 ];
 
 @NgModule({

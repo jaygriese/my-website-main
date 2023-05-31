@@ -50,7 +50,7 @@ export class EventViewComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // this.verifyLoggedIn();
+    this.verifyLoggedIn();
    
    
     this.http.get(this.eventsUrl).subscribe((response: Event[]) => {
@@ -126,25 +126,27 @@ filter(string: string) {
   // }
 
 
-}
+  verifyLoggedIn() {
 
-
-
-  // verifyLoggedIn() {
-
-  //   if (localStorage.getItem('userName') != null) {
-  //     this.currentUser = localStorage.getItem('userName');
-  //     this.logInStatus = true;
-  //   }
+    if (localStorage.getItem('userName') != null) {
+      this.currentUser = localStorage.getItem('userName');
+      this.logInStatus = true;
+    }
 
   
-  // }
+  }
 
-  // logOut() {
-  //   localStorage.clear();
-  //   console.log(localStorage.getItem('userName'))
-  //   this.logInStatus = false;
-  // }
+  logOut() {
+    localStorage.clear();
+    console.log(localStorage.getItem('userName'))
+    this.logInStatus = false;
+  }
+
+
+
+  
+
+}
 
 
 

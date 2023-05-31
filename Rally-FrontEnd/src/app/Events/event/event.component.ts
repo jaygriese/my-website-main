@@ -27,7 +27,8 @@ export class EventComponent implements OnInit {
   numJoined: number = 0;
   commentDisplay: string[] = [];
 
-  userJoined: string;
+  // userJoined: string;
+  userJoined: boolean = false;
 
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private eventService: EventService) {
@@ -101,10 +102,19 @@ export class EventComponent implements OnInit {
     return this.commentDisplay;
   }
 
+  // getUserJoined() {
+  //   for(let i = 0; i < this.joinedEvent.length; i++) {
+  //     if(this.joinedEvent[i].event.id === this.eventDetails.id && this.joinedEvent[i].userName === this.currentUser) {
+  //       this.userJoined = this.joinedEvent[i].userName;
+  //     }
+  //   }
+  //   return this.userJoined;
+  // }
+
   getUserJoined() {
     for(let i = 0; i < this.joinedEvent.length; i++) {
-      if(this.joinedEvent[i].userName === this.currentUser) {
-        this.userJoined = this.joinedEvent[i].userName;
+      if(this.joinedEvent[i].event.id === this.eventDetails.id && this.joinedEvent[i].userName === this.currentUser) {
+        this.userJoined = true;
       }
     }
     return this.userJoined;

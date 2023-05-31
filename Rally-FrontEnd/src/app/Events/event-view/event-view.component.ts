@@ -60,7 +60,7 @@ export class EventViewComponent implements OnInit {
     })
 
 
-    console.log(this.joinedEvent);
+    // console.log(this.joinedEvent);
 
     this.http.get(this.joinUrl).subscribe((response: JoinEvent[]) => {
       console.log(response);

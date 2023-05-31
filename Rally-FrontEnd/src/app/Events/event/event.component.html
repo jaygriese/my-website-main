@@ -84,8 +84,12 @@
                     <!-- <a href="http://localhost:4200/join/" class="myButton">JOIN EVENT</a> -->
 
                     <!-- <a routerLink="/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">JOIN EVENT</a> -->
-                    <a *ngIf="this.currentUser !== this.userJoined" routerLink="/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">JOIN EVENT</a>
-                    <a *ngIf="this.currentUser === this.userJoined" routerLink="/edit/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">UPDATE RSVP</a> 
+
+                    <!-- <a *ngIf="this.currentUser !== this.userJoined" routerLink="/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">JOIN EVENT</a>
+                    <a *ngIf="this.currentUser === this.userJoined" routerLink="/edit/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">UPDATE RSVP</a>  -->
+
+                    <a *ngIf="!userJoined" routerLink="/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">JOIN EVENT</a>
+                    <a *ngIf="userJoined" routerLink="/edit/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">UPDATE RSVP</a> 
                 </span>
             </div>
         </div>

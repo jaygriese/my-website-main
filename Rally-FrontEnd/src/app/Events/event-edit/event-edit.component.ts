@@ -34,7 +34,7 @@ export class EventEditComponent implements OnInit {
     this.getEventUrl = 'http://localhost:8080/events/event'
     this.updateEventUrl = 'http://localhost:8080/events/edit/event'
     this.deleteEventUrl = 'http://localhost:8080/events/edit/delete'
-    
+
     this.event;
     this.id = this.route.snapshot.params['id'];
    }
@@ -75,7 +75,12 @@ updateEvent(eventInformation: NgForm) {
     console.log(res)
   });
 
-  eventInformation.reset();
+  // eventInformation.reset();
+
+  this.router.navigate(["/events"])
+  .then(() => {
+    window.location.reload();
+  });
  
 
 }
@@ -85,10 +90,10 @@ deleteEvent() {
     this.eventService.deleteEvent(this.id).subscribe(data => {
       console.log(data);
     })
-  //   this.router.navigate(["/events"])
-  // .then(() => {
-  //   window.location.reload();
-  // });
+    this.router.navigate(["/events"])
+  .then(() => {
+    window.location.reload();
+  });
   }
  
 }

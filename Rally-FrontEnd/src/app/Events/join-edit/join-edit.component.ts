@@ -110,7 +110,12 @@ export class JoinEditComponent implements OnInit {
       console.log(res)
     });
   
-    joinEventInformation.reset();
+    // joinEventInformation.reset();
+    
+    this.router.navigate(["/events"])
+    .then(() => {
+      window.location.reload();
+    });
    
   
   }

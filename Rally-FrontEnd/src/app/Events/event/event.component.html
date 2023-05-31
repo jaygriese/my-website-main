@@ -128,39 +128,9 @@
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
-                <!-- <iframe
-                    width="300"
-                    height="400"
-                    frameborder="0" style="border:0"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps/embed/v1/search?key=MYKEYHERE&q=shaw+neighborhood+st+louis+mo"
-                    allowfullscreen>
-                </iframe> -->
-                <!-- <iframe
-                width="300"
-                height="400"
-                frameborder="0" style="border:0"
-                referrerpolicy="no-referrer-when-downgrade"
-                [src]='mapUrl'
-                allowfullscreen>
-            </iframe> -->
                 <p style="font-size: 15px; font-style:italic;">expand map to search event address</p>
             <br>
             <br>
-            <!-- <br> -->
-
-            <!-- <span class="col d-flex justify-content-center">
-                <div class="card" style="width: 10rem; display: center; background-color: #85CDE3; color: white;">
-                <p style="text-align: center; font-family: Oswald, sans-serif; font-size: 75px; font-weight: 800; margin-bottom: -10px;">{{this.numJoined}}</p>
-                    <div class="card-footer">
-                        <p style="text-align: center; font-size: 20px;">signed up</p>
-                    </div>
-                </div>
-            </span> -->
-            <!-- <br>
-            <br>
-            <br> -->
-
 
             <span>
                 <p id="event_display2">comments</p>
@@ -174,26 +144,9 @@
                         </div>
                     </div>
 
-                <!-- <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; text-align:center;">edit event</a> 
-                           
-                <button type="button" class="button2" (click)="deleteEvent()" style="background-color: #C03E24;">delete event</button> -->
 
             </span>
         
-            <!-- <span>
-                <p id="event_display2">create this event?</p>
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-grid gap-2">
-                            <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; text-align:center;">edit event</a> 
-                           
-                            <button type="button" class="button2" (click)="deleteEvent()" style="background-color: #C03E24;">delete event</button>
-                          </div>
-                    </div>
-                </div>
-
-            </span> -->
             </div>
 
             <div class="col-2"></div>
@@ -209,17 +162,8 @@
                         <img *ngIf="eventDetails.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg" width="300" height="300">
                         <img *ngIf="eventDetails.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg" width="300" height="300">
 
-                        <!-- <span style="float: right;">
-                            <div class="card" style="width: 8rem; display: center; background-color:#f6f4f3">
-                            <p style="text-align: center; font-family: Oswald, sans-serif; font-size: 75px; font-weight: 800; margin-bottom: -10px;">{{this.numJoined}}</p>
-                                <div class="card-footer" style="background-color: #f6f4f3;">
-                                    <p style="text-align: center; font-size: 18px; font-family: montserrat, sans-serif;">signed up</p>
-                                </div>
-                            </div>
-                        </span> -->
 
                     </div>
-                    <!-- <br> -->
                     <p style="font-size: 15px; font-style: italic; margin-top: 12px; ">hosted by: <span style="font-weight: bolder;">{{eventDetails.eventHost}} <span style="font-weight: lighter;">|</span> {{eventDetails.contactEmail}}</span><br>
                     
                     <span style="font-style: normal; font-weight: bold; color: #F9A605">

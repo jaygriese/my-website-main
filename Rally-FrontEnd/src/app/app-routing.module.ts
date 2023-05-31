@@ -59,10 +59,8 @@ const routes: Routes = [
   {path: 'edit/:id', component: EventEditComponent},
   {path: 'home', component: HomeComponent},
   {path: 'user/404', component: PageNotFoundComponent},
-  {path: 'join/:id', component: EventJoinComponent},
-  
+  {path: 'join/:id', component: EventJoinComponent}, 
   {path: 'edit/join/:id', component: JoinEditComponent},
-  // {path: 'edit/:join/:id', component: JoinEditComponent}
   
 ];
 

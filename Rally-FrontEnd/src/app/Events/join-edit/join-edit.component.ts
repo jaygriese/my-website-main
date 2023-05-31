@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-// import { EventComponent } from '../event/event.component';
 import { EventService } from '../services/event.service';
 import { Event } from '../models/event';
 import { JoinEvent } from '../models/JoinEvent';

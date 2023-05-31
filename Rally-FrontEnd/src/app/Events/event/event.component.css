@@ -50,24 +50,13 @@ font-family: montserrat, sans-serif;
 }
 
 
-
 #details {
     text-align: left;
     font-size: 25px;
     font-family: montserrat, sans-serif;
 }
 
-/* .btn {
-    background-color: #fff;
-    border-color:  #85CDE3;
-    transition: all .7s;
-    border-radius: 0;
-  }
-  .btn:hover {
-    color: #fff;
-    background-color:  #85CDE3;
-    border-color:  #85CDE3;
-  } */
+
 
   .btn {
     background-color: #fff;

@@ -19,6 +19,7 @@ export class EventViewComponent implements OnInit {
   logInStatus: Boolean;
 
   private eventsUrl: string;
+  private joinUrl: string;
 
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
@@ -27,20 +28,21 @@ export class EventViewComponent implements OnInit {
 
   joinedEvent: JoinEvent [] = [];
   numJoined: number = 0;
-  joinUrl: string;
-  filteredEventsId: number;
   
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
+
     this.eventsUrl = 'http://localhost:8080/events/events/'
     this.joinUrl = 'http://localhost:8080/join/join/'
+
     this.eventList;
     this.filteredEvents;
+
     this.selected;
+
     this.joinedEvent;
     this.numJoined;
-    this.filteredEventsId;
   
 
   
@@ -64,23 +66,21 @@ export class EventViewComponent implements OnInit {
       console.log(response);
       this.joinedEvent = response;
 
-      // this.getNumJoined();
      
     })
 
   
   }
 
-
-  // getNumJoined() {
-  //   for(let i = 0; i < this.joinedEvent.length; i++) {
-  //     if(this.joinedEvent[i].event.id === this.filteredEvents[i].id) {
-  //       this.numJoined += this.joinedEvent[i].numAttending;
-  //     } 
-  //   }
-  //   return this.numJoined;
-  // }
-
+  getNumJoined(eventId: string) {
+    this.numJoined = 0;
+    for(let i = 0; i < this.joinedEvent.length; i++) {
+      if(this.joinedEvent[i].event.id === eventId) {
+        this.numJoined += this.joinedEvent[i].numAttending;
+      }
+    }
+    return this.numJoined;
+  }
 
 
 
@@ -93,17 +93,6 @@ export class EventViewComponent implements OnInit {
     }
     return this.filteredEvents;
   }
-
-
-// byDate() {
-//   this.filteredEvents.splice(0);
-//   for(let i = 0; i < this.eventList.length; i++) {
-//     if(this.eventList[i].datetime.includes(this.DateSelected)) {
-//       this.filteredEvents.push(this.eventList[i])
-//     } 
-//   }
-//   return this.filteredEvents;
-// }
 
 
 filter(string: string) {

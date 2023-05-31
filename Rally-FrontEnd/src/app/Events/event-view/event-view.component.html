@@ -90,16 +90,6 @@
                           </div>   
                     </div>
 
-                
-                <!-- <div class="card w-100">
-                    <div class="card-body">
-                      <h3 class="card-title">
-                        I'm available on: <input type="date" [(ngModel)]="DateSelected">
-                      </h3>
-                      <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
-                    </div>
-                  </div> -->
-
             <br>
             <br>
             <br>
@@ -139,17 +129,14 @@
                                     <p style="font-family:Oswald, sans-serif; font-weight: 700;  font-size: 15;">{{event.datetime | date:'short'}}</p>
                                     <p style="font-weight: 800; margin-top: -15px;">{{event.eventTitle}}</p>
                                     <p style="font-size: 23px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
-                                    <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>
-
-                                    <!-- <div *ngFor="let joined of joinedEvent">
-                                        <div *ngIf="joined.event.id === event.id && joined.numAttending > 0; else signUp">
-                                            <p style="font-size: 15px; font-style: italic; margin-top: 70px;" >{{joined.numAttending}} attending</p>
-                                        </div>
+                                    <!-- <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p> -->
+                                    <div >
+                                        <p *ngIf="getNumJoined(event.id) !== 0; else signUp" style="font-size: 15px; font-weight: bold; margin-top: 70px;">{{getNumJoined(event.id)}} attending</p>
                                         <ng-template #signUp>
+                                            <!-- <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>  -->
                                             <p style="font-size: 15px; font-style: italic; margin-top: 70px;">Be the first to sign up!</p> 
                                         </ng-template>
-                                    </div> -->
-                                   
+                                    </div> 
                                     <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
                                 </div>
                             </div>

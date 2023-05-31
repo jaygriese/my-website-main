@@ -82,7 +82,10 @@
             <div class="col">
                 <span>
                     <!-- <a href="http://localhost:4200/join/" class="myButton">JOIN EVENT</a> -->
-                    <a routerLink="/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">JOIN EVENT</a> 
+
+                    <!-- <a routerLink="/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">JOIN EVENT</a> -->
+                    <a *ngIf="this.currentUser !== this.userJoined" routerLink="/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">JOIN EVENT</a>
+                    <a *ngIf="this.currentUser === this.userJoined" routerLink="/edit/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">UPDATE RSVP</a> 
                 </span>
             </div>
         </div>
@@ -236,25 +239,29 @@
                     <p style="font-size: 20px; font-weight: bolder;">description:</p>
                     <p style="margin-top: -15px;">{{eventDetails.description}}</p> 
                     <br> 
-                    <!-- <br> -->
+                    <!-- <a *ngIf="this.currentUser === eventDetails.userName" 
+                    routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="btn btn-link" style="color: #85CDE3; font-size: 20px; font-weight: 600; margin-left: -15px;">UPDATE EVENT</a> -->
+                    <a *ngIf="this.currentUser === eventDetails.userName" 
+                    routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm" style="font-size: 20px; font-weight: 500;">UPDATE EVENT</a>
 
 
-                    <!-- <ng-container *ngIf="{{currentUser}} === {{eventDetails.eventHost}}"> -->
+                    
+
+                   
                         <!-- <div style="float: left">
                         <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; color: white;">edit event</a> 
                         <br>     
                         <button type="button" class="button2" style="margin-top: 10px; background-color: #C03E24" (click)="deleteEvent()">delete event</button>
                         </div> -->
-                        <div style="float: left">
-                            <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="btn btn-link" style="color: #85CDE3;">EDIT EVENT</a> 
-                            <br>     
-                            <button type="button" class="btn btn-link" style="color: #C03E24" (click)="deleteEvent()">DELETE EVENT</button>
-                            <br>
+                        <!-- <div style="padding-left:none; margin-left: none;" *ngIf="this.currentUser === eventDetails.userName">
+                            <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="btn btn-link" style="color: #85CDE3; font-weight: 700;">UPDATE EVENT</a>
+                        </div> -->
+
+                        <!-- <button type="button" class="btn btn-link" style="color: #C03E24" (click)="deleteEvent()">DELETE EVENT</button> -->
                             <!-- <a routerLink="/edit/{{join.id}}" routerLinkActive="active" class="btn btn-link" style="color: #85CDE3;">EDIT RSVP</a>  -->
-                            <br> 
-                        </div>
+                   
                             
-                    <!-- </ng-container> -->
+        
 
                     <br>
                     <br>

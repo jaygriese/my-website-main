@@ -22,11 +22,13 @@ export class EventComponent implements OnInit {
   id: string;
   eventDetails: Event;
 
+  joinUrl: string;
   joinedEvent: JoinEvent [] = [];
   numJoined: number = 0;
-  joinUrl: string;
-
   commentDisplay: string[] = [];
+
+  userJoined: string;
+
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private eventService: EventService) {
     this.logInStatus = false;
@@ -37,13 +39,16 @@ export class EventComponent implements OnInit {
 
     this.joinedEvent;
     this.numJoined;
-
     this.commentDisplay;
+
+    this.userJoined;
 
    }
 
   ngOnInit(): void {
     this.verifyLoggedIn();
+
+  
 
     // this.eventDetails = new Event();
 
@@ -65,8 +70,12 @@ export class EventComponent implements OnInit {
 
       this.getNumJoined();
       this.getComments();
+
+      this.getUserJoined();
      
     })
+
+      // this.verifyOwner();
 
 
 
@@ -92,21 +101,36 @@ export class EventComponent implements OnInit {
     return this.commentDisplay;
   }
 
-
-
-
-deleteEvent() {
-  if(confirm("Are you sure you want to delete this event?")) {
-    this.eventService.deleteEvent(this.id).subscribe(data => {
-      console.log(data);
-    })
-    this.router.navigate(["/events"])
-  .then(() => {
-    window.location.reload();
-  });
+  getUserJoined() {
+    for(let i = 0; i < this.joinedEvent.length; i++) {
+      if(this.joinedEvent[i].userName === this.currentUser) {
+        this.userJoined = this.joinedEvent[i].userName;
+      }
+    }
+    return this.userJoined;
   }
+
+
+
+
+// deleteEvent() {
+//   if(confirm("Are you sure you want to delete this event?")) {
+//     this.eventService.deleteEvent(this.id).subscribe(data => {
+//       console.log(data);
+//     })
+//     this.router.navigate(["/events"])
+//   .then(() => {
+//     window.location.reload();
+//   });
+//   }
  
-}
+// }
+
+// verifyOwner() {
+//   if(this.currentUser === this.eventDetails.userName) {
+//    this.ownerStatus = true;
+//   }
+// }
 
 
   verifyLoggedIn() {

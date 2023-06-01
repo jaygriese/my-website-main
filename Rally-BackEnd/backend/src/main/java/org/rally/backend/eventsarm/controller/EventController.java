@@ -34,11 +34,6 @@ public class EventController {
         return new ResponseEntity<>(eventRepository.findById(id), HttpStatus.OK);
     }
 
-//    @PostMapping("/event")
-//    public void deleteEvent(@RequestBody int id) {
-//        eventRepository.deleteById(id);
-//
-//    }
 
     @PostMapping("/edit/delete")
     public void deleteEvent(@RequestBody int id) {

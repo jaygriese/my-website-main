@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { EventComponent } from '../event/event.component';
 import { EventService } from '../services/event.service';
 import { Event } from '../models/event';
 import { JoinEvent } from '../models/JoinEvent';
@@ -16,14 +15,14 @@ import { JoinEventDTO } from '../models/DTO/JoinEventDTO';
 export class EventJoinComponent implements OnInit {
 
   currentUser: String;
-  //currentUser is String if logged in???
   logInStatus: Boolean;
 
   private getEventUrl: string;
   private joinUrl: string;
 
+
+  //get event to join
   id: string;
-  // join: Join;
   event: Event;
   eventId: number;
 
@@ -33,7 +32,7 @@ export class EventJoinComponent implements OnInit {
 
     this.getEventUrl = 'http://localhost:8080/events/event'
     this.joinUrl = 'http://localhost:8080/join/event'
-    // this.join;
+   
     this.event;
     this.id = this.route.snapshot.params['id'];
 
@@ -44,7 +43,7 @@ export class EventJoinComponent implements OnInit {
   ngOnInit(): void {
 
     this.verifyLoggedIn();
-    //to authenticate user b4 making event
+   
 
     console.log(this.id);
 
@@ -81,8 +80,6 @@ export class EventJoinComponent implements OnInit {
 
 joinEvent(joinEventInformation: NgForm) {
   let joinEvent: JoinEventDTO = {
-    // id: 0,
-    // id: this.eventId,
     id: 0,
     userName: localStorage.getItem("userName"),
     event: this.event,

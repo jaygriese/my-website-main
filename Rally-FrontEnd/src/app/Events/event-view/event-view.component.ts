@@ -3,8 +3,6 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from '../models/event';
 import { JoinEvent } from '../models/JoinEvent';
-// import { MatCalendar } from '@angular/material/datepicker';
-
 
 @Component({
   selector: 'app-event-view',
@@ -15,17 +13,22 @@ export class EventViewComponent implements OnInit {
 
   isLoading: boolean = true;
 
+  //login 
   currentUser;
   logInStatus: Boolean;
 
+  //get requests for events, join forms
   private eventsUrl: string;
   private joinUrl: string;
 
+  //displaying events, filters
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
 
+  //calendar filter
   selected: Date | null;
 
+  //optional: showing num attending 
   joinedEvent: JoinEvent [] = [];
   numJoined: number = 0;
   
@@ -72,6 +75,7 @@ export class EventViewComponent implements OnInit {
   
   }
 
+  //show num attending for each event
   getNumJoined(eventId: string) {
     this.numJoined = 0;
     for(let i = 0; i < this.joinedEvent.length; i++) {
@@ -83,7 +87,7 @@ export class EventViewComponent implements OnInit {
   }
 
 
-
+//calendar filter
   byDate() {
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
@@ -95,6 +99,7 @@ export class EventViewComponent implements OnInit {
   }
 
 
+//event category filter
 filter(string: string) {
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
@@ -108,7 +113,7 @@ filter(string: string) {
  
   };
 
-
+//view all filter
   viewAll() {
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
@@ -144,7 +149,7 @@ filter(string: string) {
 
 
 
-  
+
 
 }
 

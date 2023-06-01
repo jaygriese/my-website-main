@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Event } from 'src/app/Events/models/event';
 import { EventDTO } from '../models/DTO/EventDTO';
 import { NgForm } from '@angular/forms';
 
@@ -14,11 +13,8 @@ import { NgForm } from '@angular/forms';
 export class EventCreateComponent implements OnInit {
 
   currentUser: String;
-  //currentUser is String if logged in???
   logInStatus: Boolean;
   private eventUrl: string;
-
-  // userId: number = Number(localStorage.getItem('id'));
 
 
 
@@ -30,7 +26,6 @@ export class EventCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.verifyLoggedIn();
-    //to authenticate user b4 making event
   }
 
   verifyLoggedIn() {
@@ -59,8 +54,6 @@ export class EventCreateComponent implements OnInit {
   registerNewEvent(eventInformation: NgForm) {
     let createNewEvent: EventDTO = {
       id: 0,
-      // id: eventInformation.value.id,
-      // id: this.getIdNum(localStorage.getItem('id')),
       userName: localStorage.getItem("userName"),
       eventHost: eventInformation.value.eventHost,
       contactEmail: eventInformation.value.contactEmail,

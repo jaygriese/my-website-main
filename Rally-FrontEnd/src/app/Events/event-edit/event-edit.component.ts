@@ -23,6 +23,7 @@ export class EventEditComponent implements OnInit {
   private getEventUrl: string;
   private deleteEventUrl: string;
 
+  //get event to edit
   id: string;
   event: Event;
   eventId: number;

@@ -17,17 +17,18 @@ import { JoinEventDTO } from '../models/DTO/JoinEventDTO';
 export class JoinEditComponent implements OnInit {
 
   currentUser: String;
-  //currentUser is String if logged in???
   logInStatus: Boolean;
 
   private getJoinUrl: string;
   private updateJoinUrl: string;
   private deleteJoinUrl: string;
 
+  //get event user is joining
   id: string;
   event: Event;
   eventId: number;
  
+  //get joined form
   joinedEvents: JoinEvent [] = [];
   join: JoinEvent;
   
@@ -54,8 +55,7 @@ export class JoinEditComponent implements OnInit {
 
 
     this.verifyLoggedIn();
-    //to authenticate user b4 making event
-
+   
 
     console.log(this.id);
 
@@ -80,6 +80,7 @@ export class JoinEditComponent implements OnInit {
 
   }
 
+  //find which join object to populate edit join form
   getJoin() {
     for(let i = 0; i < this.joinedEvents.length; i++) { 
       if(this.joinedEvents[i].userName === localStorage.getItem('userName') && this.joinedEvents[i].event.id === this.event.id) {
@@ -125,7 +126,6 @@ export class JoinEditComponent implements OnInit {
   deleteJoin() {
     if(confirm("Are you sure you don't want to attend this event?")) {
       this.http.post(this.deleteJoinUrl, this.join.id).subscribe(data => {
-      // this.eventService.deleteJoin(this.join.id).subscribe(data => {
         console.log(data);
       })
       this.router.navigate(["/events"])

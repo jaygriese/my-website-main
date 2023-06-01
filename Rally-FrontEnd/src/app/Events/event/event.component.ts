@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from '../models/event';
 import { EventService } from '../services/event.service';
-// import { EventViewComponent } from '../event-view/event-view.component';
 import { JoinEvent } from '../models/JoinEvent';
 
 @Component({
@@ -19,15 +18,18 @@ export class EventComponent implements OnInit {
 
 
   // private eventUrl: string;
+
+  //to capture event, event.id
   id: string;
   eventDetails: Event;
 
+  //to display comments, num attending
   joinUrl: string;
   joinedEvent: JoinEvent [] = [];
   numJoined: number = 0;
   commentDisplay: string[] = [];
 
-  // userJoined: string;
+  //verify user to display update/delete options
   userJoined: boolean = false;
 
 
@@ -49,11 +51,6 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
     this.verifyLoggedIn();
 
-  
-
-    // this.eventDetails = new Event();
-
-    // this.id = this.route.snapshot.params['id'];
 
     console.log(this.id);
 
@@ -71,17 +68,14 @@ export class EventComponent implements OnInit {
 
       this.getNumJoined();
       this.getComments();
-
       this.getUserJoined();
      
     })
 
-      // this.verifyOwner();
-
-
-
   }
 
+
+//get num attending event
   getNumJoined() {
     for(let i = 0; i < this.joinedEvent.length; i++) {
       if(this.joinedEvent[i].event.id === this.eventDetails.id) {
@@ -92,7 +86,7 @@ export class EventComponent implements OnInit {
   }
 
 
-
+//comments from join form
   getComments() {
     for(let i = 0; i < this.joinedEvent.length; i++) {
       if(this.joinedEvent[i].event.id === this.eventDetails.id && this.joinedEvent[i].comment !== null) {
@@ -102,15 +96,9 @@ export class EventComponent implements OnInit {
     return this.commentDisplay;
   }
 
-  // getUserJoined() {
-  //   for(let i = 0; i < this.joinedEvent.length; i++) {
-  //     if(this.joinedEvent[i].event.id === this.eventDetails.id && this.joinedEvent[i].userName === this.currentUser) {
-  //       this.userJoined = this.joinedEvent[i].userName;
-  //     }
-  //   }
-  //   return this.userJoined;
-  // }
 
+
+  //verify user for visible update/delete button
   getUserJoined() {
     for(let i = 0; i < this.joinedEvent.length; i++) {
       if(this.joinedEvent[i].event.id === this.eventDetails.id && this.joinedEvent[i].userName === this.currentUser) {
@@ -120,27 +108,6 @@ export class EventComponent implements OnInit {
     return this.userJoined;
   }
 
-
-
-
-// deleteEvent() {
-//   if(confirm("Are you sure you want to delete this event?")) {
-//     this.eventService.deleteEvent(this.id).subscribe(data => {
-//       console.log(data);
-//     })
-//     this.router.navigate(["/events"])
-//   .then(() => {
-//     window.location.reload();
-//   });
-//   }
- 
-// }
-
-// verifyOwner() {
-//   if(this.currentUser === this.eventDetails.userName) {
-//    this.ownerStatus = true;
-//   }
-// }
 
 
   verifyLoggedIn() {

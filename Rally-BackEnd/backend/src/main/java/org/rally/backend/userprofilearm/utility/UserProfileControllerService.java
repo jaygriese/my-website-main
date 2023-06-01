@@ -167,6 +167,7 @@ public class UserProfileControllerService {
         return targetForumPostReplies;
     }
 
+    /** Ease of use: Generates roles in DB (For project use) **/
     public static void generateRoles() {
         if (roleRepository.findAll().size() == 0) {
             Role role = new Role();
@@ -179,7 +180,7 @@ public class UserProfileControllerService {
             roleRepository.save(role1);
             roleRepository.save(role2);
         } else {
-            System.out.println("Role list made");
+            System.out.println("Role list has already been made");
         }
     }
 }

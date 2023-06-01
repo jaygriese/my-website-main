@@ -63,6 +63,7 @@ export class LoginUserComponent implements OnInit {
         localStorage.setItem('id', data.id)
 
         /* maybe I can encode incoming data so I don't have to save it to session storage */
+        console.log(data)
         this.storageService.saveUser(data);
         this.router.navigate(["/myProfile"]);
       });

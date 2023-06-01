@@ -7,6 +7,8 @@
             <br>
             <label>Enter a user name: <input type="text" name="userName" ngModel></label>        
             <div *ngIf="noUserNameError; else userNameError"><br><br></div>
+            <label>Enter a valid Email: <input type="email" name="userEmail" ngModel></label>
+            <div *ngIf="noUserEmailError; else userEmailError"><br><br></div>
             <label>Enter your password: <input type="password" name="password" ngModel></label>
             <div *ngIf="passwordForm; else incorrectPassword"><br><br></div>
             <label>Please re-enter your password: <input type="password" name="verify" ngModel></label>
@@ -73,6 +75,9 @@
 </div>
 <ng-template #userNameError>
     <p style="color: crimson">{{ errorUserName }}</p>
+</ng-template>
+<ng-template #userEmailError>
+    <p style="color: crimson">{{ errorUserEmail }}</p>
 </ng-template>
 <ng-template #incorrectPassword>
     <p style="color: crimson">{{ errorPassword }}</p>

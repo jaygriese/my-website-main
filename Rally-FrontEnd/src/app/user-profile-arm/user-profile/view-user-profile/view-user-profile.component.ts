@@ -53,6 +53,10 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
    }
 
   ngOnInit() {
+
+    if (this.authorize.isloggedIn() !== true) {
+      this.authorize.clean();
+    }
     /* This method pulls the parameters of the activated route and converts them into a usable string */
     this.activatedRoute.paramMap.subscribe(params => {
     this.viewUserName = params.get('userName');
@@ -69,7 +73,6 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
         this.router.navigate(['/user/404']);
         return;
       }
-      console.log(data)
       this.userEntityInformation = data;
       this.allPost = data.updatedPostHistoryViewUser;
       this.allPostFilter = this.allPost;

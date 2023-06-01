@@ -50,6 +50,7 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
 import { SecurityComponent } from './security/security.component';
 
 import { httpInterceptorProviders } from './security/Interceptor/jwt-handler.interceptor';
+import { EmailVerificationComponent } from './security/email-verification/email-verification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,6 +93,7 @@ import { httpInterceptorProviders } from './security/Interceptor/jwt-handler.int
     HomeComponent,
     PageNotFoundComponent,
     SecurityComponent,
+    EmailVerificationComponent,
   ],
   imports: [
     BrowserModule,

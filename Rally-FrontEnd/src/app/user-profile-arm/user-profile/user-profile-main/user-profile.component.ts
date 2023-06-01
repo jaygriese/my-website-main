@@ -64,9 +64,7 @@ export class UserProfileComponent implements OnInit {
   image: any;
 
   constructor(private http: HttpClient, 
-              private router: Router, 
               private viewUser: ViewUserService,
-              private verifyService: VerifyLogoutService, 
               private activeUserService: ViewUserService, 
               private cdref: ChangeDetectorRef,
               private authorize: AuthorizeService) {

@@ -22,7 +22,7 @@ public class JWTGenerator {
                 .setSubject(userName)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + SecurityConstants.JWT_EXPIRATION))
-                .signWith(SignatureAlgorithm.HS256, key())
+                .signWith( key(), SignatureAlgorithm.HS256)
                 .compact();
     }
 

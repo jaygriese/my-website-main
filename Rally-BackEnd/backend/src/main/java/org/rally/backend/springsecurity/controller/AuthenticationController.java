@@ -1,16 +1,18 @@
-package org.rally.backend.userprofilearm.controller;
+package org.rally.backend.springsecurity.controller;
 
+import org.rally.backend.springsecurity.models.ConfirmationToken;
 import org.rally.backend.springsecurity.payload.response.JWTResponse;
+import org.rally.backend.springsecurity.repository.ConfirmationTokenRepository;
 import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
-import org.rally.backend.springsecurity.security.services.UserDetailsImpl;
+import org.rally.backend.springsecurity.security.services.UserServicesImpl;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.Role;
 import org.rally.backend.userprofilearm.model.UserInformation;
-import org.rally.backend.userprofilearm.model.dto.AuthResponseDTO;
 import org.rally.backend.userprofilearm.model.dto.UserBundleDTO;
 import org.rally.backend.userprofilearm.exception.AuthenticationFailure;
 import org.rally.backend.userprofilearm.model.UserEntity;
 import org.rally.backend.userprofilearm.model.dto.LoginDTO;
+import org.rally.backend.userprofilearm.model.response.AuthenticationSuccess;
 import org.rally.backend.userprofilearm.model.response.ResponseMessage;
 import org.rally.backend.userprofilearm.repository.RoleRepository;
 import org.rally.backend.userprofilearm.repository.UserInformationRepository;
@@ -32,7 +34,6 @@ import java.util.stream.Collectors;
 
 
 @RestController
-//@CrossOrigin
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @RequestMapping(value = "/api")
 public class AuthenticationController {
@@ -43,6 +44,8 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     private PasswordEncoder passwordEncoder;
     private JWTGenerator jwtGenerator;
+    private UserServicesImpl userServicesImpl;
+    private ConfirmationTokenRepository confirmationTokenRepository;
 
 
     @Autowired
@@ -51,13 +54,17 @@ public class AuthenticationController {
                                     UserInformationRepository userInformationRepository,
                                     AuthenticationManager authenticationManager,
                                     PasswordEncoder passwordEncoder,
-                                    JWTGenerator jwtGenerator) {
+                                    JWTGenerator jwtGenerator,
+                                    UserServicesImpl userServicesImpl,
+                                    ConfirmationTokenRepository confirmationTokenRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
         this.jwtGenerator = jwtGenerator;
+        this.userServicesImpl = userServicesImpl;
+        this.confirmationTokenRepository = confirmationTokenRepository;
     }
 
     @PostMapping("/register")
@@ -70,6 +77,9 @@ public class AuthenticationController {
             ResponseMessage authenticationFailure = new ResponseMessage("That username is taken, please select a different user name.");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
+//        if (userRepository.existsByUserEmail(existingUser.getUserEmail())) {
+//            return ResponseEntity.badRequest().body("Error: Email is already in use");
+//        }
 
         String password = userBundleDTO.getRegisterDTO().getPassword();
         String verifyPassword = userBundleDTO.getRegisterDTO().getVerifyPassword();
@@ -78,7 +88,7 @@ public class AuthenticationController {
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
-        UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()), userBundleDTO.getRegisterDTO().getPassword());
+        UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()),userBundleDTO.getRegisterDTO().getUserEmail(), userBundleDTO.getRegisterDTO().getPassword());
 
         if (registerNewUser.getRoles().size() == 0) {
                 Role roles = roleRepository.findByName("USER").get();
@@ -103,11 +113,32 @@ public class AuthenticationController {
         UserInformation newUserInformation = new UserInformation(userId, firstName, lastName, neighborhood, city, state);
 
         userInformationRepository.save(newUserInformation);
+        userServicesImpl.saveUser(registerNewUser);
 
-        return new ResponseEntity<>(registerNewUser, HttpStatus.OK);
+        return new ResponseEntity<>(newestUser, HttpStatus.OK);
 
     }
 
+    @PostMapping("/confirm-account")
+    public ResponseEntity<?> confirmUserAccount(@RequestBody String token) {
+
+        if (confirmationTokenRepository.findByConfirmationToken(token) == null) {
+            ResponseMessage responseMessage = new ResponseMessage("Token not present");
+            return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+        }
+
+        AuthenticationSuccess response = new AuthenticationSuccess(userServicesImpl.confirmEmail(token));
+        if (response.getSuccess().equals("Email verified successfully!")) {
+            ConfirmationToken success = confirmationTokenRepository.findByConfirmationToken(token);
+            confirmationTokenRepository.delete(success);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ResponseMessage responseMessage = new ResponseMessage(token);
+            ConfirmationToken failedToken = confirmationTokenRepository.findByConfirmationToken(token);
+            confirmationTokenRepository.delete(failedToken);
+            return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+        }
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> processLoginForm(@RequestBody LoginDTO loginDTO) {

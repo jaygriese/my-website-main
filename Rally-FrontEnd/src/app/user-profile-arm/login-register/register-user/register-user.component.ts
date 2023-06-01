@@ -29,6 +29,8 @@ export class RegisterUserComponent implements OnInit {
   /* Form Error handling */
   noUserNameError: boolean;
   errorUserName: string;
+  noUserEmailError: boolean;
+  errorUserEmail: string;
   passwordForm: boolean;
   errorPassword: string;
   passwordMatchIssue: boolean;
@@ -71,6 +73,7 @@ export class RegisterUserComponent implements OnInit {
 
     let submitNewUser: RegisterDTO = {
       userName: userInformation.value.userName,
+      userEmail: userInformation.value.userEmail,
       password: userInformation.value.password,
       verifyPassword: userInformation.value.verify
     }

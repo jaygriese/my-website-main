@@ -5,6 +5,8 @@ import { Resource } from '../models/resource';
 import { ResourceComponent } from '../resource/resource.component';
 import { ResourceDTO } from '../models/ResourceDTO';
 import { NgForm } from '@angular/forms';
+import { ResourceService } from '../resource-filter/resource-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resource-update',
@@ -26,10 +28,10 @@ export class ResourceUpdateComponent implements OnInit {
 
 
 
- constructor(private http: HttpClient, private route: ActivatedRoute) {
+ constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private resourceService: ResourceService) {
     this.logInStatus = false;
     this.getResourceUrl = 'http://localhost:8080/resources/resource'
-    this.updateResourceUrl = 'http://localhost:8080/resources/resource'
+    this.updateResourceUrl = 'http://localhost:8080/resources/update/resource'
     this.resource;
     this.id = this.route.snapshot.params['id'];
    }
@@ -38,33 +40,33 @@ ngOnInit(): void {
     this.verifyLoggedIn();
      console.log(this.id);
 
-//     this.eventService.getEvent(this.id).subscribe((response: Event) => {
-//       this.resource = response;
-//       console.log(response);
-//     this.resourceId = +this.resource.id;
-//     })
+    this.resourceService.getResource(this.id).subscribe((response: Resource) => {
+      this.resource = response;
+      console.log(response);
+    this.resourceId = +this.resource.id;
+    })
 
 
 }
 
-                // updateEvent() {
-                //   this.eventService.updateEvent(this.id, this.event).subscribe((response: Event) => {
-                //     this.event = response;
+                // updateResource() {
+                //   this.resourceService.updateResource(this.id, this.resource).subscribe((response: Resource) => {
+                //     this.resource = response;
                 //   })
                 // }  
 
                 // onSubmit() {
-                //   this.updateEvent;
+                //   this.updateResource;
                 // }
 
-                // deleteEvent() {
-                //   // this.event.eventTitle = "delete";
+                // deleteResource() {
+                //   // this.resource.reosurceTitle = "delete";
 
                 // }
 
                 // onSubmit(buttonType: string): void {
                 //   if(buttonType==="update") {
-                //     this.updateEvent();
+                //     this.updateResource();
                 //   } else if(buttonType==="delete") {
                 //     this.deleteEvent();
                 //   }
@@ -82,9 +84,9 @@ ngOnInit(): void {
 updateResource(resourceForm: NgForm) {
 
     let updateResource: ResourceDTO = {
-    id: this.resourceId,
+        id: this.resourceId,
 
-    resourceName: resourceForm.value.resourceName,
+        resourceName: resourceForm.value.resourceName,
         category: resourceForm.value.category,
         address: resourceForm.value.address,
         website: resourceForm.value.website,
@@ -98,8 +100,10 @@ updateResource(resourceForm: NgForm) {
     console.log(res)
   });
 
-  resourceForm.reset();
-
+  //resourceForm.reset();
+this.router.navigate(['/resources']).then(()=>{
+    window.location.reload();
+  });
  }
 
 
@@ -118,5 +122,7 @@ logOut() {
     console.log(localStorage.getItem('userName'))
     this.logInStatus = false;
   }
+categories = ["Athletics", "Arts", "Business", "Civic", "Education", "Entertainment", "Fitness", "Hospitality", "Medical", "Park", "Religious", "Retail"];
+  categoryModel = {category: this.categories[0]}
 
 }

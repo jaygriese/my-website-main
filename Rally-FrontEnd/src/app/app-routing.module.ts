@@ -42,7 +42,7 @@ const routes: Routes = [
   {path: 'add', component: ResourceAddComponent},
   {path: 'resources', component: ResourceSearchComponent},
   {path: 'resource/update', component: ResourceUpdateComponent},
-  {path: 'resources/update/:id', component: ResourceUpdateComponent},
+  {path: 'update/:id', component: ResourceUpdateComponent},
   {path: 'event', component: EventComponent },
   {path: 'event/:id', component: EventComponent },
   {path: 'create', component: EventCreateComponent},

@@ -50,7 +50,7 @@ public class ResourceController {
         return new ResponseEntity<>(newResource, HttpStatus.OK);
     }
 
-    @PostMapping("resources/update/resource")
+    @PostMapping("/update/resource")
     public ResponseEntity<?> editResourceForm(@RequestBody ResourceDTO resourceDTO) {
         Optional<Resource> result = resourceRepository.findById(resourceDTO.getId());
         Resource updatedResource = result.get();

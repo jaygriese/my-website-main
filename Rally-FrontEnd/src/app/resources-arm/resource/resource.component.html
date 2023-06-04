@@ -39,7 +39,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-grid gap-2">
-                                <a routerLink="/resources/update/{{resourceDetails.id}}" routerLinkActive="active" class="button2" style="background-color:#85CDE3; text-align:center;">update resource</a>
+                                <a routerLink="/update/{{resourceDetails.id}}" routerLinkActive="active" class="button2" style="background-color:#85CDE3; text-align:center;">update resource</a>
                                 
                                 <button type = "button" class="button2" (click) = "deleteResource()" style="background-color: #C03E24;">delete resource</button>
                             </div>
@@ -55,8 +55,6 @@
                     <div id="details">
                         <br>
                         <p style="font-size: 15px; margin-top: -12px;">category: <span style="font-weight: bolder;">{{resourceDetails.category}}</span> </p>
-                        <!-- <p style="font-size: 15px; margin-top: -12px;">resourceName: <span style="font-weight: bolder;">{{resourceDetails.resourceName}}</span></p> -->
-                        <!-- <p style="font-size: 15px; margin-top: -12px;">category: <span style="font-weight: bolder;">{{resourceDetails.category}}</span></p> -->
                         <br>
                         <p style="font-size: 15px; font-style: italic; margin-top: 12px; ">website: <span style="font-weight: bolder;">{{resourceDetails.website}}</span></p>
                         <p style="font-size: 15px; font-style: italic; margin-top: 12px; ">email: <span style="font-weight: bolder;">{{resourceDetails.email}}</span></p>

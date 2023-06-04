@@ -1,21 +1,21 @@
-<body class="background">
+<body class="background container">
   
   <!-- login status -->
   <div *ngIf="logInStatus; else notLoggedIn">
         
     <div style="text-align: right;">
-        <p class="text-white">Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
+        <p class="text-black">Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
     </div>
 
 </div>
 <ng-template #notLoggedIn>
 
-    <p class="text-white">User is not logged in. </p>
+    <p class="text-black">User is not logged in. </p>
     <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
 </ng-template>
 
 <!-- Banner -->
-<div class="green"><h1>Search Services</h1></div>
+<div class="green" style="text-align:center"><h1>Search Services</h1></div>
 <br>
 <br>
 
@@ -29,19 +29,21 @@
 <table class="table table-striped table-dark table-hover" style="align-content: center;">
     <thead>
         <tr>
-            <th scope="col" sortable="id" (sort)="onSort($event)">#</th>
-            <th scope="col" sortable="type" (sort)="onSort($event)">Type</th>
-            <th scope="col" sortable="service" (sort)="onSort($event)">Service</th>
-            <th scope="col" sortable="category" (sort)="onSort($event)">Category</th>
-            <th scope="col" sortable="day" (sort)="onSort($event)">Days</th>
-            <th scope="col" sortable="time" (sort)="onSort($event)">Times</th>
+            <!-- <th scope="col" sortable="id" (sort)="onSort($event)">#</th> -->
+            <th scope="col" sortable="name" (sort)="onSort($event)" style="padding-left:2%;">Name</th>
+            <th scope="col" sortable="type" (sort)="onSort($event)" style="padding-left:2%;">Type</th>
+            <th scope="col" sortable="service" (sort)="onSort($event)" style="padding-left:2%;">Service/Item</th>
+            <th scope="col" sortable="category" (sort)="onSort($event)" style="padding-left:2%;">Category</th>
+            <th scope="col" sortable="day" (sort)="onSort($event)" style="padding-left:2%;">Days</th>
+            <th scope="col" sortable="time" (sort)="onSort($event)" style="padding-left:2%;">Times</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let s of servicesList | service:filter">
-            <td><a href="/{{s.id}}" routerLink='/serviceitem' [queryParams]="{id: s.id}" routerLinkActive="active">{{s.id}}</a></td>      
+            <!-- <td><a href="/{{s.id}}" routerLink='/serviceitem' [queryParams]="{id: s.id}" routerLinkActive="active">{{s.id}}</a></td>   -->
+            <td>{{s.name}}</td>    
             <td>{{s.type.type}}</td>
-            <td>{{s.service}}</td> 
+            <td><a href="/{{s.id}}" routerLink='/serviceitem' [queryParams]="{id: s.id}" routerLinkActive="active">{{s.service}}</a></td> 
             <td>{{s.category.category}}</td> 
             <td>{{s.day}}</td> 
             <td>{{s.time}}</td> 

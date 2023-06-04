@@ -46,7 +46,7 @@ export class OfferComponent implements OnInit {
   types = ["Offering", "Requesting"];
   typeModel = {type: this.types[0]};
 
-  categories = ["Art", "Administrative", "Babysitting", "Dogwalking", "Event", "Music", "Other", "Photography", "Repair", "Rideshare"];
+  categories = ["Art", "Administrative", "Babysitting", "Dogwalking", "Event", "Music", "Item", "Other", "Photography", "Repair", "Rideshare"];
   categoryModel = {category: this.categories[0]}
 
   days = ["Any", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -85,8 +85,10 @@ export class OfferComponent implements OnInit {
       console.log(submitService.time);
       console.log(submitService.description);
       console.log(submitService.email);
-      console.log(res);
+
     })
+
+
 
 }
 }

@@ -1,97 +1,88 @@
-<body class="background">
+<body style="text-align:center">
 
     <!-- login status -->
     <div *ngIf="logInStatus; else notLoggedIn">
         
         <div style="text-align: right;">
-            <p class="text-white">Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
+            <p class="text-black">Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
         </div>
     
     </div>
     <ng-template #notLoggedIn>
     
-        <p class="text-white">User is not logged in. </p>
+        <p class="text-black">User is not logged in. </p>
         <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
     </ng-template>
     
     <!-- Banner -->
-    <div class="green"><h1>{{serviceName}}</h1></div>
+    <div class="green"><h1 class="center" style="font-weight: bold;">{{serviceName}}</h1></div>
     <br>
     <br>
 
 
     <form>
         <div class="form-group row form">
-          <label for="staticUser" class="col-sm-10 col-form-label left">Name:</label>
-          <div class="col-lg-2">
-            <input type="text" readonly class="form-control-plaintext right" id="staticUser" value="{{user}}">
+          <label class="col-sm col-form-label" style="text-align:right; font-weight: bold;" for="staticUser">Name:</label>
+          <div  class="col-sm">
+            <input type="text" readonly class="form-control-plaintext" style="text-align:left" id="staticUser" value="{{user}}">
           </div>
         </div>
 
         <div class="form-group row">
-            <label for="staticType" class="col-sm-10 col-form-label left">Type:</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext center" id="staticType" value="{{type}}">
+            <label for="staticType" class="col-sm col-form-label" style="text-align:right; font-weight: bold;">Type:</label>
+            <div class="col-sm">
+              <input type="text" readonly class="form-control-plaintext" id="staticType" style="text-align:left" value="{{type}}">
             </div>
           </div>
 
           <div class="form-group row form">
-            <label for="staticCategory" class="col-sm-10 col-form-label left">Category of Service:</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext center" id="staticCategory" value="{{category}}">
+            <label for="staticCategory" class="col-sm col-form-label" style="text-align:right; font-weight: bold;">Category of Service:</label>
+            <div class="col-sm">
+              <input type="text" readonly class="form-control-plaintext" style="text-align:left" id="staticCategory" value="{{category}}">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="staticDay" class="col-sm-10 col-form-label left">Days Available:</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext center" id="staticDay" value="{{day}}">
+            <label for="staticDay" class="col-sm col-form-label" style="text-align:right; font-weight: bold;">Days Available:</label>
+            <div class="col-sm">
+              <input type="text" readonly class="form-control-plaintext" id="staticDay" style="text-align:left" value="{{day}}">
             </div>
           </div>
 
           <div class="form-group row form">
-            <label for="staticTime" class="col-sm-10 col-form-label left">Times Available:</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext center" id="staticTime" value="{{time}}">
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="staticDescription" class="col-sm-10 col-form-label left">Description:</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext center" id="staticDescription" value="{{description}}">
+            <label for="staticTime" class="col-sm col-form-label" style="text-align:right; font-weight: bold;">Times Available:</label>
+            <div class="col-sm">
+              <input type="text" readonly class="form-control-plaintext" id="staticTime" style="text-align:left" value="{{time}}">
             </div>
           </div>
 
           <div class="form-group row form">
-            <label for="staticEmail" class="col-sm-10 col-form-label left">User Email:</label>
-            <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext center" id="staticEmail" value="{{email}}">
+            <label for="staticEmail" class="col-sm col-form-label" style="text-align:right; font-weight: bold;">User Email:</label>
+            <div class="col-sm">
+              <input type="text" readonly class="form-control-plaintext" id="staticEmail" style="text-align:left" value="{{email}}">
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="text-area">
+            <label for="staticDescription" style="text-align:center; font-weight: bold;">Description:</label>
+            <br>
+            <br>
+            <div>
+              <input type="text" class="wrap-text" readonly class="form-control-plaintext wrap-text" id="staticDescription" style="text-align:center;" value="{{description}}">
             </div>
           </div>
 
+          <br>
+          <br>
+          <div *ngIf="user == currentUser; else activeLink">
+            <input type="text" readonly class="form-control-plaintext italics" id="staticItem" style="text-align:center;" value="{{type}} by {{user}}">
+            <button class="button-orange button-hover" type="button">Delete Item</button>
+          </div>
 
-
-
-
-
-
-
+          <ng-template #activeLink>
+            <button class="button-green button-hover" type="button"><a class="nav-link" routerLink="/user/{{user}}/{{ids}}" routerLinkActive="active">Book Item / Message User</a></button>
+          </ng-template>
 
     </form>
-
-
-
-
-    <!-- <div>
-        <p>{{serviceId}}</p>    
-        <p>{{type}}</p>
-        <p>{{serviceName}}</p> 
-        <p>{{category}}</p> 
-        <p>{{day}}</p> 
-        <p>{{time}}</p> 
-        <p>{{user}}</p> 
-        <p>{{description}}</p> 
-        <p>{{email}}</p> 
-    </div> -->
 </body>

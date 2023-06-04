@@ -4,8 +4,9 @@ import { LoginUserComponent } from './user-profile-arm/login-register/login-user
 import { RegisterUserComponent } from './user-profile-arm/login-register/register-user/register-user.component';
 import { EventViewComponent } from './Events/event-view/event-view.component';
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
-import { ResourcesComponent } from './resources-arm/resources/resources.component';
-import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
+import { ResourceComponent } from './resources-arm/resource/resource.component';
+import { ResourceAddComponent } from './resources-arm/resource-add/resource-add.component';
+import { ResourceUpdateComponent } from './resources-arm/resource-update/resource-update.component';
 import { EventComponent } from './Events/event/event.component';
 import { EventCreateComponent } from './Events/event-create/event-create.component';
 import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
@@ -19,13 +20,14 @@ import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-po
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
 import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
-import { ResourcesSearchComponent } from './resources-arm/resources-search/resources-search.component';
+import { ResourceSearchComponent } from './resources-arm/resource-search/resource-search.component';
 import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
 import { SearchComponent } from './services-arm/search/search.component';
 import { ServiceItemComponent } from './services-arm/service-item/service-item.component';
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+
 
 
 const routes: Routes = [
@@ -35,9 +37,12 @@ const routes: Routes = [
   {path: 'events', component: EventViewComponent},
   {path: 'forum', component: ForumComponent},
   {path: 'communityHomeForum', component: CommunityHomeComponent},
-  {path: 'resources', component: ResourcesComponent},
-  {path: 'resourcesAdd', component: ResourcesAddComponent},
-  {path: 'resourcesSearch', component: ResourcesSearchComponent},
+  {path: 'resource', component: ResourceComponent},
+  {path: 'resource/:id', component: ResourceComponent },
+  {path: 'add', component: ResourceAddComponent},
+  {path: 'resources', component: ResourceSearchComponent},
+  {path: 'resource/update', component: ResourceUpdateComponent},
+  {path: 'resources/update/:id', component: ResourceUpdateComponent},
   {path: 'event', component: EventComponent },
   {path: 'event/:id', component: EventComponent },
   {path: 'create', component: EventCreateComponent},
@@ -56,7 +61,8 @@ const routes: Routes = [
   {path: 'serviceitem', component: ServiceItemComponent},
   {path: 'edit/:id', component: EventEditComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'user/404', component: PageNotFoundComponent}
+  {path: 'user/404', component: PageNotFoundComponent},
+
 ];
 
 @NgModule({

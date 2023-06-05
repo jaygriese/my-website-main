@@ -2,7 +2,7 @@
     background-color: #0EBB9A;
     text-align: center;
 	color:#ffffff;
-	font-family: montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size:20px;
     font-weight: 500;
     width: 125px;
@@ -15,7 +15,7 @@
     background-color: #0EBB9A;
     text-align: center;
 	color:#ffffff;
-	font-family: montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size:20px;
     font-weight: 500;
     width: 125px;
@@ -33,7 +33,7 @@
 
 
 #list_head {
-    font-family:Oswald, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     text-align: left;
     font-size: 60px;
     color: black;
@@ -46,7 +46,7 @@
 	/* border-radius:7px; */
 	display: internal;
 	color:#ffffff;
-	font-family: montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size:30px;
 	font-weight:bold;
     text-shadow: 0.5px 0.5px 0px #000;
@@ -55,24 +55,19 @@
     float: right;
 }
 
-#event_display1 {
+#event_display {
     text-align: left;
     font-size: 35px;
-    font-family: montserrat, sans-serif;
+
 }
 
-#event_display2 {
-    text-align: left;
-    font-size: 35px;
-    font-family: montserrat, sans-serif;
-}
 
 
 .button2 {
     background-color: #F9A605;
 	/* border-radius:6px;  */
 	color:#ffffff;
-	font-family:montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size:22px;
 	font-weight:bold;
     text-shadow: 0.5px 0.5px 0px #000;
@@ -85,7 +80,7 @@
 .card-body {
     text-align: left;
     font-size: 28px;
-    font-family: montserrat, sans-serif;
+    /* font-family: montserrat, sans-serif; */
 }
 
 

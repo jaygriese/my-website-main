@@ -2,7 +2,7 @@
    background-color: #0EBB9A;
    text-align: center;
   color:#ffffff;
-  font-family: montserrat, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size:20px;
    font-weight: 500;
    width: 125px;
@@ -15,7 +15,7 @@
    background-color: #0EBB9A;
    text-align: center;
   color:#ffffff;
-  font-family: montserrat, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size:20px;
    font-weight: 500;
    width: 125px;
@@ -33,7 +33,7 @@
 
 
 #list_head {
-   font-family:Oswald, sans-serif;
+   font-family: 'Open Sans', sans-serif;
    text-align: left;
    font-size: 60px;
    color: black;
@@ -58,7 +58,7 @@ input[type=text] {
  
 
  label {
-    font-family: montserrat, sans-serif;
+    /* font-family: montserrat, sans-serif; */
     font-size: x-large;
  }
 
@@ -68,7 +68,7 @@ input[type=text] {
   /* border-radius:7px; */
   display: internal;
   color:#ffffff;
-  font-family: montserrat, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size:30px;
   font-weight: bold;
    text-shadow: 1px 1px 1px #000;

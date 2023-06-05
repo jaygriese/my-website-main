@@ -2,7 +2,7 @@
   background-color: #0EBB9A;
   text-align: center;
 color:#ffffff;
-font-family: montserrat, sans-serif;
+font-family: 'Open Sans', sans-serif;
 font-size:20px;
   font-weight: 500;
   width: 125px;
@@ -15,7 +15,7 @@ text-decoration: none;
   background-color: #0EBB9A;
   text-align: center;
 color:#ffffff;
-font-family: montserrat, sans-serif;
+font-family: 'Open Sans', sans-serif;
 font-size:20px;
   font-weight: 500;
   width: 125px;
@@ -31,10 +31,8 @@ text-decoration: none;
 
 
 
-
-
 #list_head {
-    font-family:Oswald, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     text-align: left;
     font-size: 60px;
     color: black;
@@ -47,7 +45,7 @@ text-decoration: none;
 	/* border-radius:7px; */
 	display: internal;
 	color:#ffffff;
-	font-family: montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size:30px;
 	font-weight:bold;
     text-shadow: 0.5px 0.5px 0px #000;
@@ -60,14 +58,12 @@ text-decoration: none;
 #event_display1 {
     text-align: left;
     font-size: 35px;
-    font-family: montserrat, sans-serif;
     margin-top: -10px;
 }
 
 #event_display2 {
 text-align: left;
 font-size: 35px;
-font-family: montserrat, sans-serif;
 }
 
 
@@ -75,7 +71,7 @@ font-family: montserrat, sans-serif;
   background-color: #F9A605;
   /* border-radius:6px;  */
   color:#ffffff;
-  font-family: montserrat, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size:20px;
   font-weight: 500;
   /* text-shadow: 0.5px 0.5px 0px #000; */

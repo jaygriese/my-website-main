@@ -75,7 +75,7 @@
             </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="container">
-                    <ul class="nav justify-content-end" style="margin-right: 50px; font-family: 'montserrat', sans-serif;">
+                    <ul class="nav justify-content-end" style="margin-right: 50px; font-family: 'Open Sans', sans-serif;">
                     <li class="nav-item"><a class="nav-link" routerLink="/events" routerLinkActive="active">EVENTS</a></li>
                     <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active">FORUMS</a></li>
                     <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">EATS</a></li>
@@ -132,7 +132,9 @@
 
             </div>
             <div class="col-7">
-                <p style="text-align: left; font-size: 30px; ; font-family: Oswald, sans-serif; font-weight: 800; margin-bottom: -15px;">{{eventDetails.eventTitle}}<span style="font-family: oswald, sans-serif; font-size: 30px; font-weight: 700; float: right; margin-bottom: -15px;">{{eventDetails.datetime  |  date:'short'}}</span></p>
+                <p style="text-align: left; font-size: 30px; font-family: 'Open Sans', sans-serif; font-weight: 800; margin-bottom: -15px;">
+                    {{eventDetails.eventTitle}}<span style="font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 500; float: right; margin-bottom: -15px;">
+                        {{eventDetails.datetime  |  date:'short'}}</span></p>
                 <hr style="height:4px; color: black; background-color: black">
             </div>
         </div>
@@ -201,14 +203,14 @@
                 
                     </p> 
                     <br>
-                    <p style="font-size: 20px; font-weight: bolder;">address: </p>
-                    <p style="margin-top: -15px;">{{eventDetails.eventAddress}}</p>
+                    <p style="font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: 700;">address: </p>
+                    <p style="font-family: 'Open Sans', sans-serif; margin-top: -15px;">{{eventDetails.eventAddress}}</p>
                     <br>
-                    <p style="font-size: 20px; font-weight: bolder;">description:</p>
+                    <p style="font-size: 20px; font-weight: 700;">description:</p>
                     <p style="margin-top: -15px;">{{eventDetails.description}}</p> 
                     <br> 
                     <a *ngIf="this.currentUser === eventDetails.userName" 
-                    routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm" style="font-size: 20px; font-weight: 500;">UPDATE EVENT</a>
+                    routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm" style="font-size: 20px; font-weight: 500;">update event</a>
 
                     <br>
                     <br>

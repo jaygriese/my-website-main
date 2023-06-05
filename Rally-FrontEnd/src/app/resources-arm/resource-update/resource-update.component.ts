@@ -87,8 +87,12 @@ updateResource(resourceForm: NgForm) {
         id: this.resourceId,
 
         resourceName: resourceForm.value.resourceName,
+        neighborhood: resourceForm.value.neighborhood,
         category: resourceForm.value.category,
         address: resourceForm.value.address,
+        city: resourceForm.value.city,
+        state: resourceForm.value.state,
+        zip: resourceForm.value.zip,
         website: resourceForm.value.website,
         telephoneNumber: resourceForm.value.telephoneNumber,
         email: resourceForm.value.email,

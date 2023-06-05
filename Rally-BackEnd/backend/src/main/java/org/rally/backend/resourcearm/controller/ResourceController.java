@@ -39,7 +39,11 @@ public class ResourceController {
         Resource newResource = new Resource(
                 resourceDTO.getResourceName(),
                 resourceDTO.getCategory(),
+                resourceDTO.getNeighborhood(),
                 resourceDTO.getAddress(),
+                resourceDTO.getCity(),
+                resourceDTO.getState(),
+                resourceDTO.getZip(),
                 resourceDTO.getWebsite(),
                 resourceDTO.getTelephoneNumber(),
                 resourceDTO.getEmail(),
@@ -56,7 +60,11 @@ public class ResourceController {
         Resource updatedResource = result.get();
         updatedResource.setResourceName(resourceDTO.getResourceName());
         updatedResource.setCategory(resourceDTO.getCategory());
+        updatedResource.setNeighborhood(resourceDTO.getNeighborhood());
         updatedResource.setAddress(resourceDTO.getAddress());
+        updatedResource.setCity(resourceDTO.getCity());
+        updatedResource.setState(resourceDTO.getState());
+        updatedResource.setState(resourceDTO.getZip());
         updatedResource.setWebsite(resourceDTO.getWebsite());
         updatedResource.setTelephoneNumber(resourceDTO.getTelephoneNumber());
         updatedResource.setEmail(resourceDTO.getEmail());

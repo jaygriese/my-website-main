@@ -10,7 +10,15 @@ public class Resource extends AbstractEntity {
     @NotBlank(message = "How would you categorize the resource?")
     private String category;
     @NotBlank(message = "Where is the resource located?")
+    private String neighborhood;
+    @NotBlank(message = "Where is the resource located?")
     private String address;
+    @NotBlank(message = "Where is the resource located?")
+    private String city;
+    @NotBlank(message = "Where is the resource located?")
+    private String state;
+    @NotBlank(message = "Where is the resource located?")
+    private String zip;
     @NotBlank(message = "What is the resource's website?")
     private String website;
     @NotBlank(message = "Who can we contact?")
@@ -20,11 +28,15 @@ public class Resource extends AbstractEntity {
     @NotBlank(message = "Tell us more about this resource!")
     private String description;
 
-    public Resource(String resourceName, String category, String address, String website, String telephoneNumber, String email, String description) {
+    public Resource(String resourceName, String category, String neighborhood, String address, String city, String state, String zip, String website, String telephoneNumber, String email, String description) {
         this.resourceName = resourceName;
-        this.address = address;
-        this.website = website;
         this.category = category;
+        this.neighborhood = neighborhood;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.website = website;
         this.telephoneNumber = telephoneNumber;
         this.email = email;
         this.description = description;
@@ -49,12 +61,42 @@ public class Resource extends AbstractEntity {
         this.category = category;
     }
 
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     public String getWebsite() {
@@ -94,7 +136,11 @@ public class Resource extends AbstractEntity {
         return "Resource{" +
                 "resourceName'" + resourceName + '\'' +
                 "category'" + category + '\'' +
+                "neighborhood" + neighborhood +'\''+
                 "address'" + address + '\'' +
+                "city" + city +'\''+
+                "state" + state +'\''+
+                "zip" + zip +'\''+
                 "website'" + website + '\'' +
                 "telephoneNumber'" + telephoneNumber + '\'' +
                 "email'" + email + '\'' +

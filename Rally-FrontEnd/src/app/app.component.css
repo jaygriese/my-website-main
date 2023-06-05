@@ -43,6 +43,9 @@
 /* INCLUDE class="container" IN BODY TAG, WILL ALIGN WITH NAV BAR MARGINS */
 body {
     margin-top: 120px;
+
+/* used this as colored gradient for background on user profile and view profile pages */
+    /* background: radial-gradient(#abe7dc, #ffffff 70%); */
 }
 
 /* can use for main heading on pages? */
@@ -52,6 +55,12 @@ body {
     font-size: 60px;
     color: black;
     font-weight: 700;
+}
+
+/* this takes the bright blue, underlined link away and changes to black (or adjust to color of your choice) */
+a {
+    color: black;
+    text-decoration: none;
 }
 
 
@@ -97,6 +106,7 @@ body {
 
   /* small button, outline changes to solid when hover */
   /* use with class="btn btn-outline-info btn-xm" */
+
   .btn {
     background-color: #fff;
     border-color:  #85CDE3;
@@ -115,16 +125,19 @@ body {
 
 /* used class="form-control form-control-lg" inside any input tag for forms */
 /* used class="form-label" inside any label for forms */
+/* generally set form input boxes to be around 500px, left aligned */
 /* Radio/Checkbox: wrap in div with class="form-check", used class="form-check-input" for input and class="form-check-label" for label */
 
 
 /* can use to change inside to text box (or whatever type= on form) */
+
   input[type=text] {
     background-color: #f6f4f3;
  }
 
 
  /* can use to position text of label above input box */
+
  .form-label {
     margin-bottom: -5px;
  }

@@ -1,8 +1,10 @@
-/* .logInButton {
+
+/* NAV BAR AT TOP */
+.logInButton {
     background-color: #0EBB9A;
     text-align: center;
 	color:#ffffff;
-	font-family: montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size:20px;
     font-weight: 500;
     width: 125px;
@@ -11,8 +13,116 @@
 	text-decoration: none;
 }
 
+.logOutButton {
+    background-color: #0EBB9A;
+    text-align: center;
+	color:#ffffff;
+	font-family: 'Open Sans', sans-serif;
+	font-size:20px;
+    font-weight: 500;
+    width: 125px;
+    height: 65px;
+	text-decoration: none;
+}
+
 .nav-link {
     color: black;
     font-weight: 450;
     font-size: 15px;
-} */
+}
+
+
+
+
+/* MAIN */
+
+
+/* Used style="font-family: 'Open Sans', sans-serif;" for any larger heading */
+
+/* INCLUDE class="container" in body tag, WILL ALIGN WITH NAV BAR MARGINS */
+body {
+    margin-top: 120px;
+}
+
+/* can use for main heading on pages? */
+#list_head {
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    font-size: 60px;
+    color: black;
+    font-weight: 700;
+}
+
+
+
+/* BUTTONS */
+
+/* alternate with colors  blue #85CDE3, orange #F9A605, or red (delete)#C03E24 */
+
+/* large button I've used at top of pages */
+.button1 {
+    background-color: #0EBB9A;
+	display: internal;
+	color:#ffffff;
+	font-family: 'Open Sans', sans-serif;
+	font-size:30px;
+	font-weight:bold;
+    text-shadow: 0.5px 0.5px 0px #000;
+	padding:15px 75px;
+	text-decoration: none;
+}
+
+
+
+/* medium-sized button */
+.button2 {
+    background-color: #F9A605;
+    color:#ffffff;
+    font-family: 'Open Sans', sans-serif;
+    font-size:20px;
+    font-weight: 500;
+    padding:12px 12px;
+    text-decoration:none;
+    width: 150px;
+  }
+
+
+  /* small button, outline changes to solid when hover */
+  /* use with class="btn btn-outline-info btn-xm" */
+  .btn {
+    background-color: #fff;
+    border-color:  #85CDE3;
+    transition: all .7s;
+    border-radius: 0;
+  }
+  .btn:hover {
+    color: #fff;
+    background-color:  #85CDE3;
+    border-color:  #85CDE3;
+  }
+
+
+
+/* FORMS */
+
+/* used class="form-control form-control-lg" inside any input tag for forms */
+/* used class="form-label" inside any label for forms */
+
+
+/* can use to change inside to text box (or whatever type= on form) */
+  /* input[type=text] {
+    background-color: #f6f4f3;
+ } */
+
+
+ /* can use to position text of label above input box */
+ /* .form-label {
+    margin-bottom: -5px;
+ } */
+
+
+
+
+
+
+

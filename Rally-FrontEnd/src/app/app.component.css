@@ -56,6 +56,8 @@ body {
 
 
 
+
+
 /* BUTTONS */
 
 /* alternate with colors green #0EBB9A, blue #85CDE3, orange #F9A605, or red (delete)#C03E24 */
@@ -113,6 +115,7 @@ body {
 
 /* used class="form-control form-control-lg" inside any input tag for forms */
 /* used class="form-label" inside any label for forms */
+/* Radio/Checkbox: wrap in div with class="form-check", used class="form-check-input" for input and class="form-check-label" for label */
 
 
 /* can use to change inside to text box (or whatever type= on form) */

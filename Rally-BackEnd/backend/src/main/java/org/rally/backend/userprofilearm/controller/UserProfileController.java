@@ -7,6 +7,7 @@ import org.rally.backend.forumarm.models.Replies;
 import org.rally.backend.forumarm.repository.ForumPostRepository;
 import org.rally.backend.forumarm.repository.RepliesRepository;
 import org.rally.backend.servicesarm.repository.ServiceRepository;
+import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.*;
 import org.rally.backend.userprofilearm.model.dto.DirectMessageDTO;
@@ -42,6 +43,7 @@ public class UserProfileController {
     HiddenPostRepository hiddenPostRepository;
     ServiceRepository serviceRepository;
     EventRepository eventRepository;
+    private JWTGenerator jwtGenerator;
 
 
     @Autowired
@@ -50,7 +52,7 @@ public class UserProfileController {
                                  DirectMessageRepository directMessageRepository, ProfilePictureRepository profilePictureRepository,
                                  ForumPostRepository forumPostRepository, RepliesRepository repliesRepository,
                                  HiddenPostRepository hiddenPostRepository, ServiceRepository serviceRepository,
-                                 EventRepository eventRepository) {
+                                 EventRepository eventRepository, JWTGenerator jwtGenerator) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
@@ -61,6 +63,7 @@ public class UserProfileController {
         this.hiddenPostRepository = hiddenPostRepository;
         this.serviceRepository = serviceRepository;
         this.eventRepository = eventRepository;
+        this.jwtGenerator = jwtGenerator;
     }
 
     /** GET REQUEST **/
@@ -97,7 +100,12 @@ public class UserProfileController {
     }
 
     @GetMapping("/getMainUserBundleInformation/{userName}")
-    public ResponseEntity<?> getMainUserBundle(@PathVariable String userName) {
+    public ResponseEntity<?> getMainUserBundle(@PathVariable String userName, @RequestHeader (name="authorization") String token) {
+
+
+        if (!jwtGenerator.validateToken(token.substring(7, token.length()))) {
+            return new ResponseEntity<>(new ResponseMessage("Bad Token"), HttpStatus.OK);
+        }
 
         Optional<UserEntity> areYouThere = Optional.ofNullable(userRepository.findByUserName(userName));
         if (areYouThere.isEmpty()) {

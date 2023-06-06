@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UserInfoDTO } from '../../models/dto/UserInfoDTO';
 import { UserBundleDTO } from '../../models/dto/UserBundleDTO';
 import { ViewUserService } from '../../user-profile/services/view-user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-register-user',
@@ -29,6 +30,8 @@ export class RegisterUserComponent implements OnInit {
   /* Form Error handling */
   noUserNameError: boolean;
   errorUserName: string;
+  noUserEmailError: boolean;
+  errorUserEmail: string;
   passwordForm: boolean;
   errorPassword: string;
   passwordMatchIssue: boolean;
@@ -39,14 +42,16 @@ export class RegisterUserComponent implements OnInit {
   lastNameMessage: string;
   createNewUser: boolean;
   postResponseMessage: string;
+  postResponseMessageValid: string;
 
   constructor(private http: HttpClient, 
               private router: Router, 
-              private registerService: ViewUserService) {
+              private registerService: ViewUserService,
+              private cookieService: CookieService) {
    }
 
   ngOnInit(): void {
-    if (localStorage.getItem("userName") !== null) {
+    if (this.cookieService.check('token')) {
       this.router.navigate(["/myProfile"])
     }
   } 
@@ -71,6 +76,7 @@ export class RegisterUserComponent implements OnInit {
 
     let submitNewUser: RegisterDTO = {
       userName: userInformation.value.userName,
+      userEmail: userInformation.value.userEmail,
       password: userInformation.value.password,
       verifyPassword: userInformation.value.verify
     }
@@ -118,14 +124,13 @@ export class RegisterUserComponent implements OnInit {
       }
   
       this.http.post('http://localhost:8080/api/register', userBundle).subscribe((response: any) => {
-        if (response.message) {
-            this.postResponseMessage = response.message;
+        if (response.message === "Verify your account with the link sent to your email!") {
+            this.postResponseMessageValid = response.message;
             return;
           }  else {
-
-            localStorage.setItem('userName', this.registerUser.userName)
-            localStorage.setItem('id', response.id)
-            this.router.navigate(["/myProfile"])
+            this.postResponseMessage = response.message;
+            return;
+            // this.router.navigate(["/login"])
             }
         });
 

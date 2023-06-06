@@ -7,7 +7,6 @@ import { RegisterUserComponent } from './user-profile-arm/login-register/registe
 import { LoginUserComponent } from './user-profile-arm/login-register/login-user/login-user.component';
 import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 import { FormsModule } from '@angular/forms';
-import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { EventComponent } from './Events/event/event.component';
@@ -37,7 +36,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
-
+import { SecurityComponent } from './security/security.component';
+import { httpInterceptorProviders } from './security/Interceptor/jwt-handler.interceptor';
+import { EmailVerificationComponent } from './security/email-verification/email-verification.component';
+import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,14 +63,16 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     ViewPostComponent,
     ViewUserProfileComponent,
     UserProfileComponent,
-    ForumSearchResultsComponent,
     SearchComponent,
+    ForumSearchResultsComponent,
     SortableHeaderDirective,
     ServicePipe,
     ServiceItemComponent,
     EventEditComponent,
     HomeComponent,
     PageNotFoundComponent,
+    SecurityComponent,
+    EmailVerificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,7 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     MatCardModule,
     MatNativeDateModule,
   ],
-  providers: [CookieService, ThemeserviceService],
+  providers: [CookieService, ThemeserviceService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -32,7 +32,7 @@ export class ViewUserService {
   }
 
   getMainUserBundleByUserName(userName: string) {
-    return this.http.get(`${this.getMainUserBundle}` + userName);
+    return this.http.get<any>(`${this.getMainUserBundle}` + userName);
   }
 
   /* Post Methods */

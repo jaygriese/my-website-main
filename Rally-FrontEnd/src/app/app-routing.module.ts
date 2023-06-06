@@ -8,7 +8,6 @@ import { ResourcesHomeComponent } from './resources-arm/resources-home/resources
 import { ResourcesAddComponent } from './resources-arm/resources-add/resources-add.component';
 import { EventComponent } from './Events/event/event.component';
 import { EventCreateComponent } from './Events/event-create/event-create.component';
-import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
 import { ServicesHomeComponent } from './services-arm/services-home/services-home.component';
 import { OfferComponent } from './services-arm/offer/offer.component';
 import { IntroductionsComponent } from './community-forum-arm/forum/introductions/introductions.component';
@@ -25,6 +24,8 @@ import { ServiceItemComponent } from './services-arm/service-item/service-item.c
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
+import { EmailVerificationComponent } from './security/email-verification/email-verification.component';
 
 
 const routes: Routes = [
@@ -53,7 +54,8 @@ const routes: Routes = [
   {path: 'serviceitem', component: ServiceItemComponent},
   {path: 'edit/:id', component: EventEditComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'user/404', component: PageNotFoundComponent}
+  {path: 'user/404', component: PageNotFoundComponent},
+  {path: 'confirm-account/:token', component: EmailVerificationComponent}
 ];
 
 @NgModule({

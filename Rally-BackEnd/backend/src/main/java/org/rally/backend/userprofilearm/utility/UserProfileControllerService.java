@@ -166,4 +166,21 @@ public class UserProfileControllerService {
         }
         return targetForumPostReplies;
     }
+
+    /** Ease of use: Generates roles in DB (For project use) **/
+    public static void generateRoles() {
+        if (roleRepository.findAll().size() == 0) {
+            Role role = new Role();
+            role.setName("USER");
+            Role role1 = new Role();
+            role1.setName("ADMIN");
+            Role role2 = new Role();
+            role2.setName("MODERATOR");
+            roleRepository.save(role);
+            roleRepository.save(role1);
+            roleRepository.save(role2);
+        } else {
+            System.out.println("Role list has already been made");
+        }
+    }
 }

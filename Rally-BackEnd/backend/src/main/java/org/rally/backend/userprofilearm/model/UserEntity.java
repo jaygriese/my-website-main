@@ -1,6 +1,8 @@
 package org.rally.backend.userprofilearm.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.rally.backend.forumarm.models.ForumPostLike;
@@ -20,6 +22,11 @@ public class UserEntity {
     @Size(min = 3, max = 20)
     private String userName;
 
+    @NotEmpty
+    @NotNull
+    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    private String userEmail;
+
     @NotNull
     private String pwHash;
 
@@ -31,13 +38,31 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles = new ArrayList<>();
+    private boolean accountVerified;
 
     public UserEntity() {
     }
 
-    public UserEntity(String userName, String password) {
+    public UserEntity(String userName,String userEmail, String password) {
         this.userName = userName;
+        this.userEmail = userEmail;
         this.pwHash = encoder.encode(password);
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public Boolean isAccountVerified() {
+        if (this.accountVerified) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void setAccountVerified(boolean accountVerified) {
+        this.accountVerified = accountVerified;
     }
 
     public List<Role> getRoles() {
@@ -54,6 +79,10 @@ public class UserEntity {
 
     public String getUserName() {
         return userName;
+    }
+
+    public String getPwHash() {
+        return pwHash;
     }
 
     public boolean isMatchingPassword(String password) {

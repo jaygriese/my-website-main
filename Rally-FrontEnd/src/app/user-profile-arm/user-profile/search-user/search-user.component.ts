@@ -3,6 +3,7 @@ import { UserEntity } from '../../models/UserEntity';
 import { ViewUserService } from '../services/view-user.service';
 import { VerifyLogoutService } from 'src/app/user-profile-arm/security/verify-logout.service';
 import { NgForm } from '@angular/forms';
+import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
 
 @Component({
   selector: 'app-search-user',
@@ -15,12 +16,15 @@ export class SearchUserComponent implements OnInit {
   userList: UserEntity[]; 
   logInStatus: Boolean;
 
-  constructor(private userService: ViewUserService, 
-              private verifyService: VerifyLogoutService) { }
+  constructor(private userService: ViewUserService,
+              private authorize: AuthorizeService) { }
 
   ngOnInit(): void {
     /* Makes sure user is logged in before */
-    this.logInStatus = this.verifyService.verifyLoggedIn();
+    if (this.authorize.isloggedIn() !== true) {
+      this.authorize.logOut();
+    }
+    
     this.userService.getUserList().subscribe((data: UserEntity[]) => {
       this.userList = data;
       /* Remove active user from list */
@@ -29,6 +33,7 @@ export class SearchUserComponent implements OnInit {
   }
 
   /* Search for specific user by name or by character */
+  /* This method needs to be refactored to be handled by backend */
   searchForUser(searchUser: NgForm) {
     let filterUser: any[] = [];
     let search = searchUser.value.search.toLowerCase().split('');

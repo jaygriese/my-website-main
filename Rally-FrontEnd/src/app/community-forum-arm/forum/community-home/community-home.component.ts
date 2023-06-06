@@ -87,5 +87,6 @@ Dark(){
       console.log(res)
       this.getPosts();
     });
+    
   }
 }

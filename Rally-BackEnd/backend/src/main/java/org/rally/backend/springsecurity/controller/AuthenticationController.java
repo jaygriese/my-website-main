@@ -3,6 +3,7 @@ package org.rally.backend.springsecurity.controller;
 import org.rally.backend.springsecurity.models.ConfirmationToken;
 import org.rally.backend.springsecurity.payload.response.JWTResponse;
 import org.rally.backend.springsecurity.repository.ConfirmationTokenRepository;
+import org.rally.backend.springsecurity.repository.JWTBlackListRepository;
 import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
 import org.rally.backend.springsecurity.security.services.UserServicesImpl;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
@@ -46,6 +47,7 @@ public class AuthenticationController {
     private JWTGenerator jwtGenerator;
     private UserServicesImpl userServicesImpl;
     private ConfirmationTokenRepository confirmationTokenRepository;
+    private JWTBlackListRepository jwtBlackListRepository;
 
 
     @Autowired
@@ -56,7 +58,8 @@ public class AuthenticationController {
                                     PasswordEncoder passwordEncoder,
                                     JWTGenerator jwtGenerator,
                                     UserServicesImpl userServicesImpl,
-                                    ConfirmationTokenRepository confirmationTokenRepository) {
+                                    ConfirmationTokenRepository confirmationTokenRepository,
+                                    JWTBlackListRepository jwtBlackListRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
@@ -65,6 +68,7 @@ public class AuthenticationController {
         this.jwtGenerator = jwtGenerator;
         this.userServicesImpl = userServicesImpl;
         this.confirmationTokenRepository = confirmationTokenRepository;
+        this.jwtBlackListRepository = jwtBlackListRepository;
     }
 
     @PostMapping("/register")
@@ -80,7 +84,7 @@ public class AuthenticationController {
         }
         if (userRepository.existsByUserEmail(existingEmail)) {
             ResponseMessage authenticationFailure = new ResponseMessage("Error: Email is already in use");
-            return ResponseEntity.badRequest().body("Error: Email is already in use");
+            return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
         String password = userBundleDTO.getRegisterDTO().getPassword();
@@ -93,7 +97,7 @@ public class AuthenticationController {
         UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()),userBundleDTO.getRegisterDTO().getUserEmail(), userBundleDTO.getRegisterDTO().getPassword());
 
         if (registerNewUser.getRoles().size() == 0) {
-                Role roles = roleRepository.findByName("USER").get();
+            Role roles = roleRepository.findByName("USER").get();
             registerNewUser.setRoles(Collections.singletonList(roles));
         }
 
@@ -184,6 +188,13 @@ public class AuthenticationController {
                 theUser.getUserEmail(),
                 roles);
 
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logoutConfirmed(@RequestHeader (name="authorization") String token) {
+        jwtGenerator.invalidateToken(token.substring(7, token.length()));
+        ResponseMessage response = new ResponseMessage("User logged out");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

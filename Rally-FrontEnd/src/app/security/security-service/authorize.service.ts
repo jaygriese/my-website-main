@@ -12,7 +12,8 @@ const AUTH_API = 'http://localhost:8080/verify/'
 export class AuthorizeService {
 
   constructor(private router: Router,
-              private cookieService: CookieService) { }
+              private cookieService: CookieService,
+              private http: HttpClient) { }
 
   /* Need to figure out how to get the interceptor to see this. */
   isloggedIn(): any {
@@ -47,11 +48,15 @@ export class AuthorizeService {
   }
 
   logOut() {
+    this.http.get('http://localhost:8080/api/logout').subscribe((data: any) =>{
+      console.log(data);
+    })
     sessionStorage.clear();
     localStorage.removeItem('userName');
     localStorage.removeItem('id');
     this.cookieService.delete('token');
     this.router.navigate(["/login"])
+    
     return false;
   }
 

@@ -7,6 +7,8 @@ import org.rally.backend.forumarm.models.Replies;
 import org.rally.backend.forumarm.repository.ForumPostRepository;
 import org.rally.backend.forumarm.repository.RepliesRepository;
 import org.rally.backend.servicesarm.repository.ServiceRepository;
+import org.rally.backend.springsecurity.models.BadJWT;
+import org.rally.backend.springsecurity.repository.JWTBlackListRepository;
 import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.*;
@@ -43,6 +45,7 @@ public class UserProfileController {
     HiddenPostRepository hiddenPostRepository;
     ServiceRepository serviceRepository;
     EventRepository eventRepository;
+    JWTBlackListRepository jwtBlackListRepository;
     private JWTGenerator jwtGenerator;
 
 
@@ -52,7 +55,8 @@ public class UserProfileController {
                                  DirectMessageRepository directMessageRepository, ProfilePictureRepository profilePictureRepository,
                                  ForumPostRepository forumPostRepository, RepliesRepository repliesRepository,
                                  HiddenPostRepository hiddenPostRepository, ServiceRepository serviceRepository,
-                                 EventRepository eventRepository, JWTGenerator jwtGenerator) {
+                                 EventRepository eventRepository, JWTGenerator jwtGenerator,
+                                 JWTBlackListRepository jwtBlackListRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
@@ -64,6 +68,7 @@ public class UserProfileController {
         this.serviceRepository = serviceRepository;
         this.eventRepository = eventRepository;
         this.jwtGenerator = jwtGenerator;
+        this.jwtBlackListRepository = jwtBlackListRepository;
     }
 
     /** GET REQUEST **/
@@ -102,9 +107,11 @@ public class UserProfileController {
     @GetMapping("/getMainUserBundleInformation/{userName}")
     public ResponseEntity<?> getMainUserBundle(@PathVariable String userName, @RequestHeader (name="authorization") String token) {
 
+        Optional<BadJWT> test = Optional.ofNullable(jwtBlackListRepository.findByBadToken(token.substring(7, token.length())));
 
-        if (!jwtGenerator.validateToken(token.substring(7, token.length()))) {
-            return new ResponseEntity<>(new ResponseMessage("Bad Token"), HttpStatus.OK);
+        if (!jwtGenerator.validateToken(token.substring(7, token.length())) || test.isPresent()) {
+            ResponseMessage responseMessage = new ResponseMessage("Bad Token");
+            return new ResponseEntity<>(responseMessage, HttpStatus.BAD_REQUEST);
         }
 
         Optional<UserEntity> areYouThere = Optional.ofNullable(userRepository.findByUserName(userName));
@@ -177,10 +184,10 @@ public class UserProfileController {
         return new ResponseEntity<>(currentPostSettings, HttpStatus.OK);
     }
 
-    @GetMapping(path = {"/userProfileImage/{userId}"})
-    public ResponseEntity<?> getImageDetails(@PathVariable("userId") String userId) throws IOException {
+    @GetMapping(path = {"/userProfileImage/{userName}"})
+    public ResponseEntity<?> getImageDetails(@PathVariable("userName") String userName) throws IOException {
 
-        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByUserId(userId);
+        final Optional<ProfilePicture> dbImage = profilePictureRepository.findByUserName(userName);
         if (dbImage.isEmpty()) {
             ResponseMessage responseMessage = new ResponseMessage("User does not have a profile picture.");
             return new ResponseEntity<>(responseMessage, HttpStatus.OK);
@@ -188,7 +195,7 @@ public class UserProfileController {
 
         return new ResponseEntity<>(ProfilePicture.builder()
                 .id(dbImage.get().getId())
-                .userId(dbImage.get().getUserId())
+                .userName(dbImage.get().getUserName())
                 .type(dbImage.get().getType())
                 .image(ImageUtility.decompressImage(dbImage.get().getImage())).build(), HttpStatus.OK);
     }
@@ -202,13 +209,13 @@ public class UserProfileController {
     public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file)
             throws IOException {
 
-        if (profilePictureRepository.findByUserId(file.getOriginalFilename()).isPresent()) {
-            Optional<ProfilePicture> remove = profilePictureRepository.findByUserId(file.getOriginalFilename());
+        if (profilePictureRepository.findByUserName(file.getOriginalFilename()).isPresent()) {
+            Optional<ProfilePicture> remove = profilePictureRepository.findByUserName(file.getOriginalFilename());
             profilePictureRepository.deleteById(remove.get().getId());
         }
 
         profilePictureRepository.save(ProfilePicture.builder()
-                .userId(file.getOriginalFilename())
+                .userName(file.getOriginalFilename())
                 .type(file.getContentType())
                 .image(ImageUtility.compressImage(file.getBytes())).build());
         return ResponseEntity.status(HttpStatus.OK)

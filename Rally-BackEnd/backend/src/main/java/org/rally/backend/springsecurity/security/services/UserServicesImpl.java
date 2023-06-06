@@ -41,7 +41,7 @@ public class UserServicesImpl implements UserService{
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(user.getUserEmail());
         mailMessage.setSubject("Complete Registration to Rally!");
-        mailMessage.setText("To confirm your account, please follow the link! \n\n" + "http://localhost:4200/confirm-account/" + confirmationToken.getConfirmationToken() + "\n\n" + "Link will expire at " + confirmationToken.getExpiryDate());
+        mailMessage.setText("Hello, " + user.getUserName() + "! To confirm your account, please follow the link! \n\n" + "http://localhost:4200/confirm-account/" + confirmationToken.getConfirmationToken() + "\n\n" + "Link will expire at " + confirmationToken.getExpiryDate());
         emailService.sendEmail(mailMessage);
 
         return "Verify your account with the link sent to your email!";

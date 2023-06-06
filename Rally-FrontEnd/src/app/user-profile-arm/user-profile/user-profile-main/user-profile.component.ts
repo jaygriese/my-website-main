@@ -98,23 +98,25 @@ export class UserProfileComponent implements OnInit {
         this.allPostFilter = this.allPost;
         this.updateHiddenPost();
       },  err => {
-        if (err.status === 500) {
+        /* temporary error handling */
+        if (err.status === 500 || err.status === 400) {
           this.authorize.logOut();
         }
       })
 
       /* Get user Profile pic */
       /* bundle in userbundle or change to user userName */
-      this.http.get('http://localhost:8080/user/userProfileImage/' + localStorage.getItem('id')).subscribe((response: any) => {
+      this.http.get('http://localhost:8080/user/userProfileImage/' + this.storageService.getUserName()).subscribe((response: any) => {
         if (response.message) {
           console.log(response.message);
           return;
         } else {
           this.postResponse = response;
           this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
+          console.log(this.postResponse)
         }
       },  err => {
-        if (err.status === 500) {
+        if (err.status === 500 || err.status === 400) {
           this.authorize.logOut();
         }
       })
@@ -221,7 +223,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     const imageFormData = new FormData();
-    imageFormData.append('image', this.uploadedImage, this.userEntity.id);
+    imageFormData.append('image', this.uploadedImage, this.storageService.getUserName());
 
     this.http.post('http://localhost:8080/user/upload/image', imageFormData, {observe: 'response'}).subscribe((response: any) => {
       console.log(response);

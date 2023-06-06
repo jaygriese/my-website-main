@@ -53,8 +53,12 @@ public class UserEntity {
         return userEmail;
     }
 
-    public boolean isAccountVerified() {
-        return accountVerified;
+    public Boolean isAccountVerified() {
+        if (this.accountVerified) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void setAccountVerified(boolean accountVerified) {

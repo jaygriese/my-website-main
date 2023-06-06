@@ -65,6 +65,7 @@
             </select>
             <br><br>
             <div *ngIf="createNewUser; else userExists"><br><br></div> 
+            <div *ngIf="createNewUser; else validRegister"><br><br></div>
             <input type="submit" value="Submit">
             <button type="button" (click)="clearForms()">Go back</button>
         </form>
@@ -93,4 +94,7 @@
 </ng-template>
 <ng-template #userExists>
     <p style="color: crimson;"> {{ postResponseMessage }}</p>
+</ng-template>
+<ng-template #validRegister>
+    <p style="color: rgb(62, 167, 106);"> {{ postResponseMessageValid }}</p>
 </ng-template>

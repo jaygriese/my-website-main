@@ -19,8 +19,8 @@
       <input type="submit" value="Submit">
 
       <br><br>
-      <div *ngIf="incorrectPassword">
-        <p id="IncorrectPW">Invalid Username or Password</p>
+      <div *ngIf="errorMessage">
+        <p id="IncorrectPW" style="color: crimson;">{{ this.loginResponseMessage }}</p>
       </div>
 
     </form>

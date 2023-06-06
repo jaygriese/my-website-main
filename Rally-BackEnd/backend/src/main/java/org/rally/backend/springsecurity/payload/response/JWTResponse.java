@@ -8,13 +8,39 @@ public class JWTResponse {
     private String type = "Bearer ";
     private int id;
     private String userName;
+    private String email;
     private List<String> roles;
+    private Boolean accountVerified;
 
-    public JWTResponse(String token, int id, String userName,  List<String> roles) {
+    public JWTResponse(String token, Boolean accountVerified, int id, String userName, String email, List<String> roles) {
         this.token = token;
+        this.accountVerified = accountVerified;
         this.id = id;
         this.userName = userName;
+        this.email = email;
         this.roles = roles;
+    }
+
+    public JWTResponse(String token, Boolean accountVerified, List<String> roles) {
+        this.token = token;
+        this.accountVerified = accountVerified;
+        this.roles = roles;
+    }
+
+    public Boolean getAccountVerified() {
+        return accountVerified;
+    }
+
+    public void setAccountVerified(Boolean accountVerified) {
+        this.accountVerified = accountVerified;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAccessToken() {
@@ -25,9 +51,9 @@ public class JWTResponse {
         this.token = accessToken;
     }
 
-    public String getTokenType() {
-        return type;
-    }
+//    public String getTokenType() {
+//        return type;
+//    }
 
     public void setTokenType(String tokenType) {
         this.type = tokenType;

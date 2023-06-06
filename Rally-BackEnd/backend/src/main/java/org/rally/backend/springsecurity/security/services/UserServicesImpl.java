@@ -28,14 +28,6 @@ public class UserServicesImpl implements UserService{
     @Override
     public String saveUser(UserEntity user) {
 
-        /** Need to move this at the top of Registration **/
-//        if (userRepository.existsByUserEmail(user.getUserEmail())) {
-//            return "Error: Email is already in use";
-//        }
-
-        /** Need to move save(user) from Authentication controller to here for proper ordering **/
-//        userRepository.save(user);
-
         ConfirmationToken confirmationToken = new ConfirmationToken();
 
 

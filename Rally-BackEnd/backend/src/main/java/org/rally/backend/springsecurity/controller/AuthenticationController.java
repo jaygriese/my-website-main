@@ -72,14 +72,16 @@ public class AuthenticationController {
         UserProfileControllerService.generateRoles();
 
         UserEntity existingUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
+        String existingEmail = userBundleDTO.getRegisterDTO().getUserEmail();
 
         if (existingUser != null) {
             ResponseMessage authenticationFailure = new ResponseMessage("That username is taken, please select a different user name.");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
-//        if (userRepository.existsByUserEmail(existingUser.getUserEmail())) {
-//            return ResponseEntity.badRequest().body("Error: Email is already in use");
-//        }
+        if (userRepository.existsByUserEmail(existingEmail)) {
+            ResponseMessage authenticationFailure = new ResponseMessage("Error: Email is already in use");
+            return ResponseEntity.badRequest().body("Error: Email is already in use");
+        }
 
         String password = userBundleDTO.getRegisterDTO().getPassword();
         String verifyPassword = userBundleDTO.getRegisterDTO().getVerifyPassword();
@@ -113,9 +115,9 @@ public class AuthenticationController {
         UserInformation newUserInformation = new UserInformation(userId, firstName, lastName, neighborhood, city, state);
 
         userInformationRepository.save(newUserInformation);
-        userServicesImpl.saveUser(registerNewUser);
+        ResponseMessage confirm = new ResponseMessage(userServicesImpl.saveUser(registerNewUser));
 
-        return new ResponseEntity<>(newestUser, HttpStatus.OK);
+        return new ResponseEntity<>(confirm, HttpStatus.OK);
 
     }
 
@@ -157,6 +159,11 @@ public class AuthenticationController {
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
+        if (!theUser.isAccountVerified()) {
+            AuthenticationFailure authenticationFailure = new AuthenticationFailure("Account is not verified, please check your email to verify your account.");
+            return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
+        }
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginDTO.getUserName(),
@@ -171,8 +178,10 @@ public class AuthenticationController {
                 .collect(Collectors.toList());
 
         JWTResponse response = new JWTResponse(token,
+                theUser.isAccountVerified(),
                 theUser.getId(),
                 theUser.getUserName(),
+                theUser.getUserEmail(),
                 roles);
 
         return new ResponseEntity<>(response, HttpStatus.OK);

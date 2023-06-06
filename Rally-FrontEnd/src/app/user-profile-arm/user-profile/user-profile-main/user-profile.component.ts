@@ -2,13 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { VerifyLogoutService } from 'src/app/user-profile-arm/security/verify-logout.service';
 import { UserInfoDTO } from '../../models/dto/UserInfoDTO';
 import { NgForm } from '@angular/forms';
 import { UserInformation } from '../../models/UserInformation';
 import { ViewUserService } from '../services/view-user.service';
 import { UserEntity } from '../../models/UserEntity';
-import { MainUserBundle } from '../../models/MainUserBundle';
 import { DirectMessage } from '../../models/Directmessage';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
 import { NgUserInformation } from '../../models/ng-model/UserInformation';
@@ -16,6 +14,7 @@ import { HiddenPost } from '../../models/HiddenPost';
 import { Event } from 'src/app/Events/models/event';
 import { HidePostDTO } from '../../models/dto/HidePostDTO';
 import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
+import { StorageService } from 'src/app/security/security-service/storage-service.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -55,7 +54,7 @@ export class UserProfileComponent implements OnInit {
 
   /* HTML variables */
   @ViewChild('dmBottomOfScroll') private scrollMe: ElementRef;
-  currentUser = localStorage.getItem('userName');
+  currentUser = this.storageService.getUserName();
 
   /* Image uploading */
   uploadedImage: File;
@@ -67,14 +66,18 @@ export class UserProfileComponent implements OnInit {
               private viewUser: ViewUserService,
               private activeUserService: ViewUserService, 
               private cdref: ChangeDetectorRef,
-              private authorize: AuthorizeService) {
+              private authorize: AuthorizeService,
+              private storageService: StorageService) {
   }
 
   ngOnInit(): void {
-    /* If user is logged in */
-    if (this.authorize.isloggedIn() === true) {  // localStorage.getItem('id') !== null
-      /* Get user information and user entity data */
-      this.activeUserService.getMainUserBundleByUserName(localStorage.getItem('userName')).subscribe((data: any) => {
+    /* Checks if user is logged in */
+    if (this.authorize.isloggedIn() === true) {
+      
+      /* Get all information relevent to user */
+      this.activeUserService.getMainUserBundleByUserName(this.storageService.getUserName())
+      .subscribe((data: any) => {
+        
         this.userEntity = data.viewUser;
         this.userInformation = data.viewUserInformation;
         this.allDmHistory = data.viewUserDmHistory.directMessageList;
@@ -89,14 +92,19 @@ export class UserProfileComponent implements OnInit {
                                            this.userInformation.city,
                                            this.userInformation.state);
         /* Remove active user from dm list */
-        this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user.userName !== localStorage.getItem("userName"));
+        this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user.userName !== this.storageService.getUserName());
 
         this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
         this.allPostFilter = this.allPost;
         this.updateHiddenPost();
+      },  err => {
+        if (err.status === 500) {
+          this.authorize.logOut();
+        }
       })
 
       /* Get user Profile pic */
+      /* bundle in userbundle or change to user userName */
       this.http.get('http://localhost:8080/user/userProfileImage/' + localStorage.getItem('id')).subscribe((response: any) => {
         if (response.message) {
           console.log(response.message);
@@ -105,9 +113,14 @@ export class UserProfileComponent implements OnInit {
           this.postResponse = response;
           this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
         }
+      },  err => {
+        if (err.status === 500) {
+          this.authorize.logOut();
+        }
       })
-    } else {
-      this.authorize.clean();
+    } 
+    else {
+      this.authorize.logOut();
     }
   }
 

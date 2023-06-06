@@ -22,8 +22,9 @@ export class SearchUserComponent implements OnInit {
   ngOnInit(): void {
     /* Makes sure user is logged in before */
     if (this.authorize.isloggedIn() !== true) {
-      this.authorize.clean();
+      this.authorize.logOut();
     }
+    
     this.userService.getUserList().subscribe((data: UserEntity[]) => {
       this.userList = data;
       /* Remove active user from list */

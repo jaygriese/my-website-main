@@ -6,6 +6,8 @@ import { ThemeserviceService } from 'src/app/services/themeservice.service';
 import { map } from 'rxjs/operators';
 import { ForumPost } from '../../models/ForumPost';
 import { ReplyDTO } from '../../models/ReplyDTO';
+import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
+import { ViewUserService } from 'src/app/user-profile-arm/user-profile/services/view-user.service';
 @Component({
   selector: 'app-forum-topic1',
   templateUrl: './forum-topic1.component.html',
@@ -19,17 +21,40 @@ export class ForumTopic1Component implements OnInit {
   testArray;
   newArray;
   createPostBoolean: boolean;
-  constructor(private http: HttpClient, private router: Router, private themeservice: ThemeserviceService) {
+  loginLoading: boolean;
+  constructor(private http: HttpClient, private router: Router, private themeservice: ThemeserviceService, private authorize: AuthorizeService, private activeUserService: ViewUserService) {
     this.logInStatus = false;
     this.createPostBoolean = false;
     this.darktheme = false;
     this.testArray;
     this.forumTopic = "topic1";
     this.newArray = [];
+    this.loginLoading = true;
    }
   
   ngOnInit(): void {
-    this.verifyLoggedIn();
+    if (this.authorize.isloggedIn() === true) {
+      
+      /* Get all information relevent to user */
+      this.activeUserService.getMainUserBundleByUserName(this.themeservice.getUserName())
+      .subscribe((data: any) => {
+        this.logInStatus = true;
+        this.currentUser = data.viewUser.userName
+        this.loginLoading = false;
+      },  err => {
+        if (err.status === 500) {
+          this.logInStatus = false;
+          this.currentUser = null;
+          this.themeservice.logOut();
+          this.loginLoading = false;
+        }
+      })
+  }
+    else {
+      this.themeservice.logOut();
+      this.logInStatus = false;
+      this.loginLoading = false;
+  }
     this.checkTheme();
     this.getPosts();
   }
@@ -41,14 +66,7 @@ export class ForumTopic1Component implements OnInit {
   createPostButton(){
       this.createPostBoolean = true;
   }
-  verifyLoggedIn() {
-  
-    if (localStorage.getItem('userName') != null) {
-      this.currentUser = localStorage.getItem('userName');
-      this.logInStatus = true;
-    }
-  
-  }
+
   createPost(postInformation: NgForm){
       this.createPostBoolean = false;
       this.themeservice.createAPost(postInformation, this.forumTopic);
@@ -66,9 +84,8 @@ Dark(){
   localStorage.setItem('theme', 'dark')
 }
   logOut() {
-    localStorage.removeItem('userName');
-    console.log(localStorage.getItem('userName'));
     this.logInStatus = false;
+    this.themeservice.logOut();
   }
   Search(searchInformation: NgForm){
     localStorage.setItem('searchTerm', searchInformation.value.description)

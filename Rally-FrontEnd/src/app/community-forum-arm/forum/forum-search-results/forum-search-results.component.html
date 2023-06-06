@@ -1,5 +1,6 @@
 <div class="marginResetting">
     <div class="buttonsPosition">
+        <div *ngIf="!loginLoading">
     <span *ngIf="logInStatus; else notLoggedIn">
         <span class="right"><span class="loginName">Logged in as: {{currentUser}} </span><button class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
     </span>
@@ -7,6 +8,7 @@
 <ng-template #notLoggedIn>
     <span class="right"><span class="loginName">User is not logged in. </span><a class="btn btn-info" routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span>
 </ng-template>
+</div>
 <!-- log out button -->
 <span class="left" *ngIf="darktheme; else lightTheme">
     <button class="btn btn-warning" (click)="Light()">Turn on the lights</button>

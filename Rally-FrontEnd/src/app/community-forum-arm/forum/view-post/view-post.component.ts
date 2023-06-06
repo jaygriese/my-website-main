@@ -6,6 +6,8 @@ import { ReplyDTO } from '../../models/ReplyDTO';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
 import { map } from 'rxjs/operators';
 import { ForumPost } from '../../models/ForumPost';
+import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
+import { ViewUserService } from 'src/app/user-profile-arm/user-profile/services/view-user.service';
 
 @Component({
   selector: 'app-view-post',
@@ -27,7 +29,8 @@ export class ViewPostComponent implements OnInit {
   darktheme: boolean;
   isLoading: boolean;
   replyTooLong: boolean;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private themeservice: ThemeserviceService, private router: Router) { 
+  loginLoading: boolean;
+  constructor(private route: ActivatedRoute, private http: HttpClient, private themeservice: ThemeserviceService, private router: Router, private authorize: AuthorizeService, private activeUserService: ViewUserService) { 
     this.postId = +this.route.snapshot.paramMap.get('id');
     this.postReplyBoolean = false;
     this.logInStatus = false;
@@ -40,10 +43,32 @@ export class ViewPostComponent implements OnInit {
     this.darktheme = false;
     this.isLoading = true;
     this.replyTooLong = false;
+    this.loginLoading = true;
   }
   ngOnInit() {
+    if (this.authorize.isloggedIn() === true) {
+      
+      /* Get all information relevent to user */
+      this.activeUserService.getMainUserBundleByUserName(this.themeservice.getUserName())
+      .subscribe((data: any) => {
+        this.logInStatus = true;
+        this.currentUser = data.viewUser.userName
+        this.loginLoading = false;
+      },  err => {
+        if (err.status === 500) {
+          this.logInStatus = false;
+          this.loginLoading = false;
+          this.currentUser = null;
+          this.themeservice.logOut();
+        }
+      })
+  }
+  else {
+    this.themeservice.logOut();
+    this.logInStatus = false;
+    this.loginLoading = false;
+  }
     this.getPost();
-    this.verifyLoggedIn();
     this.checkTheme();
   }
   checkTheme(){
@@ -112,17 +137,10 @@ export class ViewPostComponent implements OnInit {
     this.editReplyDescription1 = idString;
   }
   logOut() {
-    localStorage.removeItem('userName');
-    this.currentUser = null;
-    console.log(localStorage.getItem('userName'));
     this.logInStatus = false;
+    this.themeservice.logOut();
   }
-  verifyLoggedIn() {
-    if (localStorage.getItem('userName') != null) {
-      this.currentUser = localStorage.getItem('userName');
-      this.logInStatus = true;
-    }
-  }
+
   updateDescription1(updateInformation: NgForm){
     this.replyTooLong = false;
     if (updateInformation.value.newDescription.length > 245){

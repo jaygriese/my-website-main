@@ -20,7 +20,7 @@ export class JwtHandlerInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
     const jwt = this.cookieService.get('token');
-    
+    console.log(jwt)
     if (jwt === null) {
       request = request.clone({
         withCredentials: true,

@@ -58,6 +58,9 @@ export class ForumTopic2Component implements OnInit {
     this.checkTheme();
     this.getPosts();
   }
+  login(){
+    this.router.navigate(["/login"]);
+  }
   checkTheme(){
       if (localStorage.getItem('theme') == 'dark'){
           this.Dark();

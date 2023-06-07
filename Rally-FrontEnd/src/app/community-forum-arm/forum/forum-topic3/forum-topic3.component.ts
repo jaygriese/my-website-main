@@ -70,7 +70,9 @@ export class ForumTopic3Component implements OnInit {
   createPostButton(){
       this.createPostBoolean = true;
   }
-
+  login(){
+    this.router.navigate(["/login"]);
+  }
   createPost(postInformation: NgForm){
       this.createPostBoolean = false;
       this.themeservice.createAPost(postInformation, this.forumTopic);

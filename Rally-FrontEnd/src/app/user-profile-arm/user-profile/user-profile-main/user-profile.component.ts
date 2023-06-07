@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { UserInfoDTO } from '../../models/dto/UserInfoDTO';
 import { NgForm } from '@angular/forms';
 import { UserInformation } from '../../models/UserInformation';
@@ -94,11 +93,12 @@ export class UserProfileComponent implements OnInit {
         /* Remove active user from dm list */
         this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user.userName !== this.storageService.getUserName());
 
+        /* Get all user post organized to display */
         this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
         this.allPostFilter = this.allPost;
         this.updateHiddenPost();
       },  err => {
-        /* temporary error handling */
+        /* temporary error handling / want to build better handling approach */
         if (err.status === 500 || err.status === 400) {
           this.authorize.logOut();
         }
@@ -113,7 +113,6 @@ export class UserProfileComponent implements OnInit {
         } else {
           this.postResponse = response;
           this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
-          console.log(this.postResponse)
         }
       },  err => {
         if (err.status === 500 || err.status === 400) {
@@ -126,7 +125,8 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  /* This method controls what is visible on the users post history based on checkbox input in html */
+  /* This method controls what is visible on the users post history based on checkbox input in html 
+  | ForumPost | Events | Resouces | Services | Restaurants*/
   userPostHistoryFilter(event) {
     if (event.target.checked) {
       if (this.filterActive === false) {
@@ -160,6 +160,7 @@ export class UserProfileComponent implements OnInit {
     this.cdref.detectChanges();
   }
 
+  /* Checks the post to see if it is hidden and flags it as so to display on post (or not) on post history */
   updateHiddenPost() {
     for (let hide of this.hiddenPost) {
       for (let post of this.allPost) {
@@ -178,7 +179,6 @@ export class UserProfileComponent implements OnInit {
       hidePostId: post.id,
       userId: Number(localStorage.getItem("id"))
     }
-    console.log(hidePostDTO)
 
     this.http.post('http://localhost:8080/user/hidePostList', hidePostDTO).subscribe((response) => {
       console.log(response);
@@ -186,7 +186,7 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  /* Remove post from hidden post / Make post public */
+  /* Remove post from hidden post | Make post public */
   unhidePost(post: any) {
 
     let hidePostDTO: HidePostDTO = {
@@ -208,7 +208,6 @@ export class UserProfileComponent implements OnInit {
     if (event.target.files[0].size > 1024000) {   
       this.uploadErrorMsg = ["File is too large, please select a smaller image", true];
       this.uploadedImage = null;
-      console.log(this.uploadedImage)
       return;
     } else {
       this.uploadedImage = event.target.files[0];
@@ -251,9 +250,9 @@ export class UserProfileComponent implements OnInit {
     }
     
     for (let i = 0; i < this.allDmHistory.length; i++) {
-      if (localStorage.getItem('userName') === this.allDmHistory[i].sentByUserName && this.respondToDm.userName === this.allDmHistory[i].receivedByUserName) {
+      if (this.storageService.getUserName() === this.allDmHistory[i].sentByUserName && this.respondToDm.userName === this.allDmHistory[i].receivedByUserName) {
         this.conversation.push(this.allDmHistory[i]);
-      } else if (localStorage.getItem('userName') === this.allDmHistory[i].receivedByUserName && this.respondToDm.userName === this.allDmHistory[i].sentByUserName) {
+      } else if (this.storageService.getUserName() === this.allDmHistory[i].receivedByUserName && this.respondToDm.userName === this.allDmHistory[i].sentByUserName) {
         this.conversation.push(this.allDmHistory[i]);
       }
     }
@@ -265,21 +264,21 @@ export class UserProfileComponent implements OnInit {
   /* After sending a message to a user, this refreshes the chat history */
   refreshConversation( chatWithUser: string) {
     for (let i = 0; i < this.allDmHistory.length; i++) {
-      if (localStorage.getItem('userName') === this.allDmHistory[i].sentByUserName && chatWithUser === this.allDmHistory[i].receivedByUserName) {
+      if (this.storageService.getUserName() === this.allDmHistory[i].sentByUserName && chatWithUser === this.allDmHistory[i].receivedByUserName) {
         this.conversation.push(this.allDmHistory[i]);
-      } else if (localStorage.getItem('userName') === this.allDmHistory[i].receivedByUserName && chatWithUser === this.allDmHistory[i].sentByUserName) {
+      } else if (this.storageService.getUserName() === this.allDmHistory[i].receivedByUserName && chatWithUser === this.allDmHistory[i].sentByUserName) {
         this.conversation.push(this.allDmHistory[i]);
       }
     }
   }
 
-  /* Sends respone to the database */
+  /* Sends direct message respone to the database */
   respondToUserDm( userResponse: NgForm ) {
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.respondToDm.id,
       receivedByUserName: this.respondToDm.userName,
       sentByUserId: localStorage.getItem('id'),
-      sentByUserName: localStorage.getItem('userName'),
+      sentByUserName: this.storageService.getUserName(),
       messageContent: userResponse.value.messageContent
     }
 
@@ -303,13 +302,14 @@ export class UserProfileComponent implements OnInit {
       city: userDetails.value.city,
       state: userDetails.value.state
     }
-    this.http.put<any>('http://localhost:8080/user/update-user-information/' + localStorage.getItem("id"), userInfo).subscribe((response: UserInformation) => {
+    this.http.put<any>('http://localhost:8080/user/update-user-information/' + this.storageService.getUserName(), userInfo).subscribe((response: UserInformation) => {
         this.userInformation = response
         this.changeInfo=true;
         return;
     });
   }
 
+  /* Boolean to change the user information into an editable form on user profile */
   editProfileDetails() {
     this.changeInfo=false;
   }

@@ -34,7 +34,7 @@
 <div class="row" *ngFor = "let user of userList">
     <div class="col">
         <div class="card" style="background-color: #ecdfc3;">
-            <h2><a routerLink="/user/{{user.userName}}/{{user.id}}" routerLinkActive="active">{{ user.userName }}</a></h2>
+            <h2><a routerLink="/user/{{user.userName}}" routerLinkActive="active">{{ user.userName }}</a></h2>
         </div>
     </div>
 </div>

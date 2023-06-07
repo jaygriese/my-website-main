@@ -3,7 +3,7 @@ package org.rally.backend.springsecurity.controller;
 import org.rally.backend.springsecurity.models.ConfirmationToken;
 import org.rally.backend.springsecurity.payload.response.JWTResponse;
 import org.rally.backend.springsecurity.repository.ConfirmationTokenRepository;
-import org.rally.backend.springsecurity.repository.JWTBlackListRepository;
+import org.rally.backend.springsecurity.repository.JWTBlockListRepository;
 import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
 import org.rally.backend.springsecurity.security.services.UserServicesImpl;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
@@ -47,7 +47,7 @@ public class AuthenticationController {
     private JWTGenerator jwtGenerator;
     private UserServicesImpl userServicesImpl;
     private ConfirmationTokenRepository confirmationTokenRepository;
-    private JWTBlackListRepository jwtBlackListRepository;
+    private JWTBlockListRepository jwtBlockListRepository;
 
 
     @Autowired
@@ -59,7 +59,7 @@ public class AuthenticationController {
                                     JWTGenerator jwtGenerator,
                                     UserServicesImpl userServicesImpl,
                                     ConfirmationTokenRepository confirmationTokenRepository,
-                                    JWTBlackListRepository jwtBlackListRepository) {
+                                    JWTBlockListRepository jwtBlockListRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
@@ -68,7 +68,7 @@ public class AuthenticationController {
         this.jwtGenerator = jwtGenerator;
         this.userServicesImpl = userServicesImpl;
         this.confirmationTokenRepository = confirmationTokenRepository;
-        this.jwtBlackListRepository = jwtBlackListRepository;
+        this.jwtBlockListRepository = jwtBlockListRepository;
     }
 
     @PostMapping("/register")
@@ -105,7 +105,7 @@ public class AuthenticationController {
 
         UserEntity newestUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
 
-        int userId = newestUser.getId();
+        String userName = newestUser.getUserName();
         String firstName = userBundleDTO.getUserInfoDTO().getFirstName();
         String lastName = userBundleDTO.getUserInfoDTO().getLastName();
         String neighborhood = userBundleDTO.getUserInfoDTO().getNeighborhood();
@@ -116,7 +116,7 @@ public class AuthenticationController {
             throw new MinimumCharacterException();
         }
 
-        UserInformation newUserInformation = new UserInformation(userId, firstName, lastName, neighborhood, city, state);
+        UserInformation newUserInformation = new UserInformation(userName, firstName, lastName, neighborhood, city, state);
 
         userInformationRepository.save(newUserInformation);
         ResponseMessage confirm = new ResponseMessage(userServicesImpl.saveUser(registerNewUser));

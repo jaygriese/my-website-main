@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -15,7 +14,7 @@ export class AuthorizeService {
               private cookieService: CookieService,
               private http: HttpClient) { }
 
-  /* Need to figure out how to get the interceptor to see this. */
+  
   isloggedIn(): any {
     if (!this.cookieService.check('token')) {
       return false;
@@ -28,7 +27,7 @@ export class AuthorizeService {
     try {
       JSON.parse(payload)
     } catch(e) {
-      this.clean();
+      this.logOut();
       return;
     }
 
@@ -38,25 +37,15 @@ export class AuthorizeService {
     }
   }
 
-  clean(): void {
-    sessionStorage.clear();
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userId");
-    this.cookieService.delete('token');
-    // sessionStorage.setItem('expired', "Access Token Expired")
-    this.router.navigate(["/login"])
-  }
-
   logOut() {
     this.http.get('http://localhost:8080/api/logout').subscribe((data: any) =>{
       console.log(data);
     })
-    sessionStorage.clear();
     localStorage.removeItem('userName');
     localStorage.removeItem('id');
     this.cookieService.delete('token');
     this.router.navigate(["/login"])
-    
+
     return false;
   }
 

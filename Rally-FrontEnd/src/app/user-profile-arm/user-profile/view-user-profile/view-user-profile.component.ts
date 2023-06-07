@@ -2,7 +2,6 @@ import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserEntity } from '../../models/UserEntity';
 import { ViewUserService } from '../services/view-user.service';
-import { VerifyLogoutService } from '../../security/verify-logout.service';
 import { ViewUserBundle } from '../../models/ViewUserBundle';
 import { NgForm } from '@angular/forms';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
@@ -19,7 +18,6 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
   /* Viewing Users information */
   viewUserName: string;
-  viewUserId: string;
   userEntityInformation: ViewUserBundle;
 
   /* Direct Message with active user */
@@ -55,12 +53,19 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
 
     if (this.authorize.isloggedIn() !== true) {
-      this.authorize.clean();
+      this.authorize.logOut();
     }
-    /* This method pulls the parameters of the activated route and converts them into a usable string */
+
+    this.activatedRoute.paramMap.subscribe(params => {
+      if (params.get('userName') === '404') {
+        this.router.navigate(['/invalidUser/404'])
+        return;
+      }
+    })
+
+    /* Pulling userName and userId from  */
     this.activatedRoute.paramMap.subscribe(params => {
     this.viewUserName = params.get('userName');
-    this.viewUserId = params.get('id');
     });
 
     /* If you tried to view yourself, you will be redirected to the 'myProfile' route */
@@ -85,7 +90,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
     })
 
     /* Get view users profile picture */
-    this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserId).subscribe((response: any) => {
+    this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserName).subscribe((response: any) => {
       if (response.message) {
         console.log(response.message);
         return;

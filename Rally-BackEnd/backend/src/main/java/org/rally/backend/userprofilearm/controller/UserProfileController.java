@@ -8,7 +8,7 @@ import org.rally.backend.forumarm.repository.ForumPostRepository;
 import org.rally.backend.forumarm.repository.RepliesRepository;
 import org.rally.backend.servicesarm.repository.ServiceRepository;
 import org.rally.backend.springsecurity.models.BadJWT;
-import org.rally.backend.springsecurity.repository.JWTBlackListRepository;
+import org.rally.backend.springsecurity.repository.JWTBlockListRepository;
 import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.*;
@@ -45,7 +45,7 @@ public class UserProfileController {
     HiddenPostRepository hiddenPostRepository;
     ServiceRepository serviceRepository;
     EventRepository eventRepository;
-    JWTBlackListRepository jwtBlackListRepository;
+    JWTBlockListRepository jwtBlockListRepository;
     private JWTGenerator jwtGenerator;
 
 
@@ -56,7 +56,7 @@ public class UserProfileController {
                                  ForumPostRepository forumPostRepository, RepliesRepository repliesRepository,
                                  HiddenPostRepository hiddenPostRepository, ServiceRepository serviceRepository,
                                  EventRepository eventRepository, JWTGenerator jwtGenerator,
-                                 JWTBlackListRepository jwtBlackListRepository) {
+                                 JWTBlockListRepository jwtBlockListRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
@@ -68,7 +68,7 @@ public class UserProfileController {
         this.serviceRepository = serviceRepository;
         this.eventRepository = eventRepository;
         this.jwtGenerator = jwtGenerator;
-        this.jwtBlackListRepository = jwtBlackListRepository;
+        this.jwtBlockListRepository = jwtBlockListRepository;
     }
 
     /** GET REQUEST **/
@@ -95,7 +95,7 @@ public class UserProfileController {
 
         /** Find viewing users information **/
         viewUserProfileBundle.setViewUser(userRepository.findByUserName(userName));
-        viewUserProfileBundle.setViewUserInformation(userInformationRepository.findByUserId(targetUser.getId()));
+        viewUserProfileBundle.setViewUserInformation(userInformationRepository.findByUserName(targetUser.getUserName()));
         viewUserProfileBundle.setViewUserDmHistory(UserProfileControllerService.activeUserDirectMessageHistory(targetUser.getId()));
         viewUserProfileBundle.setUpdatedPostHistoryViewUser(UserProfileControllerService.sortUpdatedPostHistoryViewUser(targetUser.getId()));
 
@@ -107,7 +107,7 @@ public class UserProfileController {
     @GetMapping("/getMainUserBundleInformation/{userName}")
     public ResponseEntity<?> getMainUserBundle(@PathVariable String userName, @RequestHeader (name="authorization") String token) {
 
-        Optional<BadJWT> test = Optional.ofNullable(jwtBlackListRepository.findByBadToken(token.substring(7, token.length())));
+        Optional<BadJWT> test = Optional.ofNullable(jwtBlockListRepository.findByBadToken(token.substring(7, token.length())));
 
         if (!jwtGenerator.validateToken(token.substring(7, token.length())) || test.isPresent()) {
             ResponseMessage responseMessage = new ResponseMessage("Bad Token");
@@ -120,7 +120,7 @@ public class UserProfileController {
         }
 
         UserEntity targetUser = userRepository.findByUserName(userName);
-        Optional<UserInformation> targetInformation = userInformationRepository.findByUserId(targetUser.getId());
+        Optional<UserInformation> targetInformation = userInformationRepository.findByUserName(targetUser.getUserName());
         UserDmHistory targetDirectMessages = UserProfileControllerService.activeUserDirectMessageHistory(targetUser.getId());
         UserPostHistory targetUserPostHistory = new UserPostHistory();
 
@@ -195,7 +195,7 @@ public class UserProfileController {
 
         return new ResponseEntity<>(ProfilePicture.builder()
                 .id(dbImage.get().getId())
-                .userName(dbImage.get().getUserName())
+                .userName(String.valueOf(UUID.randomUUID()))
                 .type(dbImage.get().getType())
                 .image(ImageUtility.decompressImage(dbImage.get().getImage())).build(), HttpStatus.OK);
     }
@@ -283,10 +283,10 @@ public class UserProfileController {
     /** PUT Request **/
 
 
-    @PutMapping("/update-user-information/{userId}")
-    public ResponseEntity<?> updateUserInformation(@PathVariable int userId, @RequestBody UserInfoDTO userInfoDTO) {
+    @PutMapping("/update-user-information/{userName}")
+    public ResponseEntity<?> updateUserInformation(@PathVariable String userName, @RequestBody UserInfoDTO userInfoDTO) {
 
-        Optional<UserInformation> userInfo = userInformationRepository.findByUserId(userId);
+        Optional<UserInformation> userInfo = userInformationRepository.findByUserName(userName);
 
         userInfo.get().setFirstName(userInfoDTO.getFirstName());
         userInfo.get().setLastName(userInfoDTO.getLastName());

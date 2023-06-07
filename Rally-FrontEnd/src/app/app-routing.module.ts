@@ -64,7 +64,7 @@ const routes: Routes = [
   {path: 'forum/topic3', component: ForumTopic3Component},
   {path: 'forum/post/:id', component: ViewPostComponent},
   {path: 'myProfile', component: UserProfileComponent},
-  {path: 'user/:userName/:id', component: ViewUserProfileComponent},
+  {path: 'user/:userName', component: ViewUserProfileComponent},
   {path: 'restaurant/:id', component: ViewRestaurantComponent},
   {path: 'restaurants/search', component: SearchRestaurantComponent},
   {path: 'forum/search', component: ForumSearchResultsComponent},
@@ -72,7 +72,7 @@ const routes: Routes = [
   {path: 'serviceitem', component: ServiceItemComponent},
   {path: 'edit/:id', component: EventEditComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'user/404', component: PageNotFoundComponent},
+  {path: 'invalidUser/404', component: PageNotFoundComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full' },
   {path: 'confirm-account/:token', component: EmailVerificationComponent}
 ];

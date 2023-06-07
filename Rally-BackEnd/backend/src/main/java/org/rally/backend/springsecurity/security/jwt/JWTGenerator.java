@@ -5,7 +5,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import org.rally.backend.springsecurity.models.BadJWT;
-import org.rally.backend.springsecurity.repository.JWTBlackListRepository;
+import org.rally.backend.springsecurity.repository.JWTBlockListRepository;
 import org.rally.backend.springsecurity.security.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -21,7 +21,7 @@ import java.util.Optional;
 public class JWTGenerator {
 
     @Autowired
-    private JWTBlackListRepository jwtBlackListRepository;
+    private JWTBlockListRepository jwtBlockListRepository;
 
     public String generateToken(Authentication authentication) {
         String userName = authentication.getName();
@@ -59,9 +59,9 @@ public class JWTGenerator {
         BadJWT setBadToken = new BadJWT();
         setBadToken.setBadToken(token);
 
-        Optional<BadJWT> ifPresent = Optional.ofNullable(jwtBlackListRepository.findByBadToken(token));
+        Optional<BadJWT> ifPresent = Optional.ofNullable(jwtBlockListRepository.findByBadToken(token));
         if (ifPresent.isEmpty()) {
-            jwtBlackListRepository.save(setBadToken);
+            jwtBlockListRepository.save(setBadToken);
         } else {
             System.out.println("Quack");
         }

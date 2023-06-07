@@ -4,6 +4,7 @@ import { ViewUserService } from '../services/view-user.service';
 import { VerifyLogoutService } from 'src/app/user-profile-arm/security/verify-logout.service';
 import { NgForm } from '@angular/forms';
 import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
+import { StorageService } from 'src/app/security/security-service/storage-service.service';
 
 @Component({
   selector: 'app-search-user',
@@ -17,7 +18,8 @@ export class SearchUserComponent implements OnInit {
   logInStatus: Boolean;
 
   constructor(private userService: ViewUserService,
-              private authorize: AuthorizeService) { }
+              private authorize: AuthorizeService,
+              private storageService: StorageService) { }
 
   ngOnInit(): void {
     /* Makes sure user is logged in before */
@@ -28,7 +30,7 @@ export class SearchUserComponent implements OnInit {
     this.userService.getUserList().subscribe((data: UserEntity[]) => {
       this.userList = data;
       /* Remove active user from list */
-      this.userList = this.userList.filter((user: UserEntity) => user.userName !== localStorage.getItem("userName"));
+      this.userList = this.userList.filter((user: UserEntity) => user.userName !== this.storageService.getUserName());
     })
   }
 

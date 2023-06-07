@@ -47,17 +47,29 @@
                             
                             <div class="mb-3">
                                 <label class = "form-label">category</label><br>
-                                <select class = "form-select" id="category-drop" type = "category-drop" name="category" required [(ngModel)]="categoryModel.category" #category="ngModel" >
-                                 <option *ngFor="let c of categories" [value]="c">{{c}}</option>
-                              </select>
-                        </div> 
-                        <div *ngIf="category.invalid && category.touched" class="alert alert-danger">
-                                           How would you categorize the resource?.
-                        </div>
+                                <select class = "form-select" type = "text" required #category = ngModel id = "category" name = "category" ngModel>
+                                    <option value="" disabled selected>select the category</option>
+                                    <option value="Athletics">Athletics</option>
+                                    <option value="Arts">Arts</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Civic">Civic</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Fitness">Fitness</option>
+                                    <option value="Hospitality">Hospitality</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Park">Park</option>
+                                    <option value="Religous">Religous</option>
+                                    <option value="Retail">Retail</option>
+                                </select>
+                            </div> 
+                                <div *ngIf="category.invalid && (category.dirty || category.touched)" class="alert alert-danger">
+                                    How would you categorize this resource?
+                                </div>
                         <!-- <div class="mb-3">
                             <label class = "form-label">neighborhood</label><br>
-                            <select class = "form-select" id = "neighborhood" name = "neighborhood" type = "category-drop" ngModel>
-                                <option value="" disabled selected>Select your neighborhood</option>
+                            <select class = "form-select" type = "text" required #neighborhood = ngModel id = "neighborhood" name = "neighborhood" ngModel>
+                                <option value="" disabled selected>select your neighborhood</option>
                                 <option value="Compton Heights">Compton Heights</option>
                                 <option value="Central West End">Central West End</option>
                                 <option value="The Hill">The Hill</option>
@@ -68,19 +80,56 @@
                                 <option value="Downtown">Down Town</option>
                                 <option value="Midtown">Midtown</option>
                             </select>
+                        </div> 
                             <div *ngIf="neighborhood.invalid && (neighborhood.dirty || neighborhood.touched)" class="alert alert-danger">
-                                Where is the resource located?</div>
-                        </div>                         -->
-                        <br>
+                                Where is the resource located?
+                            </div> -->
+
                         <div class="mb-3">
                             <label class = "form-label">address</label><br>
                             <input class = "form-control form-control-lg" type="text" required #address="ngModel" id="address" name="address" ngModel>
                             
                             <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
                                 Where is the resource located?</div>
-                        </div>                        
+                        </div>
+                        <!-- CITY -->
+                        <div class="mb-3">
+                            <label class = "form-label">city</label><br>
+                            <select class = "form-select" type = "text" required #city = ngModel id = "city" name = "city" ngModel>
+                                <option value="" disabled selected>select the city</option>
+                                <option value="Saint Louis">Saint Louis</option>
+                                <option value="Jennings">Jennings</option>
+                                <option value="Clayton">Clayton</option>
+                                <option value="University City">University City</option>
+                                <option value="Affton">Affton</option>
+                                <option value="Ferguson">Ferguson</option>
+                            </select>
+                        </div> 
+                            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+                                Where is the resource located?
+                            </div>
 
-
+                        <!-- STATE -->
+                        <div class="mb-3">
+                            <label class = "form-label">state</label><br>
+                            <select class = "form-select" type = "text" required #state = ngModel id = "state" name = "state" ngModel>
+                                <option value="" disabled selected>select the state</option>
+                                <option value="Missouri">Missouri</option>
+                                <option value="Illinois">Illinois</option>
+                            </select>
+                        </div> 
+                            <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
+                                Where is the resource located?
+                            </div>
+                        <!-- ZIP
+                         -->
+                         <div class="mb-3">
+                            <label class = "form-label">zip code</label><br>
+                            <input class = "form-control form-control-lg" type="text" required #zip="ngModel" id="zip" name="zip" ngModel>
+                            
+                            <div *ngIf="zip.invalid && (zip.dirty || zip.touched)" class="alert alert-danger">
+                                What is the resource's website?</div>
+                    </div>                             
                         <div class="mb-3">
                                 <label class = "form-label">website</label><br>
                                 <input class = "form-control form-control-lg" type="text" required #website="ngModel" id="website" name="website" ngModel>

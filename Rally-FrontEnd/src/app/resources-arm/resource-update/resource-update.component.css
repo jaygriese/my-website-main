@@ -11,13 +11,12 @@
  input[type=text] {
      background-color: #f6f4f3;
   }
+
+  input[type=form-select] {
+   background-color: #f6f4f3;
+   }
  
- 
-  input[type=datetime-local] {
-     background-color: #f6f4f3;
-  }
- 
- 
+
   #description {
      background-color: #f6f4f3;
   }
@@ -50,3 +49,11 @@
  .form-label {
     margin-bottom: -5px;
  }
+
+ .form-select {
+   margin-bottom: -5px;
+   background-color: #f6f4f3;
+   width: 530px;
+   font-size:20px;  
+}
+ 

@@ -11,8 +11,6 @@ public class ResourceDTO {
 
     @NotBlank(message = "How would you categorize the resource?")
     private String category;
-    @NotBlank(message = "Where is the resource located?")
-    private String neighborhood;
 
     @NotBlank(message = "Where is the resource located?")
     private String address;
@@ -54,14 +52,6 @@ public class ResourceDTO {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public String getNeighborhood() {
-        return neighborhood;
-    }
-
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
     }
 
     public String getAddress() {

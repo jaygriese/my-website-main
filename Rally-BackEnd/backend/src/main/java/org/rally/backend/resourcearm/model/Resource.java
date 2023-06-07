@@ -10,8 +10,6 @@ public class Resource extends AbstractEntity {
     @NotBlank(message = "How would you categorize the resource?")
     private String category;
     @NotBlank(message = "Where is the resource located?")
-    private String neighborhood;
-    @NotBlank(message = "Where is the resource located?")
     private String address;
     @NotBlank(message = "Where is the resource located?")
     private String city;
@@ -28,10 +26,9 @@ public class Resource extends AbstractEntity {
     @NotBlank(message = "Tell us more about this resource!")
     private String description;
 
-    public Resource(String resourceName, String category, String neighborhood, String address, String city, String state, String zip, String website, String telephoneNumber, String email, String description) {
+    public Resource(String resourceName, String category, String address, String city, String state, String zip, String website, String telephoneNumber, String email, String description) {
         this.resourceName = resourceName;
         this.category = category;
-        this.neighborhood = neighborhood;
         this.address = address;
         this.city = city;
         this.state = state;
@@ -61,12 +58,6 @@ public class Resource extends AbstractEntity {
         this.category = category;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
-    }
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
     public String getAddress() {
         return address;
     }
@@ -136,7 +127,6 @@ public class Resource extends AbstractEntity {
         return "Resource{" +
                 "resourceName'" + resourceName + '\'' +
                 "category'" + category + '\'' +
-                "neighborhood" + neighborhood +'\''+
                 "address'" + address + '\'' +
                 "city" + city +'\''+
                 "state" + state +'\''+

@@ -53,7 +53,6 @@ export class ResourceAddComponent implements OnInit {
       id: 0, 
       resourceName: resourceForm.value.resourceName,
       category: resourceForm.value.category,
-      neighborhood: resourceForm.value.neighborhood,
       address: resourceForm.value.address,
       city: resourceForm.value.city,
       state: resourceForm.value.state,
@@ -66,8 +65,6 @@ export class ResourceAddComponent implements OnInit {
     console.log(newResource);
     this.http.post(this.resourceUrl, newResource).subscribe((res) => {
       console.log(res)
-    });
-    this.router.navigate(['/resources']).then(()=>{
       window.location.reload();
     });
   }

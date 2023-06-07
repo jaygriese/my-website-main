@@ -39,7 +39,6 @@ public class ResourceController {
         Resource newResource = new Resource(
                 resourceDTO.getResourceName(),
                 resourceDTO.getCategory(),
-                resourceDTO.getNeighborhood(),
                 resourceDTO.getAddress(),
                 resourceDTO.getCity(),
                 resourceDTO.getState(),
@@ -49,7 +48,7 @@ public class ResourceController {
                 resourceDTO.getEmail(),
                 resourceDTO.getDescription());
 
-        System.out.printf("This is the resource to save: Name %s, category %s, email %s, address: %s, phone: %s, description: %s", newResource.getResourceName(), newResource.getCategory(), newResource.getEmail(), newResource.getAddress(), newResource.getTelephoneNumber(), newResource.getDescription());
+        System.out.printf("This is the resource to save: Name %s, category %s, address: %s, city: %s, state: %s, zip: %s, website: %s, phone: %s, email %s, description: %s", newResource.getResourceName(), newResource.getCategory(), newResource.getAddress(), newResource.getCity(), newResource.getState(), newResource.getZip(), newResource.getWebsite(), newResource.getTelephoneNumber(), newResource.getEmail(), newResource.getDescription());
         resourceRepository.save(newResource);
         return new ResponseEntity<>(newResource, HttpStatus.OK);
     }
@@ -60,7 +59,6 @@ public class ResourceController {
         Resource updatedResource = result.get();
         updatedResource.setResourceName(resourceDTO.getResourceName());
         updatedResource.setCategory(resourceDTO.getCategory());
-        updatedResource.setNeighborhood(resourceDTO.getNeighborhood());
         updatedResource.setAddress(resourceDTO.getAddress());
         updatedResource.setCity(resourceDTO.getCity());
         updatedResource.setState(resourceDTO.getState());

@@ -16,7 +16,7 @@ export class Resource {
         this.id = id;
         this.resourceName = resourceName;
         this.category = category;
-        this.neighborhood = this.neighborhood;
+        this.neighborhood = neighborhood;
         this.address = address;
         this.city = city; 
         this.state = state;

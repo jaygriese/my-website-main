@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 @Entity
 public class BadJWT {
 
+    /** JWT flagged as invalid **/
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;

@@ -31,7 +31,7 @@ import java.util.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @RequestMapping(value = "/user")
 public class UserProfileController {
 
@@ -76,11 +76,13 @@ public class UserProfileController {
     /** GET REQUEST **/
 
 
+    /** Returns a list of all users for search component **/
     @GetMapping("/search")
     public List<UserEntity> displayAllUsers() {
         return this.userRepository.findAll();
     }
 
+    /** Returns information for a user being viewed **/
     @GetMapping("/getViewUserBundleInformation/{userName}")
     public ResponseEntity<?> getViewUserInformation(@PathVariable String userName) {
 
@@ -104,6 +106,7 @@ public class UserProfileController {
 
     }
 
+    /** Returns a list of all information for the logged in users account **/
     @GetMapping("/getMainUserBundleInformation/{userName}")
     public ResponseEntity<?> getMainUserBundle(@PathVariable String userName, @RequestHeader (name="authorization") String token) {
 
@@ -119,11 +122,13 @@ public class UserProfileController {
             return new ResponseEntity<>(new ResponseMessage("404"), HttpStatus.OK);
         }
 
+        /** Main user information and DM history **/
         UserEntity targetUser = userRepository.findByUserName(userName);
         Optional<UserInformation> targetInformation = userInformationRepository.findByUserName(targetUser.getUserName());
         UserDmHistory targetDirectMessages = UserProfileControllerService.activeUserDirectMessageHistory(targetUser.getId());
         UserPostHistory targetUserPostHistory = new UserPostHistory();
 
+        /** Profile details on Post history from other parts of the website **/
         List<HiddenPost> targetHiddenPost = UserProfileControllerService.getHiddenPostListForUserBundleMain(targetUser.getId());
         targetUserPostHistory.setViewUserHiddenPost(targetHiddenPost);
         List<ForumPosts> targetForumPost = UserProfileControllerService.getUserForumPost(targetUser.getId());
@@ -138,6 +143,7 @@ public class UserProfileController {
         return new ResponseEntity<>(new UserBundle(targetUser, targetInformation, targetDirectMessages, targetUserPostHistory), HttpStatus.OK);
     }
 
+    /** Returns a list of post hidden relative to the user profile **/
     @GetMapping("/getHiddenPostList/{userId}")
     public List<HiddenPost> getHiddenPostListByUserId(@PathVariable int userId) {
         List<HiddenPost> hiddenPostList = new ArrayList<>();
@@ -149,6 +155,7 @@ public class UserProfileController {
         return hiddenPostList;
     }
 
+    /** Returns a filtered list of post that excludes post marked as hidden by the user when their page is viewed **/
     @GetMapping("/getUpdatedPostHistoryViewUser/{userId}")
     public ResponseEntity<?> getUpdatedPostHistoryViewUser(@PathVariable int userId) {
 
@@ -184,6 +191,7 @@ public class UserProfileController {
         return new ResponseEntity<>(currentPostSettings, HttpStatus.OK);
     }
 
+    /** Returns the users profile picture **/
     @GetMapping(path = {"/userProfileImage/{userName}"})
     public ResponseEntity<?> getImageDetails(@PathVariable("userName") String userName) throws IOException {
 
@@ -205,6 +213,7 @@ public class UserProfileController {
     /** POST REQUEST **/
     /** POST REQUEST **/
 
+    /** Uploads the image to the profile picture table **/
     @PostMapping("/upload/image")
     public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file)
             throws IOException {
@@ -222,6 +231,7 @@ public class UserProfileController {
                 .body(new ResponseMessage("Image uploaded successfully: " + file.getOriginalFilename()));
     }
 
+    /** Update the hidden post on user profile **/
     @PostMapping("/hidePostList")
     public ResponseEntity<?> hiddenPosts(@RequestBody HidePostDTO hidePostDTO) {
 
@@ -240,6 +250,7 @@ public class UserProfileController {
         return new ResponseEntity<>(hiddenPostRepository.findAll(), HttpStatus.OK);
     }
 
+    /** Marks a hidden post as no longer hidden by the main user **/
     @PostMapping("/unHidePost")
     public ResponseEntity<?> unHidePostFromProfile(@RequestBody HidePostDTO hidePostDTO) {
 
@@ -254,6 +265,7 @@ public class UserProfileController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /** Saves a direct message to the database **/
     @PostMapping("/sendDirectMessage")
     public ResponseEntity<?> updateUserInformation(@RequestBody DirectMessageDTO directMessageDTO) {
 
@@ -283,6 +295,7 @@ public class UserProfileController {
     /** PUT Request **/
 
 
+    /** Testing put request: Updates the user information that is displayed on the user profile **/
     @PutMapping("/update-user-information/{userName}")
     public ResponseEntity<?> updateUserInformation(@PathVariable String userName, @RequestBody UserInfoDTO userInfoDTO) {
 

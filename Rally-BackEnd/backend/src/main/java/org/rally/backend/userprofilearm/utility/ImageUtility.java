@@ -6,6 +6,10 @@ import java.util.zip.Inflater;
 
 public class ImageUtility {
 
+    /** This class compresses and decompresses the images for userProfile **/
+    /** This class compresses and decompresses the images for userProfile **/
+    /** This class compresses and decompresses the images for userProfile **/
+
     public static byte[] compressImage(byte[] data) {
 
         Deflater deflater = new Deflater();

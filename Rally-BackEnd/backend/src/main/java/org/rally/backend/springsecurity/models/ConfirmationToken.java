@@ -9,6 +9,8 @@ import java.util.Date;
 @Entity
 public class ConfirmationToken {
 
+    /** Email Confirmation token **/
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tokenId;

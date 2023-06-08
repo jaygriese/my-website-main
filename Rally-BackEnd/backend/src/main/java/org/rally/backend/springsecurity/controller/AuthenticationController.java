@@ -72,10 +72,12 @@ public class AuthenticationController {
         this.jwtBlockListRepository = jwtBlockListRepository;
     }
 
+    /** Register the user and saves to the repository, but doesn't mark the user as authentic yet **/
     @PostMapping("/register")
     public ResponseEntity<?> processRegistrationForm(@RequestBody UserBundleDTO userBundleDTO) {
         UserProfileControllerService.generateRoles();
 
+        /** Check if the username or email have been used yet **/
         UserEntity existingUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
         String existingEmail = userBundleDTO.getRegisterDTO().getUserEmail();
 
@@ -88,6 +90,7 @@ public class AuthenticationController {
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
+        /** Checks if passwords match before setting **/
         String password = userBundleDTO.getRegisterDTO().getPassword();
         String verifyPassword = userBundleDTO.getRegisterDTO().getVerifyPassword();
         if (!password.equals(verifyPassword)) {
@@ -95,6 +98,7 @@ public class AuthenticationController {
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
+        /** save user into UserEntity and grant role **/
         UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()),userBundleDTO.getRegisterDTO().getUserEmail(), userBundleDTO.getRegisterDTO().getPassword());
 
         if (registerNewUser.getRoles().size() == 0) {
@@ -102,8 +106,10 @@ public class AuthenticationController {
             registerNewUser.setRoles(Collections.singletonList(roles));
         }
 
+        /** saves user into repository **/
         userRepository.save(registerNewUser);
 
+        /** Set user Information with new userId that has been saved **/
         UserEntity newestUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
 
         String userName = newestUser.getUserName();
@@ -113,19 +119,24 @@ public class AuthenticationController {
         String city = userBundleDTO.getUserInfoDTO().getCity();
         String state = userBundleDTO.getUserInfoDTO().getState();
 
+        /** If any of the fields don't meet the character requirements, throws an error and remove the user from user Repository **/
         if (firstName.toCharArray().length < 3 || lastName.toCharArray().length < 3 || state.toCharArray().length < 1 || neighborhood.toCharArray().length < 3 || city.toCharArray().length < 3) {
+            userRepository.delete(registerNewUser);
             throw new MinimumCharacterException();
         }
 
         UserInformation newUserInformation = new UserInformation(userName, firstName, lastName, neighborhood, city, state);
 
+        /** Save the User info to repo **/
         userInformationRepository.save(newUserInformation);
+        /** running userServicesImpl.saveUser() sends email verification and will reflect on register HTML **/
         ResponseMessage confirm = new ResponseMessage(userServicesImpl.saveUser(registerNewUser));
 
         return new ResponseEntity<>(confirm, HttpStatus.OK);
 
     }
 
+    /** When the user clicks the link to validate their email, this method verifies the email and marks the user as authentic **/
     @PostMapping("/confirm-account")
     public ResponseEntity<?> confirmUserAccount(@RequestBody String token) {
 
@@ -147,11 +158,13 @@ public class AuthenticationController {
         }
     }
 
+    /** User login **/
     @PostMapping("/login")
     public ResponseEntity<?> processLoginForm(@RequestBody LoginDTO loginDTO) {
 
         UserEntity theUser = userRepository.findByUserName(loginDTO.getUserName());
 
+        /** Checks if the user is present **/
         if (theUser == null) {
             AuthenticationFailure authenticationFailure = new AuthenticationFailure("Username doesn't exist");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
@@ -159,16 +172,19 @@ public class AuthenticationController {
 
         String password = loginDTO.getPassword();
 
+        /** Checks if the user entered the correct password **/
         if (!theUser.isMatchingPassword(password)) {
             AuthenticationFailure authenticationFailure = new AuthenticationFailure("Incorrect password");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
+        /** Checks if the user has a verified account **/
         if (!theUser.isAccountVerified()) {
             AuthenticationFailure authenticationFailure = new AuthenticationFailure("Account is not verified, please check your email to verify your account.");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
+        /** Grants the user a JWT token for their session **/
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginDTO.getUserName(),
@@ -176,12 +192,11 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
 
-        /** Is UserDetailsImpl needed to send a legit JWT response? **/
-
         List<String> roles = theUser.getRoles().stream()
                 .map(Role::getName)
                 .collect(Collectors.toList());
 
+        /** Sends a JWT response with userInformation (Most info here isn't needed since we are only storing the JWT itself on the front) **/
         JWTResponse response = new JWTResponse(token,
                 theUser.isAccountVerified(),
                 theUser.getId(),
@@ -192,6 +207,7 @@ public class AuthenticationController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /** When the user logs out, marks the JWT token as invalid **/
     @GetMapping("/logout")
     public ResponseEntity<?> logoutConfirmed(@RequestHeader (name="authorization") String token) {
         jwtGenerator.invalidateToken(token.substring(7, token.length()));
@@ -199,6 +215,7 @@ public class AuthenticationController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /** During user Registration, this will check the first form with userName and Email and verify if those fields are available **/
     @PostMapping("/nameEmailCheck")
     public ResponseEntity<?> firstCheck(@RequestBody RegisterDTO registerDTO) {
         UserEntity existingUser = userRepository.findByUserName(registerDTO.getUserName());

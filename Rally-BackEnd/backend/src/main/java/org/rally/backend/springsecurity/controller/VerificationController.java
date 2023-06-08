@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/verify")
 public class VerificationController {
 
+    /** Controller not being used yet, app not utilizing roles other than USER yet **/
+
     @GetMapping("/all")
     public String allAccess() {
         return "Public Content";

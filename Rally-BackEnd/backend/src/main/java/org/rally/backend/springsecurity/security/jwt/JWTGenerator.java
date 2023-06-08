@@ -20,6 +20,8 @@ import java.util.Optional;
 @Component
 public class JWTGenerator {
 
+    /** JWT Generator class **/
+
     @Autowired
     private JWTBlockListRepository jwtBlockListRepository;
 
@@ -38,6 +40,7 @@ public class JWTGenerator {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(SecurityConstants.JWT_SECRET));
     }
 
+    /** Returns userName from the JWT token **/
     public String getUserNameFromJWT(String token) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key()).build()
@@ -46,6 +49,7 @@ public class JWTGenerator {
         return claims.getSubject();
     }
 
+    /** Check if the token is valid, returns true if valid, else, throws error **/
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key()).build().parse(token);
@@ -55,6 +59,8 @@ public class JWTGenerator {
         }
     }
 
+    /** Sets a JWT token in a block list, so it can't be used again **/
+    /** TODO - Need to write a method to delete expired tokens from blocklist **/
     public void invalidateToken(String token) {
         BadJWT setBadToken = new BadJWT();
         setBadToken.setBadToken(token);

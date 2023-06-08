@@ -71,6 +71,7 @@
             <br><br>
             <div *ngIf="createNewUser; else userExists"><br><br></div> 
             <div *ngIf="createNewUser; else validRegister"><br><br></div>
+            <div *ngIf="emailVerifyLoading"><h4 style="color: rgb(62, 167, 106);">Please wait while your verification email is sent</h4></div>
             <input type="submit" value="Submit">
             <button type="button" (click)="clearForms()">Go back</button>
         </form>

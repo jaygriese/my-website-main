@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    /** Service methods for validation and verification **/
+
     private UserRepository userRepository;
 
     @Autowired
@@ -32,7 +34,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("username not found");
         }
-//        UserDetails user =
         return new User(user.getUserName(), user.getPwHash(), mapRolesToAuthorities(user.getRoles()));
     }
 

@@ -93,11 +93,15 @@
                     <form #respondToDm="ngForm" (ngSubmit)="respondToUserDm(respondToDm)">
                         <div class="card" style="align-items: center; background-color: rgb(126, 161, 154);">
                         <ng-template #lengthError>
-                        <h6 style="color: rgb(165, 35, 61);">Minimum of 3 characters required.</h6>
+                            <h6 style="color: rgb(165, 35, 61);">Minimum of 3 characters required.</h6>
+                        </ng-template>
+                        <ng-template #tooLong>
+                            <h6 style="color: rgb(165, 35, 61);">You have exceeded 2500 characters.</h6>
                         </ng-template>
                         <h3>Respond:</h3>
                         <textarea rows="3" cols="40" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
                         <div *ngIf="noError; else lengthError"></div>
+                        <div *ngIf="!tooManyChar; else tooLong"></div>
                         <input style="background-color: #85CDE3;" type="submit" value="Send Message">    
                         <button style="background-color: #85CDE3;" (click)="userDms=true">Return to all Messages</button>
                     </div>

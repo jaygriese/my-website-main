@@ -14,7 +14,8 @@ export class SearchUserComponent implements OnInit {
 
   /* Search User Variables */
   userList: UserEntity[]; 
-  logInStatus: Boolean;
+  logInStatus: boolean;
+  characterError: boolean = false;
 
   constructor(private userService: ViewUserService,
               private authorize: AuthorizeService,
@@ -36,6 +37,13 @@ export class SearchUserComponent implements OnInit {
   /* Search for specific user by name or by character */
   /* This method needs to be refactored to be handled by backend */
   searchForUser(searchUser: NgForm) {
+    this.characterError=false;
+
+    if (searchUser.value.search === undefined || searchUser.value.search.length < 1 || searchUser.value.search.length > 25) {
+      this.characterError = true;
+      return;
+    }
+
     let filterUser: any[] = [];
     let search = searchUser.value.search.toLowerCase().split('');
 
@@ -64,6 +72,7 @@ export class SearchUserComponent implements OnInit {
 
   /* Reset results */
   resetResults() {
+    this.characterError = false;
     this.userService.getUserList().subscribe((data: UserEntity[]) => {
       this.userList = data;
       let remove: UserEntity;

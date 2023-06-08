@@ -63,10 +63,14 @@
             <form #dmMessageDetails="ngForm" (ngSubmit)="viewingUserSendDM(dmMessageDetails)">
                 <div class="card" style="align-items: center; background-color: rgb(126, 161, 154);">
                     <h3>Respond: </h3>
-                    <textarea rows="3" cols="40" type="text" name="messageContent" [(ngModel)]="commentBox"></textarea> 
+                <textarea rows="3" cols="40" type="text" name="messageContent" [(ngModel)]="commentBox"></textarea> 
                 <br>
                 <div *ngIf="dmCharacters; else lengthError"></div>
-                <input style="background-color: #85CDE3;" type="submit" value="Send Message">    
+                <div *ngIf="!tooManyChar; else tooLong"></div>
+                <input style="background-color: #85CDE3;" type="submit" value="Send Message">   
+                <ng-template #tooLong>
+                    <h6 style="color: rgb(165, 35, 61);">You have exceeded 2500 characters.</h6>
+                </ng-template> 
                 <ng-template #lengthError>
                     <h6 style="color:crimson;">Minimum of 3 characters required.</h6>
                 </ng-template>

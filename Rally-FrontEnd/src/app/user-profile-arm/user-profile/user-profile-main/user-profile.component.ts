@@ -14,6 +14,7 @@ import { Event } from 'src/app/Events/models/event';
 import { HidePostDTO } from '../../models/dto/HidePostDTO';
 import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
 import { StorageService } from 'src/app/security/security-service/storage-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -45,6 +46,7 @@ export class UserProfileComponent implements OnInit {
   /* HTML booleans */
   notHidden: boolean = true;
   noError: boolean = true;
+  tooManyChar: boolean = false;
   changeInfo: boolean = true;
   userDms: boolean = true;
   changeProfilePic: boolean = true;
@@ -66,7 +68,8 @@ export class UserProfileComponent implements OnInit {
               private activeUserService: ViewUserService, 
               private cdref: ChangeDetectorRef,
               private authorize: AuthorizeService,
-              private storageService: StorageService) {
+              private storageService: StorageService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -108,7 +111,6 @@ export class UserProfileComponent implements OnInit {
       /* bundle in userbundle or change to user userName */
       this.http.get('http://localhost:8080/user/userProfileImage/' + this.storageService.getUserName()).subscribe((response: any) => {
         if (response.message) {
-          console.log(response.message);
           return;
         } else {
           this.postResponse = response;
@@ -154,9 +156,9 @@ export class UserProfileComponent implements OnInit {
   
   /* Learning about LifeCycle Hooks in Angular / prevents error in the console when viewing 
     direct messages while using the [scrollTop]="scrollMe.scrollHeight" in HTML*/
-  /* Might be causing memory leak, further investigation required */
+  /* Might cause a memory leak, further investigation required */
   ngAfterContentChecked() {
-    // this.scrollMe = this.scrollMe;
+    this.scrollMe = this.scrollMe;
     this.cdref.detectChanges();
   }
 
@@ -177,12 +179,12 @@ export class UserProfileComponent implements OnInit {
     let hidePostDTO: HidePostDTO = {
       postType: post.type,
       hidePostId: post.id,
-      userId: Number(localStorage.getItem("id"))
+      userId: Number(this.userEntity.id)
     }
 
-    this.http.post('http://localhost:8080/user/hidePostList', hidePostDTO).subscribe((response) => {
-      console.log(response);
-      location.reload();
+    this.http.post('http://localhost:8080/user/hidePostList', hidePostDTO).subscribe((response: any) => {
+      /* Temp solution to refresh page without location.reload() */
+      this.router.navigate(['/register'])
     })
   }
 
@@ -198,8 +200,8 @@ export class UserProfileComponent implements OnInit {
     console.log(hidePostDTO)
 
     this.http.post('http://localhost:8080/user/unHidePost', hidePostDTO).subscribe((response) => {
-      console.log(response);
-      location.reload();
+      /* Temp solution to refresh page without location.reload() */
+      this.router.navigate(['/register'])
     })
   }
 
@@ -263,7 +265,7 @@ export class UserProfileComponent implements OnInit {
 
   /* After sending a message to a user, this refreshes the chat history */
   refreshConversation( chatWithUser: string) {
-    /* this.converstaion = [] is causing errors cause I don't know how to handle lifecycle hooks yet. :( */
+    /* this.converstaion = [] is causing an error because I don't know how to handle lifecycle hooks yet. */
     /* Want to rebuild Direct Messages with different architecture */
 
     this.conversation = [];
@@ -278,6 +280,10 @@ export class UserProfileComponent implements OnInit {
 
   /* Sends direct message respone to the database */
   respondToUserDm( userResponse: NgForm ) {
+    /*reset error message on user messages if errors occured */
+    this.noError = true;
+    this.tooManyChar = false;
+
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.respondToDm.id,
       receivedByUserName: this.respondToDm.userName,
@@ -286,10 +292,16 @@ export class UserProfileComponent implements OnInit {
       messageContent: userResponse.value.messageContent
     }
 
+    /* doesn't allow message to be sent if contents don't conform to length requirements */
     if (sendDirectMessage.messageContent === undefined || sendDirectMessage.messageContent.length < 3) {
       this.noError = false;
       return
+    } else if ( sendDirectMessage.messageContent.length > 2500) {
+      this.tooManyChar = true;
+      return
     }
+
+    /* Post message to backend if message is valid then refresh the conversation to reflect message sent */
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
       this.allDmHistory = response;
       this.commentBox = '';

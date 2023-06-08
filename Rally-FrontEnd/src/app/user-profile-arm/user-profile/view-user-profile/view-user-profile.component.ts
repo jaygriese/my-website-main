@@ -39,6 +39,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
   /* HTML booleans */
   noError: boolean = true;
+  tooManyChar: boolean = false;
   showDmHistory = false;
   dmCharacters = true;
   userReal = true;
@@ -95,7 +96,6 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
     /* Get view users profile picture */
     this.http.get(this.hostUrl + '/user/userProfileImage/' + this.viewUserName).subscribe((response: any) => {
       if (response.message) {
-        console.log(response.message);
         return;
       } else {
         this.dbImage = 'data:image/jpeg;base64,' + response.image;
@@ -146,6 +146,9 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
   /* Send Dm to viewed user */
   viewingUserSendDM(dmMessageDetails: NgForm) {
+    this.dmCharacters = true;
+    this.tooManyChar = false;
+
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.userEntityInformation.viewUser.id,
       receivedByUserName: this.userEntityInformation.viewUser.userName,
@@ -154,11 +157,16 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
       messageContent: dmMessageDetails.value.messageContent
     }
 
+    /*This checks if the message contents conform to the character limitations */
     if (sendDirectMessage.messageContent === undefined || sendDirectMessage.messageContent.length < 3) {
       this.dmCharacters = false;
       return;
-    } 
+    } else if ( sendDirectMessage.messageContent.length > 2500) {
+      this.tooManyChar = true;
+      return
+    }
 
+    /* Posts the dm if it doens't trigger any errors */
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
       this.dmList = response;
       this.commentBox = '';

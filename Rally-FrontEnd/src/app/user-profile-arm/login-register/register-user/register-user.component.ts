@@ -48,6 +48,7 @@ export class RegisterUserComponent implements OnInit {
   createNewUser: boolean;
   postResponseMessage: string;
   postResponseMessageValid: string;
+  emailVerifyLoading: boolean = false;
 
   constructor(private http: HttpClient, 
               private router: Router,
@@ -147,6 +148,7 @@ export class RegisterUserComponent implements OnInit {
       state: userDetails.value.state
     }
 
+    this.emailVerifyLoading = true;
     /* check that first and last name are filled in */
     let response: any[] = this.reglogService.userInformationCheck(userInfo);
     if (response.length === 0) {
@@ -159,9 +161,11 @@ export class RegisterUserComponent implements OnInit {
   
       this.http.post('http://localhost:8080/api/register', userBundle).subscribe((response: any) => {
         if (response.message === "Verify your account with the link sent to your email!") {
+            this.emailVerifyLoading = false;
             this.postResponseMessageValid = response.message;
             return;
           }  else {
+            this.emailVerifyLoading = false;
             this.postResponseMessage = response.message;
             return;
             }

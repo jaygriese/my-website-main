@@ -3,6 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category, Service, Type } from '../models/Search';
 import { ViewService } from '../models/ServiceGet';
+import { ViewId } from '../models/ServiceGet';
+import { UserEntity } from 'src/app/user-profile-arm/models/UserEntity';
+import { ServiceDTO } from '../models/Service';
+
 
 @Component({
   selector: 'app-service-item',
@@ -11,11 +15,19 @@ import { ViewService } from '../models/ServiceGet';
 })
 export class ServiceItemComponent implements OnInit {
 
+  userList: UserEntity[]; 
+
+  private userUrl: string;
+
   currentUser;
   logInStatus: Boolean;
   servicesList: Service[];
   serviceItem: Service;
+  delItem: ServiceDTO[];
 
+  // ids: string;
+
+  ids: string;
   id: number;
   idString: string;
   serviceId: String;
@@ -26,7 +38,7 @@ export class ServiceItemComponent implements OnInit {
   email: String;
   day: String;
   time: String;
-  user: String;
+  user: string;
 
   idArr: String[] = [];
   serviceArr: String[] = [];
@@ -36,26 +48,22 @@ export class ServiceItemComponent implements OnInit {
   emailArr: String[] = [];
   dayArr: String[] = [];
   timeArr: String[] = [];
-  userNameArr: String[] = [];
+  userNameArr: string[] = [];
 
-
-  constructor(private http: HttpClient, private router: Router, private findService: ViewService, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, private router: Router, private findService: ViewService, private route: ActivatedRoute, private findId: ViewId) {
     this.logInStatus = false;
+    this.userUrl = 'http://localhost:8080/services/delete';
    }
 
   ngOnInit(): void {
     this.verifyLoggedIn();
 
-
-
     this.findService.getService().subscribe((response: Service[]) => {
       this.servicesList = response;
       // console.log(this.servicesList);
 
-
       if (this.route.snapshot.queryParams['id']) {
         this.id = this.route.snapshot.queryParams['id'];
-        // console.log(this.id);
       }
 
       for (let i = 0; i < this.servicesList.length; i++) {
@@ -101,10 +109,27 @@ export class ServiceItemComponent implements OnInit {
       this.day = this.dayArr[this.id-1];
       this.time = this.timeArr[this.id-1];
       this.user = this.userNameArr[this.id-1];
+      console.log(this.user);
 
-      // console.log(this.serviceId);
-
+      this.findId.getId().subscribe((response: UserEntity[]) => {
+        this.userList = response;
+        console.log(this.userList);
+        // console.log(this.userList[0].id);
+        console.log(this.user);
+        for(let i = 0; i < this.userList.length; i++) {
+          if(this.userList[i].userName = this.user) {
+            this.ids = this.userList[i].id;
+            console.log(this.ids);
+            break
+          }
+          return this.ids;
+        }
+        console.log(this.user);
+      })      
       })
+
+
+
     }
 
   verifyLoggedIn() {
@@ -113,7 +138,6 @@ export class ServiceItemComponent implements OnInit {
       this.currentUser = localStorage.getItem('userName');
       this.logInStatus = true;
     }
-  
   }
 
   logOut() {
@@ -122,5 +146,12 @@ export class ServiceItemComponent implements OnInit {
     this.logInStatus = false;
   }
 
+  deleteItem() {
+    this.http.post(this.userUrl, this.id).subscribe((result) => {
+      console.log(this.id);
+    })
+  }
+  
 
 }
+

@@ -15,9 +15,19 @@ import { Router } from '@angular/router';
     getService () {
       return this.http.get(`${this.getSearchService}`)
     }
-  
-    
+  }
 
-  
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ViewId {
+    private getIdURL = 'http://localhost:8080/services/searchUser';
+
+    constructor(private http: HttpClient, private router: Router) { }
+
+    getId () {
+      return this.http.get(`${this.getIdURL}`)
+    }
   }
   

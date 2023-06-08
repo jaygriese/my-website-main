@@ -1,13 +1,13 @@
 <!-- TO DO --
 Make Offer styling match Home -->
 
-<body class="background">
+<body style="text-align:center">
 
     <!-- login status -->
     <div *ngIf="logInStatus; else notLoggedIn">
         
         <div style="text-align: right;">
-            <p class="text-white">Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
+            <p class="text-black">Logged in as: {{currentUser}}  <button (click)="logOut()"> Log Out?</button></p>
         </div>
     
     </div>
@@ -23,25 +23,23 @@ Make Offer styling match Home -->
     <br>
 
     <!-- Offer form -->
-        <form class="form container border" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <form class="form border container background" #f="ngForm" (ngSubmit)="onSubmit(f)">
             <div [hidden]="f.submitted">
-               <div class="form-group text-white accent">
-                  <label class="text-orange" for="userName">Name:</label>
+               <div class="form-group accent">
+                  <label for="userName">Name:</label>
                   <br>
 
                   <!-- Name -->
-                  <input type="text" class="form-control-center" style="width: 25%;" id="userName" name="userName" required minlength="3" placeholder={{currentUser}} [(ngModel)]="model.userName" #userName="ngModel">
+                  <input type="text" readonly class="form-control-plaintext-center" style="width: 25%; color: blue; font-size:x-large; text-align:center"
+                  id="userName" name="userName" placeholder={{currentUser}} [(ngModel)]="model.userName" #userName="ngModel">
+                  <!-- "model.userName" -->
 
-                        <div *ngIf="userName.invalid && (userName.dirty || userName.touched)"
-                           class="alert text-red">
-                           Name is required and must be at least three characters long.
-                        </div>
 
                   <br>
                   <br>
                   <br>
                   <!-- Offer or Request-->
-                  <label class="text-orange" for="category-drop">Are You Offering or Requesting a Service?</label>
+                  <label for="category-drop">Are You Offering or Requesting a Service?</label>
                   <br>
                   <select id="type-drop" name="type" required [(ngModel)]="typeModel.type" #type="ngModel">
                      <option *ngFor="let t of types" [value]="t" >{{t}}</option>
@@ -53,7 +51,7 @@ Make Offer styling match Home -->
                   <br>
                   <br>
                   <!-- Service -->
-                  <label class="text-orange" for="service">Please Title Your Service:</label>
+                  <label for="service">Please Title Your Service:</label>
                   <br>
                   <input type="text" class="form-control-center" style="width: 25%;" id="service" name="service" placeholder="Short Title... (between 5 and 50 chars)" required minlength="5" maxlength="50" [(ngModel)]="model.service" #service="ngModel">
                   
@@ -67,7 +65,7 @@ Make Offer styling match Home -->
                   <br>
 
                   <!-- Category drop down -->
-                  <label class="text-orange" for="category-drop">Pick a Category for the Service:</label>
+                  <label for="category-drop">Pick a Category for the Service:</label>
                   <br>
                   <select id="category-drop" name="category" required [(ngModel)]="categoryModel.category" #category="ngModel">
                      <option *ngFor="let c of categories" [value]="c">{{c}}</option>
@@ -80,7 +78,7 @@ Make Offer styling match Home -->
                   <br>
 
                   <!-- Days drop down -->
-                  <label class="text-orange" for="days-drop">Choose All Days Available or Any:</label>
+                  <label for="days-drop">Choose All Days Available or Any:</label>
                   <br>
                   <select id="days-drop" name="days" required multiple="days[0]" [(ngModel)]="daysModel.day" #day="ngModel">
                      <option *ngFor="let d of days" [value]="d">{{d}}</option>
@@ -92,7 +90,7 @@ Make Offer styling match Home -->
                   <br>
                   <br>
                   <!-- Time drop down -->
-                  <label class="text-orange" for="time-drop">Choose All Times Available or Any:</label>
+                  <label for="time-drop">Choose All Times Available or Any:</label>
                   <br>
                   <select id="time-drop" name="time" required multiple [(ngModel)]="timeModel.time" #time="ngModel">
                      <option *ngFor="let t of times" [value]="t">{{t}}</option>
@@ -105,11 +103,11 @@ Make Offer styling match Home -->
                      <br>
 
                   <!-- Description -->
-                  <div class="form-group accent">
-                        <label class="text-orange" for="description">Provide a Description:</label>
-                        <br>
-                        <textarea class="form-control-center" style="width:50%" id="description" rows="4" name="description" placeholder="Provide a description for the service, such as location information, whether offered or requested for free or for a fee, how you prefer payment, etc... (between 5 and 255 chars)" required minlength="5" maxlength="255" [(ngModel)]="model.description" #description="ngModel"></textarea>
-                  </div>
+
+                  <label for="description">Provide a Description:</label>
+                  <br>
+                  <textarea class="form-control-center accent" style="width:50%" id="description" rows="4" name="description" placeholder="Provide a description for the service, such as location information, whether offered or requested for free or for a fee, how you prefer payment, etc... (between 5 and 255 chars)" required minlength="5" maxlength="255" [(ngModel)]="model.description" #description="ngModel"></textarea>
+
 
                   <div *ngIf="description.invalid && (description.dirty || description.touched)"
                      class="alert text-red">
@@ -127,7 +125,7 @@ Make Offer styling match Home -->
                      <br>
 
                   <!-- Email -->
-                  <label class="text-orange" for="email">Provide Your Email:</label>
+                  <label for="email">Provide Your Email:</label>
                   <br>
                   <input type="email" class="form-control-center" style="width: 25%;" id="email" name="email" required [(ngModel)]="model.email" #email="ngModel" email="true">
                   
@@ -143,16 +141,17 @@ Make Offer styling match Home -->
                   </div>
                   <button type="submit" *ngIf="!f.invalid && !day.pristine && !time.pristine; else disabled" class="button-blue button-hover">Post It!</button>
                      <ng-template #disabled>
-                        <p class="text-orange">Please fix errors to enable button</p>
+                        <p class="text-red">Please fix errors to enable button</p>
                         <button type="submit" class="button-red" [disabled]="f.invalid">Input Required</button>
                      </ng-template>
                   </div>
 
                <!-- Reset form with New Service button Once form is submitted -->
                <div class=submitted-service *ngIf="f.submitted">
-                  <p class="text-orange">You've submitted "{{ f.value.service }}"!</p>
-                  <button class="button-blue button-hover" type="button" (click)="f.resetForm()">Add new service</button>
-
+                  <p class="text-black">You've submitted "{{ f.value.service }}"!</p>
+                  <button class="button-blue button-hover" type="button" (click)="reload()">Add new service</button>
+                  <!-- (click)="f.resetForm()" -->
+                  <!-- <a class="nav-link" routerLink="/offer" routerLinkActive="active"></a> -->
                </div>
             <br>
             <br>
@@ -160,4 +159,4 @@ Make Offer styling match Home -->
         <br>
         <br>
         <br>
-    </body>
+</body>

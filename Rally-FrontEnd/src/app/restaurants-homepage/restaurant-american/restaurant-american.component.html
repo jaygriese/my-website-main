@@ -1,0 +1,15 @@
+
+        <table style width=100% *ngFor="let component of americanRestaurant">
+            <!-- <div img src = "https://en.casacol.co/wp-content/uploads/sites/3/2022/06/The-Best-American-Food-in-Medellin-2048x1365.jpg"> -->
+            
+                <div class="name">{{component.restauntName}}</div>
+                    <div>{{component.address}}</div>
+                        <div>{{component.conactInfo}}</div>
+                            <a style="color: purple"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
+                        <br>
+                        <br>
+                        <br>
+        </table>
+
+
+ <img src="https://en.casacol.co/wp-content/uploads/sites/3/2022/06/The-Best-American-Food-in-Medellin-2048x1365.jpg">

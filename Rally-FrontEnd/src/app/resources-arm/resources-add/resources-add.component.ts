@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { ResourceDTO } from '../model/Resource';
+import { FormsModule } from '@angular/forms';
+import { ResourceDTO } from '../models/Resource';
 
 @Component({
   selector: 'app-resources-add',
@@ -11,12 +12,15 @@ import { ResourceDTO } from '../model/Resource';
 })
 export class ResourcesAddComponent implements OnInit {
   private userUrl: string;
-  currentUser: string;
+  currentUser;
   logInStatus: Boolean;
+  // Validations
+  categories = ["Athletics", "Arts", "Business", "Civic", "Education", "Entertainment", "Fitness", "Hospitality", "Medical", "Park", "Religious", "Retail"]
+  cateogryModel = {category: this.categories[0]}
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
-    this.userUrl = 'http://locahost:8080/resources/add';
+    this.userUrl = 'http://localhost:8080/resources/add';
    }
 
   ngOnInit(): void {
@@ -28,6 +32,8 @@ export class ResourcesAddComponent implements OnInit {
       this.logInStatus = true;
     }
   }
+  
+  
   logOut() {
     localStorage.clear();
     console.log(localStorage.getItem('userName'))
@@ -41,12 +47,18 @@ export class ResourcesAddComponent implements OnInit {
       address: f.value.address,
       website: f.value.website,
       telephoneNumber: f.value.telephoneNumber,
-      emailAddress: f.value.emailAddress,
+      email: f.value.email,
       description: f.value.description
     }
+    console.log(submitResource);
     this.http.post(this.userUrl, submitResource).subscribe((res) => {
-      console.log(res);
+      console.log(submitResource.resourceName);
+      console.log(submitResource.category);
+      console.log(submitResource.address);
+      console.log(submitResource.website);
+      console.log(submitResource.telephoneNumber);
+      console.log(submitResource.email);
+      console.log(submitResource.description);
     })
   }
-
 }

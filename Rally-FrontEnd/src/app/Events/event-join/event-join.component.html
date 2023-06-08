@@ -6,19 +6,6 @@
         <title>event-join</title>
       </head> -->
 
-        <!-- <div *ngIf="logInStatus; else notLoggedIn">
-            <div style="text-align: right;  display: flex; justify-content:space-between;">
-                <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
-                <button (click)="logOut()"> Log Out?</button>
-            </div>       
-        </div>
-        
-        
-        <ng-template #notLoggedIn>
-            <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">
-                Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
-        </ng-template> -->
-
         <header>
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white; border-bottom: 1px solid #000; padding: 15px;">
@@ -40,7 +27,6 @@
                         
                         <div *ngIf="logInStatus; else notLoggedIn">
                             <button class="logOutButton" (click)="logOut()">LOG OUT</button>
-                            <!-- <p style="margin-top: 5px; margin-bottom: -5px">Welcome, {{currentUser}}!</p> -->
                         </div>
         
                             <ng-template #notLoggedIn>
@@ -60,7 +46,7 @@
 
 
             <div id="list_head">
-                <p>Join Event:  {{event?.eventTitle}}</p> 
+                <p>Join:  {{event?.eventTitle}}</p> 
             </div>
         
             <br>
@@ -72,7 +58,6 @@
                     <div class="row">
                         <div class="col-5">
 
-                            <!-- <input type="hidden" id="id" name="eventId" value="event.id" ngModel> -->
                             <input type="hidden" id="event" name="event" value="event" ngModel>
                             
                             <div class="mb-3">
@@ -81,7 +66,6 @@
             
                             <div *ngIf="attending.invalid && (attending.dirty || attending.touched)" class="alert alert-danger" >
                                 Who is joining the event?</div>
-                            <!-- </div> -->
                               
                             <br>
                             <label class="form-label">email</label><br>
@@ -125,9 +109,6 @@
                     </div>
  
                 </form>
-              
-                
-            <!-- <a routerLink="/edit/{{join.id}}" routerLinkActive="active" class="btn btn-link" style="color: #85CDE3;">EDIT RSVP</a> -->
 
 
     </div>

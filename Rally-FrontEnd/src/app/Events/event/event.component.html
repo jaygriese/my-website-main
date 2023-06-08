@@ -1,70 +1,3 @@
-<!-- <div *ngIf="logInStatus; else notLoggedIn">
-    
-    <div style="text-align: right;  display: flex; justify-content:space-between;">
-        <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
-        <button (click)="logOut()"> Log Out?</button>
-    </div>
-   
-</div>
-<ng-template #notLoggedIn>
-    <p style="text-align: left; display: flex; justify-content: space-between;">Log in to rally your community!</p>
-    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
-</ng-template> -->
-
-
-
-
-<!-- <div *ngIf="logInStatus; else notLoggedIn">
-    
-    <div style="text-align: right;  display: flex; justify-content:space-between;">
-        <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
-        <button (click)="logOut()"> Log Out?</button>
-    </div>
-   
-
-</div> -->
-
-<!-- <div *ngIf="logInStatus; else notLoggedIn">
-    
-    <div>
-        <br>
-        <br>
-        <p style="font-size: 15px; font-weight: bolder;">Welcome, {{currentUser}}!</p>
-        <button class="" (click)="logOut()"> Log Out?</button>
-    </div>
-   
-
-</div>
-
-
-<ng-template #notLoggedIn>
-    <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
-</ng-template> -->
-
-
-<!-- <div class="container" *ngIf="logInStatus">
-    
-    <div>
-        <br>
-        <br>
-        <p style="margin-top: 15px; font-size: 18px; font-weight: bolder;">Welcome, {{currentUser}}!</p>
-        <button class="btn btn-light"  (click)="logOut()">Log Out?</button>
-    </div>
-
-</div> -->
-
-
-<!-- <ng-template #notLoggedIn>
-    <div class="container">
-        <br>
-        <br>
-        <p style="margin-top: 15px; font-size: 18px;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Log in</a></span> to <span style="font-family: impact; font-size: 18px;">rally!</span> your community</p>
-    </div>
-</ng-template> -->
-
-
-
-
 
 <header>
     <div class="container-fluid">
@@ -87,7 +20,6 @@
                 
                 <div *ngIf="logInStatus; else notLoggedIn">
                     <button class="logOutButton" (click)="logOut()">LOG OUT</button>
-                    <!-- <p style="margin-top: 5px; margin-bottom: -5px">Welcome, {{currentUser}}!</p> -->
                 </div>
 
                     <ng-template #notLoggedIn>
@@ -113,9 +45,6 @@
             </div>
             <div class="col">
                 <span>
-
-                    <!-- <a routerLink="/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">JOIN EVENT</a> -->
-
                     <a *ngIf="!userJoined" routerLink="/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">JOIN EVENT</a>
                     <a *ngIf="userJoined" routerLink="/edit/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">UPDATE RSVP</a> 
                 </span>

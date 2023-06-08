@@ -1,3 +1,4 @@
+
 .logInButton {
     background-color: #0EBB9A;
     text-align: center;
@@ -11,18 +12,17 @@
 	text-decoration: none;
 }
 
-/* .logOutButton {
+.logOutButton {
     background-color: #0EBB9A;
     text-align: center;
 	color:#ffffff;
-	font-family: montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size:20px;
     font-weight: 500;
     width: 125px;
     height: 65px;
-    padding-top: 15px;
 	text-decoration: none;
-} */
+}
 
 .nav-link {
     color: black;
@@ -30,12 +30,6 @@
     font-size: 15px;
 }
 
-/* .RH5 {
-    font-family: montserrat, sans-serif;
-    text-align: left;
-    font-size: 100px;
-    font-weight: 900;
-} */
 
 .card-body {
     background-color: #0EBB9A;
@@ -62,15 +56,11 @@
     font-size: 30px;
     font-weight: 800;
     text-align: center;
-    /* color: black;
-    text-decoration: none; */
-    /* color: white; */
 }
 
 .Rp3 {
     font-size: 20px;
     text-align: center;
-    /* color: white; */
 }
 
 .Rp4 {

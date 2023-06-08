@@ -32,6 +32,8 @@ Make Offer styling match Home -->
                   <!-- Name -->
                   <input type="text" readonly class="form-control-plaintext-center" style="width: 25%; color: blue; font-size:x-large; text-align:center"
                   id="userName" name="userName" placeholder={{currentUser}} [(ngModel)]="model.userName" #userName="ngModel">
+                  <!-- "model.userName" -->
+
 
                   <br>
                   <br>
@@ -147,8 +149,9 @@ Make Offer styling match Home -->
                <!-- Reset form with New Service button Once form is submitted -->
                <div class=submitted-service *ngIf="f.submitted">
                   <p class="text-black">You've submitted "{{ f.value.service }}"!</p>
-                  <button class="button-blue button-hover" type="button" (click)="f.resetForm()">Add new service</button>
-
+                  <button class="button-blue button-hover" type="button" (click)="reload()">Add new service</button>
+                  <!-- (click)="f.resetForm()" -->
+                  <!-- <a class="nav-link" routerLink="/offer" routerLinkActive="active"></a> -->
                </div>
             <br>
             <br>

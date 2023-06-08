@@ -88,7 +88,10 @@ export class OfferComponent implements OnInit {
 
     })
 
-
-
 }
+
+reload() {
+  window.location.reload();
+}
+
 }

@@ -5,6 +5,7 @@ import { Category, Service, Type } from '../models/Search';
 import { ViewService } from '../models/ServiceGet';
 import { ViewId } from '../models/ServiceGet';
 import { UserEntity } from 'src/app/user-profile-arm/models/UserEntity';
+import { ServiceDTO } from '../models/Service';
 
 
 @Component({
@@ -16,10 +17,13 @@ export class ServiceItemComponent implements OnInit {
 
   userList: UserEntity[]; 
 
+  private userUrl: string;
+
   currentUser;
   logInStatus: Boolean;
   servicesList: Service[];
   serviceItem: Service;
+  delItem: ServiceDTO[];
 
   // ids: string;
 
@@ -48,6 +52,7 @@ export class ServiceItemComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private findService: ViewService, private route: ActivatedRoute, private findId: ViewId) {
     this.logInStatus = false;
+    this.userUrl = 'http://localhost:8080/services/delete';
    }
 
   ngOnInit(): void {
@@ -140,6 +145,13 @@ export class ServiceItemComponent implements OnInit {
     console.log(localStorage.getItem('userName'))
     this.logInStatus = false;
   }
+
+  deleteItem() {
+    this.http.post(this.userUrl, this.id).subscribe((result) => {
+      console.log(this.id);
+    })
+  }
+  
 
 }
 

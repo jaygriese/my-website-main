@@ -77,11 +77,11 @@
           <br>
           <div *ngIf="user == currentUser; else activeLink">
             <input type="text" readonly class="form-control-plaintext italics" id="staticItem" style="text-align:center;" value="{{type}} by {{user}}">
-            <button class="button-orange button-hover" type="button">Delete Item</button>
+            <button class="button-orange button-hover" type="button" (click)="deleteItem()">Remove Item</button>
           </div>
 
           <ng-template #activeLink>
-            <button class="button-green button-hover" type="button"><a class="nav-link" routerLink="/user/{{user}}/{{ids}}" routerLinkActive="active">Book Item / Message User</a></button>
+            <button class="button-green button-hover" type="button"><a class="nav-link" routerLink="/user/{{user}}/{{ids}}" routerLinkActive="active">Message User</a></button>
           </ng-template>
 
     </form>

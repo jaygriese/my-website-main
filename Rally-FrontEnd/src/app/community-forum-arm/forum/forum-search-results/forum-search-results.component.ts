@@ -75,11 +75,11 @@ export class ForumSearchResultsComponent implements OnInit {
   }
 
   Light(){
-      this.themeservice.switchToLightTheme();
+    localStorage.setItem('theme', 'light'); 
       this.darktheme = false;
   }
   Dark(){
-    this.themeservice.switchToDarkTheme();
+    localStorage.setItem('theme', 'dark'); 
     this.darktheme = true;
   }
   logOut() {

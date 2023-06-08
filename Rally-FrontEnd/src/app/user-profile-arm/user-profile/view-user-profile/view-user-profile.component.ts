@@ -16,6 +16,9 @@ import { AuthorizeService } from 'src/app/security/security-service/authorize.se
 })
 export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
+  /* Host Url */
+  private hostUrl = 'http://localhost:8080';
+
   /* Viewing Users information */
   viewUserName: string;
   userEntityInformation: ViewUserBundle;
@@ -56,16 +59,12 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
       this.authorize.logOut();
     }
 
-    this.activatedRoute.paramMap.subscribe(params => {
-      if (params.get('userName') === '404') {
-        this.router.navigate(['/invalidUser/404'])
-        return;
-      }
-    })
-
     /* Pulling userName and userId from  */
     this.activatedRoute.paramMap.subscribe(params => {
     this.viewUserName = params.get('userName');
+    if (params.get('userName') === '404') {
+      this.router.navigate(['/invalidUser/404'])
+    }
     });
 
     /* If you tried to view yourself, you will be redirected to the 'myProfile' route */
@@ -75,7 +74,6 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
     this.viewUser.getViewUserBundleByUserName(this.viewUserName).subscribe((data: any) => {
       if (data.message) {
         this.userReal = false;
-        this.router.navigate(['/user/404']);
         return;
       }
       this.userEntityInformation = data;
@@ -87,15 +85,25 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
       this.dmList = data.viewUserDmHistory.directMessageList;
       this.displayConversation(this.userEntityInformation.viewUser);
       this.scrollToBottom;
+    },  err => {
+      /* temporary error handling / want to build better handling approach */
+      if (err.status === 500 || err.status === 400) {
+        this.authorize.logOut();
+      }
     })
 
     /* Get view users profile picture */
-    this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserName).subscribe((response: any) => {
+    this.http.get(this.hostUrl + '/user/userProfileImage/' + this.viewUserName).subscribe((response: any) => {
       if (response.message) {
         console.log(response.message);
         return;
       } else {
         this.dbImage = 'data:image/jpeg;base64,' + response.image;
+      }
+    },  err => {
+      /* temporary error handling / want to build better handling approach */
+      if (err.status === 500 || err.status === 400) {
+        this.authorize.logOut();
       }
     })  
   }

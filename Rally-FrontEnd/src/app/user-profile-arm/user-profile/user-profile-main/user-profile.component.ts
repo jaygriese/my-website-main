@@ -156,7 +156,7 @@ export class UserProfileComponent implements OnInit {
     direct messages while using the [scrollTop]="scrollMe.scrollHeight" in HTML*/
   /* Might be causing memory leak, further investigation required */
   ngAfterContentChecked() {
-    this.scrollMe = this.scrollMe;
+    // this.scrollMe = this.scrollMe;
     this.cdref.detectChanges();
   }
 
@@ -239,12 +239,12 @@ export class UserProfileComponent implements OnInit {
 
 
   /* Display conversation with user selected */
-  displayConversation( userDms: UserEntity) {
+  displayConversation( userDms: string) {
     this.conversation = [];
     this.respondToDm = null;
 
     for (let i = 0; i < this.userEntityDmList.length; i++) {
-        if (this.respondToDm === null && userDms.userName == this.userEntityDmList[i].userName) {
+        if (this.respondToDm === null && userDms == this.userEntityDmList[i].userName) {
         this.respondToDm = this.userEntityDmList[i];
       }
     }
@@ -263,6 +263,10 @@ export class UserProfileComponent implements OnInit {
 
   /* After sending a message to a user, this refreshes the chat history */
   refreshConversation( chatWithUser: string) {
+    /* this.converstaion = [] is causing errors cause I don't know how to handle lifecycle hooks yet. :( */
+    /* Want to rebuild Direct Messages with different architecture */
+
+    this.conversation = [];
     for (let i = 0; i < this.allDmHistory.length; i++) {
       if (this.storageService.getUserName() === this.allDmHistory[i].sentByUserName && chatWithUser === this.allDmHistory[i].receivedByUserName) {
         this.conversation.push(this.allDmHistory[i]);
@@ -277,7 +281,7 @@ export class UserProfileComponent implements OnInit {
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.respondToDm.id,
       receivedByUserName: this.respondToDm.userName,
-      sentByUserId: localStorage.getItem('id'),
+      sentByUserId: this.userEntity.id,
       sentByUserName: this.storageService.getUserName(),
       messageContent: userResponse.value.messageContent
     }

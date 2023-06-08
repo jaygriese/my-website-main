@@ -35,18 +35,18 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserProfileController {
 
-    UserRepository userRepository;
-    UserInformationRepository userInformationRepository;
-    RoleRepository roleRepository;
-    DirectMessageRepository directMessageRepository;
-    ProfilePictureRepository profilePictureRepository;
-    ForumPostRepository forumPostRepository;
-    RepliesRepository repliesRepository;
-    HiddenPostRepository hiddenPostRepository;
-    ServiceRepository serviceRepository;
-    EventRepository eventRepository;
-    JWTBlockListRepository jwtBlockListRepository;
-    private JWTGenerator jwtGenerator;
+    private final UserRepository userRepository;
+    private final UserInformationRepository userInformationRepository;
+    private final RoleRepository roleRepository;
+    private final DirectMessageRepository directMessageRepository;
+    private final ProfilePictureRepository profilePictureRepository;
+    private final ForumPostRepository forumPostRepository;
+    private final RepliesRepository repliesRepository;
+    private final HiddenPostRepository hiddenPostRepository;
+    private final ServiceRepository serviceRepository;
+    private final EventRepository eventRepository;
+    private final JWTBlockListRepository jwtBlockListRepository;
+    private final JWTGenerator jwtGenerator;
 
 
     @Autowired

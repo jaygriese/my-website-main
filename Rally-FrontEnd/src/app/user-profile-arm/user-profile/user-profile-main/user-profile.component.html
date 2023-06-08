@@ -63,7 +63,7 @@
             <div class="scroll" *ngIf="userDms; else showConversations">
             <ul *ngFor="let user of userEntityDmList">
                 <div class="card" style="background-color: #F9A605">
-                <h6 style="text-align: left;" (click)="displayConversation(user)">{{ user.userName }}</h6>
+                <h6 style="text-align: left;" (click)="displayConversation(user.userName)">{{ user.userName }}</h6>
                 </div>
             </ul>
             </div>

@@ -1,7 +1,9 @@
 package org.rally.backend.userprofilearm.model;
 
 import jakarta.persistence.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 @Entity
 public class DirectMessage {
@@ -21,8 +23,6 @@ public class DirectMessage {
     @Column(columnDefinition = "VARCHAR(5000) NOT NULL")
     private String messageContent;
 
-    private String messageHash;
-
     public DirectMessage() {
     }
 
@@ -31,7 +31,7 @@ public class DirectMessage {
         this.receivedByUserName = receivedByUserName;
         this.sentByUserId = sentByUserId;
         this.sentByUserName = sentByUserName;
-        this.messageContent = messageContent;
+        this.messageContent = Base64.getEncoder().encodeToString(messageContent.getBytes(StandardCharsets.UTF_8));
     }
 
 
@@ -72,17 +72,12 @@ public class DirectMessage {
         this.sentByUserName = sentByUserName;
     }
 
-    public String getMessageContent() {
-        return messageContent;
-    }
-
     public void setMessageContent(String messageContent) {
         this.messageContent = messageContent;
     }
 
-    public boolean isMessageMatching(String content) {
-        return encoder.matches(content, messageHash);
+    public String getMessageContent() {
+        byte[] decodedBytes = Base64.getDecoder().decode(messageContent);
+        return new String(decodedBytes);
     }
-
-    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 }

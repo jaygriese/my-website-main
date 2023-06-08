@@ -9,6 +9,7 @@ import org.rally.backend.springsecurity.security.services.UserServicesImpl;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.Role;
 import org.rally.backend.userprofilearm.model.UserInformation;
+import org.rally.backend.userprofilearm.model.dto.RegisterDTO;
 import org.rally.backend.userprofilearm.model.dto.UserBundleDTO;
 import org.rally.backend.userprofilearm.exception.AuthenticationFailure;
 import org.rally.backend.userprofilearm.model.UserEntity;
@@ -196,6 +197,23 @@ public class AuthenticationController {
         jwtGenerator.invalidateToken(token.substring(7, token.length()));
         ResponseMessage response = new ResponseMessage("User logged out");
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/nameEmailCheck")
+    public ResponseEntity<?> firstCheck(@RequestBody RegisterDTO registerDTO) {
+        UserEntity existingUser = userRepository.findByUserName(registerDTO.getUserName());
+        String existingEmail = registerDTO.getUserEmail();
+
+        if (existingUser != null) {
+            ResponseMessage authenticationFailure = new ResponseMessage("That username is taken, please select a different user name.");
+            return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
+        }
+        if (userRepository.existsByUserEmail(existingEmail)) {
+            ResponseMessage authenticationFailure = new ResponseMessage("Error: Email is already in use");
+            return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
+        }
+        ResponseMessage responseMessage = new ResponseMessage("True");
+        return new ResponseEntity<>(responseMessage, HttpStatus.OK);
     }
 
 

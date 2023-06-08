@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { VerifyLogoutService } from './verify-logout.service';
+import { LogRegService } from './log-reg.service';
 
-describe('VerifyLogoutService', () => {
-  let service: VerifyLogoutService;
+describe('LogRegService', () => {
+  let service: LogRegService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(VerifyLogoutService);
+    service = TestBed.inject(LogRegService);
   });
 
   it('should be created', () => {

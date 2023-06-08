@@ -27,6 +27,9 @@ import { ForumTopic3Component } from './community-forum-arm/forum/forum-topic3/f
 import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-post.component';
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { ResourceSearchComponent } from './resources-arm/resource-search/resource-search.component';
+import { ViewRestaurantComponent } from './restaurants-homepage/view-restaurant/view-restaurant.component';
+import { ReviewComponent } from './restaurants-homepage/review/review.component';
+import { SearchRestaurantComponent } from './restaurants-homepage/search/search-restaurant.component';
 import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
 import { SearchComponent } from './services-arm/search/search.component';
 import { SortableHeaderDirective } from './services-arm/models/Sortable';
@@ -39,6 +42,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+import { RestaurantsHomepageComponent } from './restaurants-homepage/restaurants-homepage.component';
+import { RestaurantAmericanComponent } from './restaurants-homepage/restaurant-american/restaurant-american.component';
+import { RestaurantAsianComponent } from './restaurants-homepage/restaurant-asian/restaurant-asian.component';
+import { RestaurantsMexicanComponent } from './restaurants-homepage/restaurants-mexican/restaurants-mexican.component';
+import { RestaurantsItalianComponent } from './restaurants-homepage/restaurants-italian/restaurants-italian.component';
+import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pizza/restaurants-pizza.component';
 
 
 @NgModule({
@@ -55,6 +64,12 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     ResourceAddComponent,
     ResourceSearchComponent,
     ResourceUpdateComponent,
+    RestaurantsHomepageComponent,
+    RestaurantAmericanComponent,
+    RestaurantAsianComponent,
+    RestaurantsMexicanComponent,
+    RestaurantsItalianComponent,
+    RestaurantsPizzaComponent,
     EventComponent,
     EventCreateComponent,
     ServicesHomeComponent,
@@ -66,8 +81,11 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     ViewPostComponent,
     ViewUserProfileComponent,
     UserProfileComponent,
-    ForumSearchResultsComponent,
+    ViewRestaurantComponent,
+    ReviewComponent,
     SearchComponent,
+    ForumSearchResultsComponent,
+    SearchRestaurantComponent,
     SortableHeaderDirective,
     ServicePipe,
     ServiceItemComponent,

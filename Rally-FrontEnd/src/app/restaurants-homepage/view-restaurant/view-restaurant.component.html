@@ -1,0 +1,36 @@
+<!-- 
+ <div class="review">
+        <h2><a routerLink="/restaurant/{{user.id}}" routerLinkActive="active">reviews:</a></h2>
+    </div> -->
+    <div style="text-align:center" class="container">
+
+        <div class="form-group">
+          <h2 class= "purple">reviews for </h2>
+        </div>
+
+        <h1 class="restauntName">{{restaurant?.restauntName}}</h1>
+
+        <br><br>
+
+        <form #review="ngForm" (ngSubmit)="submit(review)">
+    
+          <label class="purple">Write your review here:  <input type="text" name="userReview" required ngModel></label>
+        
+          <br><br>
+          <input style=" color: #0097b2; font-family: Impact, sans-serif" type="submit" id="submit" value="Leave Review">
+        </form>
+    
+        </div>
+
+        <br>
+
+
+        <div>
+                <ul style width=100% *ngFor="let review of this?.reviewRestaurant">
+                        <li> 
+                                {{review.review}}
+                        </li>
+                </ul>    
+        </div>
+
+       

@@ -7,6 +7,12 @@ import { ForumComponent } from './community-forum-arm/forum/forum.component';
 import { ResourceComponent } from './resources-arm/resource/resource.component';
 import { ResourceAddComponent } from './resources-arm/resource-add/resource-add.component';
 import { ResourceUpdateComponent } from './resources-arm/resource-update/resource-update.component';
+import { RestaurantsHomepageComponent } from './restaurants-homepage/restaurants-homepage.component';
+import { RestaurantAmericanComponent } from './restaurants-homepage/restaurant-american/restaurant-american.component';
+import { RestaurantAsianComponent } from './restaurants-homepage/restaurant-asian/restaurant-asian.component';
+import { RestaurantsMexicanComponent } from './restaurants-homepage/restaurants-mexican/restaurants-mexican.component';
+import { RestaurantsItalianComponent } from './restaurants-homepage/restaurants-italian/restaurants-italian.component';
+import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pizza/restaurants-pizza.component';
 import { EventComponent } from './Events/event/event.component';
 import { EventCreateComponent } from './Events/event-create/event-create.component';
 import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
@@ -21,6 +27,8 @@ import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-u
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
 import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 import { ResourceSearchComponent } from './resources-arm/resource-search/resource-search.component';
+import { ViewRestaurantComponent } from './restaurants-homepage/view-restaurant/view-restaurant.component';
+import { SearchRestaurantComponent } from './restaurants-homepage/search/search-restaurant.component';
 import { ForumSearchResultsComponent } from './community-forum-arm/forum/forum-search-results/forum-search-results.component';
 import { SearchComponent } from './services-arm/search/search.component';
 import { ServiceItemComponent } from './services-arm/service-item/service-item.component';
@@ -43,6 +51,12 @@ const routes: Routes = [
   {path: 'resources', component: ResourceSearchComponent},
   {path: 'resource/update', component: ResourceUpdateComponent},
   {path: 'update/:id', component: ResourceUpdateComponent},
+  {path: 'restaurants' , component: RestaurantsHomepageComponent},
+  {path: 'restaurants/american' , component: RestaurantAmericanComponent},
+  {path: 'restaurants/asian' , component: RestaurantAsianComponent},
+  {path: 'restaurants/mexican' , component: RestaurantsMexicanComponent},
+  {path: 'restaurants/italian' , component: RestaurantsItalianComponent},
+  {path: 'restaurants/pizza' , component: RestaurantsPizzaComponent},
   {path: 'event', component: EventComponent },
   {path: 'event/:id', component: EventComponent },
   {path: 'create', component: EventCreateComponent},
@@ -56,6 +70,8 @@ const routes: Routes = [
   {path: 'forum/post/:id', component: ViewPostComponent},
   {path: 'myProfile', component: UserProfileComponent},
   {path: 'user/:userName/:id', component: ViewUserProfileComponent},
+  {path: 'restaurant/:id', component: ViewRestaurantComponent},
+  {path: 'restaurants/search', component: SearchRestaurantComponent},
   {path: 'forum/search', component: ForumSearchResultsComponent},
   {path: 'searchservice', component: SearchComponent},
   {path: 'serviceitem', component: ServiceItemComponent},

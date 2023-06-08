@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators'
 import { ReplyDTO } from '../../models/ReplyDTO';
 import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
 import { ViewUserService } from 'src/app/user-profile-arm/user-profile/services/view-user.service';
+import { ForumPostDTO } from '../../models/ForumPostDTO';
 @Component({
   selector: 'app-forum-topic2',
   templateUrl: './forum-topic2.component.html',
@@ -15,7 +16,7 @@ import { ViewUserService } from 'src/app/user-profile-arm/user-profile/services/
 })
 export class ForumTopic2Component implements OnInit {
   forumTopic: string;
-  currentUser: String;
+  currentUser: string;
   logInStatus: Boolean;
   darktheme: Boolean;
   testArray;
@@ -71,8 +72,16 @@ export class ForumTopic2Component implements OnInit {
   }
 
   createPost(postInformation: NgForm){
-      this.createPostBoolean = false;
-      this.themeservice.createAPost(postInformation, this.forumTopic);
+    this.createPostBoolean = false;
+    let postDetails: ForumPostDTO = {
+      title: postInformation.value.title,
+      description: postInformation.value.description,
+      username: this.currentUser,
+      category: this.forumTopic
+    }
+    this.http.post(`http://localhost:8080/Posts`, postDetails).subscribe((res) => {
+      this.getPosts();
+  });
   }
 
   getPosts(){

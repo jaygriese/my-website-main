@@ -50,13 +50,18 @@
   }
   body {
     background: radial-gradient(#abe7dc, #ffffff 70%);
-  
   }
   .blackcontent {
     background-color: black;
   }
   .blackbody {
     background-image: url('../images/black-image.png');
+    position: relative;
+    min-height:100vh;
+  }
+  .blackheader{
+    background-image: url('../images/black-image.png');
+    position: relative;
   }
   .button1 {
     background-color: #0EBB9A;

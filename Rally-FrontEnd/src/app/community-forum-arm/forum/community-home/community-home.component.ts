@@ -8,6 +8,7 @@ import { ForumPost } from '../../models/ForumPost';
 import { ReplyDTO } from '../../models/ReplyDTO';
 import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
 import { ViewUserService } from 'src/app/user-profile-arm/user-profile/services/view-user.service';
+import { ForumPostDTO } from '../../models/ForumPostDTO';
 @Component({
   selector: 'app-community-home',
   templateUrl: './community-home.component.html',
@@ -15,7 +16,7 @@ import { ViewUserService } from 'src/app/user-profile-arm/user-profile/services/
 })
 export class CommunityHomeComponent implements OnInit {
   forumTopic: string;
-  currentUser: String;
+  currentUser: string;
   logInStatus: Boolean;
   darktheme: Boolean;
   testArray;
@@ -72,8 +73,16 @@ export class CommunityHomeComponent implements OnInit {
   }
 
   createPost(postInformation: NgForm){
-      this.createPostBoolean = false;
-      this.themeservice.createAPost(postInformation, this.forumTopic);
+    this.createPostBoolean = false;
+    let postDetails: ForumPostDTO = {
+      title: postInformation.value.title,
+      description: postInformation.value.description,
+      username: this.currentUser,
+      category: this.forumTopic
+    }
+    this.http.post(`http://localhost:8080/Posts`, postDetails).subscribe((res) => {
+      this.getPosts();
+  });
   }
   getPosts(){
     this.themeservice.getForumTopicPosts(this.forumTopic).subscribe((posts) =>{

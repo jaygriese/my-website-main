@@ -7,11 +7,8 @@ import org.rally.backend.forumarm.models.Replies;
 import org.rally.backend.forumarm.repository.ForumPostRepository;
 import org.rally.backend.forumarm.repository.RepliesRepository;
 import org.rally.backend.servicesarm.repository.ServiceRepository;
-<<<<<<< HEAD
-=======
 import org.rally.backend.springsecurity.models.BadJWT;
 import org.rally.backend.springsecurity.repository.JWTBlockListRepository;
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
 import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.*;
@@ -38,19 +35,6 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserProfileController {
 
-<<<<<<< HEAD
-    UserRepository userRepository;
-    UserInformationRepository userInformationRepository;
-    RoleRepository roleRepository;
-    DirectMessageRepository directMessageRepository;
-    ProfilePictureRepository profilePictureRepository;
-    ForumPostRepository forumPostRepository;
-    RepliesRepository repliesRepository;
-    HiddenPostRepository hiddenPostRepository;
-    ServiceRepository serviceRepository;
-    EventRepository eventRepository;
-    private JWTGenerator jwtGenerator;
-=======
     private final UserRepository userRepository;
     private final UserInformationRepository userInformationRepository;
     private final RoleRepository roleRepository;
@@ -63,7 +47,6 @@ public class UserProfileController {
     private final EventRepository eventRepository;
     private final JWTBlockListRepository jwtBlockListRepository;
     private final JWTGenerator jwtGenerator;
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
 
 
     @Autowired
@@ -72,12 +55,8 @@ public class UserProfileController {
                                  DirectMessageRepository directMessageRepository, ProfilePictureRepository profilePictureRepository,
                                  ForumPostRepository forumPostRepository, RepliesRepository repliesRepository,
                                  HiddenPostRepository hiddenPostRepository, ServiceRepository serviceRepository,
-<<<<<<< HEAD
-                                 EventRepository eventRepository, JWTGenerator jwtGenerator) {
-=======
                                  EventRepository eventRepository, JWTGenerator jwtGenerator,
                                  JWTBlockListRepository jwtBlockListRepository) {
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
@@ -89,10 +68,7 @@ public class UserProfileController {
         this.serviceRepository = serviceRepository;
         this.eventRepository = eventRepository;
         this.jwtGenerator = jwtGenerator;
-<<<<<<< HEAD
-=======
         this.jwtBlockListRepository = jwtBlockListRepository;
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     }
 
     /** GET REQUEST **/
@@ -134,17 +110,11 @@ public class UserProfileController {
     @GetMapping("/getMainUserBundleInformation/{userName}")
     public ResponseEntity<?> getMainUserBundle(@PathVariable String userName, @RequestHeader (name="authorization") String token) {
 
-<<<<<<< HEAD
-
-        if (!jwtGenerator.validateToken(token.substring(7, token.length()))) {
-            return new ResponseEntity<>(new ResponseMessage("Bad Token"), HttpStatus.OK);
-=======
         Optional<BadJWT> test = Optional.ofNullable(jwtBlockListRepository.findByBadToken(token.substring(7, token.length())));
 
         if (!jwtGenerator.validateToken(token.substring(7, token.length())) || test.isPresent()) {
             ResponseMessage responseMessage = new ResponseMessage("Bad Token");
             return new ResponseEntity<>(responseMessage, HttpStatus.BAD_REQUEST);
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         }
 
         Optional<UserEntity> areYouThere = Optional.ofNullable(userRepository.findByUserName(userName));

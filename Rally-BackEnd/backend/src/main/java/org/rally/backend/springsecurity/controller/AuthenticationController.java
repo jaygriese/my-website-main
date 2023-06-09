@@ -3,19 +3,13 @@ package org.rally.backend.springsecurity.controller;
 import org.rally.backend.springsecurity.models.ConfirmationToken;
 import org.rally.backend.springsecurity.payload.response.JWTResponse;
 import org.rally.backend.springsecurity.repository.ConfirmationTokenRepository;
-<<<<<<< HEAD
-=======
 import org.rally.backend.springsecurity.repository.JWTBlockListRepository;
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
 import org.rally.backend.springsecurity.security.jwt.JWTGenerator;
 import org.rally.backend.springsecurity.security.services.UserServicesImpl;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.Role;
 import org.rally.backend.userprofilearm.model.UserInformation;
-<<<<<<< HEAD
-=======
 import org.rally.backend.userprofilearm.model.dto.RegisterDTO;
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
 import org.rally.backend.userprofilearm.model.dto.UserBundleDTO;
 import org.rally.backend.userprofilearm.exception.AuthenticationFailure;
 import org.rally.backend.userprofilearm.model.UserEntity;
@@ -54,10 +48,8 @@ public class AuthenticationController {
     private JWTGenerator jwtGenerator;
     private UserServicesImpl userServicesImpl;
     private ConfirmationTokenRepository confirmationTokenRepository;
-<<<<<<< HEAD
-=======
     private JWTBlockListRepository jwtBlockListRepository;
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
+
 
 
     @Autowired
@@ -68,12 +60,9 @@ public class AuthenticationController {
                                     PasswordEncoder passwordEncoder,
                                     JWTGenerator jwtGenerator,
                                     UserServicesImpl userServicesImpl,
-<<<<<<< HEAD
-                                    ConfirmationTokenRepository confirmationTokenRepository) {
-=======
                                     ConfirmationTokenRepository confirmationTokenRepository,
                                     JWTBlockListRepository jwtBlockListRepository) {
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
+
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
@@ -82,23 +71,19 @@ public class AuthenticationController {
         this.jwtGenerator = jwtGenerator;
         this.userServicesImpl = userServicesImpl;
         this.confirmationTokenRepository = confirmationTokenRepository;
-<<<<<<< HEAD
-    }
 
-=======
+
+
         this.jwtBlockListRepository = jwtBlockListRepository;
     }
 
     /** Register the user and saves to the repository, but doesn't mark the user as authentic yet **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
+
     @PostMapping("/register")
     public ResponseEntity<?> processRegistrationForm(@RequestBody UserBundleDTO userBundleDTO) {
         UserProfileControllerService.generateRoles();
 
-<<<<<<< HEAD
-=======
         /** Check if the username or email have been used yet **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         UserEntity existingUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
         String existingEmail = userBundleDTO.getRegisterDTO().getUserEmail();
 
@@ -108,16 +93,10 @@ public class AuthenticationController {
         }
         if (userRepository.existsByUserEmail(existingEmail)) {
             ResponseMessage authenticationFailure = new ResponseMessage("Error: Email is already in use");
-<<<<<<< HEAD
-            return ResponseEntity.badRequest().body("Error: Email is already in use");
-        }
-
-=======
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
         /** Checks if passwords match before setting **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         String password = userBundleDTO.getRegisterDTO().getPassword();
         String verifyPassword = userBundleDTO.getRegisterDTO().getVerifyPassword();
         if (!password.equals(verifyPassword)) {
@@ -125,20 +104,6 @@ public class AuthenticationController {
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
-<<<<<<< HEAD
-        UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()),userBundleDTO.getRegisterDTO().getUserEmail(), userBundleDTO.getRegisterDTO().getPassword());
-
-        if (registerNewUser.getRoles().size() == 0) {
-                Role roles = roleRepository.findByName("USER").get();
-            registerNewUser.setRoles(Collections.singletonList(roles));
-        }
-
-        userRepository.save(registerNewUser);
-
-        UserEntity newestUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
-
-        int userId = newestUser.getId();
-=======
         /** save user into UserEntity and grant role **/
         UserEntity registerNewUser = new UserEntity((userBundleDTO.getRegisterDTO().getUserName()),userBundleDTO.getRegisterDTO().getUserEmail(), userBundleDTO.getRegisterDTO().getPassword());
 
@@ -154,22 +119,12 @@ public class AuthenticationController {
         UserEntity newestUser = userRepository.findByUserName(userBundleDTO.getRegisterDTO().getUserName());
 
         String userName = newestUser.getUserName();
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         String firstName = userBundleDTO.getUserInfoDTO().getFirstName();
         String lastName = userBundleDTO.getUserInfoDTO().getLastName();
         String neighborhood = userBundleDTO.getUserInfoDTO().getNeighborhood();
         String city = userBundleDTO.getUserInfoDTO().getCity();
         String state = userBundleDTO.getUserInfoDTO().getState();
 
-<<<<<<< HEAD
-        if (firstName.toCharArray().length < 3 || lastName.toCharArray().length < 3 || state.toCharArray().length < 1 || neighborhood.toCharArray().length < 3 || city.toCharArray().length < 3) {
-            throw new MinimumCharacterException();
-        }
-
-        UserInformation newUserInformation = new UserInformation(userId, firstName, lastName, neighborhood, city, state);
-
-        userInformationRepository.save(newUserInformation);
-=======
         /** If any of the fields don't meet the character requirements, throws an error and remove the user from user Repository **/
         if (firstName.toCharArray().length < 3 || lastName.toCharArray().length < 3 || state.toCharArray().length < 1 || neighborhood.toCharArray().length < 3 || city.toCharArray().length < 3) {
             userRepository.delete(registerNewUser);
@@ -181,17 +136,13 @@ public class AuthenticationController {
         /** Save the User info to repo **/
         userInformationRepository.save(newUserInformation);
         /** running userServicesImpl.saveUser() sends email verification and will reflect on register HTML **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         ResponseMessage confirm = new ResponseMessage(userServicesImpl.saveUser(registerNewUser));
 
         return new ResponseEntity<>(confirm, HttpStatus.OK);
 
     }
 
-<<<<<<< HEAD
-=======
     /** When the user clicks the link to validate their email, this method verifies the email and marks the user as authentic **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     @PostMapping("/confirm-account")
     public ResponseEntity<?> confirmUserAccount(@RequestBody String token) {
 
@@ -213,19 +164,13 @@ public class AuthenticationController {
         }
     }
 
-<<<<<<< HEAD
-=======
     /** User login **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     @PostMapping("/login")
     public ResponseEntity<?> processLoginForm(@RequestBody LoginDTO loginDTO) {
 
         UserEntity theUser = userRepository.findByUserName(loginDTO.getUserName());
 
-<<<<<<< HEAD
-=======
         /** Checks if the user is present **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         if (theUser == null) {
             AuthenticationFailure authenticationFailure = new AuthenticationFailure("Username doesn't exist");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
@@ -233,28 +178,19 @@ public class AuthenticationController {
 
         String password = loginDTO.getPassword();
 
-<<<<<<< HEAD
-=======
         /** Checks if the user entered the correct password **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         if (!theUser.isMatchingPassword(password)) {
             AuthenticationFailure authenticationFailure = new AuthenticationFailure("Incorrect password");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
-<<<<<<< HEAD
-=======
         /** Checks if the user has a verified account **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         if (!theUser.isAccountVerified()) {
             AuthenticationFailure authenticationFailure = new AuthenticationFailure("Account is not verified, please check your email to verify your account.");
             return new ResponseEntity<>(authenticationFailure, HttpStatus.OK);
         }
 
-<<<<<<< HEAD
-=======
         /** Grants the user a JWT token for their session **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginDTO.getUserName(),
@@ -262,19 +198,11 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
 
-<<<<<<< HEAD
-        /** Is UserDetailsImpl needed to send a legit JWT response? **/
-
-=======
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         List<String> roles = theUser.getRoles().stream()
                 .map(Role::getName)
                 .collect(Collectors.toList());
 
-<<<<<<< HEAD
-=======
         /** Sends a JWT response with userInformation (Most info here isn't needed since we are only storing the JWT itself on the front) **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         JWTResponse response = new JWTResponse(token,
                 theUser.isAccountVerified(),
                 theUser.getId(),
@@ -285,8 +213,6 @@ public class AuthenticationController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-<<<<<<< HEAD
-=======
     /** When the user logs out, marks the JWT token as invalid **/
     @GetMapping("/logout")
     public ResponseEntity<?> logoutConfirmed(@RequestHeader (name="authorization") String token) {
@@ -313,6 +239,5 @@ public class AuthenticationController {
         return new ResponseEntity<>(responseMessage, HttpStatus.OK);
     }
 
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
 
 }

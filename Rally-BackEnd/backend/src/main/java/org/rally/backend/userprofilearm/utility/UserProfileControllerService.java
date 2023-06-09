@@ -170,11 +170,7 @@ public class UserProfileControllerService {
         return targetForumPostReplies;
     }
 
-<<<<<<< HEAD
-    /** Ease of use: Generates roles in DB (For project use) **/
-=======
     /** Ease of use: Generates roles in DB (For project use, would set up different in real application) **/
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     public static void generateRoles() {
         if (roleRepository.findAll().size() == 0) {
             Role role = new Role();

@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/verify")
 public class VerificationController {
 
-<<<<<<< HEAD
-=======
+
     /** Controller not being used yet, app not utilizing roles other than USER yet **/
 
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
+
     @GetMapping("/all")
     public String allAccess() {
         return "Public Content";

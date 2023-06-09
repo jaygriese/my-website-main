@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>resource-add</title>
+      </head>
+
+
+<body>
+    <div class="container">
+
+        <div *ngIf="logInStatus; else notLoggedIn">
+            <div style="text-align: right;  display: flex; justify-content:space-between;">
+                <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
+                <button (click)="logOut()"> Log Out?</button>
+            </div>       
+        </div>
+        
+        
+        <ng-template #notLoggedIn>
+            <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">
+                Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
+        </ng-template>
+
+
+   
+            <div id="list_head">
+                    <p>Add Resource</p> 
+            </div>
+        
+            <br>
+            <br>
+            <form #resourceForm="ngForm" (ngSubmit)="onSubmit(resourceForm)">
+                    
+                <div class="row">
+                        <div class="col-5">
+                            
+                            <div class="mb-3">
+                            <label class = "form-label">resource</label><br>
+                            <input class = "form-control form-control-lg" type="text" required #resourceName="ngModel" id="resourceName" name="resourceName" ngModel>
+                            
+                            <div *ngIf="resourceName.invalid && (resourceName.dirty || resourceName.touched)" class="alert alert-danger">
+                                What is the name of the resource?
+                            </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class = "form-label">category</label><br>
+                                <select class = "form-select" type = "text" required #category = ngModel id = "category" name = "category" ngModel>
+                                    <option value="" disabled selected>select the category</option>
+                                    <option value="Athletics">Athletics</option>
+                                    <option value="Arts">Arts</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Civic">Civic</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Fitness">Fitness</option>
+                                    <option value="Hospitality">Hospitality</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Park">Park</option>
+                                    <option value="Religous">Religous</option>
+                                    <option value="Retail">Retail</option>
+                                </select>
+                            </div> 
+                                <div *ngIf="category.invalid && (category.dirty || category.touched)" class="alert alert-danger">
+                                    How would you categorize this resource?
+                                </div>
+                        <!-- <div class="mb-3">
+                            <label class = "form-label">neighborhood</label><br>
+                            <select class = "form-select" type = "text" required #neighborhood = ngModel id = "neighborhood" name = "neighborhood" ngModel>
+                                <option value="" disabled selected>select your neighborhood</option>
+                                <option value="Compton Heights">Compton Heights</option>
+                                <option value="Central West End">Central West End</option>
+                                <option value="The Hill">The Hill</option>
+                                <option value="Soulard">Soulard</option>
+                                <option value="Bevo">Bevo</option>
+                                <option value="Gravois Park">Gravois Park</option>
+                                <option value="Tower Grove South">Tower Grove South</option>
+                                <option value="Downtown">Down Town</option>
+                                <option value="Midtown">Midtown</option>
+                            </select>
+                        </div> 
+                            <div *ngIf="neighborhood.invalid && (neighborhood.dirty || neighborhood.touched)" class="alert alert-danger">
+                                Where is the resource located?
+                            </div> -->
+
+                        <div class="mb-3">
+                            <label class = "form-label">address</label><br>
+                            <input class = "form-control form-control-lg" type="text" required #address="ngModel" id="address" name="address" ngModel>
+                            
+                            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+                                Where is the resource located?</div>
+                        </div>
+                        <!-- CITY -->
+                        <div class="mb-3">
+                            <label class = "form-label">city</label><br>
+                            <select class = "form-select" type = "text" required #city = ngModel id = "city" name = "city" ngModel>
+                                <option value="" disabled selected>select the city</option>
+                                <option value="Saint Louis">Saint Louis</option>
+                                <option value="Jennings">Jennings</option>
+                                <option value="Clayton">Clayton</option>
+                                <option value="University City">University City</option>
+                                <option value="Affton">Affton</option>
+                                <option value="Ferguson">Ferguson</option>
+                            </select>
+                        </div> 
+                            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+                                Where is the resource located?
+                            </div>
+
+                        <!-- STATE -->
+                        <div class="mb-3">
+                            <label class = "form-label">state</label><br>
+                            <select class = "form-select" type = "text" required #state = ngModel id = "state" name = "state" ngModel>
+                                <option value="" disabled selected>select the state</option>
+                                <option value="Missouri">Missouri</option>
+                                <option value="Illinois">Illinois</option>
+                            </select>
+                        </div> 
+                            <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
+                                Where is the resource located?
+                            </div>
+                        <!-- ZIP
+                         -->
+                         <div class="mb-3">
+                            <label class = "form-label">zip code</label><br>
+                            <input class = "form-control form-control-lg" type="text" required #zip="ngModel" id="zip" name="zip" ngModel>
+                            
+                            <div *ngIf="zip.invalid && (zip.dirty || zip.touched)" class="alert alert-danger">
+                                What is the resource's website?</div>
+                    </div>                             
+                        <div class="mb-3">
+                                <label class = "form-label">website</label><br>
+                                <input class = "form-control form-control-lg" type="text" required #website="ngModel" id="website" name="website" ngModel>
+                                
+                                <div *ngIf="website.invalid && (website.dirty || website.touched)" class="alert alert-danger">
+                                    What is the resource's website?</div>
+                        </div>        
+                        <div class="mb-3">
+                                <label class = "form-label">telephone number</label><br>
+                                <input class = "form-control form-control-lg" type="text" required #telephoneNumber="ngModel" id="telephoneNumber" name="telephoneNumber" ngModel>
+                                
+                                <div *ngIf="telephoneNumber.invalid && (telephoneNumber.dirty || telephoneNumber.touched)" class="alert alert-danger">
+                                    Who can we contact?
+                                </div>
+                        </div> 
+                         <div class="mb-3">
+                                <label class = "form-label">email</label><br>
+                                <input class = "form-control form-control-lg" type="text" required #email="ngModel" id="email" name="email" ngModel>
+                                
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                                    Who can we contact?
+                                </div>
+                        </div>                         
+                            <br>
+                    </div>
+
+
+                     <div class = "col-2"></div>
+
+                        <div class = "col-5">
+                                <label class="form-label">description</label><br>
+                                <textarea class = "form-control" rows="9" type="text" required #description="ngModel" id=description name="description" ngModel></textarea>
+                                <br>
+                                
+                                <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger"> Tell us more about this resource!</div>                                        
+
+                            <br>
+                            <br>
+                        <button [disabled]="resourceForm.invalid" type="submit" id="create_btn">SUBMIT</button>
+                    <br>
+                        <div *ngIf="resourceForm.invalid && resourceForm.touched" class="alert alert-danger">Make sure you've filled out the whole form!
+                    </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+</html>       

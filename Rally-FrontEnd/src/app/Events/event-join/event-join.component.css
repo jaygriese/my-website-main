@@ -30,38 +30,37 @@
 }
 
 
-
 #list_head {
-   font-family: 'Open Sans', sans-serif;
-   text-align: left;
-   font-size: 60px;
-   color: black;
-   font-weight: 700;
-   margin-top: 80px;
-}
-
-
-input[type=text] {
-    background-color: #f6f4f3;
- }
-
-
- input[type=datetime-local] {
-    background-color: #f6f4f3;
- }
-
-
- #description {
-    background-color: #f6f4f3;
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    font-size: 60px;
+    color: black;
+    font-weight: 700;
+    margin-top: 80px;
  }
  
-
- label {
-    font-size: x-large;
- }
-
-
- #edit_btn {
+ 
+ input[type=text] {
+   background-color: #f6f4f3;
+  }
+ 
+ 
+  input[type=number] {
+   background-color: #f6f4f3;
+  }
+ 
+ 
+  #comment {
+   background-color: #f6f4f3;
+  }
+  
+ 
+  label {
+   font-size: x-large;
+  }
+ 
+ 
+  #join_btn {
    background-color: #85CDE3;
    display: internal;
    color:#ffffff;
@@ -72,12 +71,12 @@ input[type=text] {
    padding:15px 75px;
    text-decoration: none;
    width: 530px;
-}
-
-.form-check-label {
+ }
+ 
+ .form-check-label {
    font-size: 17px;
-}
-
-.form-label {
+ }
+ 
+ .form-label {
    margin-bottom: -5px;
-}
+ }

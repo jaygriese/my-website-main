@@ -1,7 +1,7 @@
 .logInButton {
    background-color: #0EBB9A;
    text-align: center;
-   color:#ffffff;
+    color:#ffffff;
    font-family: 'Open Sans', sans-serif;
    font-size:20px;
    font-weight: 500;
@@ -30,7 +30,6 @@
 }
 
 
-
 #list_head {
    font-family: 'Open Sans', sans-serif;
    text-align: left;
@@ -46,12 +45,12 @@ input[type=text] {
  }
 
 
- input[type=datetime-local] {
+ input[type=number] {
     background-color: #f6f4f3;
  }
 
 
- #description {
+ #comment {
     background-color: #f6f4f3;
  }
  
@@ -61,7 +60,7 @@ input[type=text] {
  }
 
 
- #edit_btn {
+ #join_btn {
    background-color: #85CDE3;
    display: internal;
    color:#ffffff;
@@ -80,4 +79,17 @@ input[type=text] {
 
 .form-label {
    margin-bottom: -5px;
+}
+
+#edit_btn {
+   background-color: #85CDE3;
+   display: internal;
+   color:#ffffff;
+   font-family: 'Open Sans', sans-serif;
+   font-size:30px;
+   font-weight: bold;
+   text-shadow: 1px 1px 1px #000;
+   padding:15px 75px;
+   text-decoration: none;
+   width: 530px;
 }

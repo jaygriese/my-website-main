@@ -1,39 +1,55 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>event-edit</title>
-      </head>
+      </head> -->
+
+        <header>
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white; border-bottom: 1px solid #000; padding: 15px;">
+                    <div class="container">
+                    <a class="navbar-brand" routerLink="/home" routerLinkActive="active" href="#">
+                        <img src="/assets/home-assets/rally_logo2.jpg" alt="" height="75" width="80">
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="container">
+                            <ul class="nav justify-content-end" style="margin-right: 50px; font-family: 'Open Sans', sans-serif;">
+                            <li class="nav-item"><a class="nav-link" routerLink="/events" routerLinkActive="active">EVENTS</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active">FORUMS</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">EATS</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">SERVICES</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/resources" routerLinkActive="active">RESOURCES</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active">MY PROFILE</a></li>
+                            </ul>
+                        </div>    
+                        
+                        <div *ngIf="logInStatus; else notLoggedIn">
+                            <button class="logOutButton" (click)="logOut()">LOG OUT</button>
+                        </div>
+        
+                            <ng-template #notLoggedIn>
+                                <a routerLink="/login" routerLinkActive="active" class="logInButton">LOG IN</a>
+                            </ng-template>
+                    </div>
+                    </div>
+                </nav>
+            </div>
+          </header>
 
 
-<body>
+<body style="margin-top: 120px;">
     <div class="container">
 
-        <div *ngIf="logInStatus; else notLoggedIn">
-            <div style="text-align: right;  display: flex; justify-content:space-between;">
-                <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
-                <button (click)="logOut()"> Log Out?</button>
-            </div>       
-        </div>
-        
-        
-        <ng-template #notLoggedIn>
-            <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">
-                Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
-        </ng-template>
-
-
-   
+      
             <div id="list_head">
-                    <p>Edit Event: {{event.eventTitle}}</p> 
+                    <p>Update:  {{event.eventTitle}}</p> 
             </div>
         
             <br>
             <br>
-            <!-- <br> -->
-           
-                   
+                 
                 <form #eventInformation="ngForm" (ngSubmit)="updateEvent(eventInformation)">
 
                     <div class="row">
@@ -102,7 +118,7 @@
                             <br>
                             <br>
                            
-                            <button [disabled]="eventInformation.invalid" type="submit" id="edit_btn">EDIT</button>
+                            <button [disabled]="eventInformation.invalid" type="submit" id="edit_btn">UPDATE</button>
                             <br>
                                 <div *ngIf="eventInformation.invalid && eventInformation.touched" class="alert alert-danger">
                                     Make sure you've filled out the whole form!
@@ -112,11 +128,20 @@
                     </div>
  
                 </form>
-               
 
+                <div class="row">
+
+                    <div class="col-7"></div>
+
+                    <div class="col-5">
+
+                        <button type="button" (click)="deleteEvent()" id="edit_btn" style="background-color: #C03E24; float: right; margin-top: -155px; margin-right: -5px;">DELETE</button>
+                    </div>
+
+                </div>
 
     </div>
 </body>
-</html>
+<!-- </html> -->
 
 

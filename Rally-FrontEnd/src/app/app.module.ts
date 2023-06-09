@@ -42,6 +42,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+import { EventJoinComponent } from './Events/event-join/event-join.component';
+import { JoinEditComponent } from './Events/join-edit/join-edit.component';
 import { RestaurantsHomepageComponent } from './restaurants-homepage/restaurants-homepage.component';
 import { RestaurantAmericanComponent } from './restaurants-homepage/restaurant-american/restaurant-american.component';
 import { RestaurantAsianComponent } from './restaurants-homepage/restaurant-asian/restaurant-asian.component';
@@ -91,6 +93,9 @@ import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pi
     ServiceItemComponent,
     EventEditComponent,
     HomeComponent,
+    PageNotFoundComponent,
+    EventJoinComponent,
+    JoinEditComponent,
     PageNotFoundComponent
 
   ],

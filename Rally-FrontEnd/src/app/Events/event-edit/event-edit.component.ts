@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Event } from '../models/event';
 import { EventComponent } from '../event/event.component';
 import { EventService } from '../services/event.service';
@@ -20,17 +21,21 @@ export class EventEditComponent implements OnInit {
 
   private updateEventUrl: string;
   private getEventUrl: string;
+  private deleteEventUrl: string;
+
+  //get event to edit
   id: string;
   event: Event;
-  // buttonType: string;
   eventId: number;
 
 
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private eventService: EventService) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private eventService: EventService) {
  this.logInStatus = false;
     this.getEventUrl = 'http://localhost:8080/events/event'
     this.updateEventUrl = 'http://localhost:8080/events/edit/event'
+    this.deleteEventUrl = 'http://localhost:8080/events/edit/delete'
+
     this.event;
     this.id = this.route.snapshot.params['id'];
    }
@@ -50,45 +55,12 @@ export class EventEditComponent implements OnInit {
 
   }
 
-// updateEvent() {
-//   this.eventService.updateEvent(this.id, this.event).subscribe((response: Event) => {
-//     this.event = response;
-//   })
-// }  
-
-// onSubmit() {
-//   this.updateEvent;
-// }
-
-// deleteEvent() {
-//   // this.event.eventTitle = "delete";
-
-// }
-
-// onSubmit(buttonType: string): void {
-//   if(buttonType==="update") {
-//     this.updateEvent();
-//   } else if(buttonType==="delete") {
-//     this.deleteEvent();
-//   }
-// }
-
-
-
-// getIdNum(str: string) {
-//   let num: number = parseInt(str);
-//   console.log(typeof num);
-//   return num;
-// }
-
-
 updateEvent(eventInformation: NgForm) {
 
 
   let updateEvent: EventDTO = {
     id: this.eventId,
-
-    // id: this.getIdNum(localStorage.getItem('id')),
+    userName: localStorage.getItem("userName"),
     eventHost: eventInformation.value.eventHost,
     contactEmail: eventInformation.value.contactEmail,
     eventTitle: eventInformation.value.eventTitle, 
@@ -104,9 +76,27 @@ updateEvent(eventInformation: NgForm) {
     console.log(res)
   });
 
-  eventInformation.reset();
+  // eventInformation.reset();
+
+  this.router.navigate(["/events"])
+  .then(() => {
+    window.location.reload();
+  });
  
 
+}
+
+deleteEvent() {
+  if(confirm("Are you sure you want to delete this event?")) {
+    this.eventService.deleteEvent(this.id).subscribe(data => {
+      console.log(data);
+    })
+    this.router.navigate(["/events"])
+  .then(() => {
+    window.location.reload();
+  });
+  }
+ 
 }
 
 

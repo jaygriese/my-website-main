@@ -1,6 +1,5 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginUserComponent } from './user-profile-arm/login-register/login-user/login-user.component';
 import { EventViewComponent } from './Events/event-view/event-view.component';
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
 import { ResourceComponent } from './resources-arm/resource/resource.component';
@@ -23,7 +22,6 @@ import { ForumTopic3Component } from './community-forum-arm/forum/forum-topic3/f
 import { ViewPostComponent } from './community-forum-arm/forum/view-post/view-post.component';
 import { ViewUserProfileComponent } from './user-profile-arm/user-profile/view-user-profile/view-user-profile.component';
 import { CommunityHomeComponent } from './community-forum-arm/forum/community-home/community-home.component';
-import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 import { ResourceSearchComponent } from './resources-arm/resource-search/resource-search.component';
 import { ViewRestaurantComponent } from './restaurants-homepage/view-restaurant/view-restaurant.component';
 import { SearchRestaurantComponent } from './restaurants-homepage/search/search-restaurant.component';
@@ -33,11 +31,13 @@ import { ServiceItemComponent } from './services-arm/service-item/service-item.c
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
-import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
 import { EmailVerificationComponent } from './security/email-verification/email-verification.component';
 import { EventJoinComponent } from './Events/event-join/event-join.component';
 import { JoinEditComponent } from './Events/join-edit/join-edit.component';
+import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
 import { RegisterUserComponent } from './user-profile-arm/login-register/register-user/register-user.component';
+import { LoginUserComponent } from './user-profile-arm/login-register/login-user/login-user.component';
+import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 
 
 

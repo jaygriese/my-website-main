@@ -7,8 +7,8 @@ import { map } from 'rxjs/operators';
 import { ForumPost } from '../../models/ForumPost';
 import { ReplyDTO } from '../../models/ReplyDTO';
 import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
-import { ViewUserService } from 'src/app/user-profile-arm/user-profile/services/view-user.service';
 import { ForumPostDTO } from '../../models/ForumPostDTO';
+import { ViewUserService } from 'src/app/user-profile-arm/user-profile/services/view-user.service';
 @Component({
   selector: 'app-forum-topic1',
   templateUrl: './forum-topic1.component.html',

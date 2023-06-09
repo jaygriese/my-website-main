@@ -66,58 +66,10 @@ export class EventComponent implements OnInit {
       console.log(response);
       this.joinedEvent = response;
 
-<<<<<<< HEAD
-  }
-
-//   openDelete() {
-//     const modelDiv = document.getElementById('deleteModal');
-//     if(modelDiv!=null) {
-//       modelDiv.style.display = 'block';
-//     }
-
-//   }
-
-//   closeDelete() {
-//     const modelDiv = document.getElementById('deleteModal');
-//     if(modelDiv!=null) {
-//       modelDiv.style.display = 'none';
-//     }
-
-//   }
-
-// noDelete() {
-//   const deleteDiv = document.getElementById('noDelete');
-//   if(deleteDiv!=null) {
-//     deleteDiv.style.display = 'none';
-//   }
-// }
-
-// yesDelete() {
-//   const yesDeleteDiv = document.getElementById('yesDelete');
-//   if(yesDeleteDiv!=null) {
-//     this.deleteEvent();
-//   }
-// }
-
-
-// deleteEvent() {
-//   this.eventService.deleteEvent(this.id).subscribe(data => {
-//     console.log(data);
-//   })
-//   this.router.navigate(["/events"]);
-// }
-
-deleteEvent() {
-  if(confirm("Are you sure you want to delete this event?")) {
-    this.eventService.deleteEvent(this.id).subscribe(data => {
-      console.log(data);
-      
-=======
       this.getNumJoined();
       this.getComments();
       this.getUserJoined();
      
->>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     })
 
   }

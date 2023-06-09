@@ -5,6 +5,8 @@
             <h2>Search</h2>
     </div>
 
+    <div class="col" style="color: crimson;" *ngIf="characterError">You may enter between 1 through 25 characters only</div>
+
     <!-- Search bar inputs -->
     <div class="col">
         <div class="topnav">
@@ -34,7 +36,7 @@
 <div class="row" *ngFor = "let user of userList">
     <div class="col">
         <div class="card" style="background-color: #ecdfc3;">
-            <h2><a routerLink="/user/{{user.userName}}/{{user.id}}" routerLinkActive="active">{{ user.userName }}</a></h2>
+            <h2><a routerLink="/user/{{user.userName}}" routerLinkActive="active">{{ user.userName }}</a></h2>
         </div>
     </div>
 </div>

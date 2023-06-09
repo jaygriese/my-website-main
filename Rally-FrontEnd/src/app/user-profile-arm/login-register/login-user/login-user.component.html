@@ -1,5 +1,6 @@
 <div style="text-align:center" class="container">
 
+  <!-- This isn't working yet, display that token expired and need to log back in -->
   <div *ngIf="this?.accessExpired">
     <h2 style="color: crimson;">Token expired, please log back in</h2>
   </div>
@@ -8,16 +9,12 @@
       <h2>Login</h2>
     </div>
     <form #userLogin="ngForm" (ngSubmit)="login(userLogin)">
-
       <br><br>
       <label>UserName: <input type="text" name="userName" required ngModel></label>
-
       <br><br>
       <label>Password: <input type="password" name="password" required ngModel></label>
-      
       <br><br>
       <input type="submit" value="Submit">
-
       <br><br>
       <div *ngIf="errorMessage">
         <p id="IncorrectPW" style="color: crimson;">{{ this.loginResponseMessage }}</p>

@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { UserInfoDTO } from '../../models/dto/UserInfoDTO';
 import { NgForm } from '@angular/forms';
 import { UserInformation } from '../../models/UserInformation';
@@ -15,6 +14,7 @@ import { Event } from 'src/app/Events/models/event';
 import { HidePostDTO } from '../../models/dto/HidePostDTO';
 import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
 import { StorageService } from 'src/app/security/security-service/storage-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -46,6 +46,7 @@ export class UserProfileComponent implements OnInit {
   /* HTML booleans */
   notHidden: boolean = true;
   noError: boolean = true;
+  tooManyChar: boolean = false;
   changeInfo: boolean = true;
   userDms: boolean = true;
   changeProfilePic: boolean = true;
@@ -67,7 +68,8 @@ export class UserProfileComponent implements OnInit {
               private activeUserService: ViewUserService, 
               private cdref: ChangeDetectorRef,
               private authorize: AuthorizeService,
-              private storageService: StorageService) {
+              private storageService: StorageService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -94,27 +96,28 @@ export class UserProfileComponent implements OnInit {
         /* Remove active user from dm list */
         this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user.userName !== this.storageService.getUserName());
 
+        /* Get all user post organized to display */
         this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
         this.allPostFilter = this.allPost;
         this.updateHiddenPost();
       },  err => {
-        if (err.status === 500) {
+        /* temporary error handling / want to build better handling approach */
+        if (err.status === 500 || err.status === 400) {
           this.authorize.logOut();
         }
       })
 
       /* Get user Profile pic */
       /* bundle in userbundle or change to user userName */
-      this.http.get('http://localhost:8080/user/userProfileImage/' + localStorage.getItem('id')).subscribe((response: any) => {
+      this.http.get('http://localhost:8080/user/userProfileImage/' + this.storageService.getUserName()).subscribe((response: any) => {
         if (response.message) {
-          console.log(response.message);
           return;
         } else {
           this.postResponse = response;
           this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
         }
       },  err => {
-        if (err.status === 500) {
+        if (err.status === 500 || err.status === 400) {
           this.authorize.logOut();
         }
       })
@@ -124,7 +127,8 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  /* This method controls what is visible on the users post history based on checkbox input in html */
+  /* This method controls what is visible on the users post history based on checkbox input in html 
+  | ForumPost | Events | Resouces | Services | Restaurants*/
   userPostHistoryFilter(event) {
     if (event.target.checked) {
       if (this.filterActive === false) {
@@ -152,12 +156,13 @@ export class UserProfileComponent implements OnInit {
   
   /* Learning about LifeCycle Hooks in Angular / prevents error in the console when viewing 
     direct messages while using the [scrollTop]="scrollMe.scrollHeight" in HTML*/
-  /* Might be causing memory leak, further investigation required */
+  /* Might cause a memory leak, further investigation required */
   ngAfterContentChecked() {
     this.scrollMe = this.scrollMe;
     this.cdref.detectChanges();
   }
 
+  /* Checks the post to see if it is hidden and flags it as so to display on post (or not) on post history */
   updateHiddenPost() {
     for (let hide of this.hiddenPost) {
       for (let post of this.allPost) {
@@ -174,17 +179,16 @@ export class UserProfileComponent implements OnInit {
     let hidePostDTO: HidePostDTO = {
       postType: post.type,
       hidePostId: post.id,
-      userId: Number(localStorage.getItem("id"))
+      userId: Number(this.userEntity.id)
     }
-    console.log(hidePostDTO)
 
-    this.http.post('http://localhost:8080/user/hidePostList', hidePostDTO).subscribe((response) => {
-      console.log(response);
-      location.reload();
+    this.http.post('http://localhost:8080/user/hidePostList', hidePostDTO).subscribe((response: any) => {
+      /* Temp solution to refresh page without location.reload() */
+      this.router.navigate(['/register'])
     })
   }
 
-  /* Remove post from hidden post / Make post public */
+  /* Remove post from hidden post | Make post public */
   unhidePost(post: any) {
 
     let hidePostDTO: HidePostDTO = {
@@ -196,8 +200,8 @@ export class UserProfileComponent implements OnInit {
     console.log(hidePostDTO)
 
     this.http.post('http://localhost:8080/user/unHidePost', hidePostDTO).subscribe((response) => {
-      console.log(response);
-      location.reload();
+      /* Temp solution to refresh page without location.reload() */
+      this.router.navigate(['/register'])
     })
   }
 
@@ -206,7 +210,6 @@ export class UserProfileComponent implements OnInit {
     if (event.target.files[0].size > 1024000) {   
       this.uploadErrorMsg = ["File is too large, please select a smaller image", true];
       this.uploadedImage = null;
-      console.log(this.uploadedImage)
       return;
     } else {
       this.uploadedImage = event.target.files[0];
@@ -221,7 +224,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     const imageFormData = new FormData();
-    imageFormData.append('image', this.uploadedImage, this.userEntity.id);
+    imageFormData.append('image', this.uploadedImage, this.storageService.getUserName());
 
     this.http.post('http://localhost:8080/user/upload/image', imageFormData, {observe: 'response'}).subscribe((response: any) => {
       console.log(response);
@@ -238,20 +241,20 @@ export class UserProfileComponent implements OnInit {
 
 
   /* Display conversation with user selected */
-  displayConversation( userDms: UserEntity) {
+  displayConversation( userDms: string) {
     this.conversation = [];
     this.respondToDm = null;
 
     for (let i = 0; i < this.userEntityDmList.length; i++) {
-        if (this.respondToDm === null && userDms.userName == this.userEntityDmList[i].userName) {
+        if (this.respondToDm === null && userDms == this.userEntityDmList[i].userName) {
         this.respondToDm = this.userEntityDmList[i];
       }
     }
     
     for (let i = 0; i < this.allDmHistory.length; i++) {
-      if (localStorage.getItem('userName') === this.allDmHistory[i].sentByUserName && this.respondToDm.userName === this.allDmHistory[i].receivedByUserName) {
+      if (this.storageService.getUserName() === this.allDmHistory[i].sentByUserName && this.respondToDm.userName === this.allDmHistory[i].receivedByUserName) {
         this.conversation.push(this.allDmHistory[i]);
-      } else if (localStorage.getItem('userName') === this.allDmHistory[i].receivedByUserName && this.respondToDm.userName === this.allDmHistory[i].sentByUserName) {
+      } else if (this.storageService.getUserName() === this.allDmHistory[i].receivedByUserName && this.respondToDm.userName === this.allDmHistory[i].sentByUserName) {
         this.conversation.push(this.allDmHistory[i]);
       }
     }
@@ -262,29 +265,43 @@ export class UserProfileComponent implements OnInit {
 
   /* After sending a message to a user, this refreshes the chat history */
   refreshConversation( chatWithUser: string) {
+    /* this.converstaion = [] is causing an error because I don't know how to handle lifecycle hooks yet. */
+    /* Want to rebuild Direct Messages with different architecture */
+
+    this.conversation = [];
     for (let i = 0; i < this.allDmHistory.length; i++) {
-      if (localStorage.getItem('userName') === this.allDmHistory[i].sentByUserName && chatWithUser === this.allDmHistory[i].receivedByUserName) {
+      if (this.storageService.getUserName() === this.allDmHistory[i].sentByUserName && chatWithUser === this.allDmHistory[i].receivedByUserName) {
         this.conversation.push(this.allDmHistory[i]);
-      } else if (localStorage.getItem('userName') === this.allDmHistory[i].receivedByUserName && chatWithUser === this.allDmHistory[i].sentByUserName) {
+      } else if (this.storageService.getUserName() === this.allDmHistory[i].receivedByUserName && chatWithUser === this.allDmHistory[i].sentByUserName) {
         this.conversation.push(this.allDmHistory[i]);
       }
     }
   }
 
-  /* Sends respone to the database */
+  /* Sends direct message respone to the database */
   respondToUserDm( userResponse: NgForm ) {
+    /*reset error message on user messages if errors occured */
+    this.noError = true;
+    this.tooManyChar = false;
+
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.respondToDm.id,
       receivedByUserName: this.respondToDm.userName,
-      sentByUserId: localStorage.getItem('id'),
-      sentByUserName: localStorage.getItem('userName'),
+      sentByUserId: this.userEntity.id,
+      sentByUserName: this.storageService.getUserName(),
       messageContent: userResponse.value.messageContent
     }
 
+    /* doesn't allow message to be sent if contents don't conform to length requirements */
     if (sendDirectMessage.messageContent === undefined || sendDirectMessage.messageContent.length < 3) {
       this.noError = false;
       return
+    } else if ( sendDirectMessage.messageContent.length > 2500) {
+      this.tooManyChar = true;
+      return
     }
+
+    /* Post message to backend if message is valid then refresh the conversation to reflect message sent */
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
       this.allDmHistory = response;
       this.commentBox = '';
@@ -301,13 +318,14 @@ export class UserProfileComponent implements OnInit {
       city: userDetails.value.city,
       state: userDetails.value.state
     }
-    this.http.put<any>('http://localhost:8080/user/update-user-information/' + localStorage.getItem("id"), userInfo).subscribe((response: UserInformation) => {
+    this.http.put<any>('http://localhost:8080/user/update-user-information/' + this.storageService.getUserName(), userInfo).subscribe((response: UserInformation) => {
         this.userInformation = response
         this.changeInfo=true;
         return;
     });
   }
 
+  /* Boolean to change the user information into an editable form on user profile */
   editProfileDetails() {
     this.changeInfo=false;
   }

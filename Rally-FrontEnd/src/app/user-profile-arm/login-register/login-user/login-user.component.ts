@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { UserEntity } from '../../models/UserEntity';
+import { StorageService } from 'src/app/security/security-service/storage-service.service';
 import { CookieService } from 'ngx-cookie-service';
+import { LoginDTO } from '../../models/dto/LoginDTO';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -16,9 +18,6 @@ const httpOptions = {
 })
 export class LoginUserComponent implements OnInit {
 
-  /* Host Url */
-  private hostUrl = 'http://localhost:8080';
-
   userLogginIn: UserEntity;
   errorMessage: boolean;
   loginResponseMessage: string;
@@ -27,6 +26,7 @@ export class LoginUserComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private router: Router,
+              private storageService: StorageService,
               private cookieService: CookieService) 
               { 
   }
@@ -34,18 +34,27 @@ export class LoginUserComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.cookieService.check('token')) {
-      this.router.navigate(["/home"])
+      this.router.navigate(["/myProfile"])
     }
+
+    // if (sessionStorage.getItem("expired")) {
+    //   this.accessExpired = true;
+    // }
   }
 
   login(userInformation: NgForm ) {
       
     this.errorMessage = false;
 
+    let userInfo: LoginDTO = {
+      userName: userInformation.value.userName,
+      password: userInformation.value.password
+    }
+
     let userName = userInformation.value.userName;
     let password = userInformation.value.password;
 
-    return this.http.post( this.hostUrl + '/api/login',
+    return this.http.post('http://localhost:8080/api/login', //userInfo).subscribe((data: any) => {
       {
         userName,
         password,
@@ -57,9 +66,10 @@ export class LoginUserComponent implements OnInit {
           this.loginResponseMessage = data.failed;
           return;
         }
-        /* local storage being phased out */
+        /* local and sesion storage being phased out */
         localStorage.setItem('userName', data.userName)
         localStorage.setItem('id', data.id)
+        // this.storageService.saveUser(data);
 
         /* make get request based on cookie data */
         this.cookieService.set("token", data.accessToken);

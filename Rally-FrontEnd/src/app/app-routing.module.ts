@@ -1,7 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginUserComponent } from './user-profile-arm/login-register/login-user/login-user.component';
-import { RegisterUserComponent } from './user-profile-arm/login-register/register-user/register-user.component';
 import { EventViewComponent } from './Events/event-view/event-view.component';
 import { ForumComponent } from './community-forum-arm/forum/forum.component';
 import { ResourceComponent } from './resources-arm/resource/resource.component';
@@ -15,7 +14,6 @@ import { RestaurantsItalianComponent } from './restaurants-homepage/restaurants-
 import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pizza/restaurants-pizza.component';
 import { EventComponent } from './Events/event/event.component';
 import { EventCreateComponent } from './Events/event-create/event-create.component';
-import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
 import { ServicesHomeComponent } from './services-arm/services-home/services-home.component';
 import { OfferComponent } from './services-arm/offer/offer.component';
 import { IntroductionsComponent } from './community-forum-arm/forum/introductions/introductions.component';
@@ -35,9 +33,11 @@ import { ServiceItemComponent } from './services-arm/service-item/service-item.c
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
 import { EmailVerificationComponent } from './security/email-verification/email-verification.component';
 import { EventJoinComponent } from './Events/event-join/event-join.component';
 import { JoinEditComponent } from './Events/join-edit/join-edit.component';
+import { RegisterUserComponent } from './user-profile-arm/login-register/register-user/register-user.component';
 
 
 
@@ -80,6 +80,8 @@ const routes: Routes = [
   {path: 'serviceitem', component: ServiceItemComponent},
   {path: 'edit/:id', component: EventEditComponent},
   {path: 'home', component: HomeComponent},
+  {path: 'user/404', component: PageNotFoundComponent},
+  {path: 'confirm-account/:token', component: EmailVerificationComponent},
   {path: 'invalidUser/404', component: PageNotFoundComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full' },
   {path: 'confirm-account/:token', component: EmailVerificationComponent},

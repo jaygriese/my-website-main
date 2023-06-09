@@ -14,13 +14,12 @@ import { CookieOptions, CookieService } from 'ngx-cookie-service';
 @Injectable()
 export class JwtHandlerInterceptor implements HttpInterceptor {
 
-  constructor(private authService: StorageService,
-              private cookieService: CookieService) {}
+  constructor(private cookieService: CookieService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
+    /* This is needed to login/register and view the site */
     const jwt = this.cookieService.get('token');
-    console.log(jwt)
     if (jwt === null) {
       request = request.clone({
         withCredentials: true,
@@ -28,6 +27,7 @@ export class JwtHandlerInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
+    /* If the user holds a JWT token, this will send it in the headers to the back end for verification */
     request = request.clone({
       withCredentials: true,
       setHeaders: { authorization: `Bearer ${jwt}`}

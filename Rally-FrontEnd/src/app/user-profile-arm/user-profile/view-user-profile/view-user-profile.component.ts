@@ -2,7 +2,6 @@ import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserEntity } from '../../models/UserEntity';
 import { ViewUserService } from '../services/view-user.service';
-import { VerifyLogoutService } from '../../security/verify-logout.service';
 import { ViewUserBundle } from '../../models/ViewUserBundle';
 import { NgForm } from '@angular/forms';
 import { DirectMessageDTO } from '../../models/dto/directMessageDTO';
@@ -17,9 +16,11 @@ import { AuthorizeService } from 'src/app/security/security-service/authorize.se
 })
 export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
+  /* Host Url */
+  private hostUrl = 'http://localhost:8080';
+
   /* Viewing Users information */
   viewUserName: string;
-  viewUserId: string;
   userEntityInformation: ViewUserBundle;
 
   /* Direct Message with active user */
@@ -38,6 +39,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
   /* HTML booleans */
   noError: boolean = true;
+  tooManyChar: boolean = false;
   showDmHistory = false;
   dmCharacters = true;
   userReal = true;
@@ -55,12 +57,21 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
 
     if (this.authorize.isloggedIn() !== true) {
+<<<<<<< HEAD
       this.authorize.clean();
     }
     /* This method pulls the parameters of the activated route and converts them into a usable string */
+=======
+      this.authorize.logOut();
+    }
+
+    /* Pulling userName and userId from  */
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     this.activatedRoute.paramMap.subscribe(params => {
     this.viewUserName = params.get('userName');
-    this.viewUserId = params.get('id');
+    if (params.get('userName') === '404') {
+      this.router.navigate(['/invalidUser/404'])
+    }
     });
 
     /* If you tried to view yourself, you will be redirected to the 'myProfile' route */
@@ -70,7 +81,6 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
     this.viewUser.getViewUserBundleByUserName(this.viewUserName).subscribe((data: any) => {
       if (data.message) {
         this.userReal = false;
-        this.router.navigate(['/user/404']);
         return;
       }
       this.userEntityInformation = data;
@@ -82,15 +92,24 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
       this.dmList = data.viewUserDmHistory.directMessageList;
       this.displayConversation(this.userEntityInformation.viewUser);
       this.scrollToBottom;
+    },  err => {
+      /* temporary error handling / want to build better handling approach */
+      if (err.status === 500 || err.status === 400) {
+        this.authorize.logOut();
+      }
     })
 
     /* Get view users profile picture */
-    this.http.get('http://localhost:8080/user/userProfileImage/' + this.viewUserId).subscribe((response: any) => {
+    this.http.get(this.hostUrl + '/user/userProfileImage/' + this.viewUserName).subscribe((response: any) => {
       if (response.message) {
-        console.log(response.message);
         return;
       } else {
         this.dbImage = 'data:image/jpeg;base64,' + response.image;
+      }
+    },  err => {
+      /* temporary error handling / want to build better handling approach */
+      if (err.status === 500 || err.status === 400) {
+        this.authorize.logOut();
       }
     })  
   }
@@ -133,6 +152,9 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
   /* Send Dm to viewed user */
   viewingUserSendDM(dmMessageDetails: NgForm) {
+    this.dmCharacters = true;
+    this.tooManyChar = false;
+
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.userEntityInformation.viewUser.id,
       receivedByUserName: this.userEntityInformation.viewUser.userName,
@@ -141,11 +163,16 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
       messageContent: dmMessageDetails.value.messageContent
     }
 
+    /*This checks if the message contents conform to the character limitations */
     if (sendDirectMessage.messageContent === undefined || sendDirectMessage.messageContent.length < 3) {
       this.dmCharacters = false;
       return;
-    } 
+    } else if ( sendDirectMessage.messageContent.length > 2500) {
+      this.tooManyChar = true;
+      return
+    }
 
+    /* Posts the dm if it doens't trigger any errors */
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
       this.dmList = response;
       this.commentBox = '';

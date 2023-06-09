@@ -16,7 +16,7 @@ export class Category {
 
 export class Service {
     id: string;
-    userName: string;
+    name: string;
 	description: string;
     category: Category;
     day: string;
@@ -26,9 +26,9 @@ export class Service {
     type: Type;
 
 
-	constructor(id: string, userName: string, description: string, category: Category, day: string, email: string, service: string, time: string, type: Type){
+	constructor(id: string, name: string, description: string, category: Category, day: string, email: string, service: string, time: string, type: Type){
         this.id = id;
-        this.userName = userName;
+        this.name = name;
 		this.description = description;
         this.category = category;
         this.day = day;

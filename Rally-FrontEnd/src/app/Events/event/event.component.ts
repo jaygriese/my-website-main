@@ -4,9 +4,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from '../models/event';
 import { EventService } from '../services/event.service';
-import { EventViewComponent } from '../event-view/event-view.component';
-// import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-// import { Component, Input} from '@angular/core'
+import { JoinEvent } from '../models/JoinEvent';
 
 @Component({
   selector: 'app-event',
@@ -15,31 +13,44 @@ import { EventViewComponent } from '../event-view/event-view.component';
 })
 export class EventComponent implements OnInit {
 
-  // currentUser;
-  // logInStatus: Boolean;
+  currentUser;
+  logInStatus: Boolean;
 
 
   // private eventUrl: string;
+
+  //to capture event, event.id
   id: string;
   eventDetails: Event;
-  // mapUrl: string;
+
+  //to display comments, num attending
+  joinUrl: string;
+  joinedEvent: JoinEvent [] = [];
+  numJoined: number = 0;
+  commentDisplay: string[] = [];
+
+  //verify user to display update/delete options
+  userJoined: boolean = false;
+
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private eventService: EventService) {
-    // this.logInStatus = false;
+    this.logInStatus = false;
     // this.eventUrl = 'http://localhost:8080/events/event/{id}/'
+    this.joinUrl = 'http://localhost:8080/join/join/'
     this.eventDetails;
     this.id = this.route.snapshot.params['id'];
-    // this.mapUrl = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyAh6PKyQT9CBCOKjubHp1_0DCk58freoL0&q=st_louis_mo' 
 
-    
+    this.joinedEvent;
+    this.numJoined;
+    this.commentDisplay;
+
+    this.userJoined;
+
    }
 
   ngOnInit(): void {
-    // this.verifyLoggedIn();
+    this.verifyLoggedIn();
 
-    // this.eventDetails = new Event();
-
-    // this.id = this.route.snapshot.params['id'];
 
     console.log(this.id);
 
@@ -49,8 +60,13 @@ export class EventComponent implements OnInit {
     
     })
 
+    console.log(this.joinedEvent);
 
+    this.http.get(this.joinUrl).subscribe((response: JoinEvent[]) => {
+      console.log(response);
+      this.joinedEvent = response;
 
+<<<<<<< HEAD
   }
 
 //   openDelete() {
@@ -96,30 +112,66 @@ deleteEvent() {
     this.eventService.deleteEvent(this.id).subscribe(data => {
       console.log(data);
       
+=======
+      this.getNumJoined();
+      this.getComments();
+      this.getUserJoined();
+     
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     })
-    this.router.navigate(["/events"])
-  .then(() => {
-    window.location.reload();
-  });
+
   }
- 
-}
 
 
-  // verifyLoggedIn() {
+//get num attending event
+  getNumJoined() {
+    for(let i = 0; i < this.joinedEvent.length; i++) {
+      if(this.joinedEvent[i].event.id === this.eventDetails.id) {
+        this.numJoined += this.joinedEvent[i].numAttending;
+      } 
+    }
+    return this.numJoined;
+  }
 
-  //   if (localStorage.getItem('userName') != null) {
-  //     this.currentUser = localStorage.getItem('userName');
-  //     this.logInStatus = true;
-  //   }
+
+//comments from join form
+  getComments() {
+    for(let i = 0; i < this.joinedEvent.length; i++) {
+      if(this.joinedEvent[i].event.id === this.eventDetails.id && this.joinedEvent[i].comment !== null) {
+        this.commentDisplay.push(this.joinedEvent[i].comment);
+      }
+    }
+    return this.commentDisplay;
+  }
+
+
+
+  //verify user for visible update/delete button
+  getUserJoined() {
+    for(let i = 0; i < this.joinedEvent.length; i++) {
+      if(this.joinedEvent[i].event.id === this.eventDetails.id && this.joinedEvent[i].userName === this.currentUser) {
+        this.userJoined = true;
+      }
+    }
+    return this.userJoined;
+  }
+
+
+
+  verifyLoggedIn() {
+
+    if (localStorage.getItem('userName') != null) {
+      this.currentUser = localStorage.getItem('userName');
+      this.logInStatus = true;
+    }
 
   
-  // }
+  }
 
-  // logOut() {
-  //   localStorage.clear();
-  //   console.log(localStorage.getItem('userName'))
-  //   this.logInStatus = false;
-  // }
+  logOut() {
+    localStorage.clear();
+    console.log(localStorage.getItem('userName'))
+    this.logInStatus = false;
+  }
 
 }

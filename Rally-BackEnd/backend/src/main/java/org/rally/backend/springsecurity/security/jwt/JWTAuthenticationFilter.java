@@ -24,6 +24,10 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+<<<<<<< HEAD
+=======
+    /** DoFilter setup to validate if token is legit **/
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -43,6 +47,10 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+<<<<<<< HEAD
+=======
+    /** Pulls JWT token from request headers **/
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     private String getJWTFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("authorization");
         if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {

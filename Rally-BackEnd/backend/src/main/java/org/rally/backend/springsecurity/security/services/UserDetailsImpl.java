@@ -13,6 +13,14 @@ import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
 
+<<<<<<< HEAD
+=======
+    /** This class is not in use for now, but might need to be set up for later use **/
+    /** This class is not in use for now, but might need to be set up for later use **/
+    /** This class is not in use for now, but might need to be set up for later use **/
+
+
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     private int id;
     private String userName;
     @JsonIgnore
@@ -26,6 +34,10 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
+<<<<<<< HEAD
+=======
+    /** Not using this method atm, worked around it **/
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     public static UserDetailsImpl build(UserEntity userEntity) {
         /** This might break some stuff when sending response **/
         List<GrantedAuthority> authorities = userEntity.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
@@ -37,8 +49,26 @@ public class UserDetailsImpl implements UserDetails {
                 authorities);
     }
 
+<<<<<<< HEAD
 
 
+=======
+    /** Might not need this equals method atm **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        UserDetailsImpl user = (UserDetailsImpl) o;
+        return Objects.equals(id, user.id);
+    }
+
+
+    /** Required override methods that aren't being used atm **/
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -78,6 +108,7 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
+<<<<<<< HEAD
     /** equals method written differently from source, might cause issues **/
     @Override
     public boolean equals(Object o) {
@@ -90,5 +121,8 @@ public class UserDetailsImpl implements UserDetails {
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
     }
+=======
+
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
 
 }

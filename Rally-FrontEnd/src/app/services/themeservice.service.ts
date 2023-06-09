@@ -97,7 +97,7 @@ public getUserName(): any {
   try {
     JSON.parse(payload)
   } catch(e) {
-    this.authorize.clean();
+    this.authorize.logOut();
     return;
   }
   const parsedPayload = JSON.parse(payload)

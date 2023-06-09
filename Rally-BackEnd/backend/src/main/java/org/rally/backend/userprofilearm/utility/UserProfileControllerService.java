@@ -20,6 +20,10 @@ import java.util.Optional;
 @Service
 public class UserProfileControllerService {
 
+    /** Methods to assist the userProfile controller **/
+    /** Methods to assist the userProfile controller **/
+    /** Methods to assist the userProfile controller **/
+
     static UserRepository userRepository;
     static UserInformationRepository userInformationRepository;
     static RoleRepository roleRepository;
@@ -55,8 +59,8 @@ public class UserProfileControllerService {
         UserProfileControllerService.eventRepository = eventRepository;
     }
 
-    /** This method is the list that displays the users post history when viewing a user profile
-     * It doesn't display a post marked as hidden by the user account being viewed **/
+    /** List that displays the users post history when viewing a different user profile
+     * It doesn't display a post marked as hidden by the user **/
     public static List<CurrentUserPostHistory> sortUpdatedPostHistoryViewUser(int userId) {
 
         Optional<UserEntity> user = userRepository.findById(userId);
@@ -93,9 +97,8 @@ public class UserProfileControllerService {
     }
 
     /** This method returns 2 lists in an object.
-     * allUsers is a list of all the users the main account has interacted with.
-     * allMessagesRelatedToUser is a list all message history with the main user.
-     * Pending: Need to make a UserDmHistory specifically for viewing a user (only dms with user and viewed user). **/
+     * allUsers is a list of all the users the logged-in user has interacted with.
+     * allMessagesRelatedToUser is a list all message history with the main user. **/
     public static UserDmHistory activeUserDirectMessageHistory(int id) {
 
         /** Isolating all messages from and to user **/
@@ -167,7 +170,11 @@ public class UserProfileControllerService {
         return targetForumPostReplies;
     }
 
+<<<<<<< HEAD
     /** Ease of use: Generates roles in DB (For project use) **/
+=======
+    /** Ease of use: Generates roles in DB (For project use, would set up different in real application) **/
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     public static void generateRoles() {
         if (roleRepository.findAll().size() == 0) {
             Role role = new Role();

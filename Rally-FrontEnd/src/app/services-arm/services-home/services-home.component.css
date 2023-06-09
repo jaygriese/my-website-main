@@ -1,5 +1,5 @@
-.text-white {
-    color: white;
+.text-black {
+    color: black;
 }
 
 .background {
@@ -11,6 +11,7 @@
 
 .turq {
     background-color: turquoise;
+    text-align: center;
 
 }
 
@@ -25,6 +26,7 @@
     display: inline-block;
     font-size: 40px;
     transition-duration: 0.4s;
+
 }
 
 .button-blue {

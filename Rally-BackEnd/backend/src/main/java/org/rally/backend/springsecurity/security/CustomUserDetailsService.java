@@ -19,6 +19,11 @@ import java.util.stream.Collectors;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+<<<<<<< HEAD
+=======
+    /** Service methods for validation and verification **/
+
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
     private UserRepository userRepository;
 
     @Autowired
@@ -32,7 +37,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("username not found");
         }
+<<<<<<< HEAD
 //        UserDetails user =
+=======
+>>>>>>> 11c5082d21732adbc149cb42e8b014e548bc72bf
         return new User(user.getUserName(), user.getPwHash(), mapRolesToAuthorities(user.getRoles()));
     }
 

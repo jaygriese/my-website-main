@@ -1,0 +1,148 @@
+
+/* NAV BAR AT TOP */
+.logInButton {
+    background-color: #0EBB9A;
+    text-align: center;
+	color:#ffffff;
+	font-family: 'Open Sans', sans-serif;
+	font-size:20px;
+    font-weight: 500;
+    width: 125px;
+    height: 65px;
+    padding-top: 20px;
+	text-decoration: none;
+}
+
+.logOutButton {
+    background-color: #0EBB9A;
+    text-align: center;
+	color:#ffffff;
+	font-family: 'Open Sans', sans-serif;
+	font-size:20px;
+    font-weight: 500;
+    width: 125px;
+    height: 65px;
+	text-decoration: none;
+}
+
+.nav-link {
+    color: black;
+    font-weight: 450;
+    font-size: 15px;
+}
+
+
+
+
+/* MAIN */
+
+/* Used style="font-family: 'Open Sans', sans-serif;" for any larger heading */
+
+
+
+/* INCLUDE class="container" IN BODY TAG, WILL ALIGN WITH NAV BAR MARGINS */
+body {
+    margin-top: 120px;
+
+/* used this as colored gradient for background on user profile and view profile pages */
+    /* background: radial-gradient(#abe7dc, #ffffff 70%); */
+}
+
+/* can use for main heading on pages? */
+#main_head {
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    font-size: 60px;
+    color: black;
+    font-weight: 700;
+}
+
+/* this takes the bright blue, underlined link away and changes to black (or adjust to color of your choice) */
+a {
+    color: black;
+    text-decoration: none;
+}
+
+
+
+
+
+/* BUTTONS */
+
+/* alternate with colors green #0EBB9A, blue #85CDE3, orange #F9A605, or red (delete)#C03E24 */
+/* adjust width as needed */
+
+
+
+/* large button */
+/* adjust text-shadow to (3) 1px if using lighter color? */
+.button1 {
+    background-color: #0EBB9A;
+	display: internal;
+	color:#ffffff;
+	font-family: 'Open Sans', sans-serif;
+	font-size:30px;
+	font-weight:bold;
+    text-shadow: 0.5px 0.5px 0px #000;
+	padding:15px 75px;
+	text-decoration: none;
+    width: 530px;
+}
+
+
+
+/* medium-sized button */
+.button2 {
+    background-color: #F9A605;
+    color:#ffffff;
+    font-size:20px;
+    padding:12px 12px;
+    text-decoration:none;
+    width: 150px;
+  }
+
+
+  /* small button, outline changes to solid when hover */
+  /* use with class="btn btn-outline-info btn-xm" */
+
+  .btn {
+    background-color: #fff;
+    border-color:  #85CDE3;
+    transition: all .7s;
+    border-radius: 0;
+  }
+  .btn:hover {
+    color: #fff;
+    background-color:  #85CDE3;
+    border-color:  #85CDE3;
+  }
+
+
+
+/* FORMS */
+
+/* used class="form-control form-control-lg" inside any input tag for forms */
+/* used class="form-label" inside any label for forms */
+/* generally set form input boxes to be around 500px, left aligned */
+/* Radio/Checkbox: wrap in div with class="form-check", used class="form-check-input" for input and class="form-check-label" for label */
+
+
+/* can use to change inside to text box (or whatever type= on form) */
+
+  input[type=text] {
+    background-color: #f6f4f3;
+ }
+
+
+ /* can use to position text of label above input box */
+
+ .form-label {
+    margin-bottom: -5px;
+ }
+
+
+
+
+
+
+

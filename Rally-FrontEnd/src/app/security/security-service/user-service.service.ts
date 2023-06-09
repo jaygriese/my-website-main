@@ -9,6 +9,11 @@ const VERIFY_URL = 'http://localhost:8080/verify/';
 })
 export class UserServiceService {
 
+  /* Experiment class, not used atm */
+  /* Experiment class, not used atm */
+  /* Experiment class, not used atm */
+  /* This looks at your role and grants you access based on them */
+
   constructor(private http: HttpClient) { }
 
   getPublicContent(): Observable<any> {

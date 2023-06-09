@@ -34,17 +34,18 @@ public class EventController {
         return new ResponseEntity<>(eventRepository.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/event")
+
+    @PostMapping("/edit/delete")
     public void deleteEvent(@RequestBody int id) {
         eventRepository.deleteById(id);
-
     }
 
 
     @PostMapping("/create")
     public ResponseEntity<?> createEventForm(@RequestBody EventDTO eventDTO) {
 
-        Event createNewEvent = new Event(eventDTO.getEventHost(),
+        Event createNewEvent = new Event(eventDTO.getUserName(),
+                eventDTO.getEventHost(),
                 eventDTO.getContactEmail(),
                 eventDTO.getEventTitle(),
                 eventDTO.getDatetime(),
@@ -59,25 +60,6 @@ public class EventController {
 
     }
 
-//    @PostMapping("/edit/event/{id}")
-//    public ResponseEntity<?> editEventForm(@RequestBody Event event) {
-//
-//        List<Event> updatedEventList = (List<Event>) eventRepository.findAll();
-//
-//        Event updatedEvent = new Event();
-//
-//        for (Event update : updatedEventList) {
-//            if(update.getId() == event.getId()) {
-//                eventRepository.deleteById(update.getId());
-//
-//            }
-//        }
-//
-//        eventRepository.save(updatedEvent);
-//
-//        return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
-//
-//    }
 
     @PostMapping("/edit/event")
     public ResponseEntity<?> editEventForm(@RequestBody EventDTO eventDTO) {
@@ -96,48 +78,6 @@ public class EventController {
 
         AuthenticationSuccess authenticationSuccess = new AuthenticationSuccess("Success");
         return new ResponseEntity<>(authenticationSuccess, HttpStatus.OK);
-
-
-//        List<Event> updatedEventList = (List<Event>) eventRepository.findAll();
-//
-//
-//
-//        for(Event event : updatedEventList) {
-//            if(event.getId() == eventDTO.getId()) {
-//                eventRepository.deleteById(event.getId());
-//                Event updatedEvent = new Event(event.getEventHost(),
-//                        event.getContactEmail(),
-//                        eventDTO.getEventTitle(),
-//                        eventDTO.getDatetime(),
-//                        eventDTO.getEventAddress(),
-//                        eventDTO.getEventCategory(),
-//                        eventDTO.getDescription(),
-//                        eventDTO.getImageId());
-//                eventRepository.save(updatedEvent);
-//            }
-//        }
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-
-//        Event updatedEvent = new Event(eventDTO.getEventHost(),
-//                eventDTO.getContactEmail(),
-//                eventDTO.getEventTitle(),
-//                eventDTO.getDatetime(),
-//                eventDTO.getEventAddress(),
-//                eventDTO.getEventCategory(),
-//                eventDTO.getDescription(),
-//                eventDTO.getImageId());
-
-//        for (Event event : updatedEventList) {
-//            if(event.getId() == eventDTO.getId()) {
-//                eventRepository.deleteById(event.getId());
-//
-//            }
-//        }
-//
-//        eventRepository.save(updatedEvent);
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 

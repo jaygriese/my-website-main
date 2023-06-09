@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from '../models/event';
-
+import { JoinEvent } from '../models/JoinEvent';
 
 @Component({
   selector: 'app-event-view',
@@ -13,40 +13,47 @@ export class EventViewComponent implements OnInit {
 
   isLoading: boolean = true;
 
+  //login 
   currentUser;
   logInStatus: Boolean;
 
+  //get requests for events, join forms
   private eventsUrl: string;
+  private joinUrl: string;
 
+  //displaying events, filters
   eventList: Event[] = [];
   filteredEvents: Event[] = [];
 
-  // DateSelected: any;
-
+  //calendar filter
   selected: Date | null;
 
-  formattedDate: any;
-
+  //optional: showing num attending 
+  joinedEvent: JoinEvent [] = [];
+  numJoined: number = 0;
   
 
   constructor(private http: HttpClient, private router: Router) {
     this.logInStatus = false;
+
     this.eventsUrl = 'http://localhost:8080/events/events/'
+    this.joinUrl = 'http://localhost:8080/join/join/'
+
     this.eventList;
     this.filteredEvents;
-    // this.DateSelected;
-    this.selected;
-    this.formattedDate;
-    // this.formattedDate = this.selected().toString();
-    // this.formattedDate = new Date().toISOString;
 
-    
+    this.selected;
+
+    this.joinedEvent;
+    this.numJoined;
+  
+
   
 
    }
 
   ngOnInit(): void {
-    // this.verifyLoggedIn();
+    this.verifyLoggedIn();
    
    
     this.http.get(this.eventsUrl).subscribe((response: Event[]) => {
@@ -55,44 +62,44 @@ export class EventViewComponent implements OnInit {
       this.allEvents();
     })
 
-    // this.selected = new Date();
-    // this.formattedDate = this.selected.toISOString();
-    // console.log("the date object after converting to string using the toString() method: " + this.formattedDate)
-    // console.log(typeof(this.formattedDate));
 
+    // console.log(this.joinedEvent);
+
+    this.http.get(this.joinUrl).subscribe((response: JoinEvent[]) => {
+      console.log(response);
+      this.joinedEvent = response;
+
+     
+    })
 
   
   }
 
+  //show num attending for each event
+  getNumJoined(eventId: string) {
+    this.numJoined = 0;
+    for(let i = 0; i < this.joinedEvent.length; i++) {
+      if(this.joinedEvent[i].event.id === eventId) {
+        this.numJoined += this.joinedEvent[i].numAttending;
+      }
+    }
+    return this.numJoined;
+  }
 
 
+//calendar filter
   byDate() {
-    this.selected = new Date();
-    this.formattedDate = this.selected.toISOString();
-    console.log("the date object after converting to string using the toString() method: " + this.formattedDate)
-    console.log(typeof(this.formattedDate));
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
-      if(this.eventList[i].datetime.includes(this.formattedDate)) {
+      if(this.eventList[i].datetime.includes(this.selected.toISOString().slice(0,10))) {
         this.filteredEvents.push(this.eventList[i])
       } 
     }
-    console.log(this.formattedDate);
     return this.filteredEvents;
   }
 
 
-// byDate() {
-//   this.filteredEvents.splice(0);
-//   for(let i = 0; i < this.eventList.length; i++) {
-//     if(this.eventList[i].datetime.includes(this.DateSelected)) {
-//       this.filteredEvents.push(this.eventList[i])
-//     } 
-//   }
-//   return this.filteredEvents;
-// }
-
-
+//event category filter
 filter(string: string) {
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
@@ -106,7 +113,7 @@ filter(string: string) {
  
   };
 
-
+//view all filter
   viewAll() {
     this.filteredEvents.splice(0);
     for(let i = 0; i < this.eventList.length; i++) {
@@ -124,25 +131,27 @@ filter(string: string) {
   // }
 
 
-}
+  verifyLoggedIn() {
 
-
-
-  // verifyLoggedIn() {
-
-  //   if (localStorage.getItem('userName') != null) {
-  //     this.currentUser = localStorage.getItem('userName');
-  //     this.logInStatus = true;
-  //   }
+    if (localStorage.getItem('userName') != null) {
+      this.currentUser = localStorage.getItem('userName');
+      this.logInStatus = true;
+    }
 
   
-  // }
+  }
 
-  // logOut() {
-  //   localStorage.clear();
-  //   console.log(localStorage.getItem('userName'))
-  //   this.logInStatus = false;
-  // }
+  logOut() {
+    localStorage.clear();
+    console.log(localStorage.getItem('userName'))
+    this.logInStatus = false;
+  }
+
+
+
+
+
+}
 
 
 

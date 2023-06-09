@@ -36,6 +36,8 @@ import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 import { EmailVerificationComponent } from './security/email-verification/email-verification.component';
+import { EventJoinComponent } from './Events/event-join/event-join.component';
+import { JoinEditComponent } from './Events/join-edit/join-edit.component';
 
 
 
@@ -80,7 +82,11 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'invalidUser/404', component: PageNotFoundComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full' },
-  {path: 'confirm-account/:token', component: EmailVerificationComponent}
+  {path: 'confirm-account/:token', component: EmailVerificationComponent},
+  {path: 'join/:id', component: EventJoinComponent}, 
+  {path: 'edit/join/:id', component: JoinEditComponent},
+  
+
 ];
 
 @NgModule({

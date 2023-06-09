@@ -1,46 +1,39 @@
-<!-- <div *ngIf="logInStatus; else notLoggedIn">
-    
-    <div style="text-align: right;">
-        <button (click)="logOut()"> Log Out?</button>
+
+<header>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white; border-bottom: 1px solid #000; padding: 15px;">
+            <div class="container">
+            <a class="navbar-brand" routerLink="/home" routerLinkActive="active" href="#">
+                <img src="/assets/home-assets/rally_logo2.jpg" alt="" height="75" width="80">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="container">
+                    <ul class="nav justify-content-end" style="margin-right: 50px; font-family: 'Open Sans', sans-serif;">
+                    <li class="nav-item"><a class="nav-link" routerLink="/events" routerLinkActive="active">EVENTS</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active">FORUMS</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">EATS</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">SERVICES</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/resources" routerLinkActive="active">RESOURCES</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active">MY PROFILE</a></li>
+                    </ul>
+                </div>    
+                
+                <div *ngIf="logInStatus; else notLoggedIn">
+                    <button class="logOutButton" (click)="logOut()">LOG OUT</button>
+                </div>
+
+                    <ng-template #notLoggedIn>
+                        <a routerLink="/login" routerLinkActive="active" class="logInButton">LOG IN</a>
+                    </ng-template>
+            </div>
+            </div>
+        </nav>
     </div>
-
-    <h2>My Profile</h2>
-    <br><br>
-    <p>Logged in as: {{currentUser}}</p>
-
-</div>
-
-
-<ng-template #notLoggedIn>
-
-    <h2>User Profile</h2>
-
-    <p>User is not logged in.</p>
-    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
-</ng-template> -->
+  </header>
 
 
 
-
-
-<!-- <div *ngIf="logInStatus; else notLoggedIn">
-    
-    <div style="text-align: right;  display: flex; justify-content:space-between;">
-        <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
-        <button (click)="logOut()"> Log Out?</button>
-    </div>
-   
-
-</div>
-
-
-<ng-template #notLoggedIn>
-    <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
-</ng-template> -->
-
-
-
-<body style="margin-top: 80px;">
+<body style="margin-top: 120px;">
     <div class="container">
 
         <div class="row">
@@ -66,7 +59,7 @@
 
             </div>
             <div class="col-7">
-                <p style="text-align: left; font-size: 40px; ; font-family: Oswald, sans-serif; font-weight: 800; margin-bottom: -15px;">All Events</p>
+                <p style="text-align: left; font-size: 40px; ; font-family: 'Open Sans', sans-serif; font-weight: 800; margin-bottom: -15px;">Events</p>
                 <hr style="height:4px; color: black; background-color: black">
             </div>
         </div>
@@ -75,51 +68,27 @@
         
         <div class="row">
             <div class="col-3">
-                <p id="event_display1">search by date</p>
+                <p id="event_display">search by date</p>
 
                     <div>
                         <div>
                         <mat-card class="demo-inline-calendar-card">
-                            <!-- <mat-calendar [(ngModel)]="selected"></mat-calendar> -->
-                            <mat-calendar [(selected)]="selected"></mat-calendar>
+                            <mat-calendar (selectedChange)="selected = $event"></mat-calendar>
                           </mat-card>
                         </div>
                         <br>
-                          <p style="font-size: 15px; float: left;">I'm available on: {{selected | date}}</p>
+                          <p style="font-family: montserrat, sans-serif; font-size: 15px; float: left;">I'm available on: {{selected | date}}</p>
                           <div style="margin-top: -15px;">
                             <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
                           </div>   
                     </div>
-
-                    <!-- <div>
-                        <mat-card class="demo-inline-calendar-card">
-                            <mat-calendar [(ngModel)]="DateSelected"></mat-calendar>
-                        </mat-card>
-                        <br>
-                        <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
-
-                    </div> -->
-               
-                <!-- <mat-card class="demo-inline-calendar-card">
-                    <mat-calendar (selectedChange)="selected = $event"></mat-calendar>
-                  </mat-card>
-                  <p>Selected date: {{selected}}</p> -->
-                
-                <!-- <div class="card w-100">
-                    <div class="card-body">
-                      <h3 class="card-title">
-                        I'm available on: <input type="date" [(ngModel)]="DateSelected">
-                      </h3>
-                      <button class="button2" style="width: 100%;" (click)="byDate()" >find events</button>
-                    </div>
-                  </div> -->
 
             <br>
             <br>
             <br>
             
                 <span>
-                    <p id="event_display2">search by category</p>
+                    <p id="event_display">search by category</p>
 
                         <div>
                             <button class="button2" (click)="filter('connect')" >connect</button>
@@ -150,11 +119,20 @@
                                 </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <p style="font-family:Oswald, sans-serif; font-weight: 700;  font-size: 15;">{{event.datetime | date:'short'}}</p>
-                                    <p style="font-weight: 800; margin-top: -15px;">{{event.eventTitle}}</p>
-                                    <p style="font-size: 23px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
-                                    <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p>
-                                    <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more</a>
+                                    <p style="font-family: 'Open Sans', sans-serif; font-weight: 500; font-size: 22px;">{{event.datetime | date:'short'}}</p>
+                                    <p style="font-family: 'Open Sans',  sans-serif; font-weight: 800; margin-top: -15px;">{{event.eventTitle}}</p>
+                                    <p style=" font-size: 23px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
+                                    <!-- <p style="font-size: 15px; font-style: italic; margin-top: -5px;">hosted by {{event.eventHost}}</p> -->
+                                    <div >
+                                        <p *ngIf="getNumJoined(event.id) !== 0; else signUp" style="font-style: italic; font-size: 15px; margin-top: 70px; margin-bottom: 5px;">{{getNumJoined(event.id)}} attending</p>
+                                        <ng-template #signUp>
+                                            <p style="font-size: 15px; font-style: italic; margin-top: 70px; margin-bottom: 5px;">hosted by {{event.eventHost}}</p> 
+                                            <!-- <p style="font-size: 15px; font-style: italic; margin-top: 70px;">Be the first to sign up!</p>  -->
+                                        </ng-template>
+                                    </div> 
+                                    <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more </a>
+
+                                   
                                 </div>
                             </div>
                         </div>    

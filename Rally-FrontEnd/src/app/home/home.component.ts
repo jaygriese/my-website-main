@@ -7,9 +7,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  isLoading: boolean = true;
+
+  //login 
+  currentUser;
+  logInStatus: Boolean;
+
+  constructor() {
+
+  this.logInStatus = false;
+
+   }
 
   ngOnInit(): void {
+    this.verifyLoggedIn();
+
+  }
+
+  verifyLoggedIn() {
+
+    if (localStorage.getItem('userName') != null) {
+      this.currentUser = localStorage.getItem('userName');
+      this.logInStatus = true;
+    }
+
+  
+  }
+
+  logOut() {
+    localStorage.clear();
+    console.log(localStorage.getItem('userName'))
+    this.logInStatus = false;
   }
 
 }

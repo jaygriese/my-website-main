@@ -1,47 +1,56 @@
-<!-- <div *ngIf="logInStatus; else notLoggedIn">
-    
-    <div style="text-align: right;  display: flex; justify-content:space-between;">
-        <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
-        <button (click)="logOut()"> Log Out?</button>
+
+<header>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white; border-bottom: 1px solid #000; padding: 15px;">
+            <div class="container">
+            <a class="navbar-brand" routerLink="/home" routerLinkActive="active" href="#">
+                <img src="/assets/home-assets/rally_logo2.jpg" alt="" height="75" width="80">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="container">
+                    <ul class="nav justify-content-end" style="margin-right: 50px; font-family: 'Open Sans', sans-serif;">
+                    <li class="nav-item"><a class="nav-link" routerLink="/events" routerLinkActive="active">EVENTS</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active">FORUMS</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">EATS</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">SERVICES</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/resources" routerLinkActive="active">RESOURCES</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active">MY PROFILE</a></li>
+                    </ul>
+                </div>    
+                
+                <div *ngIf="logInStatus; else notLoggedIn">
+                    <button class="logOutButton" (click)="logOut()">LOG OUT</button>
+                </div>
+
+                    <ng-template #notLoggedIn>
+                        <a routerLink="/login" routerLinkActive="active" class="logInButton">LOG IN</a>
+                    </ng-template>
+            </div>
+            </div>
+        </nav>
     </div>
-   
-</div>
-<ng-template #notLoggedIn>
-    <p style="text-align: left; display: flex; justify-content: space-between;">Log in to rally your community!</p>
-    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
-</ng-template> -->
+  </header>
 
 
 
+<!-- <body style="margin-top: 80px;"> -->
+<body class="container" style="margin-top: 120px;">
 
-<!-- <div *ngIf="logInStatus; else notLoggedIn">
-    
-    <div style="text-align: right;  display: flex; justify-content:space-between;">
-        <p style="font-weight: bolder;">Welcome, {{currentUser}}!</p>
-        <button (click)="logOut()"> Log Out?</button>
-    </div>
-   
+    <!-- <div class="container" *ngIf="eventDetails"> -->
+        <div  *ngIf="eventDetails">
 
-</div>
-
-
-<ng-template #notLoggedIn>
-    <p style="text-align: left;"><span><a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span> to <span style="font-family: impact; font-size: 15px;">rally!</span> your community</p>
-</ng-template> -->
-
-
-
-
-<body style="margin-top: 80px;">
-    <div class="container" *ngIf="eventDetails">
-
-        <!-- <div class="row">
+        <div class="row">
             <div class="col">
-                <a href="http://localhost:4200/create/" class="myButton">JOIN</a>
+                <p id="list_head">Rally Up!</p> 
+            </div>
+            <div class="col">
+                <span>
+                    <a *ngIf="!userJoined" routerLink="/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">JOIN EVENT</a>
+                    <a *ngIf="userJoined" routerLink="/edit/join/{{eventDetails.id}}" routerLinkActive="active" class="myButton">UPDATE RSVP</a> 
+                </span>
             </div>
         </div>
         <br>
-        <br> -->
         <br>
         <br>
 
@@ -53,7 +62,9 @@
 
             </div>
             <div class="col-7">
-                <p style="text-align: left; font-size: 30px; ; font-family: Oswald, sans-serif; font-weight: 800; margin-bottom: -15px;">{{eventDetails.eventTitle}}<span style="font-family: oswald, sans-serif; font-size: 30px; font-weight: 700; float: right; margin-bottom: -15px;">{{eventDetails.datetime  |  date:'short'}}</span></p>
+                <p style="text-align: left; font-size: 30px; font-family: 'Open Sans', sans-serif; font-weight: 800; margin-bottom: -15px;">
+                    {{eventDetails.eventTitle}}<span style="font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 500; float: right; margin-bottom: -15px;">
+                        {{eventDetails.datetime  |  date:'short'}}</span></p>
                 <hr style="height:4px; color: black; background-color: black">
             </div>
         </div>
@@ -69,40 +80,29 @@
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
-                <!-- <iframe
-                    width="300"
-                    height="400"
-                    frameborder="0" style="border:0"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps/embed/v1/search?key=MYKEYHERE&q=shaw+neighborhood+st+louis+mo"
-                    allowfullscreen>
-                </iframe> -->
-                <!-- <iframe
-                width="300"
-                height="400"
-                frameborder="0" style="border:0"
-                referrerpolicy="no-referrer-when-downgrade"
-                [src]='mapUrl'
-                allowfullscreen>
-            </iframe> -->
                 <p style="font-size: 15px; font-style:italic;">expand map to search event address</p>
             <br>
             <br>
-        
-            <span>
-                <p id="event_display2">create this event?</p>
+            <br>
 
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-grid gap-2">
-                            <a routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="button2" style="background-color: #85CDE3; text-align:center;">edit event</a> 
-                           
-                            <button type="button" class="button2" (click)="deleteEvent()" style="background-color: #C03E24;">delete event</button>
-                          </div>
+            <span>
+                <p id="event_display2">comments</p>
+
+                    <div class="card" *ngFor="let comment of commentDisplay">
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <p class="overflow-auto" style="font-family: montserrat, sans-serif; margin-top: -10px; margin-bottom: -10px; margin-left: -5px;">
+                                    <span><img src="/assets/events-assets/megaphone-g2.jpg" height="30" width="30"></span> {{comment}}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <p *ngIf="this.commentDisplay.length === 0" style="font-family: montserrat, sans-serif;">Sign up for this event to leave a comment!</p>
+
+
+
 
             </span>
+        
             </div>
 
             <div class="col-2"></div>
@@ -117,17 +117,31 @@
                         <img *ngIf="eventDetails.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg" width="300">
                         <img *ngIf="eventDetails.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg" width="300" height="300">
                         <img *ngIf="eventDetails.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg" width="300" height="300">
+
+
                     </div>
-                    <!-- <br> -->
-                    <p style="font-size: 15px; font-style: italic; margin-top: 12px; ">hosted by: <span style="font-weight: bolder;">{{eventDetails.eventHost}} <span style="font-weight: lighter;">|</span> {{eventDetails.contactEmail}}</span></p> 
+                    <p style="font-size: 15px; font-style: italic; margin-top: 12px; ">hosted by: <span style="font-weight: bolder;">{{eventDetails.eventHost}} <span style="font-weight: lighter;">|</span> {{eventDetails.contactEmail}}</span><br>
+                    
+                    <span style="font-style: normal; font-weight: bold; color: #F9A605">
+                    <ng-container *ngIf="this.numJoined > 0">
+                        {{this.numJoined}} attending
+                    </ng-container>
+                    <ng-container *ngIf="this.numJoined === 0">
+                        Be the first to sign up!
+                    </ng-container>
+                    </span>    
+                
+                    </p> 
                     <br>
-                    <p style="font-size: 20px; font-weight: bolder;">address:</p>
-                    <p style="margin-top: -15px;">{{eventDetails.eventAddress}}</p>
+                    <p style="font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: 700;">address: </p>
+                    <p style="font-family: 'Open Sans', sans-serif; margin-top: -15px;">{{eventDetails.eventAddress}}</p>
                     <br>
-                    <p style="font-size: 20px; font-weight: bolder;">description:</p>
+                    <p style="font-size: 20px; font-weight: 700;">description:</p>
                     <p style="margin-top: -15px;">{{eventDetails.description}}</p> 
                     <br> 
-                    <br>
+                    <a *ngIf="this.currentUser === eventDetails.userName" 
+                    routerLink="/edit/{{eventDetails.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm" style="font-size: 15px; padding: 10px;">update event</a>
+
                     <br>
                     <br>
                 </div>

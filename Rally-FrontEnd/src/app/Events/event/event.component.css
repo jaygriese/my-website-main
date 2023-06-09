@@ -1,52 +1,102 @@
+.logInButton {
+  background-color: #0EBB9A;
+  text-align: center;
+  color:#ffffff;
+  font-family: 'Open Sans', sans-serif;
+  font-size:20px;
+  font-weight: 500;
+  width: 125px;
+  height: 65px;
+  padding-top: 20px;
+  text-decoration: none;
+}
+
+.logOutButton {
+  background-color: #0EBB9A;
+  text-align: center;
+  color:#ffffff;
+  font-family: 'Open Sans', sans-serif;
+  font-size:20px;
+  font-weight: 500;
+  width: 125px;
+  height: 65px;
+  text-decoration: none;
+}
+
+.nav-link {
+  color: black;
+  font-weight: 450;
+  font-size: 15px;
+}
+
+
+
+#list_head {
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    font-size: 60px;
+    color: black;
+    font-weight: 700;
+}
+
+
 .myButton {
-    background-color: #0EBB9A;
-	/* border-radius:7px; */
+  background-color: #0EBB9A;
 	display: internal;
 	color:#ffffff;
-	font-family: montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size:30px;
 	font-weight:bold;
-    text-shadow: 0.5px 0.5px 0px #000;
+  text-shadow: 0.5px 0.5px 0px #000;
 	padding:15px 75px;
 	text-decoration: none;
-    float: right;
+  float: right;
     
 }
 
 #event_display1 {
     text-align: left;
     font-size: 35px;
-    font-family: montserrat, sans-serif;
+    margin-top: -10px;
 }
 
 #event_display2 {
 text-align: left;
 font-size: 35px;
-font-family: montserrat, sans-serif;
 }
 
-/* .rectangle {
-margin-top: -5px;
-height: 300px;
-width: auto;
-box-sizing: border-box;
-border: 1px solid #f4d668;
-} */
 
 .button2 {
   background-color: #F9A605;
-  /* border-radius:6px;  */
   color:#ffffff;
-  font-family: montserrat, sans-serif;
-  font-size:25px;
-  font-weight:bold;
-  text-shadow: 0.5px 0.5px 0px #000;
-  padding:6px 24px;
+  font-family: 'Open Sans', sans-serif;
+  font-size:20px;
+  font-weight: 500;
+  padding:12px 12px;
   text-decoration:none;
+  width: 150px;  
 }
 
 
 #details {
     text-align: left;
     font-size: 25px;
+    font-family: montserrat, sans-serif;
 }
+
+
+
+  .btn {
+    background-color: #fff;
+    border-color:  #85CDE3;
+    transition: all .7s;
+    border-radius: 0;
+  }
+  .btn:hover {
+    color: #fff;
+    background-color:  #85CDE3;
+    border-color:  #85CDE3;
+  }
+
+
+ 

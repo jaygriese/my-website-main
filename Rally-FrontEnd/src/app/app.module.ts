@@ -43,6 +43,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
 import { SecurityComponent } from './security/security.component';
+import { EventJoinComponent } from './Events/event-join/event-join.component';
+import { JoinEditComponent } from './Events/join-edit/join-edit.component';
 import { RestaurantsHomepageComponent } from './restaurants-homepage/restaurants-homepage.component';
 import { RestaurantAmericanComponent } from './restaurants-homepage/restaurant-american/restaurant-american.component';
 import { RestaurantAsianComponent } from './restaurants-homepage/restaurant-asian/restaurant-asian.component';
@@ -97,6 +99,9 @@ import { EmailVerificationComponent } from './security/email-verification/email-
     PageNotFoundComponent,
     SecurityComponent,
     EmailVerificationComponent,
+    EventJoinComponent,
+    JoinEditComponent
+
   ],
   imports: [
     BrowserModule,

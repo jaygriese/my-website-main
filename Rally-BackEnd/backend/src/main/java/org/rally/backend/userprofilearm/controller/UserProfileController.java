@@ -73,6 +73,7 @@ public class UserProfileController {
         return this.userRepository.findAll();
     }
 
+
     @GetMapping("/getViewUserBundleInformation/{userName}")
     public ResponseEntity<?> getViewUserInformation(@PathVariable String userName) {
 

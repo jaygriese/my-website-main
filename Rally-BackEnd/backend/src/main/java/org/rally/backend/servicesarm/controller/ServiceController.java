@@ -1,5 +1,6 @@
 package org.rally.backend.servicesarm.controller;
 
+import jakarta.persistence.Id;
 import org.rally.backend.servicesarm.model.dto.ServiceDTO;
 import org.rally.backend.servicesarm.model.response.Category;
 import org.rally.backend.servicesarm.model.response.Service;
@@ -72,6 +73,12 @@ public class ServiceController {
 
 
         serviceRepository.save(newService);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<?> deleteService (@RequestBody int id) {
+        serviceRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

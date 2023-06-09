@@ -35,6 +35,7 @@ import { ServiceItemComponent } from './services-arm/service-item/service-item.c
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+import { EmailVerificationComponent } from './security/email-verification/email-verification.component';
 import { EventJoinComponent } from './Events/event-join/event-join.component';
 import { JoinEditComponent } from './Events/join-edit/join-edit.component';
 
@@ -71,7 +72,7 @@ const routes: Routes = [
   {path: 'forum/topic3', component: ForumTopic3Component},
   {path: 'forum/post/:id', component: ViewPostComponent},
   {path: 'myProfile', component: UserProfileComponent},
-  {path: 'user/:userName/:id', component: ViewUserProfileComponent},
+  {path: 'user/:userName', component: ViewUserProfileComponent},
   {path: 'restaurant/:id', component: ViewRestaurantComponent},
   {path: 'restaurants/search', component: SearchRestaurantComponent},
   {path: 'forum/search', component: ForumSearchResultsComponent},
@@ -79,7 +80,9 @@ const routes: Routes = [
   {path: 'serviceitem', component: ServiceItemComponent},
   {path: 'edit/:id', component: EventEditComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'user/404', component: PageNotFoundComponent},
+  {path: 'invalidUser/404', component: PageNotFoundComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full' },
+  {path: 'confirm-account/:token', component: EmailVerificationComponent},
   {path: 'join/:id', component: EventJoinComponent}, 
   {path: 'edit/join/:id', component: JoinEditComponent},
   

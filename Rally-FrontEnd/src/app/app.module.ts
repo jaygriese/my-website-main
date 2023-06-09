@@ -42,6 +42,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+import { SecurityComponent } from './security/security.component';
 import { EventJoinComponent } from './Events/event-join/event-join.component';
 import { JoinEditComponent } from './Events/join-edit/join-edit.component';
 import { RestaurantsHomepageComponent } from './restaurants-homepage/restaurants-homepage.component';
@@ -52,6 +53,8 @@ import { RestaurantsItalianComponent } from './restaurants-homepage/restaurants-
 import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pizza/restaurants-pizza.component';
 
 
+import { httpInterceptorProviders } from './security/Interceptor/jwt-handler.interceptor';
+import { EmailVerificationComponent } from './security/email-verification/email-verification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,9 +97,10 @@ import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pi
     EventEditComponent,
     HomeComponent,
     PageNotFoundComponent,
+    SecurityComponent,
+    EmailVerificationComponent,
     EventJoinComponent,
-    JoinEditComponent,
-    PageNotFoundComponent
+    JoinEditComponent
 
   ],
   imports: [
@@ -109,7 +113,7 @@ import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pi
     MatCardModule,
     MatNativeDateModule,
   ],
-  providers: [CookieService, ThemeserviceService],
+  providers: [CookieService, ThemeserviceService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

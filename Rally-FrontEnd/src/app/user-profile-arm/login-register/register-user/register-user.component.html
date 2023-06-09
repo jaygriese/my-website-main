@@ -1,18 +1,23 @@
 <div style="text-align:center" class="container">
 
     <div *ngIf="nextFormInfo; else nextForm" class="form-group">
+
+        <!-- First form that displays to register the user -->
         <h2>Register</h2>
         <p>UserName and Passwords must be between 3 to 20 characters</p>
+        <div *ngIf="whiteSpaceError; else whiteSpaceUserName"><br><br></div>
         <form #userInformation="ngForm" (ngSubmit)="registerNewUser(userInformation)">
             <br>
-            <label>Enter a user name: <input type="text" name="userName" ngModel></label>        
+            <label>Enter a user name: <input type="text" name="userName" ngModel></label>  
             <div *ngIf="noUserNameError; else userNameError"><br><br></div>
+            <label>Enter a valid Email: <input type="email" name="userEmail" ngModel></label>
+            <div *ngIf="noUserEmailError; else userEmailError"><br><br></div>
             <label>Enter your password: <input type="password" name="password" ngModel></label>
             <div *ngIf="passwordForm; else incorrectPassword"><br><br></div>
             <label>Please re-enter your password: <input type="password" name="verify" ngModel></label>
             <div *ngIf="passwordMatchIssue; else matchIssue"></div><br><br>
-            <input type="submit" value="Submit">
-
+            <input type="submit" value="Next">
+            <div *ngIf="userNameOrEmailTaken; else inUse"></div>
             <div >
             </div>
         </form>       
@@ -20,6 +25,8 @@
  
     <ng-template #nextForm>
     <div class="form-group"> 
+        
+        <!-- After completing info that is valid in the first form, this is the next form  -->
         <h2>Register</h2>
         <p>Names must be between 3 to 20 characters</p>
         <form #userDetails="ngForm" (ngSubmit)="completeRegisteration(userDetails)">
@@ -63,6 +70,8 @@
             </select>
             <br><br>
             <div *ngIf="createNewUser; else userExists"><br><br></div> 
+            <div *ngIf="createNewUser; else validRegister"><br><br></div>
+            <div *ngIf="emailVerifyLoading"><h4 style="color: rgb(62, 167, 106);">Please wait while your verification email is sent</h4></div>
             <input type="submit" value="Submit">
             <button type="button" (click)="clearForms()">Go back</button>
         </form>
@@ -71,14 +80,25 @@
         <br><br>
         <p>Already have an account? <a routerLink="/login" routerLinkActive="active">Login</a></p>
 </div>
+
+<!-- These are the error messages that get displayed when an error is detected with the input -->
 <ng-template #userNameError>
     <p style="color: crimson">{{ errorUserName }}</p>
+</ng-template>
+<ng-template #userEmailError>
+    <p style="color: crimson">{{ errorUserEmail }}</p>
 </ng-template>
 <ng-template #incorrectPassword>
     <p style="color: crimson">{{ errorPassword }}</p>
 </ng-template>
+<ng-template #whiteSpaceUserName>
+    <p style="color: crimson">{{ illegalWhiteSpace }}</p>
+</ng-template>
 <ng-template #matchIssue>
     <p style="color: crimson;">{{ passWordsDontMatch }}</p>
+</ng-template>
+<ng-template #inUse>
+    <p style="color: crimson;">{{ alreadyInUse }}</p>
 </ng-template>
 <ng-template #firstNameError>
     <p style="color: crimson;">{{ firstNameMessage }}</p>
@@ -88,4 +108,9 @@
 </ng-template>
 <ng-template #userExists>
     <p style="color: crimson;"> {{ postResponseMessage }}</p>
+</ng-template>
+
+<!-- Success! Email verification notification -->
+<ng-template #validRegister>
+    <p style="color: rgb(62, 167, 106);"> {{ postResponseMessageValid }}</p>
 </ng-template>

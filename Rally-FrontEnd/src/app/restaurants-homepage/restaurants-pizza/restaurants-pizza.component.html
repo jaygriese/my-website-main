@@ -1,27 +1,18 @@
 
 <div class="pizzaImage">
-    <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1240w,f_auto,q_auto:best/newscms/2014_03/112876/140113-cnbc-pizza-130p.jpg">
+    <!-- <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1240w,f_auto,q_auto:best/newscms/2014_03/112876/140113-cnbc-pizza-130p.jpg"> -->
         <div>
-            <table style width=100% *ngFor="let component of pizzaRestaurant">
+            <table style="text-align: center" width=100% *ngFor="let component of pizzaRestaurant">
                 <td>
                     <div class="name">{{component.restauntName}}</div>
                     <div>{{component.address}}</div>
                     <div>{{component.conactInfo}}</div>
                     <a style="color: purple"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
-                    <br>
-                    <br>
-                    <br>
-                    <!-- <link rel='stylesheet'    href="{{theme.url}}" *ngIf="currentTheme.name === theme.name" /> -->
-
+                        <br>
+                        <br>
+                        <br>
                 </td>
             </table>
         </div>
-
-        <!-- <form action=; method="post">
-            <label>Write your review here:<br/>
-            <textarea name="description" rows="1" cols="50"></textarea>
-            </label>
-            <button>Upload Review</button>
-        </form> -->
 
 </div>

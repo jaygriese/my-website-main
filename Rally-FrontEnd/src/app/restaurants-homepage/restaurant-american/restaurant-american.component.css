@@ -1,10 +1,19 @@
 .review-link {
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .name {
     font-family: Impact, sans-serif; 
     color: #0097b2;
-    font-size: 40px;
+    font-size: 30px;
 }
+
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+}
+

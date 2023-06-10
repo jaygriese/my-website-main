@@ -47,6 +47,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+import { ViewallComponent } from './restaurants-homepage/viewall/viewall.component';
+import { AddRestaurantComponent } from './restaurants-homepage/add-restaurant/add-restaurant.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +91,8 @@ import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-fou
     EventEditComponent,
     HomeComponent,
     PageNotFoundComponent,
+    ViewallComponent,
+    AddRestaurantComponent,
   ],
   imports: [
     BrowserModule,

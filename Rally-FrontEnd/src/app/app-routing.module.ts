@@ -34,6 +34,8 @@ import { ServiceItemComponent } from './services-arm/service-item/service-item.c
 import { EventEditComponent } from './Events/event-edit/event-edit.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
+import { ViewallComponent } from './restaurants-homepage/viewall/viewall.component';
+import { AddRestaurantComponent } from './restaurants-homepage/add-restaurant/add-restaurant.component';
 
 
 const routes: Routes = [
@@ -71,7 +73,9 @@ const routes: Routes = [
   {path: 'serviceitem', component: ServiceItemComponent},
   {path: 'edit/:id', component: EventEditComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'user/404', component: PageNotFoundComponent}
+  {path: 'user/404', component: PageNotFoundComponent},
+  {path: 'restaurants/viewall', component: ViewallComponent},
+  {path: 'restaurants/add', component: AddRestaurantComponent}
 ];
 
 @NgModule({

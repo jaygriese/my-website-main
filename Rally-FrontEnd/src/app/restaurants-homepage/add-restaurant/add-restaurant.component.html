@@ -1,0 +1,42 @@
+
+
+          <form class= "form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <label for="userName"> Restaurant Name:</label>
+                <br>
+  
+            <div >
+                <input class= "form1" type="text" style="width: 300px;" id="restauntName" name="restauntName" required minlength="3"  ngModel= "">
+            </div>
+                <br>
+          
+            <label class= "form" for="address">address:</label>
+                <br>
+            <input class= "form1" type="text" style="width: 350px;" id="address" name="address" placeholder="Street, City, State, Zip Code..." 
+                required minlength="5" maxlength="50" ngModel="">
+                <br>
+                <br>
+  
+            <label class= "form" for="conactInfo">Contact Info:</label>
+                <br>
+            <input class= "form1" type="text" style="width: 300px;" id="contactInfo" name="conactInfo" placeholder="website..." 
+                required minlength="5" maxlength="50" ngModel="" >
+            <br>
+            <br>
+  
+            <label class= "form" for="address">Neighborhood:</label>
+                <br>
+            <input class= "form1" type="text" style="width: 350px;" id="neighborhood" name="neighborhood" 
+            placeholder="Clayton, Tower Grove, Maplewood, or Benton Park..." required minlength="5" maxlength="50" ngModel="">
+                <br>
+                <br>
+  
+            <label class= "form"for="address">Restaurant Type:</label>
+                <br>
+            <input class= "form1" type="text" style="width: 300px;" id="restaurantType" name="restaurantType" 
+            placeholder="American, Asian, Italian, Mexican or Pizza..." required minlength="5" maxlength="50" ngModel="">
+                <br>
+                <br>
+                <br>
+            
+            <button class= "submit" style="width: 200px;" type="submit">Add Restaurant</button>
+    </form>

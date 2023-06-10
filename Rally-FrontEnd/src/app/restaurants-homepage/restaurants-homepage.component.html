@@ -5,16 +5,11 @@
 
 <body>
 
-    <form>
-        <label>Search <input type="text" name="search"></label>
-        <!-- clicking either of these will cause a form submission -->
-        <button class="nav-link" routerLink="/restaurants/search" routerLinkActive="active">Submit</button>
-     </form>
-
+   
      <br><br>
 
     <div>
-        <img src = "https://explorestlouis.com/wp-content/uploads/2020/08/Gateway-Arch-Website-Listing-2.jpg">
+        <img class="image" src = "https://explorestlouis.com/wp-content/uploads/2020/08/Gateway-Arch-Website-Listing-2.jpg">
 
     
             <div class="stl">
@@ -27,12 +22,14 @@
             <br>
 
         <div>
-            <h4>What kind of food are you in the mood for?</h4>
+            <h4  style="text-align: center">What kind of food are you in the mood for?</h4>
         </div>
 
             <br>
 
-                <div>
+           
+
+                <div  style="text-align: center">
                     <button class="nav-link" routerLink="/restaurants/american" routerLinkActive="active">American 🍔</button>
                     <button class="nav-link" routerLink="/restaurants/asian" routerLinkActive="active" >Asian 🥡</button>
                     <button class="nav-link" routerLink="/restaurants/italian" routerLinkActive="active">Italian 🍝</button>
@@ -44,11 +41,11 @@
 
             <br>
         <div class="button1">
-            <a class="button1">filter</a>
-            <a class="button1">viewall</a>  
-        </div>
-        
-            <br>
-            </body>
+            <button class="button1" routerLink="/restaurants/search" routerLinkActive="active">search</button>
+            <button class="button1" routerLink="/restaurants/viewall" routerLinkActive="active">viewall</button>  
+            <button class="button1" routerLink="/restaurants/add" routerLinkActive="active">add restaurant</button>  
 
+        </div>
+        <br>
+    </body>
 </html>

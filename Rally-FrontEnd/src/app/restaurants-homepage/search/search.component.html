@@ -1,3 +1,30 @@
-<p>search works!</p>
 
 
+<form style="text-align: center" #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
+    <div>
+        <input type="text" name="description" required ngModel> 
+        <input class="submit" type="submit" value="Search Posts">
+    </div>
+</form>
+
+<br>
+<br>
+<br>
+
+<div style="text-align: center" *ngIf="noResults">
+    <h2 style="color: red">No Results! Let's try that again...</h2>
+</div>
+
+<table style="text-align: center" width=100% *ngFor="let component of results">
+
+    <div class="name">{{component.restauntName}}</div>
+
+                    <div>{{component.address}}</div>
+                    <div>neighborhood: {{component.neighborhood}}</div>
+                    <a href>{{component.conactInfo}}</a><br>
+                    <a style="color: purple"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
+                        <br>
+                        <br>
+                        <br>
+
+</table>

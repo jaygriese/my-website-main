@@ -35,7 +35,6 @@ export class ForumSearchResultsComponent implements OnInit {
           this.Dark();
       }
   }
-
   getPosts(){
     if (localStorage.getItem('searchTerm') != null){
     this.themeservice.getAllForumPosts().subscribe((posts) =>{
@@ -53,7 +52,6 @@ export class ForumSearchResultsComponent implements OnInit {
       this.currentUser = localStorage.getItem('userName');
       this.logInStatus = true;
     }
-  
   }
   Light(){
       this.themeservice.switchToLightTheme();

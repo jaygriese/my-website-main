@@ -1,5 +1,16 @@
+
+
+.review-link {
+
+    font-size: 15px;
+    text-align: center;
+
+}
+
 .name {
     font-family: Impact, sans-serif; 
     color: #0097b2;
-    font-size: 40px;
+    font-size: 30px;
+    text-align: center;
+
 }

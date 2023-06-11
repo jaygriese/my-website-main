@@ -21,7 +21,7 @@ export class RestaurantAsianComponent implements OnInit {
       console.log(this.restaurantList)
 
       for(let i = 0;i< this.restaurantList.length;i ++) {
-        if(this.restaurantList[i].restaurantType === "Asian") {
+        if(this.restaurantList[i].restaurantType === "Asian" || this.restaurantList[i].restaurantType === "asian") {
             this.asianRestaurant.push(this.restaurantList[i])
         }
       

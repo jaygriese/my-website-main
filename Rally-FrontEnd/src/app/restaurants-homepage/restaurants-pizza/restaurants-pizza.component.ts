@@ -21,10 +21,9 @@ export class RestaurantsPizzaComponent implements OnInit {
       console.log(this.restaurantList)
 
       for(let i = 0;i< this.restaurantList.length;i ++) {
-        if(this.restaurantList[i].restaurantType === "Pizza") {
+        if(this.restaurantList[i].restaurantType === "Pizza" || this.restaurantList[i].restaurantType === "pizza") {
             this.pizzaRestaurant.push(this.restaurantList[i])
         }
-      
       }
     })
   }

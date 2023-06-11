@@ -44,16 +44,15 @@ export class SearchRestaurantComponent implements OnInit {
       || this.restaurantList[key].neighborhood.toLowerCase().includes(search.value.description.toLowerCase())) {
         searchResults.push(this.restaurantList[key]);
         console.log(searchResults)
+
+        if(searchResults.includes(search.value.description)) {
+          searchResults.push(this.restaurantList[key])
+        }
       }
     }
     if(searchResults.length === 0) {
       this.noResults = true;
     }
-
-    // if(searchResults.contains()) {
-    //   this.noResults = true;
-    // }
-
     return this.results = searchResults;
   }
 }

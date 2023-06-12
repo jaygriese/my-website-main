@@ -1,6 +1,6 @@
 .form {
     font-family: Impact, sans-serif; 
-    color: #0097b2;
+    color: #0EBB9A;
     font-size: 20px;
     margin: auto;
     width: 50%;
@@ -11,9 +11,10 @@
 .form1 {
     font-size: 13px;
     text-align: center;
-    color: purple;
+    color: #F9A605;
 }
 
 .submit {
-    color: purple;
+    color:  white;
+    background-color:  #0EBB9A;
 }

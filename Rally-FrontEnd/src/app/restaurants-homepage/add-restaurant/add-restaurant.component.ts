@@ -33,10 +33,8 @@ export class AddRestaurantComponent implements OnInit {
       restaurantType: f.value.restaurantType.toLowerCase()
     }
 
-    
-
     this.http.post(this.restaurantListURL, submittedRestaurant).subscribe((res: any) => {
-      // console.log(res)
+      console.log(res)
       this.router.navigate(['/restaurants/'+res.restaurantType])
     })
     // route user to new added restaurant:

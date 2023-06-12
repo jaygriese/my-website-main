@@ -44,7 +44,7 @@
 
   .nav-link {
     margin-right: 20px;
-    background-color: #0097b2;
+    background-color: #0EBB9A;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -62,9 +62,9 @@
 
   .button1 {
     margin-right: 20px;
-    background-color: #0097b2;
+    background-color: #0EBB9A;
     border: none;
-    color: orange;
+    color: #F9A605;
     /* padding: 15px 32px; */
     text-align: center;
     /* text-decoration: none;
@@ -83,7 +83,7 @@
 
 body {
     color: white;
-    background-color: #333;
+    /* background-color: #333; */
     font-size: 150%;
     font-family: 'Satisfy';
     /* margin: 5em 25%; */

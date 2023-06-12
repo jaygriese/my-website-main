@@ -1,6 +1,6 @@
 .nav-link {
     margin-right: 20px;
-    background-color: #0097b2;
+    background-color: #0EBB9A;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -19,14 +19,14 @@
 
 .name {
     font-family: Impact, sans-serif; 
-    color: #0097b2;
+    color: #0EBB9A;
     font-size: 40px;
     margin:auto
 }
 
 .submit {
     font-family: Impact, sans-serif; 
-    color: #0097b2;
+    color: #0EBB9A;
     font-size: 20px;
     margin:auto
 }

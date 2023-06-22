@@ -25,18 +25,39 @@
   
             <label class= "form" for="address">Neighborhood:</label>
                 <br>
-            <input class= "form1" type="text" style="width: 350px;" id="neighborhood" name="neighborhood" 
+            <!-- <input class= "form1" type="text" style="width: 350px;" id="neighborhood" name="neighborhood" 
             placeholder="Clayton, Tower Grove, Maplewood, or Benton Park..." required minlength="5" maxlength="50" ngModel="">
-                <br>
-                <br>
+                <br> -->
+                
+
+                <select style="width: 250px;" class="form1" name="neighbrohood" id="neighborhood" ngModel="">
+                    <option value="Clayton">Clayton</option>
+                    <option value="Tower Grove">Tower Grove</option>
+                    <option value="Maplewood">Maplewood</option>
+                    <option value="Benton Park">Benton Park</option>
+                </select>
+                    <br>
+                    <br>
   
             <label class= "form"for="address">Restaurant Type:</label>
                 <br>
-            <input class= "form1" type="text" style="width: 300px;" id="restaurantType" name="restaurantType" 
+            <!-- <input class= "form1" type="text" style="width: 300px;" id="restaurantType" name="restaurantType" 
             placeholder="American, Asian, Italian, Mexican or Pizza..." required minlength="5" maxlength="50" ngModel="">
                 <br>
                 <br>
-                <br>
+                <br> -->
+                <select  placeholder="please select one:" style="width: 250px;" class="form1" name="restaurantType" id="restaurantType" ngModel="">
+                    <!-- <option value=" ">please select one:</option> -->
+                    <option value="American">American</option>
+                    <option value="Asian">Asian</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Mexican">Mexican</option>
+                    <option value="Pizza">Pizza</option>
+                </select>
+
+                    <br>
+                    <br>
+                    <br>
             
             <button class= "submit" style="width: 200px;" type="submit">Add Restaurant</button>
     </form>

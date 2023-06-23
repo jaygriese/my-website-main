@@ -9,3 +9,10 @@
     color: #0EBB9A;
     font-size: 30px;
 }
+
+body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url('https://foodfireknives.com/wp-content/uploads/2022/01/italian-food.jpg');
+}

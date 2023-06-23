@@ -1,10 +1,12 @@
-<table style="text-align: center" width=100% *ngFor="let component of restaurantList">
-        
-        <div class="name">{{component.restauntName}}</div>
-            <div>{{component.address}}</div>
-                <a href="{{component.conactInfo}}">{{component.conactInfo}}</a><br>
-                    <a style="color: #F9A605"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
-                <br>
-                <br>
-                <br>
-</table>
+<body>
+    <table style="text-align: center" width=100% *ngFor="let component of restaurantList">
+            
+            <div class="name">{{component.restauntName}}</div>
+                <div>{{component.address}}</div>
+                    <a href="{{component.conactInfo}}">{{component.conactInfo}}</a><br>
+                        <a style="color: #F9A605"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
+                    <br>
+                    <br>
+                    <br>
+    </table>
+</body>

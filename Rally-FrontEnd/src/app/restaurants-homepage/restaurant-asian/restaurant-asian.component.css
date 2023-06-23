@@ -12,5 +12,12 @@
     color: #0EBB9A;
     font-size: 30px;
     text-align: center;
+}
 
+
+body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url('https://blobsvc.wort.lu/picture/d5b89ff6beb0c3070433fcfac5326bd5/1200/823/wortv3/793afb54d5f8232a6fcbce6516bfe815a0e3f211');
 }

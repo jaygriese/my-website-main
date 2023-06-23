@@ -1,15 +1,18 @@
-<table style="text-align: center" width=100% *ngFor="let component of asianRestaurant">
-    <td>
-        <div class = "name">{{component.restauntName}}</div>
-        <div>{{component.address}}</div>
-        <a href="{{component.conactInfo}}">{{component.conactInfo}}</a><br>
-        <a style="color: #F9A605"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
-        <br>
-        <br>
-        <br>
 
-    </td>
-</table>
+<body>
+    <table style="text-align: center" width=100% *ngFor="let component of asianRestaurant">
+        <td>
+            <div class = "name">{{component.restauntName}}</div>
+            <div style="color: white">{{component.address}}</div>
+            <a href="{{component.conactInfo}}">{{component.conactInfo}}</a><br>
+            <a style="color: #F9A605"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
+            <br>
+            <br>
+            <br>
+
+        </td>
+    </table>
+</body>
 
  <!-- <img src="https://blobsvc.wort.lu/picture/d5b89ff6beb0c3070433fcfac5326bd5/1200/823/wortv3/793afb54d5f8232a6fcbce6516bfe815a0e3f211">ng -->
 

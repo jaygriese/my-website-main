@@ -1,20 +1,22 @@
 
-<div class="pizzaImage">
-    <!-- <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1240w,f_auto,q_auto:best/newscms/2014_03/112876/140113-cnbc-pizza-130p.jpg"> -->
-        <div>
-            <table style="text-align: center" width=100% *ngFor="let component of pizzaRestaurant">
-                <td>
-                    <div class="name">{{component.restauntName}}</div>
-                    <div>{{component.address}}</div>
-                    <a href="{{component.conactInfo}}">{{component.conactInfo}}</a><br>
+<body> 
+    <div class="pizzaImage">
+        <!-- <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1240w,f_auto,q_auto:best/newscms/2014_03/112876/140113-cnbc-pizza-130p.jpg"> -->
+            <div>
+                <table style="text-align: center" width=100% *ngFor="let component of pizzaRestaurant">
+                    <td>
+                        <div class="name">{{component.restauntName}}</div>
+                        <div class ="yellow">{{component.address}}</div>
+                        <a class="name2" href="{{component.conactInfo}}">{{component.conactInfo}}</a><br>
 
-                    <a style="color: #F9A605"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
-                        <br>
-                        <br>
-                        <br>
-                </td>
-            </table>
-        </div>
+                        <a style="color: #F9A605"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
+                            <br>
+                            <br>
+                            <br>
+                    </td>
+                </table>
+            </div>
 
-</div>
+    </div>
+</body>
 

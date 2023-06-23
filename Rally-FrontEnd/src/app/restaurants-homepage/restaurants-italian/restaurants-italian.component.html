@@ -1,15 +1,18 @@
-<table style="text-align: center" width=100% *ngFor="let component of italianRestaurant">
-    <td>
-        <div class="name">{{component.restauntName}}</div>
-        <div>{{component.address}}</div>
-        <a href="{{component.conactInfo}}">{{component.conactInfo}}</a><br>
-        <a style="color: #F9A605"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
-        <br>
-        <br>
-        <br>
-        
-    </td>
-</table>
+
+<body> 
+    <table style="text-align: center" width=100% *ngFor="let component of italianRestaurant">
+        <td>
+            <div class="name">{{component.restauntName}}</div>
+            <div>{{component.address}}</div>
+            <a href="{{component.conactInfo}}">{{component.conactInfo}}</a><br>
+            <a style="color: #F9A605"  class="review-link" routerLink="/restaurant/{{component.id}}" routerLinkActive="active">reviews</a>
+            <br>
+            <br>
+            <br>
+            
+        </td>
+    </table>
+</body>
 
 <!-- 
 <form action=; method="post">
@@ -20,4 +23,4 @@
     <button>Upload Review</button>
  </form> -->
 
- <!-- <img src="https://foodfireknives.com/wp-content/uploads/2022/01/italian-food.jpg"> -->
+ <!-- https://foodfireknives.com/wp-content/uploads/2022/01/italian-food.jpg -->

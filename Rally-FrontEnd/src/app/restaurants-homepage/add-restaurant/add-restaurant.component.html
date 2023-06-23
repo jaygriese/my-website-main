@@ -1,4 +1,14 @@
 
+   <body> 
+   
+    <br>
+    <br>
+   <div class = "form">Is there a restaurant in the St. Louis area that you love</div>
+    <div class = "form"> and you want to share it with others?</div>
+        <br>
+    <div class = "form1"> Fill out the form below and spread the flavor!!!</div>
+        <br>
+        <br>
 
           <form class= "form" #f="ngForm" (ngSubmit)="onSubmit(f)">
             <label for="userName"> Restaurant Name:</label>
@@ -11,7 +21,7 @@
           
             <label class= "form" for="address">address:</label>
                 <br>
-            <input class= "form1" type="text" style="width: 350px;" id="address" name="address" placeholder="Street, City, State, Zip Code..." 
+            <input class= "form1" type="text" style="width: 300px;" id="address" name="address" placeholder="Street, City, State, Zip Code..." 
                 required minlength="5" maxlength="50" ngModel="">
                 <br>
                 <br>
@@ -30,7 +40,7 @@
                 <br> -->
                 
 
-                <select style="width: 250px;" class="form1" name="neighbrohood" id="neighborhood" ngModel="">
+                <select style="width: 300px;" class="form1" name="neighbrohood" id="neighborhood" ngModel="">
                     <option value="Clayton">Clayton</option>
                     <option value="Tower Grove">Tower Grove</option>
                     <option value="Maplewood">Maplewood</option>
@@ -46,7 +56,7 @@
                 <br>
                 <br>
                 <br> -->
-                <select  placeholder="please select one:" style="width: 250px;" class="form1" name="restaurantType" id="restaurantType" ngModel="">
+                <select  placeholder="please select one:" style="width: 300px;" class="form1" name="restaurantType" id="restaurantType" ngModel="">
                     <!-- <option value=" ">please select one:</option> -->
                     <option value="American">American</option>
                     <option value="Asian">Asian</option>
@@ -61,6 +71,8 @@
             
             <button class= "submit" style="width: 200px;" type="submit">Add Restaurant</button>
     </form>
+
+</body>
 
     <!-- <div style="text-align: center" *ngIf="noResults">
         <h2 style="color: red">No Results! Let's try that again...</h2>

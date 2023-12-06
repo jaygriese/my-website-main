@@ -58,9 +58,9 @@ const Home = () => {
   return (
     <div
       style={{
-        // Width: "1920vh",
+        
         // margin: "0 auto",
-        height: "100vh",
+        height: "87vh",
         // outline: "3px solid red",
       }}
     >

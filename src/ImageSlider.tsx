@@ -37,7 +37,7 @@ export function ImageSlider({ imageUrls }: ImageSlideProps) {
       style={{
         width: "100%",
         height: "100%",
-        position: "relative",
+        // position: "relative",
         // outline: "3px solid orange",
       }}
       onMouseEnter={() => {
@@ -54,11 +54,8 @@ export function ImageSlider({ imageUrls }: ImageSlideProps) {
           height: "100%",
           display: "flex",
           overflow: "hidden",
-          // display: "block",
-          objectPosition: "74% 33%", // CamelCase for object-position
-          objectFit: "cover",
-          // objectFit: "contain",
-          // outline: "3px solid yellow",
+          objectPosition: "74% 33%",
+          objectFit: "contain",
         }}
       >
         {imageUrls.map((url, index) => (
@@ -67,6 +64,7 @@ export function ImageSlider({ imageUrls }: ImageSlideProps) {
             src={url}
             className="img-slider-img"
             style={{
+          
               transform: `translateX(${-100 * imageIndex}%)`,
             }}
           />

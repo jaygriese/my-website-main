@@ -5,6 +5,7 @@ import { FaAlignJustify } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { Button } from "./Button";
+import { Bold, Heading1 } from "lucide-react";
 
 function navBar() {
   const [click, setClick] = useState(false);
@@ -42,10 +43,15 @@ function navBar() {
             // style={{ outline: "2px solid yellow" }}
             onClick={closeMobileMenu}
           >
-            <div>
-              <FaCameraRetro /> {"   "}
-              JAY GRIESEDIECK PHOTOGRAPHY
-            </div>
+            <text>
+              <text style={{ fontSize: 30, fontWeight: "bold" }}>
+                <FaCameraRetro /> {"   "}
+                JAY GRIESEDIECK
+              </text>
+              {"   "}
+              {"   "}
+              <text style={{ fontSize: 20 }}>PHOTOGRAPHY</text>
+            </text>
           </Link>
 
           <div className="menu-icon">

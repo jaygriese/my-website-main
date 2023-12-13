@@ -24,7 +24,7 @@ export function ImageSlider({ imageUrls }: ImageSlideProps) {
     if (autoPlay) {
       timeoutId = setTimeout(() => {
         showNextImage();
-      }, 1700); // Adjust the auto slide interval in milliseconds
+      }, 2200); // Adjust the auto slide interval in milliseconds
     }
 
     return () => {
@@ -37,7 +37,7 @@ export function ImageSlider({ imageUrls }: ImageSlideProps) {
       style={{
         width: "100%",
         height: "100%",
-        // position: "relative",
+        position: "relative",
         // outline: "3px solid orange",
       }}
       onMouseEnter={() => {

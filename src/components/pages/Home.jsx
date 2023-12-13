@@ -25,8 +25,12 @@ import img25 from "../images/img25.jpg";
 import img26 from "../images/img26.jpg";
 import img27 from "../images/img27.jpg";
 import img28 from "../images/img28.jpg";
+import img101 from "../images/img101.jpg";
+import img102 from "../images/img102.jpg";
 
 const IMAGES = [
+  img101,
+  img102,
   img1,
   img2,
   // img3,
@@ -58,7 +62,6 @@ const Home = () => {
   return (
     <div
       style={{
-        
         // margin: "0 auto",
         height: "87vh",
         // outline: "3px solid red",

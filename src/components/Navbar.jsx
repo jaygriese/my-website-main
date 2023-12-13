@@ -44,13 +44,17 @@ function navBar() {
             onClick={closeMobileMenu}
           >
             <text>
-              <text style={{ fontSize: 30, fontWeight: "bold" }}>
+              <text
+                style={{ fontSize: 30, fontWeight: "bold", marginLeft: "5%" }}
+              >
                 <FaCameraRetro /> {"   "}
                 JAY GRIESEDIECK
               </text>
               {"   "}
               {"   "}
-              <text style={{ fontSize: 20 }}>PHOTOGRAPHY</text>
+              <text style={{ fontSize: 20, marginLeft: "5%" }}>
+                PHOTOGRAPHY
+              </text>
             </text>
           </Link>
 
@@ -63,12 +67,26 @@ function navBar() {
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
+              <Link to="/about" className="nav-links" onClick={closeMobileMenu}>
+                About
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link
                 to="/portfolio"
                 className="nav-links"
                 onClick={closeMobileMenu}
               >
                 Portfolio
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/services"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                Services
               </Link>
             </li>
             <li className="nav-item">
@@ -81,21 +99,6 @@ function navBar() {
               </Link>
             </li>
 
-            <li className="nav-item">
-              <Link
-                to="/services"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
-                Services
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link to="/about" className="nav-links" onClick={closeMobileMenu}>
-                About
-              </Link>
-            </li>
             <li className="nav-item">
               <Link
                 to="/contact"

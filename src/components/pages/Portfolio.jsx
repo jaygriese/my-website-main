@@ -38,7 +38,81 @@ import img132 from "../images/img132.jpg";
 import img133 from "../images/img133.jpg";
 import img134 from "../images/img134.jpg";
 import img135 from "../images/img135.jpg";
+import img136 from "../images/img136.jpg";
+import img137 from "../images/img137.jpg";
+import img138 from "../images/img138.jpg";
+import img139 from "../images/img139.jpg";
+import img140 from "../images/img140.jpg";
+import img141 from "../images/img141.jpg";
+import img142 from "../images/img142.jpg";
+import img143 from "../images/img143.jpg";
+import img144 from "../images/img144.jpg";
+import img145 from "../images/img145.jpg";
+import img146 from "../images/img146.jpg";
+import img147 from "../images/img147.jpg";
+import img148 from "../images/img148.jpg";
+import img149 from "../images/img149.jpg";
+import img150 from "../images/img150.jpg";
+import img151 from "../images/img151.jpg";
+import img152 from "../images/img152.jpg";
+import img153 from "../images/img153.jpg";
+import img154 from "../images/img154.jpg";
+import img155 from "../images/img155.jpg";
+import img156 from "../images/img156.jpg";
+import img157 from "../images/img157.jpg";
+import img158 from "../images/img158.jpg";
+import img159 from "../images/img159.jpg";
+import img160 from "../images/img160.jpg";
+import img161 from "../images/img161.jpg";
+import img162 from "../images/img162.jpg";
+import img163 from "../images/img163.jpg";
+import img164 from "../images/img164.jpg";
+import img165 from "../images/img165.jpg";
+import img166 from "../images/img166.jpg";
+import img167 from "../images/img167.jpg";
+import img168 from "../images/img168.jpg";
+import img169 from "../images/img169.jpg";
+import img170 from "../images/img170.jpg";
+import img171 from "../images/img171.jpg";
+import img172 from "../images/img172.jpg";
+import img173 from "../images/img173.jpg";
+import img174 from "../images/img174.jpg";
+import img175 from "../images/img175.jpg";
+import img176 from "../images/img176.jpg";
+import img177 from "../images/img177.jpg";
+import img179 from "../images/img179.jpg";
+import img180 from "../images/img180.jpg";
+import img181 from "../images/img181.jpg";
+import img182 from "../images/img182.jpg";
+import img183 from "../images/img183.jpg";
+import img184 from "../images/img184.jpg";
+import img185 from "../images/img185.jpg";
+import img186 from "../images/img186.jpg";
+import img187 from "../images/img187.jpg";
+import img188 from "../images/img188.jpg";
+import img189 from "../images/img189.jpg";
+import img200 from "../images/img200.jpg";
+import img190 from "../images/img190.jpg";
+import img191 from "../images/img191.jpg";
+import img192 from "../images/img192.jpg";
+import img193 from "../images/img193.jpg";
+import img194 from "../images/img194.jpg";
+import img195 from "../images/img195.jpg";
+import img196 from "../images/img196.jpg";
+import img197 from "../images/img197.jpg";
+import img198 from "../images/img198.jpg";
+import img199 from "../images/img199.jpg";
+import img201 from "../images/img201.jpg";
+import img202 from "../images/img202.jpg";
+import img203 from "../images/img203.jpg";
+import img204 from "../images/img204.jpg";
 
+
+import img207 from "../images/img207.jpg";
+import img208 from "../images/img208.jpg";
+import img209 from "../images/img209.jpg";
+import img210 from "../images/img210.jpg";
+import img211 from "../images/img211.jpg";
 
 import img4 from "../images/img4.jpg";
 import img5 from "../images/img5.jpg";
@@ -56,29 +130,28 @@ import img19 from "../images/img19.jpg";
 import img20 from "../images/img20.jpg";
 import img21 from "../images/img21.jpg";
 import img22 from "../images/img22.jpg";
-import img23 from "../images/img23.jpg";
 import img24 from "../images/img24.jpg";
 import img25 from "../images/img25.jpg";
-import img26 from "../images/img26.jpg";
 import img27 from "../images/img27.jpg";
 import img28 from "../images/img28.jpg";
 
 const images = [
   img101,
   img102,
+  img131,
   img1,
-  img2,
   img105,
-
+  img2,
+  img211,
   img103,
   img104,
-  img106,
   img107,
   img108,
   img109,
   img110,
   img111,
   img112,
+  img209,
   img113,
   img114,
   img115,
@@ -95,14 +168,82 @@ const images = [
   img126,
   img127,
   img128,
+  img207,
   img129,
   img130,
-  img131,
   img132,
   img133,
   img134,
   img135,
-  img4,
+  // img137,
+
+  img138,
+  img139,
+  img140,
+  img141,
+  img142,
+  img143,
+  img144,
+  img145,
+  img173,
+  img146,
+  img147,
+  img148,
+  img149,
+  img150,
+  img151,
+  img152,
+  img153,
+  img154,
+  img155,
+  img156,
+  img157,
+  img158,
+  img159,
+  img160,
+  img161,
+  img162,
+  img163,
+  img164,
+  img165,
+  img166,
+  img167,
+  img168,
+  img169,
+  img170,
+  img171,
+  img172,
+
+  img174,
+  img175,
+  img176,
+  img177,
+  img179,
+  img180,
+  img181,
+  img182,
+  img183,
+  img184,
+  img185,
+  img186,
+  img187,
+  img188,
+  img189,
+  img190,
+  img191,
+  img192,
+  img193,
+  img194,
+  img195,
+  img196,
+  img198,
+  img197,
+  img15,
+  img199,
+  img200,
+
+  // img4,
+  img208,
   img5,
   img6,
   img7,
@@ -110,8 +251,8 @@ const images = [
   img11,
   img12,
   img14,
-  img15,
   img16,
+  img210,
   img17,
   img18,
   img19,
@@ -119,11 +260,15 @@ const images = [
   img21,
   img22,
   // img23,
+  img201,
+  img202,
+  img203,
+  img204,
   img24,
   img25,
-  img26,
   img27,
   img28,
+  img106,
 ];
 
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";

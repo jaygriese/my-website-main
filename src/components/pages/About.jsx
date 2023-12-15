@@ -13,7 +13,7 @@ const About = () => {
         <img className="image" src={bwSelfie} alt="" />
       </div>
       <div className="text">
-        <h1>About Jay</h1>
+        <h3>About Jay</h3>
         {/* text */}
         <p>
           Jay is a 36-year-old St. Louis, Missouri native who specializes in

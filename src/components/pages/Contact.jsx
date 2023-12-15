@@ -7,10 +7,11 @@ const Contact = () => {
       <div>
         <div
           style={{
-            fontSize: "20px",
+            fontSize: "15px",
             // fontStyle
             lineHeight: "1.5",
             marginLeft: "10%",
+          
             textAlign: "left",
             paddingTop: "10%",
           }}
@@ -23,12 +24,13 @@ const Contact = () => {
         <div
           style={{
             // width: "80%",
-            fontSize: "20px",
+            fontSize: "15px",
             lineHeight: "1.5",
             marginLeft: "10%",
+            marginRight: "100px",
             textAlign: "left",
             paddingTop: "5%",
-            width: "500px",
+            width: "400px",
             textAlign: "justify",
           }}
         >

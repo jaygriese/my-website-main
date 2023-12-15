@@ -19,15 +19,16 @@ export const Button = ({
 
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
-  return (
-    <Link to="/shop" className="btn-mobile">
-      <button
-        className={`btn ${checkButtonStyle} ${checkButtonSize}`}
-        onClick={onClick}
-        type={type}
-      >
-        {children}
-      </button>
-    </Link>
-  );
+  // return (
+  //   <Link to="/shop" className="btn-mobile">
+  //     <button
+  //       className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+  //       style={{fontSize:"15px", marginRight:"20%"}}
+  //       onClick={onClick}
+  //       type={type}
+  //     >
+  //       {children}
+  //     </button>
+  //   </Link>
+  // );
 };

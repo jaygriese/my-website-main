@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.btn-mobile{
+  font-size: 15px;
+}
+
 .btn--primary {
   background-color: var(--primary);
   color: #242424;

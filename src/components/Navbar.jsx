@@ -43,26 +43,24 @@ function navBar() {
             // style={{ outline: "2px solid yellow" }}
             onClick={closeMobileMenu}
           >
-            <text>
-              <text
-                style={{ fontSize: 30, fontWeight: "bold", marginLeft: "5%" }}
+            <div>
+              <span
+                style={{ fontSize: 25, fontWeight: "bold", marginLeft: "5%" }}
               >
                 <FaCameraRetro /> {"   "}
                 JAY GRIESEDIECK
-              </text>
-              {"   "}
-              {"   "}
-              <text style={{ fontSize: 20, marginLeft: "5%" }}>
+              </span>
+              <span style={{ fontSize: 15, marginLeft: "5%" }}>
                 PHOTOGRAPHY
-              </text>
-            </text>
+              </span>
+            </div>
           </Link>
 
           <div className="menu-icon">
             {click ? (
-              <FaX size={30} color="black" onClick={handleClick} />
+              <FaX size={25} color="black" onClick={handleClick} />
             ) : (
-              <FaAlignJustify size={30} color="black" onClick={handleClick} />
+              <FaAlignJustify size={25} color="black" onClick={handleClick} />
             )}
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
@@ -108,8 +106,17 @@ function navBar() {
                 Contact
               </Link>
             </li>
-
             <li className="nav-item">
+              <Link
+                to="/shop"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                Shop
+              </Link>
+            </li>
+
+            {/* <li className="nav-item">
               <Link
                 to="/shop"
                 className="nav-links-mobile"
@@ -117,7 +124,7 @@ function navBar() {
               >
                 Shop
               </Link>
-            </li>
+            </li> */}
           </ul>
           {button && <Button buttonStyle="btn--outline">Shop</Button>}
         </div>

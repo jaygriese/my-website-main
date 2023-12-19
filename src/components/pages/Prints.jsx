@@ -34,7 +34,7 @@ import img31 from "../images/vr/31.jpeg";
 import img32 from "../images/vr/32.jpeg";
 
 
-const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12,img13, img14, img15, img16, img18, img19, img20,
+const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12,img13, img14, img15, img18, img19, img20,
 img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img32, img31];
 
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
@@ -78,7 +78,7 @@ const Prints = () => {
             textAlign: "justify",
           }}
         >
-          The images are printed on museum quality, fine art paper, through PRODPI and sent directly to your home. 
+          All images are printed on museum quality, fine art paper, through PRODPI and sent directly to your home. 
           <br />
           <br />
           23 x 16.5inches (59 cm x 42 cm ) $150 USD
@@ -97,6 +97,7 @@ const Prints = () => {
           subjects or destinations,and custom sizes, please contact me at jaygriese@gmail.com to discuss your requirements.
           <br />
           <br />
+          PLEASE SEE BELOW FOR INSPIRATION:
           </div>
      
       {/* {data.img && (

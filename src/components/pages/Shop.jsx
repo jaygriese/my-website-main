@@ -17,7 +17,8 @@ const Shop = () => {
     >
       <h3>
         Thanks for stopping by! <br />
-        This page is currently under construction...
+        This page is currently under construction...<br/><br/>
+        Please come by again soon!
       </h3>
     </div>
   );

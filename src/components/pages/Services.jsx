@@ -91,6 +91,15 @@ const Services = () => {
 
   return (
     <>
+      {/* <div style={{ justifyContent: "center" }}>
+        <h3>
+          {" "}
+          <br />
+          <br />
+          This page is currently under construction. Below you can get an idea
+          of the different services Jay offers.
+        </h3>
+      </div> */}
       <div
         style={{
           // width: "80%",
@@ -103,19 +112,24 @@ const Services = () => {
           textAlign: "justify",
         }}
       >
+        <h3>
+          This page is currently under construction...
+          {/* Below you can get an idea
+          of the different services Jay offers. */}
+        </h3>
         <div>
-          This page is currently under construction, but below you can get an
-          idea of the different services Jay offers.
+          {/* <br /> */}
+          Jay offers a variety of services including portraiture, wedding, and
+          interior design/realestate photography.
           <br />
           <br />
-          Please contact him at jaygriese@gmail.com for more specific details
-          and pricing.
+          Sessions start at $70/hr with a two hour minumum. Weddings start at $800 per day and include an engangement portrait session. 
+          <br/>
+          <br/>
+           Please contact Jay at jaygriese@gmail.com for more specific details.
         </div>
       </div>
       <br />
-      {/* <div style={{justifyContent: "center"}}>
-          <h3>Interior Design/Realestate Photography</h3>
-      </div> */}
 
       {/* {data.img && (
         <div

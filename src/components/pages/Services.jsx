@@ -109,11 +109,12 @@ const Services = () => {
           textAlign: "left",
           paddingTop: "5%",
           width: "800px",
+          maxWidth: "70%",
           textAlign: "justify",
         }}
       >
         <h3>
-          This page is currently under construction...
+          {/* This page is currently under construction... */}
           {/* Below you can get an idea
           of the different services Jay offers. */}
         </h3>

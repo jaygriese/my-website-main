@@ -45,7 +45,7 @@ function navBar() {
           >
             <div>
               <span
-                style={{ fontSize: 25, fontWeight: "bold", marginLeft: "5%" }}
+                style={{ fontSize: 20, fontWeight: "bold", marginLeft: "5%" }}
               >
                 <FaCameraRetro /> {"   "}
                 JAY GRIESEDIECK
@@ -107,11 +107,7 @@ function navBar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                to="/shop"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
+              <Link to="/shop" className="nav-links" onClick={closeMobileMenu}>
                 Shop
               </Link>
             </li>

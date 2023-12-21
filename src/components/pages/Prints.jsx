@@ -75,6 +75,7 @@ const Prints = () => {
             textAlign: "left",
             paddingTop: "5%",
             width: "800px",
+            maxWidth: "70%",
             textAlign: "justify",
           }}
         >

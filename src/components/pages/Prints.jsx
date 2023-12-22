@@ -39,6 +39,7 @@ img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img32, img
 
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import Shop from "./Shop";
 
 const Prints = () => {
   const [data, setData] = useState({ img: "", i: 0 });
@@ -66,41 +67,47 @@ const Prints = () => {
   return (
     <>
       <div
-          style={{
-            // width: "80%",
-            fontSize: "15px",
-            lineHeight: "1.5",
-            marginLeft: "2%",
-            marginRight: "100px",
-            textAlign: "left",
-            paddingTop: "5%",
-            width: "800px",
-            maxWidth: "70%",
-            textAlign: "justify",
-          }}
-        >
-          All images are printed on museum quality, fine art paper, through PRODPI and sent directly to your home. 
-          <br />
-          <br />
-          23 x 16.5inches (59 cm x 42 cm ) $150 USD
-          <br />
-          36 x 26.5 inches (91 cm x 67 cm ) $350 USD
-          <br />
-          44 x 32 inches (112 cm x 81 cm ) $650 USD
-          <br />
-          62 x 44 inches (158 cm x 112 cm ) $950 USD
-          <br />
-          <br />
-          Go to the Shop to see a selection of images and to place your order.
-          <br />
-          <br />
-          For images not featured in the Shop or Gallery, including specific
-          subjects or destinations,and custom sizes, please contact me at jaygriese@gmail.com to discuss your requirements.
-          <br />
-          <br />
-          PLEASE SEE BELOW FOR INSPIRATION:
-          </div>
-     
+        style={{
+          // width: "80%",
+          fontSize: "15px",
+          lineHeight: "1.5",
+          marginLeft: "2%",
+          marginRight: "100px",
+          textAlign: "left",
+          paddingTop: "5%",
+          width: "800px",
+          maxWidth: "70%",
+          textAlign: "justify",
+        }}
+      >
+        All images are printed on museum quality, fine art paper, through PRODPI
+        and sent directly to your home.
+        <br />
+        <br />
+        23 x 16.5inches (59 cm x 42 cm ) $150 USD
+        <br />
+        36 x 26.5 inches (91 cm x 67 cm ) $350 USD
+        <br />
+        44 x 32 inches (112 cm x 81 cm ) $650 USD
+        <br />
+        62 x 44 inches (158 cm x 112 cm ) $950 USD
+        <br />
+        <br />
+        Go to the <Link to="/shop">Shop</Link> to see a selection of images and
+        to place your order.
+        <br />
+        <br />
+        For images not featured in the <Link to="/shop">Shop</Link> or{" "}
+        <Link to="/portfolio">Portfolio</Link>, including specific subjects or
+        destinations,and custom sizes, please contact Jay at jaygriese@gmail.com
+        or through{" "}
+        <Link to="https://www.instagram.com/jay_griese_/">Instagram</Link> to
+        discuss your requirements.
+        <br />
+        <br />
+        PLEASE SEE BELOW FOR INSPIRATION:
+      </div>
+
       {/* {data.img && (
         <div
           style={{
@@ -114,7 +121,7 @@ const Prints = () => {
             overflow: "hidden",
           }}
         > */}
-          {/* <button
+      {/* <button
             onClick={() => imgAction()}
             className="btn"
             style={{

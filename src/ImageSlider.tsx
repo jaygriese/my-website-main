@@ -24,7 +24,7 @@ export function ImageSlider({ imageUrls }: ImageSlideProps) {
     if (autoPlay) {
       timeoutId = setTimeout(() => {
         showNextImage();
-      }, 3000); // Adjust the auto slide interval in milliseconds
+      }, 2300); // Adjust the auto slide interval in milliseconds
     }
 
     return () => {

@@ -87,15 +87,6 @@ function navBar() {
                 Services
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/prints"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
-                Prints
-              </Link>
-            </li>
 
             <li className="nav-item">
               <Link
@@ -106,6 +97,17 @@ function navBar() {
                 Contact
               </Link>
             </li>
+
+            <li className="nav-item">
+              <Link
+                to="/prints"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                Prints
+              </Link>
+            </li>
+
             <li className="nav-item">
               <Link to="/shop" className="nav-links" onClick={closeMobileMenu}>
                 Shop

@@ -91,15 +91,21 @@ const Services = () => {
 
   return (
     <>
-      {/* <div style={{ justifyContent: "center" }}>
+      <div style={{ justifyContent: "center" }}>
         <h3>
           {" "}
           <br />
+          Thanks for stopping by! This page is currently under construction...
           <br />
-          This page is currently under construction. Below you can get an idea
-          of the different services Jay offers.
+          <br />
+          Jay offers a variety of services including event, portraiture,
+          wedding, and interior design/realestate photography.
+          <br />
+          <br />
+          Please see images below to get a sense of the different services Jay
+          offers.
         </h3>
-      </div> */}
+      </div>
       <div
         style={{
           // width: "80%",
@@ -113,21 +119,14 @@ const Services = () => {
           textAlign: "justify",
         }}
       >
-        <h3>
-          {/* This page is currently under construction... */}
-          {/* Below you can get an idea
-          of the different services Jay offers. */}
-        </h3>
         <div>
-          {/* <br /> */}
-          Jay offers a variety of services including portraiture, wedding, and
-          interior design/realestate photography.
+          Sessions start at $70/hr with a two hour minumum. Weddings start at
+          $800 per day and include an engangement portrait session.
           <br />
           <br />
-          Sessions start at $70/hr with a two hour minumum. Weddings start at $800 per day and include an engangement portrait session. 
-          <br/>
-          <br/>
-           Please contact Jay at jaygriese@gmail.com for more specific details.
+          Please contact Jay at jaygriese@gmail.com or though{" "}
+          <Link to="https://www.instagram.com/jay_griese_/">Instagram</Link> for
+          more specific details.
         </div>
       </div>
       <br />

@@ -21,8 +21,9 @@ function App() {
           <Route path="/" exact Component={Home} />
           <Route path="/about" exact Component={About} />
           <Route path="/portfolio" exact Component={Portfolio} />
-          <Route path="/prints" exact Component={Prints} />
           <Route path="/Contact" exact Component={Contact} />
+
+          <Route path="/prints" exact Component={Prints} />
           <Route path="/Shop" exact Component={Shop} />
           <Route path="/Services" exact Component={Services} />
         </Routes>

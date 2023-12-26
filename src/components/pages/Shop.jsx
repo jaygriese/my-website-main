@@ -1,5 +1,6 @@
 import "../../App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import img1 from "../images/Shop/img1.jpg";
 import img2 from "../images/Shop/img2.jpg";
@@ -22,8 +23,6 @@ import img18 from "../images/Shop/img18.jpg";
 import img19 from "../images/Shop/img19.jpg";
 import img20 from "../images/Shop/img20.jpg";
 import img21 from "../images/Shop/img21.jpg";
-// import img22 from "../images/Shop/img22.jpg";
-// import img23 from "../images/Shop/img23.jpg";
 import img24 from "../images/Shop/img24.jpg";
 import img25 from "../images/Shop/img25.jpg";
 import img26 from "../images/Shop/img26.jpg";
@@ -98,40 +97,7 @@ import img94 from "../images/Shop/img94.jpg";
 import img95 from "../images/Shop/img95.jpg";
 import img96 from "../images/Shop/img96.jpg";
 
-// virtual rooms:
-
-// import img01 from "../images/vr/1.jpeg";
-// import img02 from "../images/vr/2.jpeg";
-// import img03 from "../images/vr/3.jpeg";
-// import img04 from "../images/vr/4.jpeg";
-// import img05 from "../images/vr/5.jpeg";
-// import img06 from "../images/vr/6.jpeg";
-// import img07 from "../images/vr/7.jpeg";
-// import img08 from "../images/vr/8.jpeg";
-// import img09 from "../images/vr/9.jpeg";
-// import img010 from "../images/vr/10.jpeg";
-// import img011 from "../images/vr/11.jpeg";
-// import img012 from "../images/vr/12.jpeg";
-// import img013 from "../images/vr/13.jpeg";
-// import img014 from "../images/vr/14.jpeg";
-// import img015 from "../images/vr/15.jpeg";
-// import img016 from "../images/vr/16.jpeg";
-// import img018 from "../images/vr/18.jpeg";
-// import img019 from "../images/vr/19.jpeg";
-// import img020 from "../images/vr/20.jpeg";
-// import img021 from "../images/vr/21.jpeg";
-
-// import img024 from "../images/vr/24.jpeg";
-// import img025 from "../images/vr/25.jpeg";
-// import img026 from "../images/vr/26.jpeg";
-// import img027 from "../images/vr/27.jpeg";
-// import img028 from "../images/vr/28.jpeg";
-// import img029 from "../images/vr/29.jpeg";
-// import img030 from "../images/vr/30.jpeg";
-// import img031 from "../images/vr/31.jpeg";
-// import img032 from "../images/vr/32.jpeg";
-
-const images = [
+const shopImages = [
   img1,
   img2,
   img3,
@@ -157,15 +123,12 @@ const images = [
   img19,
   img20,
   img21,
-  // img22,
-  // img23,
   img24,
   img25,
   img26,
   img27,
   img28,
   img29,
-  // img30,
   img31,
   img32,
   img33,
@@ -234,30 +197,39 @@ const images = [
   img96,
 ];
 
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import { Link } from "react-router-dom";
+
+
 
 const Shop = () => {
-  const [data, setData] = useState({ img: "", i: 0 });
+  const [isMounted, setIsMounted] = useState(false);
 
-  const viewImage = (img, i) => {
-    console.log(img, i);
-    setData({ img, i });
-  };
+  useEffect(() => {
+    setIsMounted(true);
+
+    // Cleanup code (if any)
+    return () => {
+      setIsMounted(false);
+    };
+  }, []);
+
+  // Check if images are available before rendering
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <>
       <div style={{ padding: "10px" }}>
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
           <Masonry gutter="20px">
-            {images.map((image, i) => (
-              <img
-                key={i}
-                src={image}
-                style={{ width: "100%", display: "block", cursor: "pointer" }}
-                alt=""
-                // onClick={() => viewImage(image, i)}
-              />
+            {shopImages.map((image, i) => (
+              <Link key={i} to={`/image/${i}`}>
+                <img
+                  src={image}
+                  style={{ width: "100%", display: "block", cursor: "pointer" }}
+                  alt=""
+                />
+              </Link>
             ))}
           </Masonry>
         </ResponsiveMasonry>
@@ -265,4 +237,5 @@ const Shop = () => {
     </>
   );
 };
+
 export default Shop;

@@ -9,19 +9,22 @@ const About = () => {
   return (
     <>
       <div className="container">
-        <div className="image-container">
+        <div
+          className="image-container"
+          
+        >
           {/* image */}
           <img className="image" src={bwSelfie} alt="" />
         </div>
-        <div className="text">
+        <div className="text" >
           <h3>About Jay</h3>
           {/* text */}
           <p>
-            Jay is a St. Louis, Missouri native who specializes in
-            documentary, outdoor, street, and travel photography. His enduring
-            love for nature, adventure and travel is rooted in the wild beauty
-            of Missouri and the American West where he spent formative years as
-            a youth hunting, fishing and camping with his father.{" "}
+            Jay is a St. Louis, Missouri native who specializes in documentary,
+            outdoor, street, and travel photography. His enduring love for
+            nature, adventure and travel is rooted in the wild beauty of
+            Missouri and the American West where he spent formative years as a
+            youth hunting, fishing and camping with his father.{" "}
           </p>
           <p>
             The spark for adventure truly ignited during Jay's time in
@@ -55,18 +58,18 @@ const About = () => {
             frame.
           </p>
           <div
-          style={{
-          //   fontSize: "15px",
-          //   // fontStyle
-          //   lineHeight: "1.5",
-          //   marginLeft: "10%",
+            style={{
+              //   fontSize: "15px",
+              //   // fontStyle
+              //   lineHeight: "1.5",
+              //   marginLeft: "10%",
 
-          //   textAlign: "left",
-          //   paddingTop: "10%",
-           color: "black",
-          }}
+              //   textAlign: "left",
+              //   paddingTop: "10%",
+              color: "black",
+            }}
           >
-            Follow Jay on {" "}
+            Follow Jay on{" "}
             <Link to="https://www.instagram.com/jay_griese_/">Instagram</Link>
           </div>
         </div>

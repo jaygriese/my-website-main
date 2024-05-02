@@ -34,6 +34,6 @@ body {
     /* background-image: linear-gradient(to bottom right, , white); */
     /* background-image: radial-gradient(circle, #0EBB9A,white); */
     /* background: -webkit-gradient(radial, from(white), to(#0EBB9A)); */
-    background: radial-gradient(circle at 50% 50%, rgba(14, 187, 154, 1) 0%, rgba(14, 187, 154, 0.61) 19%, rgba(255, 255, 255, 1) 70%, rgba(255, 255, 255, 1) 84%, rgba(255, 255, 255, 1) 85%);
-    
+    /* background: radial-gradient(circle at 50% 50%, rgba(14, 187, 154, 1) 0%, rgba(14, 187, 154, 0.61) 19%, rgba(255, 255, 255, 1) 70%, rgba(255, 255, 255, 1) 84%, rgba(255, 255, 255, 1) 85%); */
+    background: radial-gradient(#abe7dc, white 70%);
  }

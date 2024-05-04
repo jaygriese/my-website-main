@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { LoginDTO } from '../../models/dto/LoginDTO';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { UserEntity } from '../../models/UserEntity';
+import { CookieService } from 'ngx-cookie-service';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+};
 
 @Component({
   selector: 'app-login-user',
@@ -12,45 +16,55 @@ import { UserEntity } from '../../models/UserEntity';
 })
 export class LoginUserComponent implements OnInit {
 
+  /* Host Url */
+  private hostUrl = 'http://localhost:8080';
+
   userLogginIn: UserEntity;
-  incorrectPassword: boolean;
+  errorMessage: boolean;
+  loginResponseMessage: string;
   userEntity: UserEntity;
+  accessExpired: boolean = false;
 
   constructor(private http: HttpClient,
-              private router: Router) 
+              private router: Router,
+              private cookieService: CookieService) 
               { 
   }
 
 
   ngOnInit(): void {
-    if (localStorage.getItem("userName") !== null) {
-      this.router.navigate(["/myProfile"])
+    if (this.cookieService.check('token')) {
+      this.router.navigate(["/home"])
     }
   }
 
   login(userInformation: NgForm ) {
       
-    this.incorrectPassword = false;
+    this.errorMessage = false;
 
-    let loginInfo: LoginDTO = {
-      userName: userInformation.value.userName,
-      password: userInformation.value.password
-    }
-    this.http.post('http://localhost:8080/api/login', loginInfo).subscribe((response: UserEntity) => {    
-      for (const k in response){
-        if (k === "failed"){
-          this.incorrectPassword = true;
+    let userName = userInformation.value.userName;
+    let password = userInformation.value.password;
+
+    return this.http.post( this.hostUrl + '/api/login',
+      {
+        userName,
+        password,
+      },
+      httpOptions
+      ).subscribe((data: any) => {
+        if (data.failed) {
+          this.errorMessage = true;
+          this.loginResponseMessage = data.failed;
           return;
-        } else {            
-          this.userLogginIn = response;
-          localStorage.setItem('userName', this.userLogginIn.userName)
-          localStorage.setItem('id', this.userLogginIn.id)
-          this.router.navigate(["/myProfile"]);
         }
-      }
-       
-    });
+        /* local storage being phased out */
+        localStorage.setItem('userName', data.userName)
+        localStorage.setItem('id', data.id)
+
+        /* make get request based on cookie data */
+        this.cookieService.set("token", data.accessToken);
+        this.router.navigate(["/myProfile"]);
+      });
     
-  
   }
 }

@@ -1,6 +1,40 @@
+.logInButton {
+    background-color: #0EBB9A;
+    text-align: center;
+	color:#ffffff;
+	font-family: 'Open Sans', sans-serif;
+	font-size:20px;
+    font-weight: 500;
+    width: 125px;
+    height: 65px;
+    padding-top: 20px;
+	text-decoration: none;
+}
+
+.logOutButton {
+    background-color: #0EBB9A;
+    text-align: center;
+	color:#ffffff;
+	font-family: 'Open Sans', sans-serif;
+	font-size:20px;
+    font-weight: 500;
+    width: 125px;
+    height: 65px;
+	text-decoration: none;
+}
+
+.nav-link {
+    color: black;
+    font-weight: 450;
+    font-size: 15px;
+}
+
+
+
+
+
 #list_head {
-    /* font-family:Verdana, Geneva, Tahoma, sans-serif; */
-    font-family:Oswald, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     text-align: left;
     font-size: 60px;
     color: black;
@@ -9,12 +43,10 @@
 
 
 .myButton {
-    /* background-color: #2e9abc; */
     background-color: #0EBB9A;
-	/* border-radius:7px; */
 	display: internal;
 	color:#ffffff;
-	font-family: montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size:30px;
 	font-weight:bold;
     text-shadow: 0.5px 0.5px 0px #000;
@@ -23,38 +55,26 @@
     float: right;
 }
 
-#event_display1 {
+#event_display {
     text-align: left;
     font-size: 35px;
-    font-family: montserrat, sans-serif;
+
 }
 
-#event_display2 {
-    text-align: left;
-    font-size: 35px;
-    font-family: montserrat, sans-serif;
-}
 
 
 .button2 {
-    /* background-color: #e5642b; */
     background-color: #F9A605;
-	/* border-radius:6px;  */
 	color:#ffffff;
-	font-family:montserrat, sans-serif;
 	font-size:22px;
-	font-weight:bold;
-    text-shadow: 0.5px 0.5px 0px #000;
 	padding:6px 24px;
 	text-decoration:none;
     width: 50%;
-    box-shadow: none;
 }
 
 .card-body {
     text-align: left;
     font-size: 28px;
-    font-family: montserrat, sans-serif;
 }
 
 
@@ -66,33 +86,22 @@
 
 .btn {
     background-color: #fff;
-    /* border-color: #5AD5E7; */
     border-color:  #85CDE3;
     transition: all .7s;
     border-radius: 0;
   }
   .btn:hover {
     color: #fff;
-    /* background-color: #5AD5E7; */
     background-color:  #85CDE3;
-    /* border-color:#5AD5E7; */
     border-color:  #85CDE3;
   }
 
   .demo-inline-calendar-card {
-    width: 300px;
+    width: 300px; 
+    color:#F9A605
   }
 
-  /* .mat-calendar-body-active>.mat-calendar-body-cell-content.mat-focus-indicator{
-    background:transparent !important
-} */
 
-/* .mat-calendar-body-today
-:not(.mat-calendar-body-selected)
-:not(.mat-calendar-body-comparison-identical) {
-background-color: rgb(255 255 255) !important;
-border: none !important;
-} */
 
 
 

@@ -228,6 +228,7 @@ const Shop = () => {
                   src={image}
                   style={{ width: "100%", display: "block", cursor: "pointer" }}
                   alt=""
+                  
                 />
               </Link>
             ))}

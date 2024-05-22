@@ -24,22 +24,31 @@ const ImageDetail = ({ images, setCartItems }) => {
   };
 
   const handleAddToCart = () => {
-    const [size, price] = selectedSize.split(" $");
-    console.log("Selected size:", size); // Debugging log
-    console.log("Selected price:", price); // Debugging log
-
-    const parsedPrice = parseFloat(price);
-    if (isNaN(parsedPrice)) {
-      console.error("Price is not a number:", price); // Error log
-      return;
+    let price;
+    switch (selectedSize) {
+      case "23 x 16.5":
+        price = 150;
+        break;
+      case "36 x 26.5":
+        price = 350;
+        break;
+      case "44 x 32":
+        price = 650;
+        break;
+      case "62 x 44":
+        price = 950;
+        break;
+      default:
+        price = 0;
     }
 
     const newItem = {
-      size,
-      quantity: parseInt(selectedQuantity, 10), // Ensure quantity is an integer
+      size: selectedSize,
+      quantity: parseInt(selectedQuantity, 10),
       image: image,
-      unitPrice: parsedPrice, // Store the unit price as a number
+      unitPrice: price,
     };
+
     setCartItems((prevItems) => [...prevItems, newItem]);
     setSelectedSize("");
     setSelectedQuantity("");
@@ -59,16 +68,16 @@ const ImageDetail = ({ images, setCartItems }) => {
           className="dropdown"
         >
           <option value="">SELECT A PRINT SIZE:</option>
-          <option value="23 x 16.5 $150">
+          <option value="23 x 16.5">
             23 x 16.5 inches (59 cm x 42 cm) $150 USD
           </option>
-          <option value="36 x 26.5 $350">
+          <option value="36 x 26.5">
             36 x 26.5 inches (91 cm x 67 cm) $350 USD
           </option>
-          <option value="44 x 32 $650">
+          <option value="44 x 32">
             44 x 32 inches (112 cm x 81 cm) $650 USD
           </option>
-          <option value="62 x 44 $950">
+          <option value="62 x 44">
             62 x 44 inches (158 cm x 112 cm) $950 USD
           </option>
         </select>

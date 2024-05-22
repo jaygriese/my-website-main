@@ -9,6 +9,7 @@ import Prints from "./components/pages/Prints";
 import Home from "./components/pages/Home";
 import ImageDetail from "./components/pages/ImageDetail";
 import Cart from "./components/pages/Cart";
+import CartState from "./components/pages/CartState";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
@@ -232,7 +233,12 @@ const images = [
               />
             }
           />
-          <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+          <Route
+            path="/cart"
+            element={<Cart cartItems={cartItems} setCartItems={setCartItems} />}
+          />
+
+          <Route path="/*" element={<CartState images={images} />} />
         </Routes>
       </Router>
     </>
@@ -240,3 +246,6 @@ const images = [
 }
 
 export default App;
+
+
+

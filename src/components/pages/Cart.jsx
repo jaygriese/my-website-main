@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Cart = ({ cartItems }) => {
+const Cart = ({ cartItems, setCartItems }) => {
 
   const grandTotal = cartItems.reduce((sum, item) => {
     return sum + item.unitPrice * item.quantity;
   }, 0);
 
+  
+  const [editIndex, setEditIndex] = useState(null);
+  const [editedQuantity, setEditedQuantity] = useState("");
+
+  const handleEdit = (index) => {
+    setEditIndex(index);
+    setEditedQuantity(cartItems[index].quantity);
+  };
+
+  const handleSave = (index) => {
+    const updatedItems = cartItems.map((item, i) =>
+      i === index ? { ...item, quantity: editedQuantity } : item
+    );
+    setCartItems(updatedItems);
+    setEditIndex(null);
+  };
+
+  const handleDelete = (index) => {
+    const updatedItems = cartItems.filter((_, i) => i !== index);
+    setCartItems(updatedItems);
+  };
+
   return (
     <div>
-      {/* <h2>Cart</h2> */}
       <br />
       <br />
       <div>
@@ -17,10 +38,6 @@ const Cart = ({ cartItems }) => {
       <li>
         {cartItems.map((item, index) => {
           const totalPrice = item.unitPrice * item.quantity;
-          console.log(
-            `Item ${index}: unitPrice = ${item.unitPrice}, quantity = ${item.quantity}, totalPrice = ${totalPrice}`
-          ); // Debugging log
-
           return (
             <li key={index}>
               <img
@@ -28,12 +45,28 @@ const Cart = ({ cartItems }) => {
                 alt="Product"
                 style={{ width: "300px", height: "auto" }}
               />
-              <div>Quantity: {item.quantity}</div>
+              <div>
+                Quantity:{" "}
+                {editIndex === index ? (
+                  <input
+                    type="number"
+                    value={editedQuantity}
+                    onChange={(e) =>
+                      setEditedQuantity(parseInt(e.target.value, 10))
+                    }
+                  />
+                ) : (
+                  item.quantity
+                )}
+              </div>
               <div>Size: {item.size}</div>
-              {/* <div>Price: ${item.unitPrice.toFixed(2)} each</div> */}
               <div>Price: ${totalPrice.toFixed(2)}</div>
-              <br />
-              <br />
+              {editIndex === index ? (
+                <button onClick={() => handleSave(index)}>Save</button>
+              ) : (
+                <button onClick={() => handleEdit(index)}>Edit</button>
+              )}
+              <button onClick={() => handleDelete(index)}>Delete</button>
             </li>
           );
         })}

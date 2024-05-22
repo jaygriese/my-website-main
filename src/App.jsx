@@ -8,7 +8,9 @@ import Shop from "./components/pages/Shop";
 import Prints from "./components/pages/Prints";
 import Home from "./components/pages/Home";
 import ImageDetail from "./components/pages/ImageDetail";
+import Cart from "./components/pages/Cart";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 import img1 from "./components/images/Shop/img1.jpg";
 import img2 from "./components/images/Shop/img2.jpg";
@@ -108,7 +110,7 @@ import img96 from "./components/images/Shop/img96.jpg";
 // import { shopImages } from "./components/pages/Shop";
 
 function App() {
-
+const [cartItems, setCartItems] = useState([]);
 const images = [
   img1,
   img2,
@@ -212,21 +214,25 @@ const images = [
     <>
       <Router>
         <Navbar />
-
         <Routes>
-          <Route path="/" exact Component={Home} />
-          <Route path="/about" exact Component={About} />
-          <Route path="/portfolio" exact Component={Portfolio} />
-          <Route path="/Contact" exact Component={Contact} />
-          <Route path="/prints" exact Component={Prints} />
-          {/* <Route path="/Shop" exact Component={Shop} /> */}
-          <Route path="/services" exact Component={Services} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/prints" element={<Prints />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/shop" element={<Shop images={images} />} />
           <Route
             path="/image/:index"
-            element={<ImageDetail images={images} />}
+            element={
+              <ImageDetail
+                images={images}
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+              />
+            }
           />
-          
+          <Route path="/cart" element={<Cart cartItems={cartItems} />} />
         </Routes>
       </Router>
     </>

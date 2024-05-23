@@ -11,7 +11,7 @@ import ImageDetail from "./components/pages/ImageDetail";
 import Cart from "./components/pages/Cart";
 import CartState from "./components/pages/CartState";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import img1 from "./components/images/Shop/img1.jpg";
 import img2 from "./components/images/Shop/img2.jpg";
@@ -111,106 +111,126 @@ import img96 from "./components/images/Shop/img96.jpg";
 // import { shopImages } from "./components/pages/Shop";
 
 function App() {
-const [cartItems, setCartItems] = useState([]);
-const images = [
-  img1,
-  img2,
-  img3,
-  // img01,
-  img4,
-  img5,
-  img6,
-  // img02,
-  img7,
-  img8,
-  // img03,
-  // img04,
-  img9,
-  img10,
-  img11,
-  img12,
-  img13,
-  img14,
-  img15,
-  img16,
-  img17,
-  img18,
-  img19,
-  img20,
-  img21,
-  img24,
-  img25,
-  img26,
-  img27,
-  img28,
-  img29,
-  img31,
-  img32,
-  img33,
-  img34,
-  img35,
-  img36,
-  img37,
-  img38,
-  img39,
-  img40,
-  img41,
-  img42,
-  img43,
-  img44,
-  img45,
-  img46,
-  img47,
-  img48,
-  img49,
-  img50,
-  img51,
-  img52,
-  img53,
-  img54,
-  img55,
-  img56,
-  img57,
-  img58,
-  img59,
-  img60,
-  img61,
-  // img62,
-  img63,
-  // img64,
-  img65,
-  img66,
-  img67,
-  img68,
-  img69,
-  img70,
-  img71,
-  img72,
-  img73,
-  img74,
-  img75,
-  img76,
-  // img77,
-  img78,
-  img79,
-  // img80,
-  img81,
-  img82,
-  img83,
-  img84,
-  img85,
-  img86,
-  img87,
-  img88,
-  img89,
-  img90,
-  img91,
-  img92,
-  img93,
-  img94,
-  img95,
-  img96,
-];
+  const [cartItems, setCartItems] = useState([]);
+ 
+   useEffect(() => {
+     const storedCartItems = localStorage.getItem("cartItems");
+     console.log("Stored cart items on load:", storedCartItems); // Log the stored data
+     if (storedCartItems) {
+       try {
+         const parsedCartItems = JSON.parse(storedCartItems);
+         console.log("Parsed cart items on load:", parsedCartItems); // Log parsed items
+         setCartItems(parsedCartItems);
+       } catch (error) {
+         console.error("Failed to parse stored cart items:", error);
+       }
+     }
+   }, []); // Empty dependency array ensures this runs only once
+
+   useEffect(() => {
+     console.log("Updating local storage with:", cartItems); // Log state changes
+     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+   }, [cartItems]); 
+
+  const images = [
+    img1,
+    img2,
+    img3,
+    // img01,
+    img4,
+    img5,
+    img6,
+    // img02,
+    img7,
+    img8,
+    // img03,
+    // img04,
+    img9,
+    img10,
+    img11,
+    img12,
+    img13,
+    img14,
+    img15,
+    img16,
+    img17,
+    img18,
+    img19,
+    img20,
+    img21,
+    img24,
+    img25,
+    img26,
+    img27,
+    img28,
+    img29,
+    img31,
+    img32,
+    img33,
+    img34,
+    img35,
+    img36,
+    img37,
+    img38,
+    img39,
+    img40,
+    img41,
+    img42,
+    img43,
+    img44,
+    img45,
+    img46,
+    img47,
+    img48,
+    img49,
+    img50,
+    img51,
+    img52,
+    img53,
+    img54,
+    img55,
+    img56,
+    img57,
+    img58,
+    img59,
+    img60,
+    img61,
+    // img62,
+    img63,
+    // img64,
+    img65,
+    img66,
+    img67,
+    img68,
+    img69,
+    img70,
+    img71,
+    img72,
+    img73,
+    img74,
+    img75,
+    img76,
+    // img77,
+    img78,
+    img79,
+    // img80,
+    img81,
+    img82,
+    img83,
+    img84,
+    img85,
+    img86,
+    img87,
+    img88,
+    img89,
+    img90,
+    img91,
+    img92,
+    img93,
+    img94,
+    img95,
+    img96,
+  ];
   return (
     <>
       <Router>
@@ -246,6 +266,3 @@ const images = [
 }
 
 export default App;
-
-
-

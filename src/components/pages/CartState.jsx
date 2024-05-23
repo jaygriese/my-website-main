@@ -17,9 +17,7 @@ const CartState = ({ images }) => {
         />
         <Route
           path="/cart"
-          element={<Cart cartItems={cartItems} setCartItems={setCartItems} />}
-        />{" "}
-        {/* Pass setCartItems here */}
+          element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} /> {/* Pass setCartItems here */}
       </Routes>
     </div>
   );

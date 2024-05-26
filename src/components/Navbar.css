@@ -19,6 +19,26 @@
   /* margin-bottom: 10px; */
 }
 
+.nav-item.cart-item {
+  list-style: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item.cart-item .nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item.cart-item .nav-links svg {
+  font-size: 25px; /* Adjust the size of the icon as needed */
+}
+
+.nav-item.cart-item .nav-links:hover {
+  text-decoration: none; /* Remove underline on hover */
+}
+
 .navbar-container {
   display: flex;
   justify-content: center;

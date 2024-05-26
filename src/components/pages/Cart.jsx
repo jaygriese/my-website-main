@@ -67,10 +67,10 @@ const Cart = ({ cartItems, setCartItems }) => {
                 <button onClick={() => handleSave(index)}>Save</button>
               ) : (
                 <button onClick={() => handleEdit(index)}>Edit</button>
-              )}
+              )}{" "}
               <button onClick={() => handleDelete(index)}>Delete</button>
-              <br/>
-              <br/>
+              <br />
+              <br />
             </li>
           );
         })}

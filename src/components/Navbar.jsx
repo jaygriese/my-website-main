@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaCameraRetro } from "react-icons/fa";
 import { FaX } from "react-icons/fa6";
-import { FaAlignJustify } from "react-icons/fa6";
+import { FaAlignJustify, FaCartShopping } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { Button } from "./Button";
@@ -29,10 +29,7 @@ function navBar() {
 
   return (
     <>
-      <nav
-        className="navbar"
-        // style={{ outline: "2px solid red" }}
-      >
+      <nav className="navbar">
         <div
           className="navbar-container"
           // style={{ outline: "2px solid orange" }}
@@ -113,11 +110,12 @@ function navBar() {
                 Shop
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item"> */}
+            {/* <li>
               <Link to="/cart" className="nav-links" onClick={closeMobileMenu}>
-                Cart
+                <FaCartShopping/>
               </Link>
-            </li>
+            </li> */}
 
             {/* <li className="nav-item">
               <Link
@@ -129,6 +127,11 @@ function navBar() {
               </Link>
             </li> */}
           </ul>
+          <li className="nav-item cart-item">
+            <Link to="/cart" className="nav-links" onClick={closeMobileMenu}>
+              <FaCartShopping />
+            </Link>
+          </li>
           {button && <Button buttonStyle="btn--outline">Shop</Button>}
         </div>
       </nav>

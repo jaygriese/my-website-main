@@ -16,7 +16,7 @@ const Contact = () => {
             paddingTop: "10%",
           }}
         >
-          jaygriese@gmail.com <br /> +13144506625
+          jaygriese@gmail.com <br /> +13142671519
           <br />
           <br />
           <Link to="https://www.instagram.com/jay_griese_/">instagram</Link>

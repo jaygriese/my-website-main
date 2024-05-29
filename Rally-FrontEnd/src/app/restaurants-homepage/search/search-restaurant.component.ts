@@ -3,56 +3,63 @@ import { Restaurant } from '../models/Restaurant';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
 })
 export class SearchRestaurantComponent implements OnInit {
+  results: Restaurant[] = []; // Ensure results is initialized as an empty array
+  noResults: boolean = false;
+  restaurantList: Restaurant[] = [];
+  private getRestaurantListUrl: string = 'http://localhost:8080/restaurantList';
 
-  results;
-  noResults: boolean= false;
-  restaurantList: Restaurant[];
-    private getRestaurantListUrl: string = 'http://localhost:8080/restaurantList'
-    constructor(private http:HttpClient) { }
-  
-    ngOnInit(): void {
-      this.http.get(this.getRestaurantListUrl).subscribe((response: Restaurant[]) => {
-        // console.log(response);
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.http.get<Restaurant[]>(this.getRestaurantListUrl).subscribe(
+      (response: Restaurant[]) => {
         this.restaurantList = response;
-        // console.log(this.restaurantList)
-      })
+      },
+      (error) => {
+        console.error('Error fetching restaurant list', error);
+      }
+    );
   }
-  Search(search: NgForm){
-    this.noResults= false;
-    const searchResults = [];
-    if(search.value.description === "") {
+
+  Search(search: NgForm): void {
+    this.noResults = false;
+    const searchResults: Restaurant[] = [];
+    const searchTerm: string = search.value.description.trim().toLowerCase(); // Trim and lowercase search term
+
+    if (!searchTerm) {
       this.noResults = true;
-      return
+      return;
     }
-    localStorage.setItem('searchTerm', search.value.description)
 
-    // console.log(search.value.description)
-    for(const key in this.restaurantList){
+    localStorage.setItem('searchTerm', search.value.description);
 
-      if (this.restaurantList[key].restauntName.toLowerCase().includes(search.value.description.toLowerCase())
-      || this.restaurantList[key].address.toLowerCase().includes(search.value.description.toLowerCase())
-      || this.restaurantList[key].conactInfo.toLowerCase().includes(search.value.description.toLowerCase())      
-      || this.restaurantList[key].restaurantType.toLowerCase().includes(search.value.description.toLowerCase())
-      || this.restaurantList[key].neighborhood.toLowerCase().includes(search.value.description.toLowerCase())) {
-        searchResults.push(this.restaurantList[key]);
-        console.log(searchResults)
-
-        if(searchResults.includes(search.value.description)) {
-          searchResults.push(this.restaurantList[key])
-        }
+    for (const restaurant of this.restaurantList) {
+      if (
+        (restaurant.restauntName &&
+          restaurant.restauntName.toLowerCase().includes(searchTerm)) ||
+        (restaurant.address &&
+          restaurant.address.toLowerCase().includes(searchTerm)) ||
+        (restaurant.conactInfo &&
+          restaurant.conactInfo.toLowerCase().includes(searchTerm)) ||
+        (restaurant.restaurantType &&
+          restaurant.restaurantType.toLowerCase().includes(searchTerm)) ||
+        (restaurant.neighborhood &&
+          restaurant.neighborhood.toLowerCase().includes(searchTerm))
+      ) {
+        searchResults.push(restaurant);
       }
     }
-    if(searchResults.length === 0) {
+
+    if (searchResults.length === 0) {
       this.noResults = true;
     }
-    return this.results = searchResults;
+
+    this.results = searchResults;
   }
 }
